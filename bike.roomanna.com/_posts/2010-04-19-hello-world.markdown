@@ -1,13 +1,12 @@
 ---
 layout: post
-title: Hello world
+title: Before we begin, a little bit about me...
 category: 
   - foo
 ---
 [arne]: img/2010-04-19-arne.jpg  "So young, so full of hope..."
 
-Before we begin, a little bit about me...
-=========================================
+
 So upon getting here you may be wondering general questions like "what is 
 this", and "why are they making me read this page" and "why there suffering in 
 this modern world"?  All excellent questions to be sure, and I figured I'd 
