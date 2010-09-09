@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ page.title }}</title> 
+    <link rel="stylesheet" href="/css/base.css" />
+  </head>
+  <body>
+    <div id="wrap" class="vbox">
+      <header>
+        <h1><a href="/">blog.roomanna.com</a></h1>
+        <p>A whole lotta crazy crap on the walls</p>
+      </header>
+      <div class="hbox">
+        <div class="boxFlex1 panel" id="content">
+{{ content }}
+        </div>
+        <div class="boxFlex0" id="sidebar">
+          <div class="panel">
+            <h2>sidebar</h2>
+            <ul>
+            {% for tag in site.iterable.categories %}
+              <a style="font-size: {{ tag.posts | size | times:1.5 | plus: 10 }}px;" href="{{site.baseurl}}/topics/{{tag.name}}/">
+                {{ tag.name }}</a>{% if forloop.last == false %},&nbsp;{% endif %}
+            {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+

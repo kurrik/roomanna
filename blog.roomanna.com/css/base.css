@@ -1,0 +1,181 @@
+@font-face {
+  font-family: "CPMono";
+  src: url('CPMono_v07 Bold.otf') format("opentype");
+}
+
+@font-face {
+  font-family: "Vegur";
+  src: url('Vegur-B 0.601.otf') format("opentype");
+}
+
+@font-face {
+  font-family: "Tiza";
+  src: url('tiza_chalk.ttf') format("truetype");
+}
+
+.hbox {
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+ 
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+ 
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+}
+ 
+ 
+.vbox {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+ 
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+ 
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+}
+ 
+ 
+.spacer {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+}
+ 
+.reverse {
+  -webkit-box-direction: reverse;
+  -moz-box-direction: reverse;
+  box-direction: reverse;
+}
+ 
+.boxFlex0 {
+  -webkit-box-flex: 0;
+  -moz-box-flex: 0;
+  box-flex: 0;
+}
+ 
+.boxFlex1, .boxFlex {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+}
+ 
+.boxFlex2 {
+  -webkit-box-flex: 2;
+  -moz-box-flex: 2;
+  box-flex: 2;
+}
+ 
+.boxGroup1 {
+  -webkit-box-flex-group: 1;
+  -moz-box-flex-group: 1;
+  box-flex-group: 1;
+}
+ 
+.boxGroup2 {
+  -webkit-box-flex-group: 2;
+  -moz-box-flex-group: 2;
+  box-flex-group: 2;
+}
+ 
+.start {
+  -webkit-box-pack: start;
+  -moz-box-pack: start;
+  box-pack: start;
+}
+ 
+.end {
+  -webkit-box-pack: end;
+  -moz-box-pack: end;
+  box-pack: end;
+}
+ 
+.center {
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  box-pack: center;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  background: #fff;
+}
+
+body {
+  background: #fff;
+  font: 14px Arial;
+  margin: 0;
+  padding: 0;
+  border-top: 2px solid #fff;
+}
+
+header {
+  padding: 10px 0;
+  text-align: center;
+}
+
+header p {
+  font-family: Tiza;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+} 
+
+h1, h2, h3 {
+  font-family: Tiza;
+  text-rendering: optimizeLegibility;
+  margin: 10px 0;
+  padding: 0;
+}
+h1 a, h2 a, h3 a {
+  color: #000;
+  text-decoration: none;
+  border: 0;
+}
+h1 {
+  font-size: 40px;
+}
+h2 {
+  font-size: 20px;
+}
+
+article {
+  line-height: 130%;
+}
+
+a {
+  color: rgba(0,153,255,1.0);
+  font-weight: bold;
+  text-decoration: none;
+  border-bottom: 2px solid rgba(0,153,255,0.1);
+}
+a:hover {
+  border-bottom-color: rgba(0,153,255,1.0);
+}
+
+#wrap {
+  width: 700px;
+  margin: 0 auto;
+}
+
+#sidebar h2 {
+  color: #ccc;
+}
+
+.panel {
+  padding: 10px;
+  margin: 0 10px 10px 10px;
+  border-radius: 10px;  
+  background: #efefe7;
+  border: 1px solid #fff;
+  -webkit-box-shadow: 0px 0px 4px rgba(0,0,0,0.4);
+}
+

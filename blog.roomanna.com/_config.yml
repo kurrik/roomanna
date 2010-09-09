@@ -1,0 +1,20 @@
+destination: ./_site
+auto:        true
+lsi:         false
+server_port: 4000
+pygments:    true
+markdown:    maruku
+permalink:   /:month-:day-:year/:title
+
+tag_dir: tag 
+tag_title_prefix: "Tags &raquo; "
+related_tags: true
+
+category_dir: topics
+category_title_prefix: "Topics &raquo; "
+
+maruku:
+  use_tex:    false
+  use_divs:   false
+  png_dir:    images/latex
+  png_url:    /images/latex
