@@ -14,11 +14,11 @@ build:
 	mkdir build
 	mkdir build/_site
 
-serve: clean
+serve: server
 	ejekyll --server jekyll build/_site
 
-serve-prod: build
-	dev_appserver.py --port=9999 --address=0.0.0.0 build
+serve-prod: server
+	dev_appserver.py --port=9998 --address=0.0.0.0 build
 
 server: build
 	cp -r appengine/* build
