@@ -7,9 +7,9 @@ layout: default
 <h1 > Related Tags : </h1>
 <ul>
 {% for tag in page.related %}
-	<li>
-		<a href="/tag/{{ tag }}">{{ tag }}</a>
-	</li>
+  <li>
+    <a href="/tag/{{ tag }}">{{ tag }}</a>
+  </li>
 {% endfor %}
 </ul>
 </span>
@@ -20,7 +20,7 @@ layout: default
 <ul>
 {% for post in site.tags[page.tag] %}
   <li> 
-    <a href="{{post.url}}">{{ post.title }}</a>
+    <a href="{{post.url}}" class="posttitle">{{ post.title }}</a>
   </li>
 {% endfor %}
 </ul>

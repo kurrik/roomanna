@@ -115,6 +115,7 @@ body {
   margin: 0;
   padding: 0;
   border-top: 2px solid #fff;
+  line-height: 140%;
 }
 
 header {
@@ -125,7 +126,7 @@ header {
 header p {
   font-family: Tiza;
   font-size: 16px;
-  margin: 0;
+  margin: 5px 0;
   padding: 0;
 } 
 
@@ -135,8 +136,10 @@ h1, h2, h3 {
   margin: 10px 0;
   padding: 0;
 }
-h1 a, h2 a, h3 a {
+header a {
   color: #000;
+}
+h1 a, h2 a, h3 a {
   text-decoration: none;
   border: 0;
 }
@@ -145,6 +148,9 @@ h1 {
 }
 h2 {
   font-size: 20px;
+}
+h3 {
+  font-size: 16px;
 }
 
 article {
@@ -162,12 +168,29 @@ a:hover {
 }
 
 #wrap {
-  width: 700px;
+  width: 70%;
+  min-width: 700px;
   margin: 0 auto;
 }
 
+#sidebar {
+  max-width: 200px;
+}
 #sidebar h2 {
+  color: #aaa;
+}
+#sidebar h3 {
   color: #ccc;
+}
+
+#content img {
+  max-width: 98%;
+  display: block;
+  margin: 10px auto;
+  border: 1px solid #999;
+  padding: 1%;
+  background: #fff;
+  -webkit-box-shadow: 1px 2px 3px #999;
 }
 
 .panel {
@@ -179,3 +202,15 @@ a:hover {
   -webkit-box-shadow: 0px 0px 4px rgba(0,0,0,0.4);
 }
 
+.posttitle {
+  font-size: 16px;
+  font-family: Tiza;
+  text-rendering: optimizeLegibility;
+  font-weight: normal;
+}
+
+.date,
+.tags,
+.links {
+  font-size: 12px;
+}

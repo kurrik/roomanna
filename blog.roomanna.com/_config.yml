@@ -10,8 +10,14 @@ tag_dir: tag
 tag_title_prefix: "Tags &raquo; "
 related_tags: true
 
-category_dir: topics
-category_title_prefix: "Topics &raquo; "
+category_dir: tag
+category_title_prefix: "Categories &raquo; "
+
+content_delimeter: "<!-- -**-END-**- -->"
+
+title: blog.roomanna.com
+url: http://blog.roomanna.com
+author: Arne Roomann-Kurrik
 
 maruku:
   use_tex:    false

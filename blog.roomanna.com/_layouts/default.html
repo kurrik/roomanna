@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>{{ page.title }}</title> 
     <link rel="stylesheet" href="/css/base.css" />
   </head>
@@ -16,13 +17,16 @@
         </div>
         <div class="boxFlex0" id="sidebar">
           <div class="panel">
-            <h2>sidebar</h2>
-            <ul>
-            {% for tag in site.iterable.categories %}
-              <a style="font-size: {{ tag.posts | size | times:1.5 | plus: 10 }}px;" href="{{site.baseurl}}/topics/{{tag.name}}/">
-                {{ tag.name }}</a>{% if forloop.last == false %},&nbsp;{% endif %}
+            <h2>I am a horrible sidebar</h2>
+            <h3>Here are my horrible tags</h3>
+            {% for tag in site.iterable.tags %}
+              <div>
+                <a href="{{site.baseurl}}/tag/{{tag.name}}/">{{ tag.name }}</a>
+              </div>
             {% endfor %}
-            </ul>
+            <h3>Here is my horrible ATOM feed</h3>
+            <img src="/img/rss-icon.png"/>
+            <a href="/atom.xml">Feed it to me!</a>
           </div>
         </div>
       </div>
