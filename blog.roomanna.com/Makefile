@@ -16,14 +16,14 @@ build:
 
 serve:
 	rm -rf _site
-	ejekyll --server
+	ejekyll --server jekyll build/_site
 
 serve-prod: build
 	dev_appserver.py --port=9999 --address=0.0.0.0 build
 
 server: build
 	cp -r appengine build
-	ejekyll
+	ejekyll jekyll build/_site
 
 deploy: server
 	appcfg.py update build
