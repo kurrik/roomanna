@@ -14,16 +14,15 @@ build:
 	mkdir build
 	mkdir build/_site
 
-serve:
-	rm -rf _site
+serve: clean
 	ejekyll --server jekyll build/_site
 
 serve-prod: build
 	dev_appserver.py --port=9999 --address=0.0.0.0 build
 
 server: build
-	cp -r appengine build
-	ejekyll jekyll build/_site
+	cp -r appengine/* build
+	ejekyll --no-auto jekyll build/_site
 
 deploy: server
 	appcfg.py update build
