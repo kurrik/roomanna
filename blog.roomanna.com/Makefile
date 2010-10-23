@@ -15,7 +15,7 @@ build:
 	mkdir build/_site
 
 serve: server
-	ejekyll --server jekyll build/_site
+	ejekyll --server 9998 jekyll build/_site
 
 serve-prod: server
 	dev_appserver.py --port=9998 --address=0.0.0.0 build
