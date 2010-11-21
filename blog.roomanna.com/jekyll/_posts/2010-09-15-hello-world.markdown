@@ -18,8 +18,10 @@ sure, and I figured I'd devote some space to answering them before getting to
 the process of writing down whatever comes to mind while completing my 
 day-to-day tasks at my nerd job.
 
+<!-- -**-END-**- -->
+
 Oops, I've gone and given it away, haven't I?  Well, this is a site I'm using
-to keep track of various stuffs and junks that I'm working on at any given time,
+to keep track of various ideas that I'm working on at any given time,
 plus anything else that I feel needs expounding on.  Don't worry, I'll keep 
 the personal opinion stuff pretty mild.  I'm really just tired of filling in a
 blank on all those "Personal blog" forms I'm constantly filling out.

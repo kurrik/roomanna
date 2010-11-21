@@ -9,7 +9,7 @@ module Jekyll
   
   AOP.around(Post, :to_liquid) do |post_instance, args, proceed, abort|
     result = proceed.call
-    result['preview'] = post_instance.preview_content
+    result['preview'] = post_instance.preview_content 
     result
   end
 end

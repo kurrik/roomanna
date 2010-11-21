@@ -1,24 +1,31 @@
 ---
 layout: default
 ---
-<header class="post">
-  <h2>{{ page.title }}</h2>
-</header>
-<div id="columns">
-  <div class="panel" id="content">
-    <article id="post">
-      <div class="links"><strong>Links:</strong>
-        <a href="{{ page.url }}">Quasilink</a>
+<article class="post">
+  <header><h2>{{ page.title }}</h2></header>
+  <div class="columns">
+    <div class="content">
+      {{ content }}
+    </div>
+    <div class="panel">
+      <div class="metadata sidebar">
+        <p>
+          This page was published on 
+          <strong>{{ page.date | date_to_string }}</strong>
+        </p>
+        <p>
+          Filed under
+          {% for tag in page.tags %}
+            <strong><a href="/tag/{{ tag }}">{{ tag }}</a></strong>
+            {% if forloop.last == false %},&nbsp;{% endif %}
+          {% endfor %}
+        </p>
+        <p>
+          Obtain a semi-permanent link by referencing this 
+          <strong><a href="{{ page.url }}">quasilink</a></strong>
+        </p>
       </div>
-      <div class="tags"><strong>Tags:</strong> 
-        {% for tag in page.tags %}
-          <a href="/tag/{{ tag }}">{{ tag }}</a> 
-          {% if forloop.last == false %},&nbsp;{% endif %}
-        {% endfor %}
-      </div>
-      <div class="date"><strong>Published:</strong> {{ page.date | date_to_string }}</div>
-      <p>{{ content }}</p>
-    </article>
+      {% include sidebar.html %}
+    </div>
   </div>
-  {% include sidebar.html %}
-</div>
+</article>

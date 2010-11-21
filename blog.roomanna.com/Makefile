@@ -14,7 +14,7 @@ build:
 	mkdir build
 	mkdir build/_site
 
-serve: server
+serve: 
 	ejekyll --server 9998 jekyll build/_site
 
 serve-prod: server
