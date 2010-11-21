@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>roomanna.com</title>
+    <link rel="stylesheet" href="css/base.css">
+    <script src="js/roomanna.js"></script>
+    <script>
+      var stepInterval = null;
+      var manager = null;
+      
+      function step() {
+        if (manager.step() == false) {
+          window.clearInterval(stepInterval);
+        }
+        manager.draw();
+      };
+      
+      function start() {
+        window.removeEventListener('mousemove', start, false);
+        stepInterval = window.setInterval(step, 40);
+      };      
+    </script>
+    <script type="text/javascript">
+      WebFontConfig = {
+        custom: { 
+          families: ['LeagueGothic'],
+          urls: [ 'css/fonts.css'] 
+        },
+        active: function() {
+          var text = new TextMapper(80, 20);
+          text.drawText('roomanna.com');
+          manager = new CanvasManager(800, 200);
+          document.getElementById('canvas').appendChild(manager.canvas);
+          manager.addPoints(text.canvas);
+          manager.draw();
+          window.addEventListener('mousemove', start, false);
+        }
+      };
+      (function() {
+        var wf = document.createElement('script');
+        wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+            '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+        wf.type = 'text/javascript';
+        wf.async = 'true';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(wf, s);
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="canvas">
+    </div>
+    <div class="texty">
+      <strong>Hello</strong>, I've got a <a href="http://blog.roomanna.com">blog</a> now.
+    </div>
+    <div id="fonty">roomanna.com</div>
+  </body>
+</html>
