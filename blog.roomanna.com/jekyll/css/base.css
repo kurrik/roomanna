@@ -40,8 +40,9 @@ body {
 }
 
 #content > * {
-  min-width: 850px;
+  min-width: 750px;
   width: 80%;
+  max-width: 900px;
 }
 
 body > header ,
@@ -188,8 +189,8 @@ header h2 strong {
   display: inline-block;
 }
 
-.sidebar h2 {
-  margin-top: 20px;
+.metadata {
+  margin-bottom: 20px;
 }
 
 .panel {
