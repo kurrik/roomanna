@@ -5,8 +5,13 @@ api_version: 1
 
 handlers:
 - url: /favicon.ico
-  static_files: build/_site/img/favicon.ico
-  upload: build/_site/img/favicon.ico
+  static_files: _site/img/favicon.ico.png
+  upload: _site/img/favicon.ico.png
+
+- url: /css/fonts
+  static_dir: _site/css/fonts
+  expiration: "1d"
+  mime_type: "application/octet-stream"
 
 - url: /.*
   script: main.py

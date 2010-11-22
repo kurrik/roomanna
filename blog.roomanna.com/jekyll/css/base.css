@@ -3,7 +3,7 @@
 ---
 @font-face {
   font-family: "Raleway";
-  src: url('raleway_thin.otf') format("opentype");
+  src: url('fonts/raleway_thin.otf') format("opentype");
 }
 
 html {
