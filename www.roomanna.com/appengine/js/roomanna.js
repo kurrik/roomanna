@@ -78,6 +78,18 @@ CanvasManager.prototype.addPoint = function(x, y, color) {
   }
 };
 
+CanvasManager.prototype.onClick = function(x, y) {
+  var sx = Math.floor(x / this.pointw);
+  var sy = Math.floor(y / this.pointh);
+  var point = this.getPoint(sx, sy);
+  if (point) {
+    this.clearPoint(sx, sy);
+  } else {
+    var color = parseInt('3366bb', 16);
+    this.addPoint(sx, sy, color);
+  }
+};
+
 CanvasManager.prototype.draw = function() {
   this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
   for (var i = 0; i < this.points.length; i++) {

@@ -14,11 +14,18 @@
       function step() {
         if (manager.step() == false) {
           window.clearInterval(stepInterval);
+          stepInterval = null;
         }
         manager.draw();
       };
       
-      function start(evt) {
+      function startStepping() {
+        if (!stepInterval) {
+          stepInterval = window.setInterval(step, 40);
+        }
+      };
+      
+      function onMouseMove(evt) {
         if (x == null || y == null) {
           x = evt.pageX;
           y = evt.pageY;
@@ -26,23 +33,35 @@
           deltaX = Math.abs(evt.pageX - x);
           deltaY = Math.abs(evt.pageY - y);
           if (deltaX > 5 || deltaY > 5) {
-            window.removeEventListener('mousemove', start, false);
-            stepInterval = window.setInterval(step, 40);
+            window.removeEventListener('mousemove', onMouseMove, false);
+            startStepping();
           }
         }
-      };      
-    </script>
-    <script type="text/javascript">
+      };  
+      
+      function onClick(evt) {
+        console.log(evt);
+        manager.onClick(evt.offsetX, evt.offsetY);
+        startStepping();
+      };   
+      
+      function onSelectStart(evt) {
+        evt.preventDefault();
+        return false;
+      };
+      
       window.addEventListener('load', function() {        
         window.setTimeout(function() {
           var text = new TextMapper(80, 20);
           text.drawText('roomanna.com');
           manager = new CanvasManager(800, 200);
           document.getElementById('canvas').appendChild(manager.canvas);
+          manager.canvas.addEventListener('click', onClick, false);
+          manager.canvas.addEventListener('selectstart', onSelectStart, false);
           manager.addPoints(text.canvas);
           manager.draw();
-          window.addEventListener('mousemove', start, false);            
-        }, 10);
+          window.addEventListener('mousemove', onMouseMove, false);            
+        }, 100);
       }, false);
     </script>
   </head>
