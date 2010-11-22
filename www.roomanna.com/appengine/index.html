@@ -3,10 +3,13 @@
   <head>
     <title>roomanna.com</title>
     <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/fonts.css">
     <script src="js/roomanna.js"></script>
     <script>
       var stepInterval = null;
       var manager = null;
+      var x = null;
+      var y = null;
       
       function step() {
         if (manager.step() == false) {
@@ -15,36 +18,32 @@
         manager.draw();
       };
       
-      function start() {
-        window.removeEventListener('mousemove', start, false);
-        stepInterval = window.setInterval(step, 40);
+      function start(evt) {
+        if (x == null || y == null) {
+          x = evt.pageX;
+          y = evt.pageY;
+        } else {
+          deltaX = Math.abs(evt.pageX - x);
+          deltaY = Math.abs(evt.pageY - y);
+          if (deltaX > 5 || deltaY > 5) {
+            window.removeEventListener('mousemove', start, false);
+            stepInterval = window.setInterval(step, 40);
+          }
+        }
       };      
     </script>
     <script type="text/javascript">
-      WebFontConfig = {
-        custom: { 
-          families: ['LeagueGothic'],
-          urls: [ 'css/fonts.css'] 
-        },
-        active: function() {
+      window.addEventListener('load', function() {        
+        window.setTimeout(function() {
           var text = new TextMapper(80, 20);
           text.drawText('roomanna.com');
           manager = new CanvasManager(800, 200);
           document.getElementById('canvas').appendChild(manager.canvas);
           manager.addPoints(text.canvas);
           manager.draw();
-          window.addEventListener('mousemove', start, false);
-        }
-      };
-      (function() {
-        var wf = document.createElement('script');
-        wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
-            '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-        wf.type = 'text/javascript';
-        wf.async = 'true';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(wf, s);
-      })();
+          window.addEventListener('mousemove', start, false);            
+        }, 10);
+      }, false);
     </script>
   </head>
   <body>
