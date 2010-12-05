@@ -223,7 +223,13 @@ article .metadata {
   border: 1px solid rgba(0,64,0,0.3);
   max-width: 200px;
 }
-.panel h2, .panel h3 {
-  margin: 10px 0;
+.panel h1, .panel h2, .panel h3 {
+  font-family: Arial;
+  margin: 15px 0;
+  line-height: 110%;
+  padding: 0;
+}
+.panel h2 {
+  font-size: 30px;
 }
 
