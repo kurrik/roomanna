@@ -9,18 +9,15 @@ title: blog.roomanna.com
         <header><h2><img src="/img/kurrik-60.png"/> Recent <strong>Entries</strong></h2></header>
       </article>
   {% for post in site.posts %}
-    <div class="columns">
       <article class="index flex">
         <header>
-          <div class="date">{{ post.date | date_to_string }}</div>
           <a href="{{ post.url }}"><h2>{{ post.title }}</h2></a>
-          
+          <div class="date">{{ post.date | date_to_string }}</div>
         </header>
         <section>
           {{ post.preview }}
         </section>
       </article>
-    </div>
   {% endfor %}
     </div>
     <div class="panel">
