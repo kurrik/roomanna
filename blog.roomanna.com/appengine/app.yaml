@@ -7,10 +7,15 @@ handlers:
 - url: /favicon.ico
   static_files: _site/img/favicon.ico.png
   upload: _site/img/favicon.ico.png
+  expiration: "1d"
 
+- url: /libs
+  static_dir: _site/libs
+  expiration: "30d"
+  
 - url: /css/fonts
   static_dir: _site/css/fonts
-  expiration: "1d"
+  expiration: "30d"
   mime_type: "application/octet-stream"
 
 - url: /.*
