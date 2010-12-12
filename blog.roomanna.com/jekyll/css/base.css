@@ -121,9 +121,17 @@ h3 {
 
 pre, .syntaxhighlighter {
   border-left: 10px solid #cfd;
-  padding-left: 10px;
+  padding: 10px 0 10px 10px;
   position: relative;
   left: 10px;
+}
+pre.blockquote {
+  border-left: 0;
+  color: #666;
+  font-family: Consolas, 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace;
+}
+pre.blockquote strong {
+  color: #000;
 }
 
 code {
