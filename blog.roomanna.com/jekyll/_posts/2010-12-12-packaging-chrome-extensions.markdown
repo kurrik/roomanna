@@ -418,7 +418,7 @@ pkinfo.setComponentByPosition(1, univ.Integer(rsakey.e))
 def to_bitstring(self, num):
   buf = ''
   while num > 1:
-    buf = str(num & 1) + buf
+    buf = str(num &amp; 1) + buf
     num = num >> 1
   buf = str(num) + buf
   return buf
@@ -612,7 +612,7 @@ class SigningKey(db.Model):
     """ Converts a long into the bit string. """
     buf = ''
     while num > 1:
-      buf = str(num & 1) + buf
+      buf = str(num &amp; 1) + buf
       num = num >> 1
     buf = str(num) + buf
     return buf
