@@ -4,7 +4,7 @@ title: Add-on-Con 2010
 tags: 
 - chrome
 - extensions
-- presentation
+- presentations
 ---
 [link-extension]: https://chrome.google.com/extensions/detail/igocgkpcgelnhiojhabmkhkgcdlpanhp
 [link-addoncon]: http://addoncon.com/

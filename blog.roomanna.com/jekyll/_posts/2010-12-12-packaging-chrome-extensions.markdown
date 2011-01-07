@@ -4,7 +4,7 @@ title: Packaging Google Chrome extensions
 tags: 
 - chrome
 - extensions
-- app engine
+- appengine
 ---
 [link-samples]: http://code.google.com/chrome/extensions/samples.html
 [link-docs]: http://src.chromium.org/viewvc/chrome/trunk/src/chrome/common/extensions/docs/
