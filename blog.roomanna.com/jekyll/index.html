@@ -5,7 +5,7 @@ title: blog.roomanna.com
 <div>
   <div class="columns">
     <div class="flex">
-  {% for post in site.posts %}
+  {% for post in site.posts limit:5 %}
       <article class="index flex">
         <header>
           <a href="{{ post.url }}"><h2>{{ post.title }}</h2></a>
@@ -27,6 +27,9 @@ title: blog.roomanna.com
         </section>
       </article>
   {% endfor %}
+      <footer class="index">
+          <strong>There may be more in the <a href="/archives.html">archives</a></strong>.
+      </footer>
     </div>
     <div class="panel">
       {% include sidebar.html %}
