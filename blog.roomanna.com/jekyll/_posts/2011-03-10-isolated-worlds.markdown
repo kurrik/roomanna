@@ -83,8 +83,8 @@ and access a popup's window object from a background page by calling
 
 !['Background page and popup talking to each other'][img02]
 
-This is pretty cool, because a popup could log to the background page's log
-like this (for example):
+This is pretty cool, because a popup could log to the background page's console
+like this:
 
 <pre class="brush:javascript">
 var bg = chrome.extension.getBackgroundPage();
@@ -138,7 +138,7 @@ function loadJQuery() {
 };
 </pre>
 
-Does actually load jQuery, but it puts it into the page's execution context,
+does actually load jQuery, but it puts it into the page's execution context,
 not the context of the content script.  In fact, if you were to do something
 like:
 
@@ -150,12 +150,13 @@ function loadMyScript() {
 };
 </pre>
 
-You can load JavaScript resources packaged with your extension into the context
+you would be able to load JavaScript resources packaged with your extension 
+into the context
 of arbitrary web pages.  Which can be useful if you really need to get into
 that JavaScript context for whatever reason.
 
-You can still rely on jQuery, although not dynamically.  Just reference the 
-appropriate file
+An extension can still rely on jQuery, although not dynamically.  Just 
+reference the appropriate file
 in the `content_scripts` section of your **manifest.json** file:
 
 <pre class="brush:javascript">
