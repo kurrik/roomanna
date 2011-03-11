@@ -92,7 +92,7 @@ article {
 article img {
   max-width: 98%;
   display: block;
-  margin: 15px auto;
+  margin: 20px auto;
   border: 1px solid #999;
   padding: 1%;
   background: #fff;
@@ -101,7 +101,7 @@ article img {
 }
 
 p {
-  margin: 10px 0;
+  margin: 15px 0;
   padding: 0;
 }
 
@@ -162,6 +162,21 @@ pre.blockquote strong {
 
 code {
   color: #063;
+}
+
+blockquote,
+blockquote pre code {
+  color: #888;
+}
+
+blockquote {
+  padding: 0 0 0 10px;
+  border-left: 10px solid #ccc; 
+  margin: 20px 40px 20px 20px;
+}
+
+blockquote pre {
+  border-left: 0;
 }
 
 a {
