@@ -4,7 +4,6 @@ title: Isolated Worlds
 tags: 
 - chrome
 - extensions
-- presentations
 ---
 [link-groups]: http://groups.google.com/a/chromium.org/group/chromium-extensions/browse_thread/thread/0d65a331cfaeb7ab#
 [link-docs]: http://code.google.com/chrome/extensions/content_scripts.html#registration
