@@ -13,6 +13,7 @@ tags:
 [link-4]: http://www.meetup.com/NYC-GTUG/events/16337631/
 [link-5]: http://gtugs.org
 [link-6]: https://sites.google.com/site/phillygtug/calendar
+[link-6-register]: http://bit.ly/ig4KgL
 [link-map-2]: http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=22000+AOL+Way+Dulles,+VA&aq=&sll=40.740445,-74.002082&sspn=0.010031,0.022724&dirflg=r&ttype=dep&date=05%2F16%2F11&time=12:15pm&noexp=0&noal=0&sort=def&ie=UTF8&hq=&hnear=22000+Aol+Way,+Dulles,+Loudoun,+Virginia+20166&z=16
 [link-map-3]: http://maps.google.com/maps?q=Google+Cambridge,+Cambridge,+MA&hl=en&sll=42.36259,-71.087264&sspn=0.02211,0.049255&ie=UTF8&view=map&cid=1579732836221855691&hq=Google+Cambridge,+Cambridge,+MA&hnear=&z=16&iwloc=A
 [link-map-4]: http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=111+8th+Avenue,+New+York,+NY&aq=&sll=40.742022,-74.004636&sspn=0.009624,0.022724&dirflg=r&ttype=dep&date=05%2F16%2F11&time=12:15pm&noexp=0&noal=0&sort=def&ie=UTF8&hq=&hnear=111+8th+Ave,+Manhattan,+New+York+10011&ll=40.740445,-74.002082&spn=0.010031,0.022724&z=16
@@ -37,7 +38,8 @@ Starts at 6:30 PM<br>
 *  **May 23rd, 2011 - Philly/Delaware GTUG**<br>
 At [2 West Liberty Blvd, Malvern, PA, 19355][link-map-6]<br>
 Starts at 5:30 PM and ends around 8:00 PM.<br>
-[Event page][[link-6]
+[Event page][link-6]<br>
+[Registration][link-6-register]
 
 *  **May 25th, 2011 - NYC GTUG:**<br>
 At Google NYC, [111 8th Ave. 10th Floor, New York, NY][link-map-4]<br>
