@@ -5,6 +5,13 @@ jekyll_ext by rfelix, available at https://github.com/rfelix/jekyll_ext
 syntaxhighlighter by alex gorbatchev, available at 
 http://code.google.com/p/syntaxhighlighter/
 
+Yaml brush for syntaxhighlighter by Nicolas Perriault, available at
+http://www.undermyhat.org/blog/wp-content/uploads/2009/09/shBrushYaml.js
+
+Go brush for syntaxhighlighter by Allister Sanchez, available at
+http://d.allistersanchez.com/js/shBrushGo.js
+
+
 Content:
 --------
 Except where otherwise labeled, content is released under a Creative Commons 
