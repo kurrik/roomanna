@@ -24,7 +24,7 @@ of I/O this year.   I think this is a huge step in getting broader developer
 support for [Go][link-2] as well as giving a comfortable middle ground between 
 Python and Java for developers who want their App Engine apps to be compact 
 and flexible while retaining some ability to do static analysis and 
-refactoring. <a href="#note">*</a>
+refactoring. <a href="/05-20-2011/simple-go-server#note">*</a>
 
 But at this point I’m still a wannabe Go fanboy.  I hadn’t actually sat down 
 and written a service in the language until a few days ago, when I got a 
