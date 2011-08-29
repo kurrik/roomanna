@@ -2,15 +2,15 @@ This project contains the source and content of http://blog.roomanna.com.
 
 REQUIREMENTS:
 To build, install dependencies:
-  
+
   gem update --system          # may need to be administrator or root
   gem install jekyll
   gem install jekyll_ext
-  
+
 SERVING CONTENT:
 
 From the blog.roomanna.com directory:
 
   make serve
-  
+
 The blog will be accessible at http://localhost:9998
