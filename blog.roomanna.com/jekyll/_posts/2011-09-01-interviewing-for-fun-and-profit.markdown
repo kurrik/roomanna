@@ -35,7 +35,7 @@ developer how to reverse a hash of an IP address and they tell me that
 hashes can’t be reversed, then I'm going to think that the candidate
 gives up too easily.  If you find yourself coming up against the limits
 of what is possible, start breaking physical laws.  Pretend you have
-infinite resources, since companies like Google usually do.  
+infinite resources, since companies like Google usually do.
 
 * **Distill all programming questions into CS algorithms**<br>
   Know how to implement a fast sort by hand.  Know implementation details
@@ -52,7 +52,7 @@ technologies they list on their resume, yet they can’t describe what a
 closure or a prototype chain are.  Typically, these folks have used
 "JavaScript" (meaning jQuery) to manipulate a series of DOM elements
 and have never written an application, library, or node.js server using
-the real language.  I’ve been especially hard when grading these folks.
+the real language.  I’ve been especially tough when grading these folks.
 
 * **Show your work**<br>
   Try to understand that I really want all interview candidates to do well.
