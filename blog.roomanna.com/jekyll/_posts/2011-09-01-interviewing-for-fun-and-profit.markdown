@@ -28,8 +28,7 @@ people looking for a software engineering job:
 
 <!-- -**-END-**- -->
 
-* **Don’t give up easily**
-
+* **Don’t give up easily**<br>
   I think one of the most basic things you can do to fail an interview
 is to assume that there’s no answer to a given question.  If I ask a
 developer how to reverse a hash of an IP address and they tell me that
@@ -38,8 +37,7 @@ gives up too easily.  If you find yourself coming up against the limits
 of what is possible, start breaking physical laws.  Pretend you have
 infinite resources, since companies like Google usually do.  
 
-* **Distill all programming questions into CS algorithms**
-
+* **Distill all programming questions into CS algorithms**<br>
   Know how to implement a fast sort by hand.  Know implementation details
 for hash maps, linked lists, heaps.  Understand how to guesstimate the
 order runtime for an algorithm.  If stumped, go for brute force and
@@ -48,8 +46,7 @@ of a few algorithms like the Fisher-Yates shuffle.  There’s no interview
 question which a solid application of CS fundamentals won’t solve or at
 least make you look good.
 
-* **Don’t lie or exaggerate on your resume**
-
+* **Don’t lie or exaggerate on your resume**<br>
   One of my pet peeves is that people slip “JavaScript” into the soup of
 technologies they list on their resume, yet they can’t describe what a
 closure or a prototype chain are.  Typically, these folks have used
@@ -57,8 +54,7 @@ closure or a prototype chain are.  Typically, these folks have used
 and have never written an application, library, or node.js server using
 the real language.  I’ve been especially hard when grading these folks.
 
-* **Show your work**
-
+* **Show your work**<br>
   Try to understand that I really want all interview candidates to do well.
 I’m looking for any excuse to pass an interviewee, since failure means
 that I have to do more interviews in the future.  If I ask a question of
@@ -68,8 +64,7 @@ candidate grabs a whiteboard marker, starts drawing a diagram, and tells
 me their approach, I can at least write that they have a good thought
 process and correct them if they’re wildly off track.
 
-* **Do your homework**
-
+* **Do your homework**<br>
   If you already know the position you’re going to be interviewing for,
 spend a couple of evenings and read up on the documentation or technology
 you’ll be working with.  When I interviewed for a Developer Relations
@@ -78,8 +73,7 @@ role at Google, I spent a few nights going through all of code.google.com
 that I knew about the APIs and had some suggestions for ways that they
 could improve their documentation.
 
-* **Tailor your resume**
-
+* **Tailor your resume**<br>
   If your mission statement is "To work on high performance web server
 database infrastructure" and you’re interviewing for a Developer
 Advocate position, I’ll count that against you.  If the job needs
