@@ -16,6 +16,7 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util
 import os
 import logging
+import datetime
 
 CONTENT_TYPES = {
   'html' : 'text/html',
@@ -40,6 +41,11 @@ class MainHandler(webapp.RequestHandler):
       file_ext = path.split('.')[-1]
       if CONTENT_TYPES.has_key(file_ext):
         self.response.headers["Content-Type"] = CONTENT_TYPES[file_ext]
+      if file_ext not in ["html", "xml"]:
+        expires = datetime.datetime.today() + datetime.timedelta(days=30)
+        expires_str = expires.strftime('%a, %d %b %Y 00:00:00 GMT') 
+        self.response.headers["Expires"] = expires_str
+        self.response.headers["Cache-Control"] = "public, max-age=2592000"
       self.response.out.write(file_contents)
 
 def main():  # pragma: no cover
