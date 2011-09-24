@@ -79,7 +79,7 @@ in my opinion:
   allowfullscreen="true">
 </iframe>
 
-**The potential**.  [Leaving Google][1] was obviously a choice I coudln't make
+**The potential**.  [Leaving Google][1] was obviously a choice I couldn't make
 lightly. During that time I heard a lot of folks questioning Twitter's ability
 to monetize, or be a 'real'
 product.  I appreciate that they didn't want me to make a decision which they
