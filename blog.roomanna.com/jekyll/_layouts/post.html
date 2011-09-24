@@ -9,7 +9,7 @@ layout: default
       <div id="comments">
         <div id="disqus_thread"></div>
         <script type="text/javascript">
-          var disqus_shortname = 'roomanna'; 
+          var disqus_shortname = 'roomanna';
           var disqus_identifier = '{{ page.id }}';
           var disqus_url = '{{ site.url }}{{ page.url }}';
         </script>
@@ -19,7 +19,7 @@ layout: default
     <div class="panel">
       <div class="metadata sidebar">
         <p>
-          This page was published on 
+          This page was published on
           <strong>{{ page.date | date_to_string }}</strong>
         </p>
         <p>
@@ -30,12 +30,18 @@ layout: default
           {% endfor %}
         </p>
         <p>
-          Obtain a semi-permanent link by referencing this 
+          Obtain a semi-permanent link by referencing this
           <strong><a href="{{ page.url }}">quasilink</a></strong>
         </p>
         <p>
           Or just jump to the <strong><a href="#comments">comments</a></strong>
         <p>
+        <p>Maybe you feel like issuing a
+          <p><a href="https://twitter.com/share"
+             class="twitter-share-button"
+             data-count="horizontal"
+             data-text="Just read '{{page.title}}'"
+             data-via="kurrik">Tweet</a></p></p>
       </div>
       {% include sidebar.html %}
     </div>
