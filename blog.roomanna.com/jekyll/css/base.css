@@ -57,7 +57,7 @@ body {
   display: -webkit-box;
   -webkit-box-orient: horizontal !important;
   -webkit-box-pack: center;
-  
+
   display: -moz-box;
   -moz-box-orient: horizontal !important;
   -moz-box-pack: center;
@@ -171,7 +171,7 @@ blockquote pre code {
 
 blockquote {
   padding: 0 0 0 10px;
-  border-left: 10px solid #ccc; 
+  border-left: 10px solid #ccc;
   margin: 20px 40px 20px 20px;
 }
 
@@ -189,8 +189,8 @@ a:hover {
   text-decoration: none;
 }
 
-a img {
-  border: 0 !important; 
+article a img {
+  border: 0 !important;
 }
 
 a[rel=license] {
