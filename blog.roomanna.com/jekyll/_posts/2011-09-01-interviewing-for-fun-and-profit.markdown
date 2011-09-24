@@ -4,7 +4,7 @@ title: Interviewing For Fun And Profit
 tags:
 - interviewing
 ---
-[1]: http://www.aaronboodman.com/2010/10/wherein-i-help-you-get-good-job.html
+[1]: http://aaronboodman-com-v1.blogspot.com/2010/10/wherein-i-help-you-get-good-job.html
 [2]: /img/2011-09-01/interview.jpg
 [3]: http://www.flickr.com/photos/danieltedcfeliciano/5348850648/
 
