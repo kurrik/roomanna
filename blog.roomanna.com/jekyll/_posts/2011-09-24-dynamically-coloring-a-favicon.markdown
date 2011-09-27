@@ -84,7 +84,7 @@ the target page.  It does the following:
 
 ### Link element
 
-A `<link rel="link">` (many sites use "shortcut icon" but Chrome only needs
+A `<link rel="icon">` (many sites use "shortcut icon" but Chrome only needs
 to use "icon" as the link type) element can set the favicon for a given page.
 While **dev.twitter.com**
 contains such a link element in the DOM, not every page does, so the following
