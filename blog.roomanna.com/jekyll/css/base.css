@@ -66,6 +66,7 @@ body {
 .columns > * {
   -webkit-box-orient: vertical;
   -moz-box-orient: vertical;
+  display: -moz-box;
 }
 
 #content > * {
