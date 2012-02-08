@@ -16,7 +16,7 @@ on Twitter and Hacker News and such today.
 
 Despite him very clearly taking about the *platform* of Google+, not the
 *product*, the distinction seems to be lost on the majority of pundits and
-journalists I've seen talking about the "expose" since the post went live.
+journalists I've seen talking about the "exposé" since the post went live.
 If it were about the product, that would be an argument I'd have little vested
 in, but what's really disappointing to me is how little research Steve did
 about Google's developer platform strategies at all.
