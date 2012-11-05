@@ -45,7 +45,6 @@ to write up my findings for anyone heading down this road in the future.  It
 should be pretty useful if you ever want to host a CRX from an app engine app
 for whatever reason (offering a debug/trusted tester version, for example).
 
-<!-- -**-END-**- -->
 
 ## Figuring out the format
 

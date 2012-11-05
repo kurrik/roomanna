@@ -1,4 +1,6 @@
-title: Example blog
-root: http://www.example.com
+title: Roomanna
+root: http://blog.roomanna.com
 pathformat: /{{.DatePath}}/{{.Slug}}
 dateformat: "2006-01-02"
+tagsformat: /tags/{{.Tag}}
+recentcount: 5
