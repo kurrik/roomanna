@@ -1,7 +1,7 @@
 [1]: http://blog.roomanna.com/08-29-2011/my-last-day-at-google
 [2]: http://leisureblogs.chicagotribune.com/the_theater_loop/2010/10/an-annoyance-actor-does-just-ok.html
 [3]: http://techcrunch.com/2011/03/24/jack-dorsey-golden-gate-bridge/
-[4]: /img/2011-09-21/bird-shark.jpg
+[4]: {{link "bird-shark.jpg"}}
 [5]: http://www.imdb.com/title/tt0128445/\
 [6]: https://api.twitter.com/1/users/show.xml?screen_name=kurrik
 [7]: http://www.youtube.com/watch?v=PX4UEAR8prw#t=1m22
@@ -14,7 +14,7 @@
 [14]: https://twitter.com/#!/BARACKOBAMA
 [15]: http://techcrunch.com/2010/04/14/twitter-execs-address-the-big-question-monetization/
 [16]: http://gigaom.com/2011/09/13/twitter-offers-analytics-to-try-and-prove-its-value/
-[17]: /img/2011-09-21/twitter.png
+[17]: {{link "twitter.png"}}
 [18]: https://twitter.com/#!/dickc/status/3962807808
 [19]: https://dev.twitter.com
 
@@ -37,7 +37,9 @@ funny, and inspiring. I haven't had the fortune to see Jack yet, but his
 talks are already gaining a [legendary reputation][3] in the valley.  It's
 been a short time, but I really feel confident in the leadership at Twitter.
 
-[![17]][18]
+<a href="https://twitter.com/#!/dickc/status/3962807808">
+  <img src="{{link "twitter.png"}}" />
+</a>
 
 <!-- -**-END-**- -->
 

@@ -1,14 +1,14 @@
 [1]: https://chrome.google.com/webstore/detail/jlncmhmfcecpdddbiikdagcnhjlmnoib
-[2]: /img/2011-09-24/twitterbars.png
-[3]: /09-21-2011/my-first-weeks-at-twitter/
+[2]: {{link "twitterbars.png"}}
+[3]: {{link "012-my-first-weeks-at-twitter"}}
 [4]: https://dev.twitter.com
 [5]: http://code.google.com/chrome/extensions/content_scripts.html
-[6]: /img/2011-09-24/twitterbars2.png
+[6]: {{link "twitterbars2.png"}}
 [7]: http://www.chromium.org/developers/design-documents/user-scripts
 [8]: http://www.w3.org/TR/2dcontext/#dom-context-2d-globalcompositeoperation
-[9]: /img/2011-09-24/favicon1.png
-[10]: /img/2011-09-24/favicon2.png
-[11]: /img/2011-09-24/favicon3.png
+[9]: {{link "favicon1.png"}}
+[10]: {{link "favicon2.png"}}
+[11]: {{link "favicon3.png"}}
 
 Since [starting my job at Twitter][3], I've spent a *lot* of time on
 [dev.twitter.com][4], either reading documentation or posting on the discussion
@@ -199,8 +199,8 @@ current canvas is opaque, so if the canvas contains the original favicon,
 and a 16x16 red square is drawn over it:
 
 <div class="inline center">
-  <img src="/img/2011-09-24/favicon1.png" style="width: 240px" />
-  <img src="/img/2011-09-24/favicon2.png" style="width: 240px" />
+  <img src="{{link "favicon1.png"}}" style="width: 240px" />
+  <img src="{{link "favicon2.png"}}" style="width: 240px" />
 </div>
 
 The result will be a solid red image, but with an alpha channel matching the
