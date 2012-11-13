@@ -10,7 +10,11 @@ Chrome Extensions have been praised as being really easy to write, especially
 when compared with writing a Firefox xpi or a plugin for IE.  But there's still
 a few concepts that trip up developers regularly.  One of these is the
 isolated worlds concept, and it leads to
-[a lot of support questions in the group][link-groups]:
+[a lot of support questions in the group][link-groups].
+
+<!--BREAK-->
+
+For example:
 
 <pre class="blockquote">
 My requirement is load jquery.js file into the content script
@@ -44,8 +48,6 @@ because if you were to use the snippet on a regular web page, there
 would be a decent chance of getting it to work.  But Content Scripts don't
 work just like regular web pages, and not understanding that difference will
 lead to painful-to-debug issues like this one.
-
-<!-- -**-END-**- -->
 
 ## An overview of extension architecture
 

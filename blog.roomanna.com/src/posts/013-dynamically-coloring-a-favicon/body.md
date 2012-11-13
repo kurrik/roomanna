@@ -15,7 +15,11 @@ Since [starting my job at Twitter][3], I've spent a *lot* of time on
 group.  I've also been Tweeting a lot more, and I tend to switch back and forth
 a lot throughout the work day.  My browsing habits tend to lead to a
 bunch of open tabs in Chrome, and I realized that I was
-losing productivity.  To illustrate, quickly tell me which of
+losing productivity.
+
+<!--BREAK-->
+
+To illustrate, quickly tell me which of
 the following tabs is for **twitter.com**, and which are **dev.twitter.com**:
 
 ![2]
@@ -33,8 +37,6 @@ Much better!  And the technique is general-purpose enough to be used on any
 domain, or even in a non-Chrome extension context (if you can run code on the
 target domain, that is).  The extension itself can be found [in the Chrome
 Web Store][1].  Read on for a walkthrough of the code.
-
-<!-- -**-END-**- -->
 
 ## Boilerplate
 

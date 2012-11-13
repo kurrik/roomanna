@@ -12,6 +12,8 @@ With my [decision to leave Google to work for Twitter][2], I am now officially
 unemployed for the first time in four years, and will be for slightly over one
 week.  I have named this week **Freedom Week**.
 
+<!--BREAK-->
+
 !['Like Shark Week but for Freedom'][1]
 
 Like [Shark Week][6], **Freedom Week** will be free as in beer (as in I will be

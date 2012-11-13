@@ -5,6 +5,8 @@
 I've gone [in-depth on the structure of CRX files][link-prev], but left out a
 crucial portion for anyone looking to host their own CRX from a server.
 
+<!--BREAK-->
+
 In order to get the advantages of auto-updating your extension, you'll need to
 host an autoupdate manifest file.  From the [documentation][link-autoupdate]
 of this feature, the file should be similar to the following:
@@ -26,8 +28,6 @@ While it's easy enough to obtain this value by installing an extension and
 copying and pasting from the extensions information page,
 this approach is not ideal if you're generating your own
 signing keys, which the previous article covered in depth.
-
-<!-- -**-END-**- -->
 
 I thought it might be good to cover that as an addendum here.  Luckily,
 Erik Kay explained the format of this number in

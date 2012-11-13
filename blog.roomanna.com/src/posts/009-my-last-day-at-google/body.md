@@ -8,6 +8,8 @@
 after I started my first Silicon Valley job at Google) I will be starting
 a position as Developer Advocate at Twitter.
 
+<!--BREAK-->
+
 There’s a lot I can say about what made Twitter attractive, so much that
 I want to save it for a future post.  The time since I made the definitive
 decision to leave Google has been filled with a bunch of internal reflection,

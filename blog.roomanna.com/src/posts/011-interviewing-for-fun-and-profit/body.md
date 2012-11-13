@@ -11,6 +11,8 @@ difference between a candidate getting a passing score or a failing score.
 I've certainly had interviews start off really promising, but go quickly
 downhill when the candidate made a few key errors.
 
+<!--BREAK-->
+
 <a href="http://www.flickr.com/photos/danieltedcfeliciano/5348850648/"><img
 src="{{link "interview.jpg"}}"></a>
 
@@ -20,8 +22,6 @@ which would help me out.  I tried to identify areas where I had failed
 people in the past.  So in the interest of helping otherwise qualified
 candidates from making silly mistakes, here are some suggestions for
 people looking for a software engineering job:
-
-<!-- -**-END-**- -->
 
 * **Don’t give up easily**<br>
   I think one of the most basic things you can do to fail an interview

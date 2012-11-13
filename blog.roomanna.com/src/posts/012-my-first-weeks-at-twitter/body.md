@@ -23,6 +23,8 @@ about joining the company.  Obviously I'm still in the honeymoon period and
 things are still moving fast, but the energy and culture of the place have
 been inspiring.  I've found a few things particularly worth gushing over:
 
+<!--BREAK-->
+
 **Management**. I think a lot of a company's spirit comes directly from the top.
 At Google, I always respected Larry, Sergey, and Eric for being open and direct,
 while still fostering an atmosphere of playfulness and respect throughout the
@@ -40,8 +42,6 @@ been a short time, but I really feel confident in the leadership at Twitter.
 <a href="https://twitter.com/#!/dickc/status/3962807808">
   <img src="{{link "twitter.png"}}" />
 </a>
-
-<!-- -**-END-**- -->
 
 **My team**.  The Developer Relations team is so much smaller than the team I
 was on at Google (even if you only count Chrome DevRel) that it's

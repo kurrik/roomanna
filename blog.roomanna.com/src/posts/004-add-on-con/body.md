@@ -9,6 +9,8 @@ crazied everything up and the holidays shut everything down, I was invited
 to give an educational session at [Add-on-Con 2010][link-addoncon] on the
 topic of Chrome extensions.
 
+<!--BREAK-->
+
 Despite starting at 9:00am on the teaching day (the day before the conference
 began in earnest), I think the session went well.  I have a Chrome extensions
 presentation which is also
@@ -26,8 +28,6 @@ to "melt" the screen (an effect inspired by
 I suggest you install the [slides][link-extension] to see it in action.  The
 demo is near the end.  This was actually fairly simple to accomplish, so I'll
 go over how I built it here.
-
-<!-- -**-END-**- -->
 
 The code that initializes
 the animation creates an `<image>`  and a `<canvas>`, then

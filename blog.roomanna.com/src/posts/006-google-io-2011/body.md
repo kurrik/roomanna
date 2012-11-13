@@ -14,6 +14,8 @@ viewing the session, you should be able to
 [see it here, starting at 10:45am PDT][link-2].   We’re bringing a lot of
 great content, and will try to bring the funny as well.
 
+<!--BREAK-->
+
 [Eric Bidelman][link-3] and I will be talking about some of the newer HTML
 features that have been implemented in Chrome during the past year.  We’re
 doing a pretty demo-heavy talk, so we’re going to show you the "wow",

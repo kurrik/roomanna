@@ -22,6 +22,8 @@ are built and hosted automatically from the [Chromium source tree][link-docs]
 so I modified the docs build script to generate the gallery and zip each
 sample into an easily-downloadable archive.
 
+<!--BREAK-->
+
 Of course zips are fine if you want to peek into sample code, but not so good
 if you just want to quickly test a sample to see what it does.  To address this,
 I've been working on a method to offer each zip as a packaged crx.
@@ -44,7 +46,6 @@ find a ton of information online to help me do this automatically, so I decided
 to write up my findings for anyone heading down this road in the future.  It
 should be pretty useful if you ever want to host a CRX from an app engine app
 for whatever reason (offering a debug/trusted tester version, for example).
-
 
 ## Figuring out the format
 

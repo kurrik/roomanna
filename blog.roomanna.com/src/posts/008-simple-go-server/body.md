@@ -19,6 +19,8 @@ Python and Java for developers who want their App Engine apps to be compact
 and flexible while retaining some ability to do static analysis and
 refactoring. <a href="{{link "008-simple-go-server"}}#note">*</a>
 
+<!--BREAK-->
+
 But at this point I’m still a wannabe Go fanboy.  I hadn’t actually sat down
 and written a service in the language until a few days ago, when I got a
 Chrome Extension help request that involved the use of a web server.  I
@@ -28,8 +30,6 @@ talk more about the extension in a later post, but wanted to cover my
 experience writing the server first.
 
 !['Go Gopher'][img01]
-
-<!-- -**-END-**- -->
 
 *(At this point I'll say that I'm certainly not at the point where I'm going
 to be sharing best practices.  If you see anything that looks funny, please

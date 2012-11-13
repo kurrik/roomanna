@@ -14,6 +14,8 @@ After an [amazing Google I/O session][link-1] last week, I'm doing a bit of
 touring around on the East Coast until June.  There's a ton of [GTUGs][link-5]
 within driving distance of NJ, so I'm hitting up a few.
 
+<!--BREAK-->
+
 I'll be giving a modified version of my I/O talk at each event.  There's still
 a few demos Eric and I have tucked away, so there'll be some new content if
 you've already seen the I/O session.  I'll also do Q/A about anything I'm
