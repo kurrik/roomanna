@@ -2,6 +2,12 @@
   <h1>Posts tagged with <em>{{.Tag}}</em></h1>
   {{range .Posts}}
     <h4><a href="{{.Path}}">{{.Title}}</a></h4>
+    <p class="muted metadata">
+      <i class="icon-time"></i>
+      {{.FormattedDate}}
+      <i class="icon-tags"></i>
+      {{range .Tags}}<a href="/tags/{{.}}">{{.}}</a> {{end}}
+    </p>
     <div>{{.Snippet}}</div>
   {{end}}
 {{end}}`

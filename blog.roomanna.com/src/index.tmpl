@@ -1,6 +1,12 @@
 {{define "body"}}
   {{range .Site.RecentPosts}}
     <h2><a href="{{.Path}}">{{.Title}}</a></h2>
+    <p class="muted metadata">
+      <i class="icon-time"></i>
+      {{.FormattedDate}}
+      <i class="icon-tags"></i>
+      {{range .Tags}}<a href="/tags/{{.}}">{{.}}</a> {{end}}
+    </p>
     <div>{{.Body}}</div>
   {{end}}
 {{end}}

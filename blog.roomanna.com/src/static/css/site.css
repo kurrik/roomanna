@@ -21,3 +21,7 @@ header.site {
   background: #fafafa url('/static/img/bg.png');
   border-bottom: 1px solid #999;
 }
+
+.metadata a {
+  color: #999 !important;
+}
