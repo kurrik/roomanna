@@ -1,2 +1,13 @@
 {{define "sidebar"}}
+  <br>
+  <ul class="nav nav-list">
+    <li class="nav-header">Navigation</li>
+    <li><a href="/">Main</a></li>
+    <li><a href="/archive.html">All posts</a></li>
+
+    <li class="nav-header">Tags</li>
+    {{range $k, $v := .Site.Tags}}
+    <li><a href="/tags/{{$k}}">{{$k}}</a></li>
+    {{end}}
+  </ul>
 {{end}}

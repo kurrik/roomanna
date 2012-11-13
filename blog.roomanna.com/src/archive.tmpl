@@ -1,4 +1,5 @@
 {{define "body"}}
+  <h1>All posts</h1>
   {{range .Site.PostsByDate}}
     <h4><a href="{{.Path}}">{{.Title}}</a></h4>
     <div>{{.Snippet}}</div>

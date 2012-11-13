@@ -1,7 +1,7 @@
 {{define "body"}}
-  <h1>Posts tagged with {{.Tag}}</h1>
+  <h1>Posts tagged with <em>{{.Tag}}</em></h1>
   {{range .Posts}}
-    <h2>{{.Title}}</h2>
-    <div>{{.Body}}</div>
+    <h4><a href="{{.Path}}">{{.Title}}</a></h4>
+    <div>{{.Snippet}}</div>
   {{end}}
 {{end}}`
