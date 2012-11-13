@@ -1,4 +1,4 @@
-[1]: /img/2011-08-29/freedom.jpg "..."
+[1]: {{link "freedom.jpg"}}
 [2]: http://blog.roomanna.com/08-29-2011/my-last-day-at-google
 [3]: http://www.twitch.tv/realnotch/b/293076467
 [4]: http://www.ludumdare.com/compo/ludum-dare-21/?action=preview&uid=398

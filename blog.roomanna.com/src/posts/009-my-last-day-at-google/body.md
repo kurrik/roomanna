@@ -2,7 +2,7 @@
 [2]: http://www.bwater.com/Uploads/FileManager/Principles/Bridgewater-Associates-Ray-Dalio-Principles.pdf
 [3]: http://nymag.com/news/business/wallstreet/ray-dalio-2011-4/
 [4]: https://sites.google.com/site/googdevreljobs/
-[5]: /img/2011-08-29/bust.jpg "On my way in"
+[5]: {{link "bust.jpg"}}
 
 ...was August 25th, 2011.   On September 6th, 2011 (four years and two days
 after I started my first Silicon Valley job at Google) I will be starting

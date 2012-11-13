@@ -13,35 +13,35 @@
 [link-opensocial]: http://opensocial-resources.googlecode.com/svn/spec/1.0/OpenSocial-Specification.xml
 [link-sample]: https://github.com/kurrik/chrome-extensions/tree/master/crx-appengine-packager
 
-I've been working at Google for about three years now, and was fortunate enough 
-to transfer onto the Chrome extensions team about a year ago.  Mostly, I 
+I've been working at Google for about three years now, and was fortunate enough
+to transfer onto the Chrome extensions team about a year ago.  Mostly, I
 support developers working on Chrome extensions, but from time to time I work
 on projects for the team to keep my sanity.  A good example of this is the
-[Chrome extensions samples browser][link-samples].  The extension docs 
-are built and hosted automatically from the [Chromium source tree][link-docs] 
-so I modified the docs build script to generate the gallery and zip each 
+[Chrome extensions samples browser][link-samples].  The extension docs
+are built and hosted automatically from the [Chromium source tree][link-docs]
+so I modified the docs build script to generate the gallery and zip each
 sample into an easily-downloadable archive.
 
 Of course zips are fine if you want to peek into sample code, but not so good
 if you just want to quickly test a sample to see what it does.  To address this,
-I've been working on a method to offer each zip as a packaged crx. 
+I've been working on a method to offer each zip as a packaged crx.
 
 Some considerations:
 
- * I didn't want to check the .crx files into the source tree because of the 
+ * I didn't want to check the .crx files into the source tree because of the
    hassles involved with binary files in source control.  We've had some issues
    with the generated zip files, so managing two sets of archives seemed like it
    could be trouble.
-   
+
  * The extension docs are hosted on App Engine, meaning there are some
-   restrictions on what kind of libraries I could use.  While there are 
-   already [solutions for packing extensions in Python][link-pack], they 
+   restrictions on what kind of libraries I could use.  While there are
+   already [solutions for packing extensions in Python][link-pack], they
    rely on OpenSSL, which isn't available on App Engine.
-   
+
 I decided to write a Python library which could run on App Engine and convert
 a directory of files into a Chrome extension crx archive.  I didn't
 find a ton of information online to help me do this automatically, so I decided
-to write up my findings for anyone heading down this road in the future.  It 
+to write up my findings for anyone heading down this road in the future.  It
 should be pretty useful if you ever want to host a CRX from an app engine app
 for whatever reason (offering a debug/trusted tester version, for example).
 
@@ -50,16 +50,16 @@ for whatever reason (offering a debug/trusted tester version, for example).
 
 From [the CRX format documentation][link-crx-format] I knew I needed to create
 a binary file containing a header, an RSA public key, an RSA signature, and the
-bytes of a zip file with the extension contents.  
+bytes of a zip file with the extension contents.
 
 The RSA key is used to generate
-a signature of the zip file contents, so I needed to figure out how to get a 
+a signature of the zip file contents, so I needed to figure out how to get a
 zip of a directory first.
 
 ## Obtaining a zip file
 
-Technically, the Chrome extension documentation samples are already zipped 
-and checked into 
+Technically, the Chrome extension documentation samples are already zipped
+and checked into
 source control, but it's fairly easy to zip up a directory in Python.  Most
 projects probably won't have a zip handy, so I'm including the step here.
 
@@ -79,7 +79,7 @@ zip_file = zipfile.ZipFile(zip_buffer, 'w')
 path = 'path/to/extension/directory'
 try:
   for root, dirs, files in os.walk(path):
-    for file in files:  
+    for file in files:
       # Absolute path to the file to be added.
       abspath = os.path.realpath(os.path.join(root, file))
       # Write a relative path into the zip file.
@@ -92,9 +92,9 @@ finally:
 
 zip_string = zip_buffer.getvalue()
 </pre>
- 
+
 This way `zip_string` contains the bytes of a zip file containing the specified
-directory.  You'll see that I'm using a simple form of generating a relative 
+directory.  You'll see that I'm using a simple form of generating a relative
 path:
 
 <pre class="brush: python">
@@ -124,25 +124,25 @@ import os
 rsakey = RSA.generate(1024, os.urandom)
 </pre>
 
-This is computationally intensive, so I usually generate a key if needed and 
-store it in the data store for reuse. For local development, you can install 
+This is computationally intensive, so I usually generate a key if needed and
+store it in the data store for reuse. For local development, you can install
 the package from the [PyCrypto homepage][link-pycrypto].
 
 At this point I had a zip file and a key, so I needed to figure out exactly
-how to sign a piece of data according to the RSA specification in order to 
-obtain the signature. 
+how to sign a piece of data according to the RSA specification in order to
+obtain the signature.
 
 ## Figuring out the RSA signature payload format
 
-From the packaging instructions, I knew I could use OpenSSL to generate a 
-signature, but wasn't really sure what it was doing under the covers.  So I 
-figured the best approach would be to sign an existing extension and see 
-what the signature was using OpenSSL's command line tools.  I packaged an 
+From the packaging instructions, I knew I could use OpenSSL to generate a
+signature, but wasn't really sure what it was doing under the covers.  So I
+figured the best approach would be to sign an existing extension and see
+what the signature was using OpenSSL's command line tools.  I packaged an
 extension using Chrome to generate a .pem key, then zipped the sources and ran
 the following:
 
 <pre class="blockquote">
-<strong>$ openssl sha1 -sign key.pem extension.zip > extension.sig 
+<strong>$ openssl sha1 -sign key.pem extension.zip > extension.sig
 $ openssl rsautl -verify -in extension.sig -inkey key.pem -raw -hexdump</strong>
 0000 - 00 01 ff ff ff ff ff ff-ff ff ff ff ff ff ff ff   ................
 0010 - ff ff ff ff ff ff ff ff-ff ff ff ff ff ff ff ff   ................
@@ -154,9 +154,9 @@ $ openssl rsautl -verify -in extension.sig -inkey key.pem -raw -hexdump</strong>
 0070 - 4a a1 68 a9 a0 64 b2 c7-11 36 da ce 92 17 e9 29   J.h..d...6.....)
 </pre>
 
-This gave me a raw hex dump of the signature, so I started going through 
-the RSA-related specifications to figure out what I was looking at. Turns 
-out this is actually formatted according to <u>Section 8.1 Encryption-block 
+This gave me a raw hex dump of the signature, so I started going through
+the RSA-related specifications to figure out what I was looking at. Turns
+out this is actually formatted according to <u>Section 8.1 Encryption-block
 formatting</u> of the [PKCS#1 specification][link-pkcs]:
 
 <pre class="blockquote">
@@ -177,12 +177,12 @@ pseudorandomly generated and nonzero. This makes the length of the
 encryption block EB equal to k.
 </pre>
 
-The format of the hext dump corresponds with block type 01.  Knowing that 
+The format of the hext dump corresponds with block type 01.  Knowing that
 the octet string started at the first <code>30</code> octet, I thought a good
 approach would be to write a script to decode that data and see what exactly
 was stored there.  I've done some work
-with RSA signatures before and know that everything is encoded using the ASN.1 
-format.  Luckily there's a [great Python pyasn library][link-pyasn] which 
+with RSA signatures before and know that everything is encoded using the ASN.1
+format.  Luckily there's a [great Python pyasn library][link-pyasn] which
 will decode this data and work on App Engine, to boot.
 
 Here's the script I wrote:
@@ -201,7 +201,7 @@ ASN.1 structure:
 
 <pre class="blockquote">
 (Sequence()
-  .setComponentByPosition(0, 
+  .setComponentByPosition(0,
     Sequence()
       .setComponentByPosition(0, ObjectIdentifier('1.3.14.3.2.26'))
       .setComponentByPosition(1, Null('')))
@@ -210,7 +210,7 @@ ASN.1 structure:
 , '')
 </pre>
 
-It might not look promising, but this was pretty good.  The 
+It might not look promising, but this was pretty good.  The
 <code>OctetString</code> towards the end was actually the raw hex bytes of a
 SHA1 hash of the same zip file.  You can calculate this in python with:
 
@@ -219,14 +219,14 @@ import hashlib
 hashlib.sha1(zip_string).digest()
 </pre>
 
-where <code>zip_string</code> is the contents of a zip file read from the 
+where <code>zip_string</code> is the contents of a zip file read from the
 filesystem, or generated using the <code>StringIO</code> approach I listed
 above.
 
-I wanted to know what the <code>ObjectIdentifier</code> string represented.  I 
+I wanted to know what the <code>ObjectIdentifier</code> string represented.  I
 had a hunch it was the signing algorithm, and from [PKCS #1][link-digestalgo]
 I found that the digest information should be encoded in the following way:
-    
+
 <pre class="blockquote">
 DigestInfo ::= SEQUENCE {
    digestAlgorithm DigestAlgorithmIdentifier,
@@ -236,7 +236,7 @@ Digest ::= OCTET STRING
 </pre>
 
 Sure enough, the compnents before the <code>OctetString</code> were algorithm
-identifiers.  I found it strange that SHA1 wasn't actually listed as an 
+identifiers.  I found it strange that SHA1 wasn't actually listed as an
 <code>AlgorithmIdentifier</code> (maybe it came after?) but later the spec
 talks about the <code>md#</code> algorithms:
 
@@ -247,11 +247,11 @@ that type, which has the algorithm-specific syntax ANY DEFINED BY
 algorithm, would have ASN.1 type NULL for these algorithms.
 </pre>
 
-So cool, at least that explains the 
+So cool, at least that explains the
 <code>.setComponentByPosition(1, Null(''))</code> in the algorithm identifier.
 
-At this point I was pretty sure that <code>'1.3.14.3.2.26'</code> was the 
-algorithm identifier for SHA1, but I wanted to make sure.  Looking a bit more, 
+At this point I was pretty sure that <code>'1.3.14.3.2.26'</code> was the
+algorithm identifier for SHA1, but I wanted to make sure.  Looking a bit more,
 I found the identifier in the [X.509 algorithms spec][link-x509algos]:
 
 <pre class="blockquote">
@@ -273,10 +273,10 @@ hash functions, respectively:
     algorithms(2) 26 }
 </pre>
 
-Sure enough, <code>iso(1) identified-organization(3) oiw(14) secsig(3) 
+Sure enough, <code>iso(1) identified-organization(3) oiw(14) secsig(3)
 algorithms(2) 26</code> matches <code>'1.3.14.3.2.26'</code>.
 
-That explained the payload format.  Now I needed a way to build up the 
+That explained the payload format.  Now I needed a way to build up the
 signature from my own code to match this structure.
 
 ## Generating the RSA signature
@@ -308,9 +308,9 @@ digestinfo.setComponentByPosition(1, univ.OctetString(zip_hash))
 digest = encoder.encode(digestinfo)
 </pre>
 
-Now <code>digest</code> contains the raw bytes of the ASN.1 
+Now <code>digest</code> contains the raw bytes of the ASN.1
 <code>DigestInfo</code> structure.  I needed to pad it with <code>ff</code>
-octets according to the PKCS#1 specification.  
+octets according to the PKCS#1 specification.
 
 <pre class="brush: python">
 paddinglength = 128 - 3 - len(digest)
@@ -318,21 +318,21 @@ paddedhexstr = "0001%s00%s" % (paddinglength * 'ff', digest.encode('hex'))
 </pre>
 
 Finally, <code>pycrypto</code> supports a method to generate a RSA signature
-given a key. 
+given a key.
 
 <pre class="brush: python">
 from Crypto.PublicKey import RSA
 import os
 
-... 
+...
 
 rsakey = RSA.generate(1024, os.urandom)
 signature_bytes = rsakey.sign(paddedhexstr.decode('hex'), "")[0]
-signature = ('%X' % signature_bytes).decode('hex') 
+signature = ('%X' % signature_bytes).decode('hex')
 </pre>
 
-There are a lot of conversions back and forth between hex and binary here.  I 
-feel that could be cleaned up a bit and everything could probably be kept 
+There are a lot of conversions back and forth between hex and binary here.  I
+feel that could be cleaned up a bit and everything could probably be kept
 in binary, but it'd be a bit harder to follow what was going on.  At the end
 of the day, the <code>signature</code> variable contains the raw bytes of a
 RSA signature of the zip file contents.
@@ -350,16 +350,16 @@ key:
 $ openssl rsa -pubout -outform DER
 </pre>
 
-From the [documentation][link-opensslrsa] the <code>-outform DER</code> 
+From the [documentation][link-opensslrsa] the <code>-outform DER</code>
 option states:
 
 <pre class="blockquote">
-The DER option uses an ASN1 DER encoded form compatible with the PKCS#1 
-RSAPrivateKey or SubjectPublicKeyInfo format.  
+The DER option uses an ASN1 DER encoded form compatible with the PKCS#1
+RSAPrivateKey or SubjectPublicKeyInfo format.
 </pre>
 
-Strangely, I couldn't find a reference to <code>SubjectPublicKeyInfo</code> 
-in PKCS #1, but it was in the 
+Strangely, I couldn't find a reference to <code>SubjectPublicKeyInfo</code>
+in PKCS #1, but it was in the
 [X.509 certificate profile spec][link-x509publickey]:
 
 <pre class="blockquote">
@@ -391,7 +391,7 @@ The RSA public key MUST be encoded using the ASN.1 type RSAPublicKey:
 </pre>
 
 So I needed to get the bit string format of the <code>RSAPublicKey</code>
-version of my RSA key, and then encode that together into a 
+version of my RSA key, and then encode that together into a
 <code>SubjectPublicKey</code> format:
 
 <pre class="brush: python">
@@ -404,7 +404,7 @@ from pyasn1.type import univ
 pkinfo = univ.Sequence()
 pkinfo.setComponentByPosition(0, univ.Integer(rsakey.n))
 pkinfo.setComponentByPosition(1, univ.Integer(rsakey.e))
-    
+
 #Convert the key into a bit string
 def to_bitstring(self, num):
   buf = ''
@@ -437,7 +437,7 @@ publickey = encoder.encode(publickeyinfo)
 
 Compared to the research and byte manipulating I needed to do earlier, actually
 getting the component pieces into the CRX format was incredibly easy.  I used
-another <code>StringIO</code> instance to write the pieces in the following 
+another <code>StringIO</code> instance to write the pieces in the following
 order (obtained from the CRX format docs):
 
 1. The string "Cr24", a 'magic number' specific to the CRX format
@@ -447,7 +447,7 @@ order (obtained from the CRX format docs):
 1. The public key
 1. The signature
 1. The contents of the zip file
-  
+
 Here it is in python:
 
 <pre class="brush: python">
@@ -473,14 +473,14 @@ into Chrome.
 ## Conclusion
 
 It was certainly a lot of research to accomplish the same effect as this
-[42 line script][link-bash], but I find it pretty satisfying to be able to 
+[42 line script][link-bash], but I find it pretty satisfying to be able to
 figure out the component parts of the CRX format.  Having been on the [author
-end of a specification][link-opensocial], I really appreciate how much work 
+end of a specification][link-opensocial], I really appreciate how much work
 went into making these RFCs comprehensive yet still understandable.
 
 At the end of the day, I had a script that could run on App Engine and package
 a directory into a CRX file.  If you're interested in running it, I've included
-a finished version below.  You can download the 
+a finished version below.  You can download the
 [entire sample project][link-sample] on github.
 
 **main.py**
@@ -569,15 +569,15 @@ from google.appengine.ext import db
 
 class Zipper(object):
   """ Handles creating zip files. """
-  
+
   def zip(self, path):
-    """ Returns the contents of a path as a binary string reprentation of a 
+    """ Returns the contents of a path as a binary string reprentation of a
     zip file."""
     zip_buffer = StringIO.StringIO()
     zip_file = zipfile.ZipFile(zip_buffer, 'w')
     try:
       for root, dirs, files in os.walk(path):
-        for file in files:  
+        for file in files:
           # Absolute path to the file to be added.
           abspath = os.path.realpath(os.path.join(root, file))
           # Write a relative path into the zip file.
@@ -593,12 +593,12 @@ class Zipper(object):
 
 class SigningKey(db.Model):
   """ Represents an RSA key that can be used to sign an extension.
-  
+
   The first time getOrCreate is called, a new key is generated and stored in
   the data store.  Subsequent calls will return the original key."""
-  
+
   blob = db.BlobProperty()
-    
+
   def toBitString_(self, num):
     """ Converts a long into the bit string. """
     buf = ''
@@ -611,7 +611,7 @@ class SigningKey(db.Model):
   def getRSAKey(self):
     """ Gets a data structure representing an RSA public+private key. """
     return pickle.loads(self.blob)
-    
+
   def getRSAPublicKey(self):
     """ Gets an ASN.1-encoded form of this RSA key's public key. """
     # Get a RSAPublicKey structure
@@ -619,7 +619,7 @@ class SigningKey(db.Model):
     rsakey = self.getRSAKey()
     pkinfo.setComponentByPosition(0, univ.Integer(rsakey.n))
     pkinfo.setComponentByPosition(1, univ.Integer(rsakey.e))
-    
+
     # Encode the public key info as a bit string
     pklong = long(encoder.encode(pkinfo).encode('hex'), 16)
     pkbitstring = univ.BitString("'00%s'B" % self.toBitString_(pklong))
@@ -640,7 +640,7 @@ class SigningKey(db.Model):
     # Encode the public key structure
     publickey = encoder.encode(publickeyinfo)
     return publickey
-    
+
   @staticmethod
   def getOrCreate():
     """ Returns a signing key from the data store or creates one if it doesn't
@@ -658,7 +658,7 @@ class SigningKey(db.Model):
 
 class Packager(object):
   """ Handles creating CRX files. """
-  
+
   def package(self, zip_string, key):
     """ Packages a zip file into a CRX, given a signing key. """
     # Obtain the hash of the zip file contents
@@ -677,18 +677,18 @@ class Packager(object):
 
     # Encode the sequence into ASN.1
     digest = encoder.encode(digestinfo)
-    
+
     # Pad the hash
     paddinglength = 128 - 3 - len(digest)
     paddedhexstr = "0001%s00%s" % (paddinglength * 'ff', digest.encode('hex'))
-    
+
     # Calculate the signature
     signature_bytes = key.getRSAKey().sign(paddedhexstr.decode('hex'), "")[0]
     signature = ('%X' % signature_bytes).decode('hex')
-    
+
     # Get the public key
     publickey = key.getRSAPublicKey()
-    
+
     # Write the actual CRX contents
     crx_buffer = StringIO.StringIO("wb")
     crx_buffer.write("Cr24")  # Extension file magic number, from the CRX focs

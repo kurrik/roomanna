@@ -11,12 +11,12 @@
 [link-map-6]: http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=2+West+Liberty+Blvd,+Malvern,+PA,+19355&aq=&sll=42.348776,-71.06781&sspn=0.078277,0.181789&dirflg=r&ttype=dep&date=05%2F16%2F11&time=12:15pm&noexp=0&noal=0&sort=def&ie=UTF8&hq=&hnear=2+W+Liberty+Blvd,+Malvern,+Pennsylvania+19355&z=16&start=0
 
 After an [amazing Google I/O session][link-1] last week, I'm doing a bit of
-touring around on the East Coast until June.  There's a ton of [GTUGs][link-5] 
+touring around on the East Coast until June.  There's a ton of [GTUGs][link-5]
 within driving distance of NJ, so I'm hitting up a few.
 
 I'll be giving a modified version of my I/O talk at each event.  There's still
 a few demos Eric and I have tucked away, so there'll be some new content if
-you've already seen the I/O session.  I'll also do Q/A about anything I'm 
+you've already seen the I/O session.  I'll also do Q/A about anything I'm
 capable of answering if you had any questions.
 
 In chronological order:
@@ -42,6 +42,6 @@ At AOL, [22000 AOL Way Dulles, VA][link-map-2]<br>
 Starts at 6:30 PM and ends around 8:45 PM<br>
 [Event page][link-2]
 
-I usually don't do US events outside of Silicon Valley, so it's great to be 
+I usually don't do US events outside of Silicon Valley, so it's great to be
 able to do this many events in such a short span.  The GTUG organizers have
 been really helpful in getting this all set up!

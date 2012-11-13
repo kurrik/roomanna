@@ -1,5 +1,5 @@
 [1]: http://aaronboodman-com-v1.blogspot.com/2010/10/wherein-i-help-you-get-good-job.html
-[2]: /img/2011-09-01/interview.jpg
+[2]: {{link "interview.jpg"}}
 [3]: http://www.flickr.com/photos/danieltedcfeliciano/5348850648/
 
 During my 4 years at Google, I conducted over 70 interviews.  While there
@@ -11,7 +11,8 @@ difference between a candidate getting a passing score or a failing score.
 I've certainly had interviews start off really promising, but go quickly
 downhill when the candidate made a few key errors.
 
-[!['...'][2]][3]
+<a href="http://www.flickr.com/photos/danieltedcfeliciano/5348850648/"><img
+src="{{link "interview.jpg"}}"></a>
 
 I finally found myself on the receiving end of a few technical interviews
 when applying for the position at Twitter, so my mind was on strategies
