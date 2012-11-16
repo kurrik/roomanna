@@ -6,22 +6,30 @@ usage:
 	@echo '    clean         Clean all'
 	@echo '    deploy        Deploy blog'
 
-GW_FLAGS=-src=src -dst=build
+GW_FLAGS=-src=src -dst=build/content
+CONTENT_FILES=$(shell find src -type f)
+SERVER_FILES=$(shell find server -type f)
 
 clean:
 	rm -rf build
 
-build:
-	mkdir build
+%/.dir:
+	mkdir -p $*
+	touch $*/.dir
+
+build/content/index.html: build/.dir build/content/.dir ${CONTENT_FILES}
 	ghostwriter $(GW_FLAGS)
 
-serve:
+build/app.yaml: $(SERVER_FILES)
+	cp -r server/* build
+
+watch:
 	ghostwriter $(GW_FLAGS) -watch -serve=127.0.0.1:9998
 
-serve-prod: server
-	dev_appserver.py --port=9998 --address=0.0.0.0 build
+server: build/content/index.html build/app.yaml
+
+serve: server
+	~/src/google_appengine_go/dev_appserver.py --port=9998 --address=0.0.0.0 build
 
 deploy: server
-	appcfg.py update build
-
-all: serve
+	~/src/google_appengine_go/appcfg.py update build
