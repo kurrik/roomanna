@@ -22,7 +22,7 @@ losing productivity.
 To illustrate, quickly tell me which of
 the following tabs is for **twitter.com**, and which are **dev.twitter.com**:
 
-![2]
+<img class="centered" src="{{link "twitterbars.png"}}"/>
 
 Not very easy, huh?
 
@@ -31,7 +31,7 @@ Extension content script][5].  Using some Javascript,
 the <code>&lt;link rel="icon"&gt;</code> element, and the HTML5 canvas
 API, I was able to quickly turn the tab strip into this:
 
-![6]
+<img class="centered" src="{{link "twitterbars2.png"}}"/>
 
 Much better!  And the technique is general-purpose enough to be used on any
 domain, or even in a non-Chrome extension context (if you can run code on the
@@ -146,7 +146,7 @@ function onImageLoaded() {
 Even though the canvas isn't really placed in the DOM anywhere, this is what it
 would look like if it were visible:
 
-![9]
+<img class="centered" src="{{link "favicon1.png"}}"/>
 
 I've enlarged the image 20x and changed the alpha channel to show pink instead
 of transparency.
@@ -200,15 +200,15 @@ This means that the layer to be drawn will only be drawn where the
 current canvas is opaque, so if the canvas contains the original favicon,
 and a 16x16 red square is drawn over it:
 
-<div class="inline center">
+<p class="centered">
   <img src="{{link "favicon1.png"}}" style="width: 240px" />
   <img src="{{link "favicon2.png"}}" style="width: 240px" />
-</div>
+</p>
 
 The result will be a solid red image, but with an alpha channel matching the
 original favicon:
 
-![11]
+<img class="centered" src="{{link "favicon3.png"}}" />
 
 ### Setting the favicon
 

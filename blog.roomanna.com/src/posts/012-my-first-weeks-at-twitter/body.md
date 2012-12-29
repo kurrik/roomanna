@@ -39,9 +39,11 @@ funny, and inspiring. I haven't had the fortune to see Jack yet, but his
 talks are already gaining a [legendary reputation][3] in the valley.  It's
 been a short time, but I really feel confident in the leadership at Twitter.
 
+<p class="centered">
 <a href="https://twitter.com/#!/dickc/status/3962807808">
   <img src="{{link "twitter.png"}}" />
 </a>
+</p>
 
 **My team**.  The Developer Relations team is so much smaller than the team I
 was on at Google (even if you only count Chrome DevRel) that it's
@@ -66,6 +68,7 @@ should.  Any company which makes a recruiting video in the style
 of [one of my favorite movies ever][5] is hitting all the right notes,
 in my opinion:
 
+<p class="centered">
 <iframe
   width="640"
   height="360"
@@ -73,6 +76,7 @@ in my opinion:
   frameborder="0"
   allowfullscreen="true">
 </iframe>
+</p>
 
 **The potential**.  [Leaving Google][1] was obviously a choice I couldn't make
 lightly. During that time I heard a lot of folks questioning Twitter's ability

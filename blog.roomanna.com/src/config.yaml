@@ -1,6 +1,6 @@
 title: Roomanna
 root: http://blog.roomanna.com
 pathformat: /{{.DatePath}}/{{.Slug}}
-dateformat: "2006-01-02"
+dateformat: "01-02-2006"
 tagsformat: /tags/{{.Tag}}
-recentcount: 1
+recentcount: 5

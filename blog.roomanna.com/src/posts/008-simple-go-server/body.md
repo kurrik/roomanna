@@ -21,6 +21,8 @@ refactoring. <a href="{{link "008-simple-go-server"}}#note">*</a>
 
 <!--BREAK-->
 
+<img class="pull-right" src="{{link "gogopher.png"}}" title="Go Gopher"/>
+
 But at this point I’m still a wannabe Go fanboy.  I hadn’t actually sat down
 and written a service in the language until a few days ago, when I got a
 Chrome Extension help request that involved the use of a web server.  I
@@ -28,8 +30,6 @@ wanted to write a blog post about the answer but needed a simple server
 to mock responses back to the extension.  So I wrote the service in Go. I’ll
 talk more about the extension in a later post, but wanted to cover my
 experience writing the server first.
-
-!['Go Gopher'][img01]
 
 *(At this point I'll say that I'm certainly not at the point where I'm going
 to be sharing best practices.  If you see anything that looks funny, please

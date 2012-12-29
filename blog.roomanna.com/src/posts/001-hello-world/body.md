@@ -25,7 +25,7 @@ New Jersey in 2007 to take a job with a nascent advertising megacorporation
 startup named [Google][link-google], doing all kinds of developer outreach
 sort of stuff. Here I am in all my naïve glory (on the left):
 
-![So young, so full of hope...][img-arne]
+<img src="{{link "arne.jpg"}}" title="So young, so full of hope..." class="centered"/>
 
 The construction of the blog itself is a bit more interesting, to be honest. I
 decided to use [Jekyll][link-jekyll], mostly for reasons explained

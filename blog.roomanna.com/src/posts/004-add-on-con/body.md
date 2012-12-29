@@ -23,7 +23,7 @@ to draw the current browser contents into a canvas, and then 2d manipulations
 to "melt" the screen (an effect inspired by
 [one of my favorite games][link-doom]):
 
-!["Melting"][img-melting]
+<img src="{{link "melting.png"}}" title="Melting" class="centered" />
 
 I suggest you install the [slides][link-extension] to see it in action.  The
 demo is near the end.  This was actually fairly simple to accomplish, so I'll

@@ -1,12 +1,25 @@
 {{define "body"}}
+  <div class="hero-unit">
+    <p class="nomargin">Hi, my name is</p>
+    <h1><em>Arne Roomann-Kurrik</em></h1>
+    <p>
+      This is my blog. I am also on
+      <a target="_blank" href="https://twitter.com/kurrik">Twitter</a>
+      and <a href="https://linkedin.com/in/kurrik">Linkedin</a>.
+    </p>
+  </div>
   {{range .Site.RecentPosts}}
-    <h2><a href="{{.Path}}">{{.Title}}</a></h2>
+    <h3><a href="{{.Path}}">{{.Title}}</a></h3>
     <p class="muted metadata">
       <i class="icon-time"></i>
       {{.FormattedDate}}
       <i class="icon-tags"></i>
       {{range .Tags}}<a href="/tags/{{.}}">{{.}}</a> {{end}}
     </p>
-    <div>{{.Body}}</div>
+    <div>{{.Snippet}} <a href="{{.Path}}" class="">Read more...</a></div>
   {{end}}
+  <ul class="pager centered">
+    <li><a href="/archive.html">View all posts</a></li>
+  </ul>
+
 {{end}}

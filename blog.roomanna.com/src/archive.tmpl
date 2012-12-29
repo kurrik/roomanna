@@ -1,13 +1,16 @@
 {{define "body"}}
-  <h1>All posts</h1>
+  <div class="hero-unit">
+    <h1><em>All posts</em></h1>
+    <p>Ordered by date, newest at the top.</p>
+  </div>
   {{range .Site.PostsByDate}}
-    <h4><a href="{{.Path}}">{{.Title}}</a></h4>
+    <h3><a href="{{.Path}}">{{.Title}}</a></h3>
     <p class="muted metadata">
       <i class="icon-time"></i>
       {{.FormattedDate}}
       <i class="icon-tags"></i>
       {{range .Tags}}<a href="/tags/{{.}}">{{.}}</a> {{end}}
     </p>
-    <div>{{.Snippet}}</div>
+    <div>{{.Snippet}} <a href="{{.Path}}" class="">Read more...</a></div>
   {{end}}
 {{end}}
