@@ -1,0 +1,30 @@
+{{define "sidebar"}}
+  <br>
+  <ul class="nav nav-list">
+    <li class="nav-header">Navigation</li>
+    <li><a href="/">Main</a></li>
+    <li><a href="/archive.html">All posts</a></li>
+    <li><a href="/atom.xml">Feed it to me! <img src="/static/img/rss-icon.png"/></a></li>
+    {{if .Post}}
+    <li class="nav-header">This Post</li>
+    <li><a href="{{.Post.Permalink}}">Permalink</a></li>
+    {{if .Post.Next}}
+    <li><a href="{{.Post.Next.Path}}" class="tooltip-trigger" data-placement="left" title="{{.Post.Next.Title}}">&larr; Newer post</a></li>
+    {{end}}
+    {{if .Post.Prev}}
+    <li><a href="{{.Post.Prev.Path}}" class="tooltip-trigger" data-placement="left" title="{{.Post.Prev.Title}}">Older post &rarr;</a></li>
+    {{end}}
+    <li>
+      <a href="https://twitter.com/share"
+         class="twitter-share-button"
+         data-count="horizontal"
+         data-text="Just read '{{.Post.Title}}'"
+         data-via="kurrik">Tweet</a>
+    </li>
+    {{end}}
+    <li class="nav-header">Site Tags</li>
+    {{range $k, $v := .Site.Tags}}
+    <li><a href="/tags/{{$k}}">{{$k}}</a></li>
+    {{end}}
+  </ul>
+{{end}}

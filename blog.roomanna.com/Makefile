@@ -1,30 +1,35 @@
 .PHONY : deploy server serve-prod serve clean usage
 
 usage:
-	@echo '    server        Build server'
 	@echo '    serve         Run Jekyll development server'
 	@echo '    serve-prod    Run App Engine server on built server'
 	@echo '    clean         Clean all'
 	@echo '    deploy        Deploy blog'
 
+GW_FLAGS=-src=src -dst=build/content
+CONTENT_FILES=$(shell find src -type f)
+SERVER_FILES=$(shell find server -type f)
+
 clean:
 	rm -rf build
 
-build:
-	mkdir build
-	mkdir build/_site
+%/.dir:
+	mkdir -p $*
+	touch $*/.dir
 
-serve: 
-	ejekyll --server 9998 jekyll build/_site
+build/content/index.html: build/.dir build/content/.dir ${CONTENT_FILES}
+	ghostwriter $(GW_FLAGS)
 
-serve-prod: server
-	dev_appserver.py --port=9998 --address=0.0.0.0 build
+build/app.yaml: $(SERVER_FILES)
+	cp -r server/* build
 
-server: build
-	cp -r appengine/* build
-	ejekyll --no-auto jekyll build/_site
+watch:
+	ghostwriter $(GW_FLAGS) -watch -serve=127.0.0.1:9998
+
+server: build/content/index.html build/app.yaml
+
+serve: server
+	~/src/google_appengine_go/dev_appserver.py --port=9998 --address=0.0.0.0 build
 
 deploy: server
-	appcfg.py update build
-
-all: server
+	~/src/google_appengine_go/appcfg.py --oauth2 update build

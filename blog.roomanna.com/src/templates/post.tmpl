@@ -1,0 +1,43 @@
+{{define "head"}}
+  <title>{{.Site.Title}} - {{.Post.Title}}</title>
+  <link rel="canonical" href="{{.Post.Permalink}}" />
+{{end}}
+{{define "body"}}
+  <h2>{{.Post.Title}}</h2>
+  <p class="muted metadata">
+    <i class="icon-time"></i>
+    {{.Post.FormattedDate}}
+    <i class="icon-tags"></i>
+    {{range .Post.Tags}}<a href="/tags/{{.}}">{{.}}</a> {{end}}
+  </p>
+  <div>{{.Post.Body}}</div>
+  <ul class="pager">
+    {{if .Post.Next}}
+    <li class="previous">
+      <a href="{{.Post.Next.Path}}">&larr; Newer - {{.Post.Next.Title}}</a>
+    </li>
+    {{else}}
+      <li class="previous disabled">
+        <a href="#">&larr; No newer posts</a>
+      </li>
+    {{end}}
+    {{if .Post.Prev}}
+      <li class="next">
+        <a href="{{.Post.Prev.Path}}">Older - {{.Post.Prev.Title}} &rarr;</a>
+      </li>
+    {{else}}
+      <li class="next disabled">
+        <a href="#">No older posts &rarr;</a>
+      </li>
+    {{end}}
+  </ul>
+  <div id="comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_shortname = 'roomanna';
+      var disqus_identifier = '{{.Post.Path}}';
+      var disqus_url = '{{.Post.Permalink}}';
+    </script>
+    <script src="//roomanna.disqus.com/embed.js" async></script>
+  </div>
+{{end}}
