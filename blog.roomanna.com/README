@@ -3,14 +3,14 @@ This project contains the source and content of http://blog.roomanna.com.
 REQUIREMENTS:
 To build, install dependencies:
 
-  gem update --system          # may need to be administrator or root
-  gem install jekyll
-  gem install jekyll_ext
+  Go from golang.org
+  Ghostwriter from https://github.com/kurrik/ghostwriter
 
 SERVING CONTENT:
 
 From the blog.roomanna.com directory:
 
-  make serve
+  make watch
 
-The blog will be accessible at http://localhost:9998
+The blog will be accessible at http://localhost:9998.  Editing source
+files will cause the site to be rebuilt.
