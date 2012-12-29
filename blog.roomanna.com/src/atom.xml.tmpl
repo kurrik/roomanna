@@ -1,0 +1,19 @@
+{{define "root"}}<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:base="{{.Site.Root}}">
+  <title>{{.Site.Title}}</title>
+  <link href="{{.Site.Root}}/atom.xml" rel="self"/>
+  <updated>{{timeformat .Site.Rendered "2006-01-02T15:04:05Z07:00"}}</updated>
+  <id>{{.Site.Root}}/</id>
+  <author>
+    <name>{{.Site.Author}}</name>
+  </author>
+  {{range .Site.RecentPosts}}
+  <entry>
+    <title>{{.Title}}</title>
+    <link href="{{.Permalink}}"/>
+    <updated>{{timeformat .Date "2006-01-02T15:04:05Z07:00"}}</updated>
+    <id>{{.Permalink}}</id>
+    <content type="html">{{html .Body}}</content>
+  </entry>
+  {{end}}
+</feed>{{end}}

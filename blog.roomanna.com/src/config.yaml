@@ -1,5 +1,7 @@
 title: Roomanna
 root: http://blog.roomanna.com
+author: Arne Roomann-Kurrik
+email:
 pathformat: /{{.DatePath}}/{{.Slug}}
 dateformat: "01-02-2006"
 tagsformat: /tags/{{.Tag}}

@@ -32,4 +32,4 @@ serve: server
 	~/src/google_appengine_go/dev_appserver.py --port=9998 --address=0.0.0.0 build
 
 deploy: server
-	~/src/google_appengine_go/appcfg.py update build
+	~/src/google_appengine_go/appcfg.py --oauth2 update build

@@ -1,4 +1,4 @@
-application: roomanna-blog
+application: roomanna-blog-hrd
 version: 2
 runtime: go
 api_version: go1
