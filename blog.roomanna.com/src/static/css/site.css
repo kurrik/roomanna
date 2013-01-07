@@ -90,7 +90,7 @@ img.centered {
 }
 
 img.pull-right {
-  margin-left: 10px;
+  margin-left: 15px;
 }
 
 h1, h2, h3, h4 {
@@ -103,4 +103,17 @@ h1 .muted, h2 .muted, h3 .muted {
 
 .nomargin {
   margin: 0;
+}
+
+.content {
+  text-align: justify;
+}
+
+.content p, .content ul, .content ol, .content pre {
+  margin-bottom: 15px;
+}
+
+.content h1, .content h2, .content h3, .content h4 {
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
