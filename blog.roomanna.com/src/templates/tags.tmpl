@@ -1,7 +1,7 @@
 {{define "body"}}
   <div class="hero-unit">
     <h1><em>{{.Tag}}</em></h1>
-    <p>Posts tagged with <em>{{.Tag}}</em> ordered by date, newest at the top.</p>
+    <p class="nomargin">Posts tagged with <em>{{.Tag}}</em> ordered by date, newest at the top.</p>
   </div>
   {{range .Posts}}
     <h3><a href="{{.Path}}">{{.Title}}</a></h3>
