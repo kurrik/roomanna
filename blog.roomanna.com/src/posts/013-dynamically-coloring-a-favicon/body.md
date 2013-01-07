@@ -44,7 +44,7 @@ I could've written this as a [user script][7], but I like hosting stuff in the
 Chrome Web Store, so I decided to do a full-on packaged extension.  So I made
 a simple **manifest.json** file:
 
-<pre class="brush: javascript">
+<pre>
 {
    "name": "Change favicon for dev.twitter.com",
    "description": "Make dev.twitter.com stand out from twitter.com",
@@ -56,7 +56,6 @@ a simple **manifest.json** file:
    } ]
 }
 </pre>
-<!-- _end italics -->
 
 The only thing truly important to note here is that I specified a content script
 which executes a file named **favicon.js** any time Chrome visits an URL matching
