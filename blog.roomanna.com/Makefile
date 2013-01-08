@@ -1,10 +1,11 @@
-.PHONY : deploy server serve-prod serve clean usage
+.PHONY : deploy server serve watch clean usage
 
 usage:
-	@echo '    serve         Run Jekyll development server'
-	@echo '    serve-prod    Run App Engine server on built server'
+	@echo '    watch         Run Ghostwriter server in watch mode'
+	@echo '    serve         Build once and run App Engine server'
+	@echo '    server        Build content and App Engine files'
 	@echo '    clean         Clean all'
-	@echo '    deploy        Deploy blog'
+	@echo '    deploy        Deploy'
 
 GW_FLAGS=-src=src -dst=build/content
 CONTENT_FILES=$(shell find src -type f)
@@ -31,5 +32,5 @@ server: build/content/index.html build/app.yaml
 serve: server
 	~/src/google_appengine_go/dev_appserver.py --port=9998 --address=0.0.0.0 build
 
-deploy: server
+deploy: clean server
 	~/src/google_appengine_go/appcfg.py --oauth2 update build
