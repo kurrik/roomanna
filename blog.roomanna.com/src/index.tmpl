@@ -4,12 +4,13 @@
     <h1><em>Arne Roomann-Kurrik</em></h1>
     <p class="nomargin">
       This is my blog. I am also on
-      <a target="_blank" href="https://twitter.com/kurrik">Twitter</a>
+      <a target="_blank" href="https://twitter.com/kurrik">Twitter</a>,
+      <a target="_blank" href="https://github.com/kurrik">Github</a>,
       and <a href="https://linkedin.com/in/kurrik">Linkedin</a>.
     </p>
   </div>
   {{range .Site.RecentPosts}}
-    <h3><a href="{{.Path}}">{{.Title}}</a></h3>
+    <h3 class="posttitle"><a href="{{.Path}}">{{.Title}}</a></h3>
     <p class="muted metadata">
       <i class="icon-time"></i>
       {{.FormattedDate}}

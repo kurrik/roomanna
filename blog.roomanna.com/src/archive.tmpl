@@ -4,7 +4,7 @@
     <p class="nomargin">Ordered by date, newest at the top.</p>
   </div>
   {{range .Site.PostsByDate}}
-    <h3><a href="{{.Path}}">{{.Title}}</a></h3>
+    <h3 class="posttitle"><a href="{{.Path}}">{{.Title}}</a></h3>
     <p class="muted metadata">
       <i class="icon-time"></i>
       {{.FormattedDate}}

@@ -55,6 +55,10 @@ iframe.twitter-share-button {
   top: 5px;
 }
 
+.posttitle {
+  margin-bottom: 0 !important;
+}
+
 .metadata a {
   color: #999 !important;
 }
