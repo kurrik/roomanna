@@ -84,10 +84,6 @@ h1 .muted, h2 .muted, h3 .muted {
   font-weight: normal;
 }
 
-.content {
-  text-align: justify;
-}
-
 .content p, .content ul, .content ol, .content pre {
   margin-bottom: 15px;
 }
