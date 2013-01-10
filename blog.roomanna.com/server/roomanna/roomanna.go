@@ -15,14 +15,18 @@
 package roomanna
 
 import (
+	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
 	"path/filepath"
+	"time"
 )
 
 type Handler struct {
-	Path string
+	Path         string
+	LastModified string
 }
 
 // Handles all HTTP requests.
@@ -45,6 +49,15 @@ func (h *Handler) HandleRequest(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
+	var (
+		maxage   = 3600
+		expires  = time.Now().Add(time.Second * time.Duration(maxage))
+		ccontrol = fmt.Sprintf("max-age=%v, public", maxage)
+	)
+	w.Header().Set("Last-Modified", h.LastModified)
+	w.Header().Set("Cache-Control", ccontrol)
+	w.Header().Set("Expires", expires.Format(time.RFC1123))
+	w.Header().Del("Set-Cookie")
 	http.ServeFile(w, r, path)
 }
 
@@ -57,6 +70,16 @@ func GetHandler(h *Handler) func(w http.ResponseWriter, r *http.Request) {
 
 // Serve the given GhostWriter config over HTTP.
 func init() {
-	handler := &Handler{Path: "content"}
+	var (
+		err      error
+		modified []byte
+	)
+	if modified, err = ioutil.ReadFile("content/rendered.txt"); err != nil {
+		modified = []byte(time.Now().Format(time.RFC1123))
+	}
+	handler := &Handler{
+		Path:         "content",
+		LastModified: string(modified),
+	}
 	http.HandleFunc("/", GetHandler(handler))
 }
