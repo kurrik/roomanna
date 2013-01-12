@@ -1,4 +1,4 @@
-.PHONY : deploy server serve watch clean usage
+.PHONY : deploy server serve watch clean usage create
 
 usage:
 	@echo '    watch         Run Ghostwriter server in watch mode'
@@ -19,13 +19,16 @@ clean:
 	touch $*/.dir
 
 build/content/index.html: build/.dir build/content/.dir ${CONTENT_FILES}
-	ghostwriter $(GW_FLAGS)
+	ghostwriter -action=process $(GW_FLAGS)
 
 build/app.yaml: $(SERVER_FILES)
 	cp -r server/* build
 
 watch:
-	ghostwriter $(GW_FLAGS) -watch -serve=127.0.0.1:9998
+	ghostwriter $(GW_FLAGS) -watch -action=serve -address=127.0.0.1:9998
+
+create:
+	ghostwriter $(GW_FLAGS) -action=create
 
 server: build/content/index.html build/app.yaml
 
