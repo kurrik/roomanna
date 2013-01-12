@@ -12,6 +12,8 @@ of working in the same company at one time, the same cheaply printed
 nametag on his office wall as the one which used to mark my own cube
 in Mountain View.
 
+<!--BREAK-->
+
 His editorial entitled ["Internet Access Is Not a Human Right"][1] had been
 in the news around that time.  In it, he makes a case that internet access
 should not be protected as a human right because it is not necessary
@@ -27,8 +29,6 @@ France and Estonia have pronounced Internet access a human right.  But
 that argument, however well meaning, misses a larger point: technology
 is an enabler of rights, not a right itself."  But the comparison to
 Estonia is where I think Cerf goes awry.
-
-<!--BREAK-->
 
 <p class="centered">
 <img src="{{link "screen.png"}}" />
