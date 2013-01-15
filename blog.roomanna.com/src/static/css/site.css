@@ -118,3 +118,7 @@ h1 .muted, h2 .muted, h3 .muted {
 .nomargin {
   margin: 0 !important;
 }
+
+i.icon-tags, i.icon-time {
+  background-image: none;
+}
