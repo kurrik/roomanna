@@ -42,6 +42,7 @@ footer.site a:hover {
 }
 
 header.site strong,
+header.site strong a,
 footer.site strong {
   color: #333;
 }
