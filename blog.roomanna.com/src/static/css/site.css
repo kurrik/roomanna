@@ -51,7 +51,8 @@ footer.site img {
   vertical-align: top;
 }
 
-iframe.twitter-share-button {
+iframe.twitter-share-button,
+iframe.twitter-follow-button {
   position: relative;
   top: 5px;
 }
