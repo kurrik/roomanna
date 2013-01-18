@@ -57,18 +57,6 @@ iframe.twitter-follow-button {
   top: 5px;
 }
 
-.posttitle {
-  margin-bottom: 0 !important;
-}
-
-.metadata a {
-  color: #999 !important;
-}
-
-.centered {
-  text-align: center;
-}
-
 img.centered {
   display: block;
   margin: 0 auto;
@@ -93,6 +81,26 @@ h1 .muted, h2 .muted, h3 .muted {
 .content h1, .content h2, .content h3, .content h4 {
   margin-top: 15px;
   margin-bottom: 15px;
+}
+
+.posttitle {
+  margin-bottom: 0 !important;
+}
+
+.postlist .metadata {
+  margin-bottom: 5px;
+}
+
+.postlist .snippet p {
+  margin: 5px 0;
+}
+
+.metadata a {
+  color: #999 !important;
+}
+
+.centered {
+  text-align: center;
 }
 
 .hero-unit {

@@ -10,6 +10,7 @@
       and <a target="_blank" rel="me" href="https://linkedin.com/in/kurrik">Linkedin</a>.
     </p>
   </div>
+  <div class="postlist">
   {{range .Site.RecentPosts}}
     <h3 class="posttitle"><a href="{{.Path}}">{{.Title}}</a></h3>
     <p class="muted metadata">
@@ -18,8 +19,9 @@
       <i class="icon-tags"></i>
       {{range .Tags}}<a href="/tags/{{.}}">{{.}}</a> {{end}}
     </p>
-    <div>{{.Snippet}} <a href="{{.Path}}" class="">Read more...</a></div>
+    <div class="snippet">{{.Snippet}} <a href="{{.Path}}" class="readmore">Read more...</a></div>
   {{end}}
+  </div>
   <ul class="pager centered">
     <li><a href="/archive.html">View all posts</a></li>
   </ul>

@@ -3,6 +3,7 @@
     <h1><em>All posts</em></h1>
     <p class="nomargin">Ordered by date, newest at the top.</p>
   </div>
+  <div class="postlist">
   {{range .Site.PostsByDate}}
     <h3 class="posttitle"><a href="{{.Path}}">{{.Title}}</a></h3>
     <p class="muted metadata">
@@ -11,6 +12,7 @@
       <i class="icon-tags"></i>
       {{range .Tags}}<a href="/tags/{{.}}">{{.}}</a> {{end}}
     </p>
-    <div>{{.Snippet}} <a href="{{.Path}}" class="">Read more...</a></div>
+    <div class="snippet">{{.Snippet}} <a href="{{.Path}}" class="readmore">Read more...</a></div>
   {{end}}
+  </div>
 {{end}}
