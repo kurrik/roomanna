@@ -96,6 +96,8 @@ be on a single line in your manifest):
    object-src 'self'",
 </pre>
 
+You may need to amend this if you include resources from elsewhere on the
+web.
 
 I'll note that this technique will be generally applicable for any
 third-party Javascript libraries which use protocol-relative URLs.
