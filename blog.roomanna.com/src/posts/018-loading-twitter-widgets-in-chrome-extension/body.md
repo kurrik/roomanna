@@ -81,6 +81,22 @@ load HTTPS resources:
 &lt;script&gt;!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="<strong>https://</strong>platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");&lt;/script&gt;
 </pre>
 
+Finally, the new changes to Chrome Extension security require the use of
+a Content Security Policy directive to allow third-party components to
+be embedded in an extension page.  You'll need to make sure your manifest
+contains the following (I've wrapped it for legibility but this should all
+be on a single line in your manifest):
+
+<pre>
+"content_security_policy":
+  "script-src 'self'
+              https://platform.twitter.com
+              https://cdn.api.twitter.com
+              https://syndication.twimg.com;
+   object-src 'self'",
+</pre>
+
+
 I'll note that this technique will be generally applicable for any
 third-party Javascript libraries which use protocol-relative URLs.
 It may help open up a lot of new functionality for Chrome extensions.
