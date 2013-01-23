@@ -1,6 +1,7 @@
 [1]: http://en.wikipedia.org/wiki/Post_Office_(novel)
 [2]: http://www.booksmith.com/
 [3]: http://www.amazon.com/Post-Office-ebook/dp/B000SEGDNG/
+[4]: http://singularityhub.com/2013/01/22/robot-serves-up-340-hamburgers-per-hour/
 
 I picked up [Post Office][3] by Charles Bukowski at [Booksmith][2] because
 one of the shelves claimed it was hilarious and because I hadn't read
@@ -62,7 +63,9 @@ who carried out calculations by hand.  It's a term which has surprisingly
 been around since 1613 but was in use until electronic computers were
 invented.  By 1965 US post offices were already implementing OCR to
 classify addresses.  So in 1971, when this book was written, Chinaski
-was pretty much a last-gen piece of technology, on his way out.
+was pretty much a last-gen computer, on his way out.
+Maybe by 2055 we'll
+look back on [fast food employee][4] memoirs in the same way.
 
 I thought it was a great read, but alien&mdash;that world no longer
 represents our own.  Maybe that added a bit of sadness to the book,
