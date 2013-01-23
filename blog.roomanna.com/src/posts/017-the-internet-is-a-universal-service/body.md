@@ -45,7 +45,7 @@ In fact, [Estonia's Constitution][4] makes no such reference to a
 specification or even the word "internet" in its "human rights" section.
 The closest it gets is:
 
-<blockquote>§ 45. Everyone has the right to freely disseminate ideas,
+<blockquote><p>§ 45. Everyone has the right to freely disseminate ideas,
 opinions, beliefs and other information by word, print, picture or
 other means. This right may be restricted by law to protect public
 order, morals, and the rights and freedoms, health, honour and good
@@ -53,9 +53,9 @@ name of others. This right may also be restricted by law for state
 and local government civil servants, to protect a state or business
 secret or information received in confidence, which has become known
 to them by reason of their office, and the family and private life
-of others, as well as in the interests of justice.
+of others, as well as in the interests of justice.</p>
 
-There is no censorship.</blockquote>
+<p>There is no censorship.</p></blockquote>
 
 In 1992, when a still-fledgling Estonian Parliament put this document
 together, they weren't superficially concerned with the ability to
@@ -71,13 +71,13 @@ regardless of their geographical location, at a uniform price;" in addition
 to other specifics, such as 3.1 kHz telephone services, as a set of
 "universal services".  In case you were curious:
 
-<blockquote>A universal service is a set of telecommunications services
+<blockquote><p>A universal service is a set of telecommunications services
 which conforms with the technical and quality requirements established
 by the Government of the Republic and which ensures, within an area
 determined in the license of a public telephone operator, that all
 customers who wish to have access to the public telephone network
 shall have such access for a uniform and reasonable
-consideration.</blockquote>
+consideration.</p></blockquote>
 
 An admirable provision to a relatively mundane act, but certainly not an
 inalienable human right on the level of any of the provisions of the

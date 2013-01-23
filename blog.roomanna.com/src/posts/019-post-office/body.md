@@ -25,7 +25,7 @@ guess we would call high functioning.
 It turns out that Chinaski is basically a thin alias for Bukowski himself.
 According to the [Wikipedia article about the book][1]:
 
-<blockquote>"Black Sparrow Press founder and owner John Martin, offered
+<blockquote><p>"Black Sparrow Press founder and owner John Martin, offered
 Bukowski 100
 dollars per month for life on condition that Bukowski would quit working
 for the post office and write full time. He agreed and Post Office
@@ -34,7 +34,7 @@ into writing a novel. All of his earlier work had been poetry.
 Martin was actually a little worried that Bukowski would not be
 able to make the transition to prose. However, the fear turned
 out to be quite unfounded as Bukowski had no trouble writing
-stories about his life."</blockquote>
+stories about his life."</p></blockquote>
 
 I have to say that makes sense.  The way he talks about the small
 injustices and boredoms of working in a post office seem way too close
