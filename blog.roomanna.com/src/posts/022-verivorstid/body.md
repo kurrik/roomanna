@@ -278,7 +278,7 @@ Because the Kitchenaid wasn't stuffing evenly, we'd get
 a trickle of blood for a while then a huge glob of barley all at once.  Some
 light massaging of the sausage was required to even things out.
 
-Luckily, Steph was really good at keeping things moving along well.
+Luckily, Steph was really good at keeping things moving.
 She was kind of scary good at it, actually.
 
 <p class="centered">
