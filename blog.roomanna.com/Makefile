@@ -25,6 +25,7 @@ build/app.yaml: $(SERVER_FILES)
 	cp -r server/* build
 
 watch:
+	ulimit -n 4096
 	ghostwriter $(GW_FLAGS) -watch -action=serve -address=127.0.0.1:9998
 
 create:
