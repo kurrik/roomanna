@@ -10,6 +10,11 @@
       and <a target="_blank" rel="me" href="https://linkedin.com/in/kurrik">Linkedin</a>.
     </p>
   </div>
+  <div>
+    {{range $tc := .Site.TagCounts}}
+      <a class="tag" href="/tags/{{$tc.Tag}}">{{$tc.Tag}}</a> ({{$tc.Count}})
+    {{end}}
+  </div>
   <div class="postlist">
   {{range .Site.RecentPosts}}
     <h3 class="posttitle"><a href="{{.Path}}">{{.Title}}</a></h3>
