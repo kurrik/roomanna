@@ -132,3 +132,7 @@ h1 .muted, h2 .muted, h3 .muted {
 i.icon-tags, i.icon-time {
   background-image: none;
 }
+
+pre, pre code {
+  font-size: 13px;
+}
