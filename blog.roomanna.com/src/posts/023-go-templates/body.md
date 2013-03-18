@@ -257,7 +257,9 @@ and then creating both regular and admin variants.
 </pre>
 
 Then every page living in the third tier of templates must implement
-`body_content` instead of `body`.
+`body_content` instead of `body`.  Because `body_content` is used consistently,
+you could theoretically make any page an `admin` page just by changing its
+variant and reparsing.
 
 It's honestly not the most intuitive
 system.  I'm not really sold on the utility of managing template
