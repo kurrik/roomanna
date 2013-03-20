@@ -26,7 +26,6 @@ build/app.yaml: $(SERVER_FILES)
 	cp -r server/* build
 
 watch:
-	ulimit -n 4096
 	ghostwriter $(GW_FLAGS) -watch -action=serve -address=127.0.0.1:9998
 
 create:
@@ -40,11 +39,19 @@ serve: server
 deploy: clean server
 	~/src/google_appengine_go/appcfg.py --oauth2 update build
 
+# Unified static resources:
+
+
 # Bootstrap
 bootstrap: \
 	src/static/js/bootstrap.min.js \
 	src/static/css/bootstrap.min.css \
-	src/static/css/bootstrap-responsive.min.css
+	src/static/css/bootstrap-responsive.min.css \
+	src/static/img/glyphicons-halflings-white.png \
+	src/static/img/glyphicons-halflings.png
+
+src/static/img/glyphicons-%.png: lib/bootstrap/img/glyphicons-%.png
+	cp $< $@
 
 src/static/js/bootstrap.js: $(BOOTSTRAP_JS_FILES)
 	cat $(BOOTSTRAP_JS_FILES) > $@
