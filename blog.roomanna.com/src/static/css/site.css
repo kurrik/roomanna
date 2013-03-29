@@ -1,10 +1,12 @@
-body {
-  background: #ccc;
+@font-face {
+  font-family: 'Visitor';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../font/visitor1.ttf');
 }
 
-.main {
+body {
   background: #fff;
-  padding-bottom: 20px;
 }
 
 header.site,
@@ -66,63 +68,29 @@ img.pull-right {
   margin-left: 15px;
 }
 
-h1, h2, h3, h4 {
-  font-weight: normal;
-}
-
-h1 .muted, h2 .muted, h3 .muted {
-  font-weight: normal;
-}
-
-.content p, .content ul, .content ol, .content pre {
-  margin-bottom: 15px;
-}
-
-.content h1, .content h2, .content h3, .content h4 {
-  margin-top: 15px;
-  margin-bottom: 15px;
-}
-
-.posttitle {
-  margin-bottom: 0 !important;
-}
-
-.postlist .metadata {
-  margin-bottom: 5px;
-}
-
-.postlist .snippet p {
-  margin: 5px 0;
-}
-
-.metadata a {
-  color: #999 !important;
-}
-
 .centered {
   text-align: center;
 }
 
 .hero-unit {
-  margin: 25px 0;
-  background-color: #08c;
+  margin: 20px 0;
+  background-color: #333;
   color: #fff;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.8);
-}
-
-.hero-unit a {
-  color: #111;
-}
-
-.hero-unit em {
-  color: #111;
-  font-style: normal;
+  padding: 10px 15px;
+  line-height: 1.5;
+  border-radius: 0;
 }
 
 .hero-unit h1 {
-  font-size: 55px;
-  margin-top: 0;
-  margin-bottom: 0;
+  margin: 5px 0 0;
+  font: 90px 'Visitor';
+  line-height: 0.6;
+  text-shadow: 0px 4px 0px #000;
+  word-wrap: break-word;
+}
+
+.hero-unit em {
+  color: #f36;
 }
 
 .nomargin {
@@ -131,8 +99,162 @@ h1 .muted, h2 .muted, h3 .muted {
 
 i.icon-tags, i.icon-time {
   background-image: none;
+  color: #444;
+  display: inline-block;
+  font-size: 20px;
+  margin-right: 3px;
 }
 
+code {
+  font-size: 16px;
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+pre {
+  margin-bottom: 20px;
+}
 pre, pre code {
-  font-size: 13px;
+  font-size: 15px;
+}
+
+iframe {
+  margin-bottom: 20px;
+}
+
+blockquote p {
+  line-height: 1.5 !important;
+  font-size: 22px;
+  color: #999;
+}
+
+strong {
+  color: #000;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.5);
+}
+
+li {
+  line-height: 1.5;
+}
+
+h1, h2, h3, h4 {
+  color: #333;
+}
+h2 {
+  font-size: 36px;
+}
+h3 {
+  font-size: 30px;
+}
+h4 {
+  font-size: 24px;
+}
+
+#roomanna {
+  cursor: default;
+  text-transform: uppercase;
+  font: 90px 'Visitor';
+  letter-spacing: 0px;
+  word-wrap: break-word;
+  line-height: 0.6;
+  margin-top: 20px;
+}
+#roomanna a:hover {
+  text-decoration: none;
+}
+#roomanna span {
+  display: block;
+}
+#roomanna .title {
+  text-shadow: 0px 2px 0px #999;
+  color: #333;
+}
+#roomanna .byline {
+  font-size: 50%;
+  line-height: 0.8;
+  color: #999;
+  text-shadow: 0px 1px 0px #666;
+}
+#roomanna .subtitle {
+  color: #999;
+  text-shadow: 0px 2px 0px #666;
+}
+
+.mdash {
+  display: inline-block !important;
+  width: 27px;
+  text-align: center;
+  overflow: hidden;
+}
+.maincolumn {
+  font-family: 'Sanchez';
+  font-size: 18px;
+  line-height: 1.5 !important;
+}
+
+h2.posttitle,
+h3.posttitle {
+  font-family: 'Visitor';
+  font-size: 40px;
+  margin-bottom: 0;
+  text-shadow: 0px 1px 0px #001130;
+}
+h2.posttitle a:hover,
+h3.posttitle a:hover {
+  text-shadow: 0px 1px 0px #0099ee;
+  text-decoration: none;
+}
+.metadata {
+  margin-bottom: 0;
+}
+.metadata i {
+  vertical-align: baseline;
+}
+.snippet {
+}
+.snippet p:last-of-type {
+  margin-bottom: 0;
+}
+.postbody {
+  margin-top: 20px;
+}
+.postbody p {
+  margin: 0 0 20px;
+}
+.tagcounts a,
+.tagcounts h3.posttitle {
+  color: #d14;
+}
+.tagcounts h3.posttitle {
+  text-shadow: 0px 1px 0px #400;
+}
+.accounts a,
+.accounts h3.posttitle {
+  color: #4d1;
+}
+.accounts h3.posttitle {
+  text-shadow: 0px 1px 0px #040;
+}
+
+.img-polaroid {
+  padding: 0px;
+  border: 2px solid #333;
+}
+.pager {
+  margin-bottom: 0;
+}
+.pager li a {
+  margin-bottom: 20px;
+}
+
+/* Landscape phone to portrait tablet */
+@media (min-width: 768px) {
+  #roomanna {
+    max-width: 108px;
+    float: right;
+  }
+  .maincolumn {
+    /* margin-left: 10px; */
+  }
 }

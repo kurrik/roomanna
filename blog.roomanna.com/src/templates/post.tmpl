@@ -15,7 +15,7 @@
     <i class="icon-tags"></i>
     {{range .Post.Tags}}<a href="/tags/{{.}}">{{.}}</a> {{end}}
   </p>
-  <div>{{.Post.Body}}</div>
+  <div class="postbody">{{.Post.Body}}</div>
   <ul class="pager">
     {{if .Post.Next}}
     <li class="previous">

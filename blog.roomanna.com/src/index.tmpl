@@ -1,16 +1,20 @@
 {{define "body"}}
   <div class="hero-unit">
     <p class="nomargin">Hi, my name is</p>
-    <h1><em>Arne Roomann-Kurrik</em></h1>
+    <h1>Arne Roomann-Kurrik</h1>
     <p class="nomargin">
-      This is my blog. I am also on
-      <a target="_blank" rel="me" href="https://twitter.com/kurrik">Twitter</a>,
-      <a target="_blank" rel="me" href="https://github.com/kurrik">Github</a>,
-      <a target="_blank" rel="me" href="https://plus.google.com/+kurrik?rel=author">Google+</a>
-      and <a target="_blank" rel="me" href="https://linkedin.com/in/kurrik">Linkedin</a>.
+      This is my blog.
     </p>
   </div>
-  <div>
+  <div class="accounts">
+    <h3 class="posttitle">Elsewhere</h3>
+      <a target="_blank" rel="me" href="https://twitter.com/kurrik">Twitter</a> (@kurrik)
+      <a target="_blank" rel="me" href="https://github.com/kurrik">Github</a> (kurrik)
+      <a target="_blank" rel="me" href="https://plus.google.com/+kurrik?rel=author">Google+</a> (+kurrik)
+      <a target="_blank" rel="me" href="https://linkedin.com/in/kurrik">Linkedin</a> (kurrik)
+  </div>
+  <div class="tagcounts">
+    <h3 class="posttitle">Tags</h3>
     {{range $tc := .Site.TagCounts}}
       <a class="tag" href="/tags/{{$tc.Tag}}">{{$tc.Tag}}</a> ({{$tc.Count}})
     {{end}}

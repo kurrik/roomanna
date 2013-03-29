@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="/static/css/bootstrap.2.2.2.min.css" />
+    <link href='http://fonts.googleapis.com/css?family=Sanchez' rel='stylesheet' type='text/css'>
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="/static/css/font-awesome.css">
     <link rel="stylesheet" href="/static/css/site.css" />
     {{template "head" .}}
@@ -21,32 +23,24 @@
     </script>
   </head>
   <body>
-    <header class="site">
       <div class="container">
         <div class="row">
-          <div class="span12">
-            <a href="/">Welcome to <strong>blog.roomanna.com</strong>,
-            personal site of <strong>Arne Roomann-Kurrik</strong></a>
+          <div class="span2">
+            <div id="roomanna">
+              <a href="/"<span class="subtitle">blog</span><span class="title">roomanna</span></a>
+              <span class="byline">the•personal•site•of•arne•roomann<span class="mdash">&#x2014;</span>ku&#x200b;rrik</span>
+            </div>
           </div>
-        </div>
-      </div>
-    </header>
-    <div class="main">
-      <div class="container">
-        <div class="row">
-          <div class="span9 content">
+          <div class="span8 maincolumn">
             {{template "body" .}}
-          </div>
-          <div class="span3">
             {{template "sidebar" .}}
           </div>
         </div>
       </div>
-    </div>
     <footer class="site">
       <div class="container">
         <div class="row">
-          <div class="span12">
+          <div class="span8 offset2">
             <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" src="http://i.creativecommons.org/l/by-sa/3.0/80x15.png" /></a>
             Except where noted, the content at <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">blog.roomanna.com</span> is created by <a xmlns:cc="http://creativecommons.org/ns#" href="http://roomanna.com" property="cc:attributionName" rel="cc:attributionURL">Arne Roomann-Kurrik</a> and licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.  Please let me know if you use it anywhere!
             The source code for this site is available from <a href="http://github.com/kurrik/roomanna/">github</a>.
