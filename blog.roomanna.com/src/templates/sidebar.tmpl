@@ -27,14 +27,5 @@
          data-via="kurrik">Tweet</a>
     </li>
     {{end}}
-    <li class="nav-header">Site Tags</li>
-    {{range $k, $v := .Site.Tags}}
-    <li><a href="/tags/{{$k}}">{{$k}}</a></li>
-    {{end}}
-    <li class="nav-header">kurrik</li>
-    <li><a target="_blank" href="https://twitter.com/kurrik" rel="author">Twitter</a></li>
-    <li><a target="_blank" href="http://plus.google.com/+kurrik?rel=author" rel="author">Google+</a></li>
-    <li><a target="_blank" rel="author" href="https://github.com/kurrik">Github</a></li>
-    <li><a target="_blank" rel="author" href="https://linkedin.com/in/kurrik">Linkedin</a></li>
   </ul>
 {{end}}
