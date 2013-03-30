@@ -23,20 +23,20 @@
     </script>
   </head>
   <body>
-      <div class="container">
-        <div class="row">
-          <div class="span2">
-            <div id="roomanna">
-              <a href="/"<span class="subtitle">blog</span><span class="title">roomanna</span></a>
-              <span class="byline">the•personal•site•of•arne•roomann<span class="mdash">&#x2014;</span>ku&#x200b;rrik</span>
-            </div>
+    <div class="container">
+      <div class="row">
+        <div class="span2">
+          <div id="roomanna">
+            <a href="/"<span class="subtitle">blog</span><span class="title">roomanna</span></a>
+            <span class="byline">the•personal•site•of•arne•roomann<span class="mdash">&#x2014;</span>ku&#x200b;rrik</span>
           </div>
-          <div class="span8 maincolumn">
-            {{template "body" .}}
-            {{template "sidebar" .}}
-          </div>
+          {{template "sidebar" .}}
+        </div>
+        <div class="span8 maincolumn">
+          {{template "body" .}}
         </div>
       </div>
+    </div>
     <footer class="site">
       <div class="container">
         <div class="row">
@@ -50,7 +50,7 @@
     </footer>
     <script src="/static/js/jquery-1.8.1.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
-    <script src="//platform.twitter.com/widgets.js"></script>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
     <script>
       $('.tooltip-trigger').tooltip();
     </script>

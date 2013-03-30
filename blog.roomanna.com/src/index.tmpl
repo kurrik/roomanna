@@ -6,7 +6,7 @@
       This is my blog.
     </p>
   </div>
-  { {template "meta" .} }
+  {{template "meta" .}}
 
   <div class="postlist">
   {{range .Site.RecentPosts}}
@@ -15,7 +15,7 @@
       <i class="icon-time"></i>
       {{.FormattedDate}}
       <i class="icon-tags"></i>
-      {{range .Tags}}<a href="/tags/{{.}}">{{.}}</a> {{end}}
+      {{range .Tags}}<a href="/tags/{{.}}" class="tag">{{.}}</a> {{end}}
     </p>
     <div class="snippet">{{.Snippet}} <a href="{{.Path}}" class="readmore">Read more...</a></div>
   {{end}}

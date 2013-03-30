@@ -13,7 +13,7 @@
     <i class="icon-time"></i>
     {{.Post.FormattedDate}}
     <i class="icon-tags"></i>
-    {{range .Post.Tags}}<a href="/tags/{{.}}">{{.}}</a> {{end}}
+    {{range .Post.Tags}}<a href="/tags/{{.}}" class="tag">{{.}}</a> {{end}}
   </p>
   <div class="postbody">{{.Post.Body}}</div>
   <ul class="pager">
@@ -45,5 +45,5 @@
     </script>
     <script src="//roomanna.disqus.com/embed.js" async></script>
   </div>
-  { {template "meta" .} }
+  {{template "meta" .}}
 {{end}}
