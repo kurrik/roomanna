@@ -10,48 +10,69 @@ module.exports = function(grunt) {
         files: [
           {
             expand: true,
-            cwd:    'lib/',
+            cwd:    'lib/bootstrap/img',
             src:    ['*.png'],
-            dest:   'build/img',
-            filter: 'isFile',
+            dest:   'build/content/static/img',
           },
           {
             expand: true,
-            cwd:    'src/img/',
-            src:    ['*.png'],
-            dest:   'build/img',
-            filter: 'isFile',
+            cwd:    'lib/font-awesome/',
+            src:    ['*.woff'],
+            dest:   'build/content/static/font',
           },
           {
             expand: true,
-            cwd:    'src/',
-            src:    ['*'],
-            dest:   'build/',
-            filter: 'isFile'
+            cwd:    'lib/visitor1/',
+            src:    ['*.woff'],
+            dest:   'build/content/static/font',
+          },
+          {
+            expand: true,
+            cwd:    'lib/font-awesome/',
+            src:    ['font-awesome-ie7.css'],
+            dest:   'build/content/static/css',
           },
         ]
       },
     },
 
     concat: {
-      dist: {
+      js: {
         src: [
-          'lib/jquery/*.js',
+          'lib/jquery/jquery-1.9.1.js',
           'lib/bootstrap/js/*.js',
           'src/js/site.js',
         ],
         dest: 'build/content/static/js/<%= pkg.name %>.js',
       },
+      css: {
+        src: [
+          'lib/font-awesome/font-awesome.css',
+          'build/content/static/css/site.css',
+        ],
+        dest: 'build/content/static/css/<%= pkg.name %>.css',
+      },
+    },
+
+    cssmin: {
+      dist: {
+        options: {
+          banner: '/* <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+        },
+        files: {
+          'build/content/static/css/<%= pkg.name %>.min.css': 'build/content/static/css/<%= pkg.name %>.css',
+        }
+      }
     },
 
     less: {
-      production: {
+      dist: {
         options: {
-          paths: ["lib/bootstrap/less"],
+          paths: ['lib/bootstrap-2.3.1/less'],
           yuicompress: true
         },
         files: {
-          "build/content/static/css/<%= pkg.name %>.min.css": "src/static/less/site.less"
+          'build/content/static/css/site.css': 'src/static/less/site.less',
         }
       }
     },
@@ -70,9 +91,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('default', ['concat', 'uglify', 'less']);
+  grunt.registerTask('default', ['copy', 'less', 'concat', 'cssmin', 'uglify']);
 };
