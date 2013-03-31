@@ -13,10 +13,10 @@
     <li class="nav-header">THIS POST</li>
     <li><a href="{{.Post.Permalink}}">LINK</a></li>
     {{if .Post.Next}}
-    <li><a href="{{.Post.Next.Path}}" class="tooltip-trigger" data-placement="left" title="{{.Post.Next.Title}}">NEXT&rarr;</a></li>
+    <li><a href="{{.Post.Next.Path}}" class="tooltip-trigger" data-placement="right" title="{{.Post.Next.Title}}">NEXT&rarr;</a></li>
     {{end}}
     {{if .Post.Prev}}
-    <li><a href="{{.Post.Prev.Path}}" class="tooltip-trigger" data-placement="left" title="{{.Post.Prev.Title}}">PREV&larr;</a></li>
+    <li><a href="{{.Post.Prev.Path}}" class="tooltip-trigger" data-placement="right" title="{{.Post.Prev.Title}}">PREV&larr;</a></li>
     {{end}}
     <li>
       <a href="https://twitter.com/share"
