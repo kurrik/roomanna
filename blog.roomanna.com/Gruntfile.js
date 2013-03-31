@@ -31,7 +31,7 @@ module.exports = function(grunt) {
         files: [
           {
             expand: true,
-            cwd:    'server',
+            cwd:    'src/server',
             src:    ['**/*'],
             dest:   'build',
           }
@@ -78,10 +78,11 @@ module.exports = function(grunt) {
       js: {
         src: [
           'lib/jquery/jquery-1.9.1.js',
-          'lib/bootstrap/js/*.js',
+          'lib/bootstrap-2.3.1/js/*.js',
           'src/js/site.js',
         ],
         dest: 'build/content/static/js/<%= pkg.name %>.js',
+        separator: ';\n',
       },
       css: {
         src: [
@@ -89,6 +90,7 @@ module.exports = function(grunt) {
           'build/content/static/css/site.css',
         ],
         dest: 'build/content/static/css/<%= pkg.name %>.css',
+        separator: '\n',
       },
     },
 
@@ -123,7 +125,23 @@ module.exports = function(grunt) {
         src: 'build/content/static/js/<%= pkg.name %>.js',
         dest: 'build/content/static/js/<%= pkg.name %>.min.js'
       }
-    }
+    },
+
+    watch: {
+      frontend: {
+        files: ['lib/**/*', 'src/img/**/*', 'src/js/**/*', 'src/less/**/*'],
+        tasks: ['frontend']
+      },
+      server: {
+        files: ['src/server/**/*'],
+        tasks: ['server']
+      },
+      content: {
+        files: ['src/site/**/*'],
+        tasks: ['content']
+      },
+    },
+
   });
 
   grunt.loadNpmTasks('grunt-bg-shell');
@@ -135,11 +153,15 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
+  // Site components
   grunt.registerTask('frontend', ['copy:frontend', 'less', 'concat', 'cssmin', 'uglify']);
-  grunt.registerTask('serve',    ['copy:server', 'bgShell:serve']);
   grunt.registerTask('server',   ['copy:server']);
-  grunt.registerTask('create',   ['bgShell:create']);
   grunt.registerTask('content',  ['bgShell:ghostwriter']);
-  grunt.registerTask('all',      ['server', 'frontend', 'content']);
+  grunt.registerTask('all',      ['clean', 'server', 'frontend', 'content']);
+
+  // Verbs
+  grunt.registerTask('create',   ['bgShell:create']);
+  grunt.registerTask('serve',    ['copy:server', 'bgShell:serve']);
+  grunt.registerTask('develop',  ['all', 'serve', 'watch']);
   grunt.registerTask('default',  ['all']);
 };
