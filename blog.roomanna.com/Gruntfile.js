@@ -32,6 +32,13 @@ module.exports = function(grunt) {
             src:    ['font-awesome-ie7.css'],
             dest:   'build/content/static/css',
           },
+          {
+            expand: true,
+            cwd:    'src/img/',
+            src:    ['*'],
+            dest:   'build/content/static/img',
+            filter: 'isFile',
+          },
         ]
       },
     },
