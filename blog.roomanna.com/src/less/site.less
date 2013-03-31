@@ -152,6 +152,7 @@ li {
 }
 
 h1, h2, h3, h4 {
+  cursor: default;
   color: #333;
 }
 h2 {
@@ -286,6 +287,10 @@ h3.posttitle a:hover {
   margin-bottom: 20px;
 }
 
+.hero-unit.index {
+  display: none;
+}
+
 /* Landscape phone to portrait tablet */
 @media (min-width: 768px) {
   #roomanna, .sidebar {
@@ -304,6 +309,9 @@ h3.posttitle a:hover {
   footer.site {
     margin-left: 20px;
     margin-right: 20px;
+  }
+  .hero-unit.index {
+    display: block;
   }
 }
 
