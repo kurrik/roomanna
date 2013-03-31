@@ -48,13 +48,13 @@ module.exports = function(grunt) {
           {
             expand: true,
             cwd:    'lib/font-awesome/',
-            src:    ['*.woff'],
+            src:    ['*.woff', '*.eot', '*.ttf', '*.svg'],
             dest:   'build/content/static/font',
           },
           {
             expand: true,
             cwd:    'lib/visitor1/',
-            src:    ['*.woff'],
+            src:    ['*.woff', '*.otf', '*.eot', '*.svg', '*.ttf'],
             dest:   'build/content/static/font',
           },
           {

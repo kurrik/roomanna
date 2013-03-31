@@ -3,9 +3,12 @@
 
 @font-face {
   font-family: 'Visitor';
+  src: url('../font/visitor1.eot?#iefix') format('embedded-opentype'),
+       url('../font/visitor1.woff') format('woff'),
+       url('../font/visitor1.ttf') format('truetype'),
+       url('../font/visitor1.svg#Visitor') format('svg');
+  font-weight: normal;
   font-style: normal;
-  font-weight: 400;
-  src: url('../font/visitor1.woff');
 }
 
 body {
@@ -96,7 +99,9 @@ img.pull-right {
 
 .hero-unit h1 {
   margin: 5px 0 0;
-  font: 90px 'Visitor';
+  font-size: 90px;
+  font-family: 'Visitor';
+  font-weight: normal;
   line-height: 0.6;
   text-shadow: 0px 4px 0px #000;
   word-wrap: break-word;
@@ -194,6 +199,7 @@ a.tag {
   cursor: default;
   text-transform: uppercase;
   font: 90px 'Visitor';
+  font-weight: normal;
   letter-spacing: 0px;
   word-wrap: break-word;
   line-height: 0.6;
@@ -234,8 +240,7 @@ a.tag {
 
 h2.posttitle,
 h3.posttitle {
-  font-family: 'Visitor';
-  font-size: 40px;
+  font: 40px 'Visitor';
   margin-bottom: 0;
   text-shadow: 0px 1px 0px #001130;
 }
