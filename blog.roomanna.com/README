@@ -1,20 +1,34 @@
 This project contains the source and content of http://blog.roomanna.com.
 
-REQUIREMENTS:
+Setup
+=====
 To build, install dependencies:
 
-  Go from golang.org
-  Ghostwriter from https://github.com/kurrik/ghostwriter
+  1. Go from golang.org
+  2. npm from npmjs.org
+  3. Golang App Engine server installed in ~/src/google_appengine_go/ from https://developers.google.com/appengine/downloads
 
 Run:
 
-  npm install
+    go get -u github.com/kurrik/ghostwriter
+    npm install
 
-SERVING CONTENT:
+Building
+========
 
-From the blog.roomanna.com directory:
+This builds the entire site:
 
-  make watch
+    grunt all
 
-The blog will be accessible at http://localhost:9998.  Editing source
-files will cause the site to be rebuilt.
+This creates a new post template:
+
+    grunt create
+
+This builds the site, starts a webserver at http://localhost:9998 and watches the source files for any changes:
+
+    grunt develop
+
+This deploys the site:
+
+    grunt deploy
+
