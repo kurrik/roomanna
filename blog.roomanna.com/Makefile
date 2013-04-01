@@ -1,4 +1,4 @@
-.PHONY : deploy server serve watch clean usage create
+.PHONY : deploy server serve watch clean usage create bootstrap
 
 usage:
 	@echo '    watch         Run Ghostwriter server in watch mode'
@@ -10,6 +10,7 @@ usage:
 GW_FLAGS=-src=src -dst=build/content
 CONTENT_FILES=$(shell find src -type f)
 SERVER_FILES=$(shell find server -type f)
+BOOTSTRAP_JS_FILES=$(shell ls lib/bootstrap/js/*.js)
 
 clean:
 	rm -rf build
@@ -25,7 +26,6 @@ build/app.yaml: $(SERVER_FILES)
 	cp -r server/* build
 
 watch:
-	ulimit -n 4096
 	ghostwriter $(GW_FLAGS) -watch -action=serve -address=127.0.0.1:9998
 
 create:
@@ -38,3 +38,35 @@ serve: server
 
 deploy: clean server
 	~/src/google_appengine_go/appcfg.py --oauth2 update build
+
+# Unified static resources:
+
+
+# Bootstrap
+bootstrap: \
+	src/static/js/bootstrap.min.js \
+	src/static/css/bootstrap.min.css \
+	src/static/css/bootstrap-responsive.min.css \
+	src/static/img/glyphicons-halflings-white.png \
+	src/static/img/glyphicons-halflings.png
+
+src/static/img/glyphicons-%.png: lib/bootstrap/img/glyphicons-%.png
+	cp $< $@
+
+src/static/js/bootstrap.js: $(BOOTSTRAP_JS_FILES)
+	cat $(BOOTSTRAP_JS_FILES) > $@
+
+src/static/js/bootstrap.min.js: src/static/js/bootstrap.js
+	./node_modules/.bin/uglifyjs -nc $< > $@
+
+src/static/css/bootstrap.css: lib/bootstrap/less/bootstrap.less
+	./node_modules/.bin/recess --compile $< > $@
+
+src/static/css/bootstrap.min.css: lib/bootstrap/less/bootstrap.less
+	./node_modules/.bin/recess --compress $< > $@
+
+src/static/css/bootstrap-responsive.css: lib/bootstrap/less/responsive.less
+	./node_modules/.bin/recess --compile $< > $@
+
+src/static/css/bootstrap-responsive.min.css: lib/bootstrap/less/responsive.less
+	./node_modules/.bin/recess --compress $< > $@

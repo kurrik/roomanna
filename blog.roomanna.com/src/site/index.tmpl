@@ -1,0 +1,27 @@
+{{define "body"}}
+  <div class="hero-unit index">
+    <p class="nomargin">Hi, my name is</p>
+    <h1>Arne Roomann-Kurrik</h1>
+    <p class="nomargin">
+      This is my blog.
+    </p>
+  </div>
+  {{template "meta" .}}
+
+  <div class="postlist">
+  {{range .Site.RecentPosts}}
+    <h3 class="posttitle"><a href="{{.Path}}">{{.Title}}</a></h3>
+    <p class="muted metadata">
+      <i class="icon-time"></i>
+      {{.FormattedDate}}
+      <i class="icon-tags"></i>
+      {{range .Tags}}<a href="/tags/{{.}}" class="tag">{{.}}</a> {{end}}
+    </p>
+    <div class="snippet">{{.Snippet}} <a href="{{.Path}}" class="readmore">Read more...</a></div>
+  {{end}}
+  </div>
+  <ul class="pager centered">
+    <li><a href="/archive.html">View all posts</a></li>
+  </ul>
+
+{{end}}

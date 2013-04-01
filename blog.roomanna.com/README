@@ -6,6 +6,10 @@ To build, install dependencies:
   Go from golang.org
   Ghostwriter from https://github.com/kurrik/ghostwriter
 
+Run:
+
+  npm install
+
 SERVING CONTENT:
 
 From the blog.roomanna.com directory:
