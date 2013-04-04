@@ -8,14 +8,16 @@
   <meta name="twitter:description" content="{{textcontent .Post.Snippet}}" />
 {{end}}
 {{define "body"}}
-  <h2 class="posttitle">{{.Post.Title}}</h2>
-  <p class="muted metadata">
-    <i class="icon-time"></i>
-    {{.Post.FormattedDate}}
-    <i class="icon-tags"></i>
-    {{range .Post.Tags}}<a href="/tags/{{.}}" class="tag">{{.}}</a> {{end}}
-  </p>
-  <div class="postbody">{{.Post.Body}}</div>
+  <article>
+    <h2 class="posttitle">{{.Post.Title}}</h2>
+    <p class="muted metadata">
+      <i class="icon-time"></i>
+      {{.Post.FormattedDate}}
+      <i class="icon-tags"></i>
+      {{range .Post.Tags}}<a href="/tags/{{.}}" class="tag">{{.}}</a> {{end}}
+    </p>
+    <div class="postbody">{{.Post.Body}}</div>
+  </article>
   <ul class="pager">
     {{if .Post.Next}}
     <li class="previous">
