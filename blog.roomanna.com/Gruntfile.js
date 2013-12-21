@@ -14,7 +14,7 @@ module.exports = function(grunt) {
       },
 
       serve: {
-        cmd: 'pkill -f dev_appserver || ~/src/google_appengine_go/dev_appserver.py --port=9998 --address=0.0.0.0 build',
+        cmd: 'pkill -f dev_appserver || ~/src/google_appengine_go/dev_appserver.py --port=9998 build',
         bg: true,
       },
 
