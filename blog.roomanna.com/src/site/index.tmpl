@@ -6,8 +6,6 @@
       This is my blog.
     </p>
   </div>
-  {{template "meta" .}}
-
   <div class="postlist">
   {{range .Site.RecentPosts}}
     <h3 class="posttitle"><a href="{{.Path}}">{{.Title}}</a></h3>
@@ -23,5 +21,5 @@
   <ul class="pager centered">
     <li><a href="/archive.html">View all posts</a></li>
   </ul>
-
+  {{template "meta" .}}
 {{end}}
