@@ -27,7 +27,7 @@ A grinning moon face shone in the center.
 
 Wes and I had created Moonshot, a puzzle game with a physics mechanic
 for a 48 hour game programming competition called Ludum Dare.  Every 4 months
-a weekend is selected, a theme is announced, and thousands of game developers
+a weekend is selected and a theme is announced. Thousands of game developers
 have the weekend to design, create, and release games for a competition
 where there are no official judges and no grand prize.
 
@@ -36,8 +36,8 @@ where there are no official judges and no grand prize.
 </p>
 
 The team rules for Ludum Dare extend the time period to 72 hours,
-but Wes and I agreed to do our best to get something done in 48
-(we have jobs, you know).  On April 26 I finished work early, ran
+but Wes and I agreed to do our best to get something done in 48.
+On April 26 2013 I finished work early and ran
 over to the market to purchase necessities - beer, chips, bourbon, Coke.
 The theme announcement was scheduled to arrive via Tweet at 7pm.
 Wes showed up at 6:56.
@@ -53,47 +53,50 @@ intricate sprite work over the weekend.  I didn't want my characters
 to be blocks or lines.
 
 I think Wes first came up with the idea of minimalist one-button gameplay.
-I forget who said "space" first.  But after those two constraints, ideas
+I forget who said "space" first.  After those two constraints, ideas
 began to flow.  By 7:30 we [had a concept][2] which wound up being very
 close to the final product.
 
 I learned about Ludum Dare through Notch.  There was a weekend right
-after I had joined Twitter where I found myself working on a weekend
-project but obsessing over a live feed of Notch coding an
+after I had started working for Twitter where I found myself
+obsessing over a live feed of Notch coding an
 entire [Wolf3D-style game][1] in 48 hours.  To check in periodically
-and see his progress was intoxicating - I saw mechanics bloom out of the
-void and levels grow up around the mechanics.  I saw his strategies for
-making a level out of a single bitmap, and for changing the appearance of
-the game by editing a single sheet of stitched-together images which would
-provide textures for the walls and items of the level.  You almost never
-get to see a professional at that level - where they're working as fast as
-they can and there's this incredible economy of action which shows that
-they just know exactly what to do next throughout the entire process.
+and see his progress was intoxicating. I saw game mechanics grow from placeholder
+functions to actual things the player could do in the game. Puzzles
+grew up around these mechanics.  He had strategies for
+making a level out of a single bitmap, and for adding new items and level types
+by editing a single sheet of textures.  He was hot reloading Java objects
+in the middle of playing the game, so his code, compile, and test cycle
+was incredibly short.
 
-It took me nine months to participate in my first Ludum Dare after
-watching Notch's performance.  Life gets in the way.  So when Ludum
-Dare 24 was announced to take place on August 24-27, 2012 and I saw
-that I had a free weekend, I knew I was finally going to be able to compete.
+I love seeing a professional
+in any field working at this level - where
+there's this incredible economy of action, and they never seem to question
+what to do next.  I wanted to see if I could program that way.
+
+It took me nine months to participate
+in my first Ludum Dare after watching Notch.  When I saw that I finally
+had a free weekend for Ludum Dare 24 in August 2012,
+I knew I was finally going to be able to see where my limits were.
 
 I think many people see computers as fixed, opaque things, which fulfill
 standard functions built into their software.  They don't think of the
 underlying malleability of a computer.  But I grew up building tower
 PCs and installing DOS and configuring my config.sys in order to
 have enough RAM to be able to run the programs I wanted.  At that point
-there wasn't a lot of separation between using a computer and programming it.
+there wasn't a lot of separation between using a computer and programming one.
 I had always been interested in games and it seemed rather obvious that
 they were the kind of thing a computer user could create.
 
 When I was young there would be these computer trade shows where you'd walk
 around from booth to booth and look for the best prices on processors, RAM,
-etc.  I would have to be diligent to follow my father through the crowd
-lest we be separated and lost indefinitely.  He would usually be looking
-for parts for the family computer, but if I were good and didn't get lost
-he would offer me the chance to select something I wanted.  One time the
-choice was between a copy of SimAnt and a book on programming games in BASIC.
-I went with SimAnt because my cousin had showed me how to play as the spider
-and that was ridiculously cool.  But in hindsight it seemed like a bit of a
-test - I was offered the choice between one expensive game which would be
+hard drives, and any of the dozen other parts needed to assemble a PC.
+I would have to be diligent to follow my father through the crowd
+lest we be separated and lost indefinitely. If I were good and didn't get lost
+he would offer me the chance to select something I wanted.  Once I found myself
+torn between a copy of SimAnt and a book on programming games in BASIC.
+In hindsight it was a bit of a test - I was offered
+the choice between one expensive game which would be
 interesting for a few months, or a $5 book which would have helped me
 make the games I wanted to play for the rest of my life.
 
