@@ -4,22 +4,22 @@ module.exports = function(grunt) {
 
     bgShell: {
       ghostwriter: {
-        cmd: 'ghostwriter -src=src/site -dst=build/content',
+        cmd: '$GOPATH/bin/ghostwriter -src=src/site -dst=build/content',
         bg: false,
       },
 
       create: {
-        cmd: 'ghostwriter -src=src/site -dst=build/content -action=create',
+        cmd: '$GOPATH/bin/ghostwriter -src=src/site -dst=build/content -action=create',
         bg: false,
       },
 
       serve: {
-        cmd: 'pkill -f dev_appserver || ~/src/google_appengine_go/dev_appserver.py --port=9998 build',
+        cmd: 'pkill -f dev_appserver || ~/src/go_appengine/dev_appserver.py --port=9998 build',
         bg: true,
       },
 
       deploy: {
-        cmd: '~/src/google_appengine_go/appcfg.py --oauth2 update build',
+        cmd: '~/src/go_appengine/appcfg.py --oauth2 update build',
         bg: false,
       },
     },

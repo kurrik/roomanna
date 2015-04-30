@@ -6,9 +6,11 @@ To build, install dependencies:
 
   1. Go from golang.org
   2. npm from npmjs.org
-  3. Golang App Engine server installed in ~/src/google_appengine_go/ from https://developers.google.com/appengine/downloads
+  3. Golang App Engine server installed in ~/src/go_appengine/ from https://developers.google.com/appengine/downloads
 
 Run:
+
+    brew install bzr # (osx)
 
     go get -u github.com/kurrik/ghostwriter
     npm install
