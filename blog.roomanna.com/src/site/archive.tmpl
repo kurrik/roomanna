@@ -8,14 +8,16 @@
   </div>
   <div class="postlist">
   {{range .Site.PostsByDate}}
-    <h3 class="posttitle"><a href="{{.Path}}">{{.Title}}</a></h3>
-    <p class="muted metadata">
-      <i class="icon-time"></i>
-      {{.FormattedDate}}
-      <i class="icon-tags"></i>
-      {{range .Tags}}<a href="/tags/{{.}}" class="tag">{{.}}</a> {{end}}
-    </p>
-    <div class="snippet">{{.Snippet}} <a href="{{.Path}}" class="readmore">Read more...</a></div>
+    <div class="post">
+      <h3 class="posttitle"><a href="{{.Path}}">{{.Title}}</a></h3>
+      <p class="muted metadata">
+        <i class="icon-time"></i>
+        {{.FormattedDate}}
+        <i class="icon-tags"></i>
+        {{range .Tags}}<a href="/tags/{{.}}" class="tag">{{.}}</a> {{end}}
+      </p>
+      <div class="snippet">{{.Snippet}} <a href="{{.Path}}" class="readmore">Read more...</a></div>
+    </div>
   {{end}}
   </div>
   {{template "meta" .}}
