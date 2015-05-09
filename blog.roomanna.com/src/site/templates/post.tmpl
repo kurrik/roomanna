@@ -12,7 +12,7 @@
     <h2 class="posttitle">{{.Post.Title}}</h2>
     <p class="muted metadata">
       <i class="icon-time"></i>
-      {{.Post.FormattedDate}}
+      <span class="postdate">{{.Post.FormattedDate}}</span>
       <i class="icon-tags"></i>
       {{range .Post.Tags}}<a href="/tags/{{.}}" class="tag">{{.}}</a> {{end}}
     </p>
