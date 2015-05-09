@@ -6,7 +6,7 @@
 [link-google]: http://www.google.com
 
 So upon getting here you may be wondering general questions like "what is
-this", and "why are they making me read this page" and "why there suffering in
+this", and "why are they making me read this page" and "why is there suffering in
 this modern world, what with computers and all"?  All excellent questions to be
 sure, and I figured I'd devote some space to answering them before getting to
 the process of writing down whatever comes to mind while completing my
