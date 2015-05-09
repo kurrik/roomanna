@@ -8,19 +8,9 @@ module.exports = function(grunt) {
         bg: false,
       },
 
-      create: {
-        cmd: '$GOPATH/bin/ghostwriter -src=src/site -dst=build/content -action=create',
-        bg: false,
-      },
-
       serve: {
         cmd: 'pkill -f dev_appserver || ~/src/go_appengine/dev_appserver.py --port=9998 build',
         bg: true,
-      },
-
-      deploy: {
-        cmd: '~/src/go_appengine/appcfg.py --oauth2 update build',
-        bg: false,
       },
     },
 
@@ -160,9 +150,7 @@ module.exports = function(grunt) {
   grunt.registerTask('all',      ['clean', 'server', 'frontend', 'content']);
 
   // Verbs
-  grunt.registerTask('create',   ['bgShell:create']);
   grunt.registerTask('serve',    ['copy:server', 'bgShell:serve']);
   grunt.registerTask('develop',  ['all', 'serve', 'watch']);
-  grunt.registerTask('deploy',   ['all', 'bgShell:deploy']);
   grunt.registerTask('default',  ['all']);
 };
