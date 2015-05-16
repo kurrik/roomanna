@@ -67,9 +67,8 @@ module.exports = function(grunt) {
     concat: {
       js: {
         src: [
-          'lib/jquery/jquery-1.9.1.js',
+          'build/content/static/js/site.js',
           'lib/bootstrap-2.3.1/js/*.js',
-          'src/js/site.js',
         ],
         dest: 'build/content/static/js/<%= pkg.name %>.js',
         separator: ';\n',
@@ -98,11 +97,26 @@ module.exports = function(grunt) {
     less: {
       dist: {
         options: {
-          paths: ['lib/bootstrap-2.3.1/less'],
+          paths: ['src/less', 'lib/bootstrap-2.3.1/less'],
           yuicompress: true
         },
         files: {
           'build/content/static/css/site.css': 'src/less/site.less',
+        }
+      }
+    },
+
+    requirejs: {
+      compile: {
+        options: {
+          name: "node_modules/almond/almond",
+          out: "build/content/static/js/site.js",
+          baseUrl: "./",
+          include: ['src/js/site'],
+          insertRequire: ['src/js/site'],
+          paths: {
+            'jquery': 'lib/jquery/jquery-1.9.1'
+          }
         }
       }
     },
@@ -140,11 +154,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Site components
-  grunt.registerTask('frontend', ['copy:frontend', 'less', 'concat', 'cssmin', 'uglify']);
+  grunt.registerTask('frontend', ['copy:frontend', 'less', 'requirejs', 'concat', 'cssmin', 'uglify']);
   grunt.registerTask('server',   ['copy:server']);
   grunt.registerTask('content',  ['bgShell:ghostwriter']);
   grunt.registerTask('all',      ['clean', 'server', 'frontend', 'content']);
