@@ -39,7 +39,7 @@ define(function AnimatedImage(require) {
   function init() {
     $('[data-animated]').map(imgInit);
     $('.animating-wrap')
-      .click(toggleItem);
+      .click(toggleItem)
       .mouseenter(playItem)
       .mouseleave(pauseItem);
   };
