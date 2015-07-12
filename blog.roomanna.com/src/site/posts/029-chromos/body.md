@@ -163,7 +163,7 @@ At the end of the day, we shipped our first game with an enemy.  It's not our
 best game&mdash;we wound up placing 374/1468 overall, which is our worst showing
 to date.  But like everything else we've done so far, I like the mechanic,
 I'm proud of getting it done, and I feel like the idea has potential should
-we want to pick this up again and work on a similar mechanic.
+we want to pick this up again and work on something similar.
 
 I'm not sure if there's much of a moral to this development log.  Making games
 is hard, especially if you don't have a strong inspiration.  Ludum Dare's
