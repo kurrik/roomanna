@@ -9,7 +9,7 @@ module.exports = function(grunt) {
       },
 
       serve: {
-        cmd: 'pkill -f dev_appserver || ~/src/go_appengine/dev_appserver.py --port=9998 build',
+        cmd: 'pkill -f dev_appserver || ~/src/go_appengine/dev_appserver.py --skip_sdk_update_check=yes --port=9998 build',
         bg: true,
       },
     },
