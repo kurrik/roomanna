@@ -26,7 +26,7 @@ It is, unfortunately, a terrible mindset to have when resources are abundant - o
 
 But it is the right mindset for three men to sneak a gallon of petrol past armed guards, use it to fuel transport into a deadly alien Zone, and then slowly amble over an alien wasteland which will probably kill them. All this in service of searching for a Room, which they believe will make their deepest desires come true.
 
-It it real?  The writer briefly mulls it:
+It it real?  The Writer briefly mulls it:
 
 <blockquote>
 "The world is absolutely dull, and that is why there’s neither telepathy, nor ghosts, nor flying saucers ... and there cannot be anything of the kind. Iron laws control the world and it’s intolerably boring. And these laws, alas, cannot be broken. They’re not able to."
