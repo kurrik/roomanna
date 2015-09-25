@@ -39,13 +39,12 @@
     {{end}}
   </ul>
   <div id="comments">
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-      var disqus_shortname = 'roomanna';
-      var disqus_identifier = '{{.Post.Path}}';
-      var disqus_url = '{{.Post.Permalink}}';
-    </script>
-    <script src="//roomanna.disqus.com/embed.js" async></script>
+    <p class="alert alert-info">
+      <strong>Comments?</strong>
+      In the interest of limiting third-party Javascript running on this
+      site, I've disabled all commenting plugins.  If you have feedback, please
+      <a href="https://twitter.com/intent/tweet?text=@kurrik&url={{.Post.Permalink}}">share it with me on Twitter</a>.
+    </p>
   </div>
   {{template "meta" .}}
 {{end}}

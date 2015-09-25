@@ -118,7 +118,7 @@ module.exports = function(grunt) {
             'jquery': 'lib/jquery/jquery-1.9.1'
           }
         }
-      }
+      },
     },
 
     uglify: {
