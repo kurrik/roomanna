@@ -1,0 +1,46 @@
+<style>
+.Word {
+  display: inline-block;
+  padding: 5px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  background: #eee;
+  margin: 5px;
+}
+.Output {
+  border: 1px solid #d00;
+  background: #fee;
+  position: relative;
+  overflow: hidden;
+}
+.Output .Word {
+  position: absolute;
+  margin: 0;
+}
+</style>
+
+<script id="tmplWord" type="text/html">
+  <div class="Word" id="{{id}}">{{text}}</div>
+</script>
+
+<script id="tmplControls" type="text/html">
+  <form class="Controls">
+    <select class="Controls-width">
+      {{#widths}}
+      <option {{#selected}}selected="true"{{/selected}} value="{{value}}">{{value}}</option>
+      {{/widths}}
+    </select>
+  </form>
+</script>
+
+<script id="tmplOutput" type="text/html">
+  <div class="Output" style="width: {{width}}px; height: {{height}}px;">
+    {{#words}}
+      <div class="Word" style="left: {{x}}px; top: {{y}}px; width: {{width}}px; height: {{height}}px;">{{text}}</div>
+    {{/words}}
+  </div>
+</script>
+
+<div id="controls"></div>
+<div id="pool"></div>
+<div id="demo1"></div>

@@ -1,0 +1,9 @@
+date: 09-25-2015
+slug: binpacking-shelf-next-fit
+title: Bin Packing - Shelf Next Fit
+tags:
+  - binpacking
+  - games
+  - algorithms
+scripts:
+  - ./post031.built.js
