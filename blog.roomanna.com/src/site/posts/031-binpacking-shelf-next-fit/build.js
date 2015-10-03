@@ -1,15 +1,15 @@
 ({
-  baseUrl: '.',
+  baseUrl: 'src',
   paths: {
     jquery: 'empty:', // Already in the page.
-    ICanHaz: '../../../../../lib/ICanHaz-0.10.2/ICanHaz',
+    icanhaz: '../../../../../lib/ICanHaz-0.10.2/ICanHaz',
     requireLib: '../../../../../node_modules/requirejs/require'
   },
   shim: {
     jquery: { exports: '$' },
-    ICanHaz: { exports: 'ich' }
+    icanhaz: { exports: 'ich' }
   },
   include: 'requireLib',
-  name: 'post031',
-  out: '../post031.built.js'
+  name: 'main',
+  out: 'post031.built.js'
 })
