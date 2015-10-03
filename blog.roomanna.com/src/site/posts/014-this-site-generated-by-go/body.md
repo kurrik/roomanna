@@ -10,18 +10,18 @@ It is now December 2012 and this plan has come to fruition.
 I hope to cover all of this in more detail in future updates, but these are
 the major components I wrote at various points during the previous 15 months:
 
-#### Fauxfile
+## Fauxfile
 A filesystem wrapper for Go, which offers a mock implementation that may
 be used for unit testing.  Available at
 [github.com/kurrik/fauxfile](https://github.com/kurrik/fauxfile).
 
-#### Ghostwriter
+## Ghostwriter
 A blog generation utility which has been heavily influenced by Jekyll.
 Depends on fauxfile, and acts as a "real world" customer of that library.
 Available at
 [github.com/kurrik/ghostwriter](https://github.com/kurrik/ghostwriter).
 
-#### Roomanna
+## Roomanna
 The blog itself, finally redesigned to use Bootstrap.  The server itself
 went from a lightweight Python server to a lightweight Go server,
 available at

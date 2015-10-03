@@ -22,13 +22,13 @@
   font-family: 'Roboto', sans-serif;
   font-weight: 100;
   line-height: 1.5 !important;
-  font-size: 22px;
+  font-size: 20px;
   color: #999;
 }
 
 .text-heading() {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 500;
+  font-family: 'Sanchez';
+  font-weight: normal;
   color: #333;
 }
 
@@ -149,10 +149,9 @@ iframe.centered {
   border-radius: 0;
 
   & h1 {
+    .text-heading();
     margin: 0;
     font-size: 60px;
-    font-family: 'Sanchez';
-    font-weight: normal;
     line-height: 1.0;
     word-wrap: break-word;
   }
@@ -199,7 +198,7 @@ iframe {
   margin-bottom: 20px;
 }
 
-blockquote p {
+blockquote, blockquote p {
   .text-quote();
 }
 
@@ -231,6 +230,7 @@ h1, h2, h3, h4 {
   cursor: default;
   margin-top: 20px;
   margin-bottom: 20px;
+  line-height: 1;
 }
 
 h2 {
@@ -330,7 +330,8 @@ a.tag {
 
 h2.posttitle,
 h3.posttitle {
-  font: 30px 'Sanchez';
+  .text-heading();
+  font-size: 30px;
   margin-bottom: 0;
   text-decoration: none;
 }
@@ -361,6 +362,21 @@ h3.posttitle a:hover {
 }
 
 .postbody {
+  h1 {
+    font-size: 28px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  h3 {
+    font-size: 20px;
+  }
+
+  h4 {
+    font-size: 18px;
+  }
 }
 
 .postbody p {

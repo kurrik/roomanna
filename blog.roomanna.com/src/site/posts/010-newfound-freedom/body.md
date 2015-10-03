@@ -39,7 +39,7 @@ such an opportunity, so I've come up with some principles to adhere to:
 
 <!-- -**-END-**- -->
 
-#### Have fun
+# Have fun
 For once I actually have nothing on my plate, so I should pick things
 which interest me and look like they'd be fun to do.  [Watching Notch
 program][3] an [entire game][4] in 48 hours last week was amazing not
@@ -49,12 +49,12 @@ rather than infrastructure, which, while bad for a long term project,
 seems like the most effective use of time for writing code in a short
 time span.
 
-#### Write something useful
+# Write something useful
 Given #1, I also want to write something that could be useful to others.
 I intend to [open source][7] everything under Apache 2, and I will try to
 write at least one client library for Twitter, which brings me to...
 
-#### Learn something new
+# Learn something new
 I shouldn't be afraid to spend time learning things which will help me
 in the future.  I don't know enough of the Twitter APIs, so writing a client
 library will help me explore them.  I'm also considering writing a better
@@ -65,7 +65,7 @@ to poke around in.  The most *fun* looks to be [Real-Time Rendering][8]
 since I've just started playing around with WebGL and want to learn
 how to do things like shadows or crazy glowy effects.
 
-#### Don't get bored
+# Don't get bored
 I only have one week, yet tons of ideas and dream projects. So one thing
 I don't have the luxury of doing is getting bored and deciding to play
 Mass Effect or watch movies on Netflix instead.  I need to be able to

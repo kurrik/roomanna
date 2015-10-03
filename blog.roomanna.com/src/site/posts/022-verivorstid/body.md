@@ -39,7 +39,7 @@ It's not really as difficult as it looks, but the payoff is the continuation
 of an old cultural tradition as well as a badass winter meal to enjoy with
 your family.
 
-### Ingredients
+# Ingredients
 
 I'll be honest that I don't have a family recipe for verivorst, and the folks
 who make them back in NJ are a bit more tight lipped about their secrets.  So
@@ -145,7 +145,7 @@ Since making this I've talked to a couple more people
 and mace does seem to be used more commonly, so I'll be a bit more
 experimental with seasoning next time around.
 
-### Prep
+# Prep
 
 Just a word of warning, the process does get a bit graphic from here.
 
@@ -340,7 +340,7 @@ in a couple of days, or freeze them for months.  They keep rather well.
   <img class="img-polaroid" src="{{link "IMG_5519.jpg"}}" />
 </p>
 
-### Serving
+# Serving
 
 The ideal state for a served verivorst is crispy outside, moist and chewy inside.
 This typically means baking at a very hot temperature, covering the sausage

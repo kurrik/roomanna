@@ -14,15 +14,15 @@ define(['jquery', 'icanhaz'], function initControls($, ich) {
   function renderControls($root) {
     $root.append(ich.tmplControls({
       widths: [
-        { value: 64 },
+        { value: 128 },
         { value: 256, selected: true },
         { value: 512 }
       ],
       count: {
-        min: 10,
-        max: 100,
-        step: 5,
-        value: 10
+        min: 1,
+        max: 20,
+        step: 1,
+        value: 5
       }
     }));
   }
@@ -64,7 +64,7 @@ define(['jquery', 'icanhaz'], function initControls($, ich) {
     this.callback = callback;
     renderControls(this.$root);
     this.$pool = this.$root.find('.Controls-words');
-    this.$root.find('.Controls').on('input', this.onChange.bind(this));
+    this.$root.find('.Controls-form').on('input', this.onChange.bind(this));
     this.onChange();
   };
 
@@ -72,6 +72,7 @@ define(['jquery', 'icanhaz'], function initControls($, ich) {
     this.config = getControlsConfig(this.$root);
     renderWords(generateWordList(this.config.count), this.$pool);
     this.words = getWordData(this.$root);
+    this.$root.find('.Controls-count--label').text(this.config.count);
     this.callback(this);
   };
 

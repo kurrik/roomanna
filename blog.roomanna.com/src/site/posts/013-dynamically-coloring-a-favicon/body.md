@@ -38,7 +38,7 @@ domain, or even in a non-Chrome extension context (if you can run code on the
 target domain, that is).  The extension itself can be found [in the Chrome
 Web Store][1].  Read on for a walkthrough of the code.
 
-## Boilerplate
+# Boilerplate
 
 I could've written this as a [user script][7], but I like hosting stuff in the
 Chrome Web Store, so I decided to do a full-on packaged extension.  So I made
@@ -63,7 +63,7 @@ which executes a file named **favicon.js** any time Chrome visits an URL matchin
 script to a different domain, this is where you would configure where the script
 runs.
 
-## Content script
+# Content script
 
 The actual meat of the script lives in **favicon.js** and runs in the context of
 the target page.  It does the following:
@@ -73,7 +73,7 @@ the target page.  It does the following:
 1. Recolors the image drawn into the canvas.
 1. Sets the link element's href to point to the canvas data.
 
-### Link element
+## Link element
 
 A `<link rel="icon">` (many sites use "shortcut icon" but Chrome only needs
 to use "icon" as the link type) element can set the favicon for a given page.
@@ -90,7 +90,7 @@ if (!link) {
 }
 </pre>
 
-### Get the favicon
+## Get the favicon
 
 Now that the code has a handle to an appropriate link element, it
 loads the existing favicon into a `<canvas>`.  In the case of
@@ -150,7 +150,7 @@ would look like if it were visible:
 I've enlarged the image 20x and changed the alpha channel to show pink instead
 of transparency.
 
-### Recolor the drawn image
+## Recolor the drawn image
 
 Once the favicon is loaded in a canvas element, any number of modifications
 are possible.  Personally, I preferred to use the fairly new
@@ -209,7 +209,7 @@ original favicon:
 
 <img class="centered" src="{{link "favicon3.png"}}" />
 
-### Setting the favicon
+## Setting the favicon
 
 This image exists in memory, but needs to be pointed at by an URL so that
 the `<link>` element can reference it.  Due to the small size of a favicon,
@@ -301,7 +301,7 @@ img.src = faviconUrl;
 </pre>
 
 <div id="extending"></div>
-## Making the extension work on all domains
+# Making the extension work on all domains
 
 The above content script works pretty well on the vast majority of sites I've
 tested.  If you want to implement this technique for a specific set of sites

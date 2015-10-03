@@ -40,7 +40,7 @@ on the types of principles which will help guide what I write about and
 how I write it, hopefully without sacrificing my voice in the process.
 I've thought about these for a few weeks now, and they are:
 
-#### Focus on the positives
+# Focus on the positives
 
 Search Hacker News for "hate" and you find posts titled:
 
@@ -86,7 +86,7 @@ contained one of my favorite expressions of this idea:
   <small><cite title="Conan O'Brian">Conan O'Brian</cite></small>
 </p></blockquote>
 
-#### Avoid punditry
+# Avoid punditry
 
 Search Hacker News for "will beat" and you will find posts like:
 
@@ -129,7 +129,7 @@ my opinions with facts, data, and/or my own experiences rather than
 rely on being an "industry expert" (I'm not).  And I hope people call me out
 on it if I don't follow this principle, because it's easy to forget.
 
-#### Write about anything interesting
+# Write about anything interesting
 
 I first started this site to put up technical content and found myself
 sterilizing my subjects and how I wrote about them.  Writing the content

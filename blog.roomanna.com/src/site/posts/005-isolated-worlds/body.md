@@ -49,7 +49,7 @@ would be a decent chance of getting it to work.  But Content Scripts don't
 work just like regular web pages, and not understanding that difference will
 lead to painful-to-debug issues like this one.
 
-## An overview of extension architecture
+# An overview of extension architecture
 
 A lot of Chrome extensions have structures similar to this:
 
@@ -115,7 +115,7 @@ the page could conceivably start calling things like
 extension.  Since extensions have a lot more power over the system than
 regular websites, this is a no-no.
 
-## Fixing the problem
+# Fixing the problem
 
 So how does one load jQuery into the content script's execution environment
 dynamically?  Unfortunately, you can't.  Loading JavaScript requires inserting

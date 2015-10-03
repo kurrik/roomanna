@@ -25,7 +25,9 @@ been inspiring.  I've found a few things particularly worth gushing over:
 
 <!--BREAK-->
 
-**Management**. I think a lot of a company's spirit comes directly from the top.
+# Management
+
+I think a lot of a company's spirit comes directly from the top.
 At Google, I always respected Larry, Sergey, and Eric for being open and direct,
 while still fostering an atmosphere of playfulness and respect throughout the
 company.  Yet Google is a company which has clear and direct objectives and
@@ -45,7 +47,9 @@ been a short time, but I really feel confident in the leadership at Twitter.
 </a>
 </p>
 
-**My team**.  The Developer Relations team is so much smaller than the team I
+# My team
+
+The Developer Relations team is so much smaller than the team I
 was on at Google (even if you only count Chrome DevRel) that it's
 amazing to see how much has been done up until this point.  The stuff on
 [dev.twitter.com][19] is done by such a small team, yet the quality of the
@@ -56,7 +60,9 @@ reputation for simplicity, but after seeing how the sausage has been made
 for a couple weeks, I think this reputation has as much to do with the great
 support work this team has done, as with an elegant API design.
 
-**The environment**.  I didn't think this would be as big of a deal, but I love
+# The environment
+
+I didn't think this would be as big of a deal, but I love
 working in San Francisco.  Even though I have to fight through Muni in
 the morning, there's something energizing about being in the middle of
 this city every day.  SF's style bleeds into the workplace as well, from all
@@ -78,7 +84,9 @@ in my opinion:
 </iframe>
 </p>
 
-**The potential**.  [Leaving Google][1] was obviously a choice I couldn't make
+## The potential
+
+[Leaving Google][1] was obviously a choice I couldn't make
 lightly. During that time I heard a lot of folks questioning Twitter's ability
 to monetize, or be a 'real'
 product.  I appreciate that they didn't want me to make a decision which they

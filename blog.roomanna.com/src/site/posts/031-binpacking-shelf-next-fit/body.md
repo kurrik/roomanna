@@ -22,6 +22,7 @@ SHELF-NF (Shelf Next Fit) and I'll be covering that here.
 
 <!--BREAK-->
 
-This is content after the break.
+{{include "post031.controls.html"}}
 
+### SHELF-NF
 {{include "post031.demos.html"}}

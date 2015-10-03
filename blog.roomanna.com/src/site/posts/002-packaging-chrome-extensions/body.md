@@ -47,7 +47,7 @@ to write up my findings for anyone heading down this road in the future.  It
 should be pretty useful if you ever want to host a CRX from an app engine app
 for whatever reason (offering a debug/trusted tester version, for example).
 
-## Figuring out the format
+# Figuring out the format
 
 From [the CRX format documentation][link-crx-format] I knew I needed to create
 a binary file containing a header, an RSA public key, an RSA signature, and the
@@ -57,7 +57,7 @@ The RSA key is used to generate
 a signature of the zip file contents, so I needed to figure out how to get a
 zip of a directory first.
 
-## Obtaining a zip file
+# Obtaining a zip file
 
 Technically, the Chrome extension documentation samples are already zipped
 and checked into
@@ -109,7 +109,7 @@ There's actually an `os.path.relpath` function which would do this a bit more
 directly, but according to the Python docs, this function is only available in
 Python 2.6 on Windows and Unix, so I try not to rely on it.
 
-## Generating an RSA key
+# Generating an RSA key
 
 For the rest of the file contents, I needed to sign the zip file with an RSA
 key, which had to be generated.  While App Engine doesn't have OpenSSL
@@ -133,7 +133,7 @@ At this point I had a zip file and a key, so I needed to figure out exactly
 how to sign a piece of data according to the RSA specification in order to
 obtain the signature.
 
-## Figuring out the RSA signature payload format
+# Figuring out the RSA signature payload format
 
 From the packaging instructions, I knew I could use OpenSSL to generate a
 signature, but wasn't really sure what it was doing under the covers.  So I
@@ -280,7 +280,7 @@ algorithms(2) 26</code> matches <code>'1.3.14.3.2.26'</code>.
 That explained the payload format.  Now I needed a way to build up the
 signature from my own code to match this structure.
 
-## Generating the RSA signature
+# Generating the RSA signature
 
 Thankfully pyasn1 makes generating the appropriate structures pretty easy.
 
@@ -338,7 +338,7 @@ in binary, but it'd be a bit harder to follow what was going on.  At the end
 of the day, the <code>signature</code> variable contains the raw bytes of a
 RSA signature of the zip file contents.
 
-## Obtaining a public key
+# Obtaining a public key
 
 At this point I had the contents of the zip file and an RSA signature of that.
 The last major component of the CRX file that I needed to calculate was the
@@ -434,7 +434,7 @@ publickeyinfo.setComponentByPosition(1, pkbitstring)
 publickey = encoder.encode(publickeyinfo)
 </pre>
 
-## Writing the CRX format
+# Writing the CRX format
 
 Compared to the research and byte manipulating I needed to do earlier, actually
 getting the component pieces into the CRX format was incredibly easy.  I used
@@ -471,7 +471,7 @@ Outputting <code>crx_file</code> to a file or serving it from a webserver
 as a binary file will deliver the CRX file in a package that can be installed
 into Chrome.
 
-## Conclusion
+# Conclusion
 
 It was certainly a lot of research to accomplish the same effect as this
 [42 line script][link-bash], but I find it pretty satisfying to be able to
