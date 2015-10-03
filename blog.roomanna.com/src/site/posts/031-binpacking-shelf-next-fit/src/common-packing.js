@@ -14,10 +14,15 @@ define([], function initPacking() {
     return max;
   };
 
+  function percent(ratio) {
+    return Math.round(ratio * 10000) / 100;
+  };
+
   function Packing(width, height) {
     this.items = [];
     this.width = width;
     this.height = height;
+    this.metrics = {};
   };
 
   Packing.prototype.add = function add(x, y, width, height, data) {
@@ -36,6 +41,33 @@ define([], function initPacking() {
 
   Packing.prototype.extendWidth = function extendHeight() {
     this.width = pow2(max(this.items, function(i) { return i.x + i.width; }));
+  };
+
+  Packing.prototype.calculate = function calculate() {
+    var i,
+        filledWidth,
+        filledHeight,
+        filledArea,
+        itemArea,
+        item;
+    this.metrics.canvasArea = this.width * this.height;
+    this.metrics.itemArea = 0;
+    this.metrics.filledArea = 0;
+    this.metrics.overflowedArea = 0;
+    for (i = 0; i < this.items.length; i++) {
+      item = this.items[i];
+      itemArea = item.width * item.height;
+      filledWidth = Math.min(item.width, this.width - item.x);
+      filledHeight = Math.min(item.height, this.height - item.y);
+      filledArea = filledWidth * filledHeight;
+      this.metrics.itemArea += itemArea;
+      this.metrics.filledArea += filledArea;
+      this.metrics.overflowedArea += (itemArea - filledArea);
+    }
+    this.metrics.filledRatio = this.metrics.filledArea / this.metrics.canvasArea;
+    this.metrics.overflowedRatio = this.metrics.overflowedArea / this.metrics.itemArea;
+    this.metrics.filledPercent = percent(this.metrics.filledRatio);
+    this.metrics.overflowedPercent = percent(this.metrics.overflowedRatio);
   };
 
   return Packing;

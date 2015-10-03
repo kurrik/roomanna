@@ -4,6 +4,7 @@ define(['jquery', 'icanhaz'], function initOutput($, ich) {
   }
 
   Output.prototype.draw = function draw(packing) {
+    packing.calculate();
     this.$root.html(ich.tmplOutput(packing));
   };
 

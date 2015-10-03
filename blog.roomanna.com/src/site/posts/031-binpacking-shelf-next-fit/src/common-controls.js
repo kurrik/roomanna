@@ -64,7 +64,7 @@ define(['jquery', 'icanhaz'], function initControls($, ich) {
     this.callback = callback;
     renderControls(this.$root);
     this.$pool = this.$root.find('.Controls-words');
-    this.$root.find('.Controls').change(this.onChange.bind(this));
+    this.$root.find('.Controls').on('input', this.onChange.bind(this));
     this.onChange();
   };
 
