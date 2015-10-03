@@ -1,22 +1,22 @@
 {{define "sidebar"}}
-<nav class="sidebar">
-  <ul class="nav nav-list">
-    <li class="nav-header">NAVIGATION</li>
-    <li><a href="/archive.html">ALL POSTS</a></li>
-    <li><a href="/atom.xml">ATOM<img src="/static/img/rss-icon.png"/></a></li>
+<nav class="Sidebar">
+  <ul class="Navigation">
+    <li class="Navigation-header">Navigation</li>
+    <li><a href="/archive.html">All Posts</a></li>
+    <li><a href="/atom.xml">Atom <img src="/static/img/rss-icon.png"/></a></li>
     <li>
       <a href="https://twitter.com/kurrik"
         class="twitter-follow-button"
         data-show-count="false">Follow @kurrik</a>
     </li>
     {{if .Post}}
-    <li class="nav-header">THIS POST</li>
-    <li><a href="{{.Post.Permalink}}">LINK</a></li>
+    <li class="Navigation-header">This Post</li>
+    <li><a href="{{.Post.Permalink}}">Permalink</a></li>
     {{if .Post.Next}}
-    <li><a href="{{.Post.Next.Path}}" class="tooltip-trigger" data-placement="right" title="{{.Post.Next.Title}}">NEXT&rarr;</a></li>
+    <li><a href="{{.Post.Next.Path}}" class="tooltip-trigger" data-placement="right" title="{{.Post.Next.Title}}">Next &rarr;</a></li>
     {{end}}
     {{if .Post.Prev}}
-    <li><a href="{{.Post.Prev.Path}}" class="tooltip-trigger" data-placement="right" title="{{.Post.Prev.Title}}">PREV&larr;</a></li>
+    <li><a href="{{.Post.Prev.Path}}" class="tooltip-trigger" data-placement="right" title="{{.Post.Prev.Title}}">Prev &larr;</a></li>
     {{end}}
     <li>
       <a href="https://twitter.com/share"

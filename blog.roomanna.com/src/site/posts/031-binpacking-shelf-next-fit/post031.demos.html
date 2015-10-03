@@ -24,17 +24,23 @@
 </script>
 
 <script id="tmplControls" type="text/html">
-  <form class="Controls">
-    <select class="Controls-width">
-      {{#widths}}
-        <option {{#selected}}selected="true"{{/selected}} value="{{value}}">{{value}}</option>
-      {{/widths}}
-    </select>
-    {{#count}}
-      <input class="Controls-count" type="range" min="{{min}}" max="{{max}}" step="{{step}}" value="{{value}}" />
-    {{/count}}
-  </form>
-  <div class="Controls-words"></div>
+  <div class="row">
+    <div class="col-xs-6">
+      <form class="Controls">
+        <select class="Controls-width">
+          {{#widths}}
+            <option {{#selected}}selected="true"{{/selected}} value="{{value}}">{{value}}</option>
+          {{/widths}}
+        </select>
+        {{#count}}
+          <input class="Controls-count" type="range" min="{{min}}" max="{{max}}" step="{{step}}" value="{{value}}" />
+        {{/count}}
+      </form>
+    </div>
+    <div class="col-xs-6">
+      <div class="Controls-words"></div>
+    </div>
+  </div>
 </script>
 
 <script id="tmplOutput" type="text/html">

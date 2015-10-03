@@ -31,12 +31,6 @@ module.exports = function(grunt) {
         files: [
           {
             expand: true,
-            cwd:    'lib/bootstrap/img',
-            src:    ['*.png'],
-            dest:   'build/content/static/img',
-          },
-          {
-            expand: true,
             cwd:    'lib/font-awesome/',
             src:    ['*.woff', '*.eot', '*.ttf', '*.svg'],
             dest:   'build/content/static/font',
@@ -68,7 +62,7 @@ module.exports = function(grunt) {
       js: {
         src: [
           'build/content/static/js/site.js',
-          'lib/bootstrap-2.3.1/js/*.js',
+          'lib/bootstrap-3.3.5/dist/js/bootstrap.min.js',
         ],
         dest: 'build/content/static/js/<%= pkg.name %>.js',
         separator: ';\n',
@@ -97,7 +91,7 @@ module.exports = function(grunt) {
     less: {
       dist: {
         options: {
-          paths: ['src/less', 'lib/bootstrap-2.3.1/less'],
+          paths: ['src/less', 'lib/bootstrap-3.3.5/less'],
           yuicompress: true
         },
         files: {
