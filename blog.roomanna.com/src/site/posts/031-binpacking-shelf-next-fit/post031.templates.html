@@ -18,7 +18,7 @@
   margin: 0;
 }
 .Controls-words {
-  max-height: 300px;
+  height: 300px;
   overflow-y: scroll;
   background: #fcf8e3;
   color: #8a6d3b;
@@ -30,28 +30,32 @@
   <div class="Word" id="{{id}}">{{text}}</div>
 </script>
 
+<script id="tmplControlsCount" type="text/html">
+  {{#count}}
+    <div class="form-group">
+      <label>Word count (<span data-binding-label="count">{{value}}</span>)</label>
+      <input class="Controls-count" data-binding="count" type="range" min="{{min}}" max="{{max}}" step="{{step}}" value="{{value}}" />
+    </div>
+  {{/count}}
+</script>
+
 <script id="tmplControls" type="text/html">
   <div class="Controls row">
     <div class="col-xs-6">
       <form class="Controls-form">
         <div class="form-group">
           <label>Image width</label>
-          <select class="form-control Controls-width">
+          <select class="form-control Controls-width" data-binding="width">
             {{#widths}}
               <option {{#selected}}selected="true"{{/selected}} value="{{value}}">{{value}}</option>
             {{/widths}}
           </select>
-        </div>
-        <div class="form-group">
-          {{#count}}
-            <label>Word count (<span class="Controls-count--label">{{value}}</span>)</label>
-            <input class="Controls-count" type="range" min="{{min}}" max="{{max}}" step="{{step}}" value="{{value}}" />
-          {{/count}}
+          {{>tmplControlsCount}}
         </div>
       </form>
     </div>
     <div class="col-xs-6">
-      <label>Word list (<span class="Controls-count--label">{{value}}</span>)</label>
+      <label>Word list (<span data-binding-label="count">{{value}}</span>)</label>
       <div class="Controls-words"></div>
     </div>
   </div>
@@ -66,4 +70,3 @@
   <p>Filled percent: {{metrics.filledPercent}}% Overflowed percent: {{metrics.overflowedPercent}}%</p>
 </script>
 
-<div id="controls"></div>

@@ -22,7 +22,10 @@ SHELF-NF (Shelf Next Fit) and I'll be covering that here.
 
 <!--BREAK-->
 
-{{include "post031.controls.html"}}
+{{include "post031.templates.html"}}
+<div id="controls" data-template="tmplControls"></div>
+<div data-template="tmplControlsCount"></div>
+
 
 ### SHELF-NF
-{{include "post031.demos.html"}}
+<div id="demo1"></div>

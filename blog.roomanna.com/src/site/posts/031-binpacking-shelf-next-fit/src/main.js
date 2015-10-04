@@ -15,5 +15,5 @@ require([
     demo1.draw(ShelfNextFit.pack(controls));
   };
 
-  new Controls('#controls', onFormChange);
+  new Controls(onFormChange);
 });
