@@ -33,7 +33,9 @@
 <script id="tmplControlsCount" type="text/html">
   {{#count}}
     <div class="form-group">
-      <label>Word count (<span data-binding-label="count">{{value}}</span>)</label>
+      <label data-toggle="tooltip" title="Number of words to generate">
+        Word count (<span data-binding-label="count">{{value}}</span>)
+      </label>
       <input class="Controls-count" data-binding="count" type="range" min="{{min}}" max="{{max}}" step="{{step}}" value="{{value}}" />
     </div>
   {{/count}}
@@ -44,18 +46,46 @@
     <div class="col-xs-6">
       <form class="Controls-form">
         <div class="form-group">
-          <label>Image width</label>
+          <label data-toggle="tooltip" title="Width of the containing texture">
+            Image width
+          </label>
           <select class="form-control Controls-width" data-binding="width">
             {{#widths}}
               <option {{#selected}}selected="true"{{/selected}} value="{{value}}">{{value}}</option>
             {{/widths}}
           </select>
+          {{#seed}}
+            <div class="form-group">
+              <label data-toggle="tooltip" title="Changes the random number generator to produce a different series">
+                Random seed (<span data-binding-label="seed">{{value}}</span>)
+              </label>
+              <input class="Controls-seed" data-binding="seed" type="range" min="{{min}}" max="{{max}}" step="{{step}}" value="{{value}}" />
+            </div>
+          {{/seed}}
+          {{#exponent}}
+            <div class="form-group">
+              <label data-toggle="tooltip" title="'Color' of generated noise (see Amit's post)">
+                Exponent (<span data-binding-label="exponent">{{value}}</span>)
+              </label>
+              <input class="Controls-exponent" data-binding="exponent" type="range" min="{{min}}" max="{{max}}" step="{{step}}" value="{{value}}" />
+            </div>
+          {{/exponent}}
+          {{#maxlength}}
+            <div class="form-group">
+              <label data-toggle="tooltip" title="Maximum length of any generated word">
+                Max word length (<span data-binding-label="maxlength">{{value}}</span>)
+              </label>
+              <input class="Controls-maxlength" data-binding="maxlength" type="range" min="{{min}}" max="{{max}}" step="{{step}}" value="{{value}}" />
+            </div>
+          {{/maxlength}}
           {{>tmplControlsCount}}
         </div>
       </form>
     </div>
     <div class="col-xs-6">
-      <label>Word list (<span data-binding-label="count">{{value}}</span>)</label>
+      <label data-toggle="tooltip" title="List of generated words (scroll to see all)">
+        Word list (<span data-binding-label="count">{{value}}</span>)
+      </label>
       <div class="Controls-words"></div>
     </div>
   </div>
@@ -67,6 +97,11 @@
       <div class="Word" style="left: {{x}}px; top: {{y}}px; width: {{width}}px; height: {{height}}px;">{{data.text}}</div>
     {{/items}}
   </div>
-  <p>Filled percent: {{metrics.filledPercent}}% Overflowed percent: {{metrics.overflowedPercent}}%</p>
+  <p>
+    {{metrics.filledPercent}}% of the image was filled.
+    {{#metrics.overflowedPercent}}
+      {{metrics.overflowedPercent}}% of the text overflowed.
+    {{/metrics.overflowedPercent}}
+  </p>
 </script>
 

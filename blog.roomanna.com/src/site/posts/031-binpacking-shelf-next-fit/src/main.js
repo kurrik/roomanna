@@ -2,11 +2,13 @@ require([
   'jquery',
   'common-controls',
   'common-output',
+  'common-random',
   'algorithm-shelfnf'
 ], function (
   $,
   Controls,
   Output,
+  RandomIft,
   ShelfNextFit
 ) {
   var demo1 = new Output('#demo1');
@@ -16,4 +18,6 @@ require([
   };
 
   new Controls(onFormChange);
+
+  $('[data-toggle="tooltip"]').tooltip();
 });

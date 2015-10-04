@@ -1,15 +1,17 @@
 ({
   baseUrl: 'src',
   paths: {
-    jquery: 'empty:', // Already in the page.
     icanhaz: '../../../../../lib/ICanHaz-0.10.2/ICanHaz',
-    requireLib: '../../../../../node_modules/requirejs/require'
+    jquery: 'empty:', // Already in the page.
+    requireLib: '../../../../../node_modules/requirejs/require',
+    seedrandom: '../../../../../lib/seedrandom/seedrandom'
   },
   shim: {
-    jquery: { exports: '$' },
-    icanhaz: { exports: 'ich' }
+    icanhaz: { exports: 'ich' },
+    jquery: { exports: '$' }
   },
   include: 'requireLib',
   name: 'main',
+  optimize: 'none',
   out: 'post031.built.js'
 })
