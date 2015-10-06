@@ -30,9 +30,42 @@ values.
 {{include "post031.templates.html"}}
 <div id="controls" data-template="tmplControls"></div>
 
+There are a few assumptions I made which will make my implementations differ
+from Jukka's paper.  The paper concerns itself with rotation of the nested
+rectangles to achieve an optimal fit, but since my text strings are generally
+more likely to be wider than tall (and about the same height) I'm not going to
+worry about it.
+
+I'm also going to pack from the top down, as opposed to bottom up.  This just
+makes the visualization a little nicer on this page. I could easily flip the
+y-coordinate to render bottom-up, like OpenGL texture coorindates.
+
+Finally, I'm just going to hardcode the image width and grow the height
+by powers of 2, which I think is more realistic in representing how I would
+really grow a texture image when streaming in strings over time.
+
 # SHELF-NF
-The first implementation the paper covers is
-SHELF-NF (Shelf Next Fit).
+
+The simplest class of packing algorithms are labeled SHELF since they
+approach the problem by trying to fit as many rectangles onto a horizontal
+row (or shelf) as possible.
+
+Shelf next fit is probably the most direct implementation of this idea:
+
+    For each rectangle in the rectangles list:
+
+        If the rectangle does not fit in the current shelf:
+            Close the current shelf.
+
+            If there is no room for a new shelf:
+                Extend the image vertically.
+
+            Open a new shelf with height 0.
+
+        Add the rectangle to the current shelf.
+
+        If the rectangle's height is greater than the shelf's height:
+            Set the shelf height to the rectangle's height.
 
 <div id="demo1"></div>
 <div data-template="tmplControlsCount"></div>
