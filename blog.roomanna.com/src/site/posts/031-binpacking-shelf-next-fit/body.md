@@ -28,7 +28,11 @@ the sliders below and the examples in this page will update with the new
 values.
 
 {{include "post031.templates.html"}}
-<div id="controls" data-template="tmplControls"></div>
+<div id="controls" data-template="tmplControlsGlobal"></div>
+<div id="controls" data-template="tmplControlsWord"></div>
+<div id="controls" data-template="tmplWordList"></div>
+
+<div id="controls" data-template="tmplControlsSize"></div>
 
 There are a few assumptions I made which will make my implementations differ
 from Jukka's paper.  The paper concerns itself with rotation of the nested
@@ -68,5 +72,6 @@ Shelf next fit is probably the most direct implementation of this idea:
             Set the shelf height to the rectangle's height.
 
 <div id="demo1"></div>
+
 <div data-template="tmplControlsCount"></div>
 

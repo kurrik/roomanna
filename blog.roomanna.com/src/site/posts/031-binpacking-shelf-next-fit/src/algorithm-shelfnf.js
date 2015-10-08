@@ -20,10 +20,7 @@ define(['jquery', 'common-packing'], function initShelfNextFit($, Packing) {
     if (shelf.height < word.height) {
       shelf.height = word.height;
     }
-    packing.add(shelf.x, shelf.y, word.width, word.height, {
-      text: word.text,
-      id: word.id
-    });
+    packing.add(shelf.x, shelf.y, word.width, word.height, word);
     shelf.x += word.width;
   }
 

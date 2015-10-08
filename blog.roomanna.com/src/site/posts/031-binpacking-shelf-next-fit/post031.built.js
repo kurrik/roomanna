@@ -3160,53 +3160,49 @@ define('common-random',['seedrandom'], function initRandom(seedrandom) {
 });
 
 define('common-controls',['jquery', 'icanhaz', 'common-random'], function initControls($, ich, RandomIft) {
-  function generateWordList(config) {
-    var i,
-        j,
-        wordLength,
-        values,
-        str = '',
-        output = [];
-    values = RandomIft(config.seed, config.exponent, config.count);
-    for (i = 0; i < config.count; i++) {
-      str = '';
-      wordLength = Math.max(1, Math.round(config.maxlength * values[i]));
-      for (j = 0; j < wordLength; j++) {
-        str += 'a';
-      }
-      output[i] = str;
-    }
-    return output;
-  };
+  var maxWordCount = 30,
+      baseSize = 12;
 
   function renderControls($root, component) {
     var formData = {
       widths: $.map([ 128, 256, 512 ], function (v) {
         return { value: v, selected: component.config.width == v };
       }),
-      count: {
-        min: 1,
-        max: 30,
-        step: 1,
-        value: component.config.count
-      },
-      exponent: {
-        min: -3.0,
-        max: 3.0,
-        step: 0.1,
-        value: component.config.exponent
-      },
       seed: {
         min: 1,
         max: 10,
         step: 1,
         value: component.config.seed
       },
-      maxlength: {
+      wordCount: {
+        min: 1,
+        max: maxWordCount,
+        step: 1,
+        value: component.config.wordCount
+      },
+      wordExponent: {
+        min: -3.0,
+        max: 3.0,
+        step: 0.1,
+        value: component.config.wordExponent
+      },
+      wordMaxLength: {
         min: 1,
         max: 30,
         step: 1,
-        value: component.config.maxlength
+        value: component.config.wordMaxLength
+      },
+      sizeExponent: {
+        min: -3.0,
+        max: 3.0,
+        step: 0.1,
+        value: component.config.sizeExponent
+      },
+      sizeVariance: {
+        min: 0,
+        max: 5,
+        step: 1,
+        value: component.config.sizeVariance
       }
     };
     $root.find('[data-template]').each(function(i, node) {
@@ -3228,13 +3224,27 @@ define('common-controls',['jquery', 'icanhaz', 'common-random'], function initCo
     });
   };
 
-  function renderWords(wordList, $pool) {
-    var i;
+  function renderWords(config, $pool) {
+    var i,
+        j,
+        str,
+        wordLength,
+        wordRandom,
+        sizeRandom,
+        wordList = [];
+    wordRandom = RandomIft(config.seed, config.wordExponent, config.wordCount);
+    sizeRandom = RandomIft(config.seed, config.sizeExponent, config.wordCount);
     $pool.empty();
-    for (i = 0; i < wordList.length; i++) {
+    for (i = 0; i < config.wordCount; i++) {
+      str = '';
+      wordLength = Math.max(1, Math.round(config.wordMaxLength * wordRandom[i]));
+      for (j = 0; j < wordLength; j++) {
+        str += 'a';
+      }
       $pool.append(ich.tmplWord({
-        id: 'word' + i.toString(),
-        text: wordList[i]
+        id:   'word' + i.toString(),
+        size: Math.round(baseSize + sizeRandom[i] * config.sizeVariance),
+        text: str
       }));
     }
   };
@@ -3248,6 +3258,7 @@ define('common-controls',['jquery', 'icanhaz', 'common-random'], function initCo
         width: $word.outerWidth(),
         height: $word.outerHeight(),
         text: $word.text(),
+        size: $word.attr('data-size')
       });
     });
     return output;
@@ -3257,10 +3268,12 @@ define('common-controls',['jquery', 'icanhaz', 'common-random'], function initCo
     this.$root = $(document);
     this.config = {
       width: 256,
-      count: 5,
-      exponent: 0.0,
       seed: 1,
-      maxlength: 15
+      wordCount: 5,
+      wordExponent: 0.0,
+      wordMaxLength: 15,
+      sizeExponent: 0.0,
+      sizeVariance: 2
     };
     this.callback = callback;
     renderControls(this.$root, this);
@@ -3270,7 +3283,7 @@ define('common-controls',['jquery', 'icanhaz', 'common-random'], function initCo
 
   Controls.prototype.onChange = function onChange() {
     var component = this;
-    renderWords(generateWordList(this.config), this.$pool);
+    renderWords(this.config, this.$pool);
     this.words = getWordData(this.$pool);
     this.$root.find('[data-binding-label]').each(function (i, node) {
       var $node = $(node),
@@ -3398,10 +3411,7 @@ define('algorithm-shelfnf',['jquery', 'common-packing'], function initShelfNextF
     if (shelf.height < word.height) {
       shelf.height = word.height;
     }
-    packing.add(shelf.x, shelf.y, word.width, word.height, {
-      text: word.text,
-      id: word.id
-    });
+    packing.add(shelf.x, shelf.y, word.width, word.height, word);
     shelf.x += word.width;
   }
 
