@@ -14,7 +14,8 @@ thing to do well.  There's a whole class of algorithms dealing with this
 ](http://clb.demon.fi/files/RectangleBinPack.pdf) which
 covers many of these algorithms (thanks Jukka Jylänki!).
 To get a feel for how well each of them perform, I decided to implement a few in
- Javascript.
+ Javascript (you can see the [source here
+](https://github.com/kurrik/roomanna/tree/master/blog.roomanna.com/src/site/posts/031-binpacking/src)).
 
 <!--BREAK-->
 
@@ -69,7 +70,7 @@ The simplest class of packing algorithms are labeled SHELF since they
 approach the problem by trying to fit as many rectangles onto a horizontal
 row (or shelf) as possible.
 
-Shelf next fit is the most direct implementation of this idea:
+Shelf Next Fit is the most direct implementation of this idea:
 
 1. For each rectangle in the rectangles list:
   1. If the rectangle does not fit in the current shelf:
@@ -91,6 +92,14 @@ space as the word count grows.
 
 # Shelf First Fit (SHELF-FF)
 
+To try and reduce the wasted space on the right edge, Shelf First Fit
+iterates over every shelf for each new word, inserting into the first shelf
+with available space (creating a new shelf if no existing shelf has room).
+
+This seems like a no-brainer, but because it is a greedy algorithm, SHELF-FF
+may wind up making locally-optimal choices which reduce the global efficiency
+of the packing.  Consider an "unlucky" case where placing a small word on
+a prior row aligns a lot of larger future words in a worse way.
 
 <div id="demo-shelfff"></div>
 
