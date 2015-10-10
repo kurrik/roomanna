@@ -3160,8 +3160,8 @@ define('common-random',['seedrandom'], function initRandom(seedrandom) {
 });
 
 define('common-controls',['jquery', 'icanhaz', 'common-random'], function initControls($, ich, RandomIft) {
-  var maxWordCount = 30,
-      baseSize = 12;
+  var maxWordCount = 50,
+      baseSize = 15;
 
   function renderControls($root, component) {
     var formData = {
@@ -3200,7 +3200,7 @@ define('common-controls',['jquery', 'icanhaz', 'common-random'], function initCo
       },
       sizeVariance: {
         min: 0,
-        max: 5,
+        max: 10,
         step: 1,
         value: component.config.sizeVariance
       }
@@ -3228,22 +3228,29 @@ define('common-controls',['jquery', 'icanhaz', 'common-random'], function initCo
     var i,
         j,
         str,
+        size,
+        halfSize,
         wordLength,
         wordRandom,
         sizeRandom,
         wordList = [];
-    wordRandom = RandomIft(config.seed, config.wordExponent, config.wordCount);
-    sizeRandom = RandomIft(config.seed, config.sizeExponent, config.wordCount);
+    // Generate maxWordCount words and take a slice, because the max length
+    // informs the distribution, but we want the sliders to add and remove
+    // words without changing the ones which are left in the pool.
+    wordRandom = RandomIft(config.seed, config.wordExponent, maxWordCount);
+    sizeRandom = RandomIft(config.seed, config.sizeExponent, maxWordCount);
     $pool.empty();
+    halfSize = Math.round(config.sizeVariance / 2.0);
     for (i = 0; i < config.wordCount; i++) {
       str = '';
       wordLength = Math.max(1, Math.round(config.wordMaxLength * wordRandom[i]));
       for (j = 0; j < wordLength; j++) {
         str += 'a';
       }
+      size = baseSize - halfSize + Math.round(sizeRandom[i] * config.sizeVariance);
       $pool.append(ich.tmplWord({
         id:   'word' + i.toString(),
-        size: Math.round(baseSize + sizeRandom[i] * config.sizeVariance),
+        size: size,
         text: str
       }));
     }
@@ -3267,7 +3274,7 @@ define('common-controls',['jquery', 'icanhaz', 'common-random'], function initCo
   function Controls(callback) {
     this.$root = $(document);
     this.config = {
-      width: 256,
+      width: 512,
       seed: 1,
       wordCount: 5,
       wordExponent: 0.0,
@@ -3389,39 +3396,78 @@ define('common-packing',[], function initPacking() {
 });
 
 
-define('algorithm-shelfnf',['jquery', 'common-packing'], function initShelfNextFit($, Packing) {
-  function doesFit(shelfX, wordWidth, maxWidth) {
-    return shelfX + wordWidth <= maxWidth;
+define('common-shelf',[], function initShelf() {
+  function Shelf(maxWidth) {
+    this.x = 0;
+    this.y = 0;
+    this.height = 0;
+    this.maxWidth = maxWidth;
+    this.isOpen = true;
   };
 
-  function initShelf() {
-    return {
-      x: 0,
-      y: 0,
-      height: 0
-    };
+  Shelf.prototype.fitsX = function fitsX(wordWidth) {
+    return this.x + wordWidth <= this.maxWidth;
   };
 
-  function addToShelf(packing, shelf, word, config) {
-    if (!doesFit(shelf.x, word.width, config.width)) {
-      shelf.x = 0;
-      shelf.y += shelf.height;
-      shelf.height = 0;
-    }
-    if (shelf.height < word.height) {
-      shelf.height = word.height;
-    }
-    packing.add(shelf.x, shelf.y, word.width, word.height, word);
-    shelf.x += word.width;
+  Shelf.prototype.fitsY = function fitsY(wordHeight) {
+    return this.height <= wordHeight;
   }
+
+  Shelf.prototype.remainingX = function remainingX() {
+    return this.maxWidth - this.x;
+  };
+
+  Shelf.prototype.canAdd = function canAdd(word) {
+    if (!this.fitsX(word.width)) {
+      return false;
+    }
+    // Only allow adding words which exceed height if the shelf is open.
+    if (!this.isOpen && !this.fitsY(word.height)) {
+      return false;
+    }
+    return true;
+  };
+
+  Shelf.prototype.add = function add(word) {
+    if (this.height < word.height) {
+      this.height = word.height;
+    }
+    this.x += word.width;
+  };
+
+  // Returns the next shelf.  Now height of this shelf cannot be extended.
+  Shelf.prototype.close = function close() {
+    var shelf = new Shelf(this.maxWidth);
+    shelf.y = this.y + this.height;
+    this.isOpen = false;
+    return shelf;
+  };
+
+  return Shelf;
+});
+
+define('algorithm-shelfnf',[
+  'jquery',
+  'common-packing',
+  'common-shelf'
+], function initShelfNextFit(
+  $,
+  Packing,
+  Shelf
+) {
 
   function pack(controls) {
     var i,
-        shelf = initShelf(),
-        packing;
-    packing = new Packing(controls.config.width, 0);
+        word,
+        shelf = new Shelf(controls.config.width),
+        packing = new Packing(controls.config.width, 0);
     for (i = 0; i < controls.words.length; i++) {
-      addToShelf(packing, shelf, controls.words[i], controls.config);
+      word = controls.words[i];
+      if (!shelf.canAdd(word)) {
+        shelf = shelf.close();
+      }
+      packing.add(shelf.x, shelf.y, word.width, word.height, word);
+      shelf.add(word);
     }
     packing.extendHeight();
     return packing;
@@ -3432,23 +3478,73 @@ define('algorithm-shelfnf',['jquery', 'common-packing'], function initShelfNextF
   };
 });
 
+define('algorithm-shelfff',[
+  'jquery',
+  'common-packing',
+  'common-shelf'
+], function initShelfNextFit(
+  $,
+  Packing,
+  Shelf
+) {
+
+  function pack(controls) {
+    var i,
+        j,
+        word,
+        shelf,
+        placed,
+        shelves = [ new Shelf(controls.config.width) ],
+        packing = new Packing(controls.config.width, 0);
+    for (i = 0; i < controls.words.length; i++) {
+      placed = false;
+      word = controls.words[i];
+      for (j = 0; j < shelves.length; j++) {
+        shelf = shelves[j];
+        if (shelf.canAdd(word)) {
+          packing.add(shelf.x, shelf.y, word.width, word.height, word);
+          shelf.add(word);
+          placed = true;
+        }
+      }
+      if (!placed) {
+        shelf = shelves[shelves.length-1].close();
+        shelves.push(shelf);
+        packing.add(shelf.x, shelf.y, word.width, word.height, word);
+        shelf.add(word);
+      }
+    }
+    packing.extendHeight();
+    return packing;
+  };
+
+  return {
+    pack: pack
+  };
+});
+
+
 require([
   'jquery',
   'common-controls',
   'common-output',
   'common-random',
-  'algorithm-shelfnf'
+  'algorithm-shelfnf',
+  'algorithm-shelfff'
 ], function (
   $,
   Controls,
   Output,
   RandomIft,
-  ShelfNextFit
+  ShelfNextFit,
+  ShelfFirstFit
 ) {
-  var demo1 = new Output('#demo1');
+  var demoShelfNf = new Output('#demo-shelfnf'),
+      demoShelfFf = new Output('#demo-shelfff');
 
   function onFormChange(controls) {
-    demo1.draw(ShelfNextFit.pack(controls));
+    demoShelfNf.draw(ShelfNextFit.pack(controls));
+    demoShelfFf.draw(ShelfFirstFit.pack(controls));
   };
 
   new Controls(onFormChange);

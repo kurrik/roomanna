@@ -1,6 +1,6 @@
 define(['jquery', 'icanhaz', 'common-random'], function initControls($, ich, RandomIft) {
-  var maxWordCount = 30,
-      baseSize = 12;
+  var maxWordCount = 50,
+      baseSize = 15;
 
   function renderControls($root, component) {
     var formData = {
@@ -39,7 +39,7 @@ define(['jquery', 'icanhaz', 'common-random'], function initControls($, ich, Ran
       },
       sizeVariance: {
         min: 0,
-        max: 5,
+        max: 10,
         step: 1,
         value: component.config.sizeVariance
       }
@@ -67,22 +67,29 @@ define(['jquery', 'icanhaz', 'common-random'], function initControls($, ich, Ran
     var i,
         j,
         str,
+        size,
+        halfSize,
         wordLength,
         wordRandom,
         sizeRandom,
         wordList = [];
-    wordRandom = RandomIft(config.seed, config.wordExponent, config.wordCount);
-    sizeRandom = RandomIft(config.seed, config.sizeExponent, config.wordCount);
+    // Generate maxWordCount words and take a slice, because the max length
+    // informs the distribution, but we want the sliders to add and remove
+    // words without changing the ones which are left in the pool.
+    wordRandom = RandomIft(config.seed, config.wordExponent, maxWordCount);
+    sizeRandom = RandomIft(config.seed, config.sizeExponent, maxWordCount);
     $pool.empty();
+    halfSize = Math.round(config.sizeVariance / 2.0);
     for (i = 0; i < config.wordCount; i++) {
       str = '';
       wordLength = Math.max(1, Math.round(config.wordMaxLength * wordRandom[i]));
       for (j = 0; j < wordLength; j++) {
         str += 'a';
       }
+      size = baseSize - halfSize + Math.round(sizeRandom[i] * config.sizeVariance);
       $pool.append(ich.tmplWord({
         id:   'word' + i.toString(),
-        size: Math.round(baseSize + sizeRandom[i] * config.sizeVariance),
+        size: size,
         text: str
       }));
     }
@@ -106,7 +113,7 @@ define(['jquery', 'icanhaz', 'common-random'], function initControls($, ich, Ran
   function Controls(callback) {
     this.$root = $(document);
     this.config = {
-      width: 256,
+      width: 512,
       seed: 1,
       wordCount: 5,
       wordExponent: 0.0,
