@@ -1,4 +1,4 @@
-application: roomanna-www
+application: roomanna-www-hrd
 version: 1
 runtime: python
 api_version: 1
@@ -12,15 +12,15 @@ handlers:
   static_dir: css/fonts/
   expiration: "1d"
   mime_type: "application/octet-stream"
-  
+
 - url: /css
   static_dir: css/
   expiration: "1d"
-  
+
 - url: /img
   static_dir: img/
   expiration: "1d"
-  
+
 - url: /js
   static_dir: js/
   expiration: "1d"
