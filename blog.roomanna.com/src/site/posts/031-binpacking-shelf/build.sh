@@ -8,7 +8,7 @@
 
 GITROOT=`git rev-parse --show-toplevel`
 BLOGROOT=$GITROOT/blog.roomanna.com
-POSTROOT=$BLOGROOT/src/site/posts/031-binpacking
+POSTROOT=$BLOGROOT/src/site/posts/031-binpacking-shelf
 
 function build {
   $BLOGROOT/node_modules/.bin/r.js -o $POSTROOT/build.js
