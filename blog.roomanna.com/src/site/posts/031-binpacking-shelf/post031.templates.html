@@ -17,7 +17,7 @@
   background: #fee;
   position: relative;
   overflow: hidden;
-  margin: 0 0 20px 0;
+  margin: 0 auto 20px auto;
 }
 .Output .Word {
   position: absolute;
@@ -171,3 +171,41 @@
   </p>
 </script>
 
+<script id="tmplSummary" type="text/html">
+  <div class="Summary">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Algorithm</th>
+          <th>Filled</th>
+          <th>Overflowed</th>
+          <th>Words before overflow</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#demos}}
+          <tr>
+            <td>{{label}}</td>
+            <td>{{metrics.filledPercent}}</td>
+            <td>
+              {{#metrics.overflowedPercent}}
+                {{metrics.overflowedPercent}}%
+              {{/metrics.overflowedPercent}}
+              {{^metrics.overflowedPercent}}
+                <span class="text-muted">-</span>
+              {{/metrics.overflowedPercent}}
+            </td>
+            <td>
+              {{#metrics.firstClipped}}
+                {{metrics.firstClipped}}%
+              {{/metrics.firstClipped}}
+              {{^metrics.firstClipped}}
+                <span class="text-muted">-</span>
+              {{/metrics.firstClipped}}
+            </td>
+          </tr>
+        {{/demos}}
+      </tbody>
+    </table>
+  </div>
+</script>

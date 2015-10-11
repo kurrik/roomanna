@@ -1,12 +1,4 @@
-define([
-  'jquery',
-  'common-packing',
-  'common-shelf'
-], function initShelfNextFit(
-  $,
-  Packing,
-  Shelf
-) {
+define(['common-packing', 'common-shelf'], function initShelfNextFit(Packing, Shelf) {
 
   function pack(controls) {
     var i,
@@ -21,7 +13,6 @@ define([
       packing.add(shelf.x, shelf.y, word.width, word.height, word);
       shelf.add(word);
     }
-    packing.extendHeight();
     return packing;
   };
 

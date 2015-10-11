@@ -116,14 +116,14 @@ define(['jquery', 'icanhaz', 'common-random'], function initControls($, ich, Ran
   function Controls(callback) {
     this.$root = $(document);
     this.config = {
-      width: 512,
+      width: 256,
       height: 256,
       seed: 1,
-      wordCount: 5,
+      wordCount: 25,
       wordExponent: 0.0,
       wordMaxLength: 15,
       sizeExponent: 0.0,
-      sizeVariance: 2
+      sizeVariance: 5
     };
     this.callback = callback;
     renderControls(this.$root, this);

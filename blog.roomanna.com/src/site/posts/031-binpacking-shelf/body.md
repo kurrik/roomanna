@@ -117,18 +117,66 @@ a prior row aligns a lot of larger future words in a worse way.
 Like SHELF-FF, but instead of choosing the first shelf with room, choose
 the smallest shelf with enough room for the word.
 
+In terms of efficiency I don't see a ton of difference between SHELF-BWF
+and SHELF-FF, although if you set the image dimensions to be tall and narrow
+there are sometimes differences in the layout on the texture.
+
+    function heuristic(shelf, word) {
+      return shelf.remainingX() - word.width; // Score is leftover X space.
+    };
+
 <div id="demo-shelfbwf"></div>
 <div data-template="tmplControlsCount"></div>
 
 # Shelf Best Height Fit (SHELF-BHF)
+
+Shelf Best Height optimizes for lowest remaining vertical space.  Since there's
+not a ton of variance in rectangle heights I didn't  expect this to be
+very efficient.  In tall and narrow images I found a few examples where it
+performed worse than SHELF-FF.
+
+    function heuristic(shelf, word) {
+      return shelf.height - word.height; // Score is leftover Y space.
+    };
 
 <div id="demo-shelfbhf"></div>
 <div data-template="tmplControlsCount"></div>
 
 # Shelf Best Area Fit (SHELF-BAF)
 
+Shelf Best Area fit optimizes for minimum remaining area after the word is
+placed.
+
+    function heuristic(shelf, word) {
+      var shelfArea = shelf.remainingX() * shelf.height,
+          wordArea = word.width * word.height;
+      return shelfArea - wordArea; // Score is leftover area.
+    };
+
 <div id="demo-shelfbaf"></div>
 <div data-template="tmplControlsCount"></div>
 
+# Shelf Worst Width Fit (SHELF-WWF)
 
+    function heuristic(shelf, word) {
+      if (shelf.remainingX() === word.width) {
+        return Number.MAX_VALUE; // Immediately pick this fit.
+      }
+      return shelf.remainingX() - word.width; // Score is leftover X space.
+    };
 
+    function compare(score, bestScore) {
+      return score > bestScore; // Higher is better.
+    };
+
+<div id="demo-shelfwwf"></div>
+<div data-template="tmplControlsCount"></div>
+
+# Summary
+
+<div data-template="tmplControlsImage"></div>
+<div data-template="tmplControlsSeed"></div>
+<div data-template="tmplControlsSize"></div>
+<div data-template="tmplControlsWord"></div>
+
+<div id="Summary"></div>

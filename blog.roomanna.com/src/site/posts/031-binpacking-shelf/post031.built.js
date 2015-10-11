@@ -3277,14 +3277,14 @@ define('common-controls',['jquery', 'icanhaz', 'common-random'], function initCo
   function Controls(callback) {
     this.$root = $(document);
     this.config = {
-      width: 512,
+      width: 256,
       height: 256,
       seed: 1,
-      wordCount: 5,
+      wordCount: 25,
       wordExponent: 0.0,
       wordMaxLength: 15,
       sizeExponent: 0.0,
-      sizeVariance: 2
+      sizeVariance: 5
     };
     this.callback = callback;
     renderControls(this.$root, this);
@@ -3324,6 +3324,30 @@ define('common-output',['jquery', 'icanhaz'], function initOutput($, ich) {
   return Output;
 });
 
+define('common-summary',['jquery', 'icanhaz'], function initSummary($, ich) {
+  function Summary(root) {
+    this.$root = $(root);
+    this.demos = [];
+  }
+
+  Summary.prototype.draw = function draw() {
+    this.$root.html(ich.tmplSummary({
+      demos: this.demos
+    }));
+    this.demos = [];
+  };
+
+  Summary.prototype.add = function add(label, metrics) {
+    this.demos.push({
+      label: label,
+      metrics: metrics
+    });
+  };
+
+  return Summary;
+});
+
+
 define('common-packing',[], function initPacking() {
   function pow2(input) {
     return Math.pow(2, Math.ceil(Math.log2(input)));
@@ -3362,7 +3386,7 @@ define('common-packing',[], function initPacking() {
   };
 
   Packing.prototype.extendHeight = function extendHeight() {
-    //this.height = pow2(max(this.items, function(i) { return i.y + i.height; }));
+    this.height = pow2(max(this.items, function(i) { return i.y + i.height; }));
   };
 
   Packing.prototype.extendWidth = function extendHeight() {
@@ -3454,15 +3478,7 @@ define('common-shelf',[], function initShelf() {
   return Shelf;
 });
 
-define('algorithm-shelfnf',[
-  'jquery',
-  'common-packing',
-  'common-shelf'
-], function initShelfNextFit(
-  $,
-  Packing,
-  Shelf
-) {
+define('algorithm-shelfnf',['common-packing', 'common-shelf'], function initShelfNextFit(Packing, Shelf) {
 
   function pack(controls) {
     var i,
@@ -3477,7 +3493,6 @@ define('algorithm-shelfnf',[
       packing.add(shelf.x, shelf.y, word.width, word.height, word);
       shelf.add(word);
     }
-    packing.extendHeight();
     return packing;
   };
 
@@ -3486,15 +3501,7 @@ define('algorithm-shelfnf',[
   };
 });
 
-define('algorithm-shelfff',[
-  'jquery',
-  'common-packing',
-  'common-shelf'
-], function initShelfFirstFit(
-  $,
-  Packing,
-  Shelf
-) {
+define('algorithm-shelfff',['common-packing', 'common-shelf'], function initShelfFirstFit(Packing, Shelf) {
 
   function pack(controls) {
     var i,
@@ -3522,7 +3529,6 @@ define('algorithm-shelfff',[
         shelf.add(word);
       }
     }
-    packing.extendHeight();
     return packing;
   };
 
@@ -3532,17 +3538,9 @@ define('algorithm-shelfff',[
 });
 
 
-define('algorithm-shelfbwf',[
-  'jquery',
-  'common-packing',
-  'common-shelf'
-], function initShelfBestWidthFit(
-  $,
-  Packing,
-  Shelf
-) {
+define('common-shelfbestfit',['common-packing', 'common-shelf'], function initShelfBestFit(Packing, Shelf) {
 
-  function pack(controls) {
+  function pack(controls, heuristic, compare) {
     var i,
         j,
         word,
@@ -3554,16 +3552,13 @@ define('algorithm-shelfbwf',[
         packing = new Packing(controls.config.width, controls.config.height);
     for (i = 0; i < controls.words.length; i++) {
       word = controls.words[i];
-      bestScore = Number.MAX_VALUE;
+      bestScore = false;
       bestShelf = -1;
-      console.log('new word');
       for (j = 0; j < shelves.length; j++) {
         shelf = shelves[j];
         if (shelf.canAdd(word)) {
-          score = shelf.remainingX();
-          console.log('shelf', j, 'score', score, 'bestscore', bestScore);
-          if (score < bestScore) {
-            console.log('updating best score to', score, 'shelf', j);
+          score = heuristic(shelf, word);
+          if (bestScore === false || compare(score, bestScore)) {
             bestScore = score;
             bestShelf = j;
           }
@@ -3578,7 +3573,6 @@ define('algorithm-shelfbwf',[
       packing.add(shelf.x, shelf.y, word.width, word.height, word);
       shelf.add(word);
     }
-    packing.extendHeight();
     return packing;
   };
 
@@ -3588,32 +3582,147 @@ define('algorithm-shelfbwf',[
 });
 
 
+define('algorithm-shelfbwf',['common-shelfbestfit'], function initShelfBestWidthFit(ShelfBestFit) {
+  function heuristic(shelf, word) {
+    return shelf.remainingX() - word.width; // Score is leftover X space.
+  };
+
+  function compare(score, bestScore) {
+    return score < bestScore; // Lower is better.
+  };
+
+  return {
+    pack: function pack(controls) {
+      return ShelfBestFit.pack(controls, heuristic, compare);
+    }
+  };
+});
+
+define('algorithm-shelfbhf',['common-shelfbestfit'], function initShelfBestHeightFit(ShelfBestFit) {
+  function heuristic(shelf, word) {
+    return shelf.height - word.height; // Score is leftover Y space.
+  };
+
+  function compare(score, bestScore) {
+    return score < bestScore; // Lower is better.
+  };
+
+  return {
+    pack: function pack(controls) {
+      return ShelfBestFit.pack(controls, heuristic, compare);
+    }
+  };
+});
+
+define('algorithm-shelfbaf',['common-shelfbestfit'], function initShelfBestAreaFit(ShelfBestFit) {
+  function heuristic(shelf, word) {
+    var shelfArea = shelf.remainingX() * shelf.height,
+        wordArea = word.width * word.height;
+    return shelfArea - wordArea; // Score is leftover area.
+  };
+
+  function compare(score, bestScore) {
+    return score < bestScore; // Lower is better.
+  };
+
+  return {
+    pack: function pack(controls) {
+      return ShelfBestFit.pack(controls, heuristic, compare);
+    }
+  };
+});
+
+
+
+define('algorithm-shelfwwf',['common-shelfbestfit'], function initShelfWorstWidthFit(ShelfBestFit) {
+  function heuristic(shelf, word) {
+    if (shelf.remainingX() === word.width) {
+      return Number.MAX_VALUE; // Immediately pick this fit.
+    }
+    return shelf.remainingX() - word.width; // Score is leftover X space.
+  };
+
+  function compare(score, bestScore) {
+    return score > bestScore; // Higher is better.
+  };
+
+  return {
+    pack: function pack(controls) {
+      return ShelfBestFit.pack(controls, heuristic, compare);
+    }
+  };
+});
 
 require([
   'jquery',
   'common-controls',
   'common-output',
-  'common-random',
+  'common-summary',
   'algorithm-shelfnf',
   'algorithm-shelfff',
-  'algorithm-shelfbwf'
+  'algorithm-shelfbwf',
+  'algorithm-shelfbhf',
+  'algorithm-shelfbaf',
+  'algorithm-shelfwwf'
 ], function (
   $,
   Controls,
   Output,
-  RandomIft,
+  Summary,
   ShelfNextFit,
   ShelfFirstFit,
-  ShelfBestWidthFit
+  ShelfBestWidthFit,
+  ShelfBestHeightFit,
+  ShelfBestAreaFit,
+  ShelfWorstWidthFit
 ) {
-  var demoShelfNf = new Output('#demo-shelfnf'),
-      demoShelfFf = new Output('#demo-shelfff'),
-      demoShelfBwf = new Output('#demo-shelfbwf');
+  var summary = new Summary('#Summary'),
+      demos;
+
+  demos = [
+    {
+      label: 'Shelf Next Fit',
+      output: new Output('#demo-shelfnf'),
+      packer: ShelfNextFit
+    },
+    {
+      label: 'Shelf First Fit',
+      output: new Output('#demo-shelfff'),
+      packer: ShelfFirstFit
+    },
+    {
+      label: 'Shelf Best Width Fit',
+      output: new Output('#demo-shelfbwf'),
+      packer: ShelfBestWidthFit
+    },
+    {
+      label: 'Shelf Best Height Fit',
+      output: new Output('#demo-shelfbhf'),
+      packer: ShelfBestHeightFit
+    },
+    {
+      label: 'Shelf Best Area Fit',
+      output: new Output('#demo-shelfbaf'),
+      packer: ShelfBestAreaFit
+    },
+    {
+      label: 'Shelf Worst Width Fit',
+      output: new Output('#demo-shelfwwf'),
+      packer: ShelfWorstWidthFit
+    }
+  ];
 
   function onFormChange(controls) {
-    demoShelfNf.draw(ShelfNextFit.pack(controls));
-    demoShelfFf.draw(ShelfFirstFit.pack(controls));
-    demoShelfBwf.draw(ShelfBestWidthFit.pack(controls));
+    var i,
+        demo,
+        packing;
+    for (i = 0; i < demos.length; i++) {
+      demo = demos[i];
+      packing = demo.packer.pack(controls);
+      demo.output.draw(packing);
+      summary.add(demo.label, packing.metrics);
+    };
+    summary.draw();
   };
 
   new Controls(onFormChange);

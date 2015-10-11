@@ -1,10 +1,13 @@
-define(['common-shelfbestfit'], function initShelfBestWidthFit(ShelfBestFit) {
+define(['common-shelfbestfit'], function initShelfWorstWidthFit(ShelfBestFit) {
   function heuristic(shelf, word) {
+    if (shelf.remainingX() === word.width) {
+      return Number.MAX_VALUE; // Immediately pick this fit.
+    }
     return shelf.remainingX() - word.width; // Score is leftover X space.
   };
 
   function compare(score, bestScore) {
-    return score < bestScore; // Lower is better.
+    return score > bestScore; // Higher is better.
   };
 
   return {

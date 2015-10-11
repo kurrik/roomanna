@@ -36,7 +36,7 @@ define([], function initPacking() {
   };
 
   Packing.prototype.extendHeight = function extendHeight() {
-    //this.height = pow2(max(this.items, function(i) { return i.y + i.height; }));
+    this.height = pow2(max(this.items, function(i) { return i.y + i.height; }));
   };
 
   Packing.prototype.extendWidth = function extendHeight() {
