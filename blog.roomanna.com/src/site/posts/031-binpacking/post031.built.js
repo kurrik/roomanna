@@ -3160,13 +3160,16 @@ define('common-random',['seedrandom'], function initRandom(seedrandom) {
 });
 
 define('common-controls',['jquery', 'icanhaz', 'common-random'], function initControls($, ich, RandomIft) {
-  var maxWordCount = 50,
+  var maxWordCount = 80,
       baseSize = 15;
 
   function renderControls($root, component) {
     var formData = {
       widths: $.map([ 128, 256, 512 ], function (v) {
-        return { value: v, selected: component.config.width == v };
+        return { value: v, selected: component.config.width === v };
+      }),
+      heights: $.map([ 128, 256, 512, 1024 ], function (v) {
+        return { value: v, selected: component.config.height === v };
       }),
       seed: {
         min: 1,
@@ -3275,6 +3278,7 @@ define('common-controls',['jquery', 'icanhaz', 'common-random'], function initCo
     this.$root = $(document);
     this.config = {
       width: 512,
+      height: 256,
       seed: 1,
       wordCount: 5,
       wordExponent: 0.0,
@@ -3358,7 +3362,7 @@ define('common-packing',[], function initPacking() {
   };
 
   Packing.prototype.extendHeight = function extendHeight() {
-    this.height = pow2(max(this.items, function(i) { return i.y + i.height; }));
+    //this.height = pow2(max(this.items, function(i) { return i.y + i.height; }));
   };
 
   Packing.prototype.extendWidth = function extendHeight() {
@@ -3376,12 +3380,16 @@ define('common-packing',[], function initPacking() {
     this.metrics.itemArea = 0;
     this.metrics.filledArea = 0;
     this.metrics.overflowedArea = 0;
+    this.metrics.firstClipped = 0;
     for (i = 0; i < this.items.length; i++) {
       item = this.items[i];
       itemArea = item.width * item.height;
-      filledWidth = Math.min(item.width, this.width - item.x);
-      filledHeight = Math.min(item.height, this.height - item.y);
+      filledWidth = Math.max(0, Math.min(item.width, this.width - item.x));
+      filledHeight = Math.max(0, Math.min(item.height, this.height - item.y));
       filledArea = filledWidth * filledHeight;
+      if (itemArea != filledArea && this.metrics.firstClipped === 0) {
+        this.metrics.firstClipped = i;
+      }
       this.metrics.itemArea += itemArea;
       this.metrics.filledArea += filledArea;
       this.metrics.overflowedArea += (itemArea - filledArea);
@@ -3410,7 +3418,7 @@ define('common-shelf',[], function initShelf() {
   };
 
   Shelf.prototype.fitsY = function fitsY(wordHeight) {
-    return this.height <= wordHeight;
+    return this.height >= wordHeight;
   }
 
   Shelf.prototype.remainingX = function remainingX() {
@@ -3460,7 +3468,7 @@ define('algorithm-shelfnf',[
     var i,
         word,
         shelf = new Shelf(controls.config.width),
-        packing = new Packing(controls.config.width, 0);
+        packing = new Packing(controls.config.width, controls.config.height);
     for (i = 0; i < controls.words.length; i++) {
       word = controls.words[i];
       if (!shelf.canAdd(word)) {
@@ -3482,7 +3490,7 @@ define('algorithm-shelfff',[
   'jquery',
   'common-packing',
   'common-shelf'
-], function initShelfNextFit(
+], function initShelfFirstFit(
   $,
   Packing,
   Shelf
@@ -3495,13 +3503,13 @@ define('algorithm-shelfff',[
         shelf,
         placed,
         shelves = [ new Shelf(controls.config.width) ],
-        packing = new Packing(controls.config.width, 0);
+        packing = new Packing(controls.config.width, controls.config.height);
     for (i = 0; i < controls.words.length; i++) {
       placed = false;
       word = controls.words[i];
       for (j = 0; j < shelves.length; j++) {
         shelf = shelves[j];
-        if (shelf.canAdd(word)) {
+        if (!placed && shelf.canAdd(word)) {
           packing.add(shelf.x, shelf.y, word.width, word.height, word);
           shelf.add(word);
           placed = true;
@@ -3524,27 +3532,88 @@ define('algorithm-shelfff',[
 });
 
 
+define('algorithm-shelfbwf',[
+  'jquery',
+  'common-packing',
+  'common-shelf'
+], function initShelfBestWidthFit(
+  $,
+  Packing,
+  Shelf
+) {
+
+  function pack(controls) {
+    var i,
+        j,
+        word,
+        score,
+        shelf,
+        bestScore,
+        bestShelf,
+        shelves = [ new Shelf(controls.config.width) ],
+        packing = new Packing(controls.config.width, controls.config.height);
+    for (i = 0; i < controls.words.length; i++) {
+      word = controls.words[i];
+      bestScore = Number.MAX_VALUE;
+      bestShelf = -1;
+      console.log('new word');
+      for (j = 0; j < shelves.length; j++) {
+        shelf = shelves[j];
+        if (shelf.canAdd(word)) {
+          score = shelf.remainingX();
+          console.log('shelf', j, 'score', score, 'bestscore', bestScore);
+          if (score < bestScore) {
+            console.log('updating best score to', score, 'shelf', j);
+            bestScore = score;
+            bestShelf = j;
+          }
+        }
+      }
+      if (bestShelf === -1) {
+        shelf = shelves[shelves.length-1].close();
+        shelves.push(shelf);
+        bestShelf = shelves.length - 1;
+      }
+      shelf = shelves[bestShelf];
+      packing.add(shelf.x, shelf.y, word.width, word.height, word);
+      shelf.add(word);
+    }
+    packing.extendHeight();
+    return packing;
+  };
+
+  return {
+    pack: pack
+  };
+});
+
+
+
 require([
   'jquery',
   'common-controls',
   'common-output',
   'common-random',
   'algorithm-shelfnf',
-  'algorithm-shelfff'
+  'algorithm-shelfff',
+  'algorithm-shelfbwf'
 ], function (
   $,
   Controls,
   Output,
   RandomIft,
   ShelfNextFit,
-  ShelfFirstFit
+  ShelfFirstFit,
+  ShelfBestWidthFit
 ) {
   var demoShelfNf = new Output('#demo-shelfnf'),
-      demoShelfFf = new Output('#demo-shelfff');
+      demoShelfFf = new Output('#demo-shelfff'),
+      demoShelfBwf = new Output('#demo-shelfbwf');
 
   function onFormChange(controls) {
     demoShelfNf.draw(ShelfNextFit.pack(controls));
     demoShelfFf.draw(ShelfFirstFit.pack(controls));
+    demoShelfBwf.draw(ShelfBestWidthFit.pack(controls));
   };
 
   new Controls(onFormChange);

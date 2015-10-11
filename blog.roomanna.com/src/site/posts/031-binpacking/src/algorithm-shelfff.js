@@ -2,7 +2,7 @@ define([
   'jquery',
   'common-packing',
   'common-shelf'
-], function initShelfNextFit(
+], function initShelfFirstFit(
   $,
   Packing,
   Shelf
@@ -15,13 +15,13 @@ define([
         shelf,
         placed,
         shelves = [ new Shelf(controls.config.width) ],
-        packing = new Packing(controls.config.width, 0);
+        packing = new Packing(controls.config.width, controls.config.height);
     for (i = 0; i < controls.words.length; i++) {
       placed = false;
       word = controls.words[i];
       for (j = 0; j < shelves.length; j++) {
         shelf = shelves[j];
-        if (shelf.canAdd(word)) {
+        if (!placed && shelf.canAdd(word)) {
           packing.add(shelf.x, shelf.y, word.width, word.height, word);
           shelf.add(word);
           placed = true;

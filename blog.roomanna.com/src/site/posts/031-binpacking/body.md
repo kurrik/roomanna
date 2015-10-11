@@ -21,12 +21,20 @@ To get a feel for how well each of them perform, I decided to implement a few in
 
 {{include "post031.templates.html"}}
 
-I'm making a few assumptions about my use.  First, that I will start with
-a predefined texture width and grow the height in powers of two.  This will
-let me extend the texture size without needing to repact everything already
-in there.  The initial width can be configured here:
+In production, I would use a bin packing implementation which would grow the
+texture image when it ran out of space, or just fail if it couldn't find room
+for a new rectangle.
 
-<div data-template="tmplControlsWidth"></div>
+Here, I'm going to fix a texture size and allow overflows.  This should
+highlight the efficiency of each algorithm through some key metrics:
+
+- How much of the image is filled up by text?
+- How much of the text overflowed out of the image?
+- How many words fit before an overflow?
+
+The texture size can be adjusted with these controls:
+
+<div data-template="tmplControlsImage"></div>
 
 Static examples are pretty boring, so there is some randomness in my word
 generation.  For reproducibility, I've used a random number generator which
@@ -40,17 +48,18 @@ and used it to create some parameterized random text.  Changing the Exponent
 sliders below will change the way the random distribution looks.  Lower values
 wind up looking more like a sine wave, while higher values look more chaotic.
 
-You can configure the lengths of the random words as well as the number of
-words to pack:
-
-<div data-template="tmplControlsWord"></div>
-
-And the size of the text:
+You can configure the distribution of font sizes in the text:
 
 <div data-template="tmplControlsSize"></div>
 
-The selected values above have resulted in the following word list, which
-we will attempt to pack using different algorithms:
+The lengths and count of strings are adjustable as well. I'm just generating
+words of varying lengths but the generated text could really be any type
+of string:
+
+<div data-template="tmplControlsWord"></div>
+
+The selected values above have resulted in the following list, which
+will be packed using different algorithms:
 
 <div data-template="tmplWordList"></div>
 
@@ -72,15 +81,13 @@ row (or shelf) as possible.
 
 Shelf Next Fit is the most direct implementation of this idea:
 
-1. For each rectangle in the rectangles list:
-  1. If the rectangle does not fit in the current shelf:
-    1. Close the current shelf.
-    2. If there is no room for a new shelf:
-      1. Extend the image vertically.
-    3. Open a new shelf with height 0.
-  2. Add the rectangle to the current shelf.
-    1. If the rectangle's height is greater than the shelf's height:
-      1. Set the shelf height to the rectangle's height.
+1. For each rectangle in the list of strings to pack:
+   1. If the rectangle does not fit in the current shelf:
+      1. Close the current shelf.
+      2. Open a new shelf with height 0.
+   2. Add the rectangle to the current shelf.
+      1. If the rectangle's height is greater than the shelf's height:
+         1. Set the shelf height to the rectangle's height.
 
 This is inefficient in the sense that when a shelf is closed, any remaining
 space is no longer considered usable even if a small rectangle shows up
@@ -96,14 +103,32 @@ To try and reduce the wasted space on the right edge, Shelf First Fit
 iterates over every shelf for each new word, inserting into the first shelf
 with available space (creating a new shelf if no existing shelf has room).
 
-This seems like a no-brainer, but because it is a greedy algorithm, SHELF-FF
+My first intuition was that this would always be a better approach
+but SHELF-FF's greedy approach
 may wind up making locally-optimal choices which reduce the global efficiency
 of the packing.  Consider an "unlucky" case where placing a small word on
 a prior row aligns a lot of larger future words in a worse way.
 
 <div id="demo-shelfff"></div>
-
-
-
 <div data-template="tmplControlsCount"></div>
+
+# Shelf Best Width Fit (SHELF-BWF)
+
+Like SHELF-FF, but instead of choosing the first shelf with room, choose
+the smallest shelf with enough room for the word.
+
+<div id="demo-shelfbwf"></div>
+<div data-template="tmplControlsCount"></div>
+
+# Shelf Best Height Fit (SHELF-BHF)
+
+<div id="demo-shelfbhf"></div>
+<div data-template="tmplControlsCount"></div>
+
+# Shelf Best Area Fit (SHELF-BAF)
+
+<div id="demo-shelfbaf"></div>
+<div data-template="tmplControlsCount"></div>
+
+
 

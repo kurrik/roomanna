@@ -4,21 +4,25 @@ require([
   'common-output',
   'common-random',
   'algorithm-shelfnf',
-  'algorithm-shelfff'
+  'algorithm-shelfff',
+  'algorithm-shelfbwf'
 ], function (
   $,
   Controls,
   Output,
   RandomIft,
   ShelfNextFit,
-  ShelfFirstFit
+  ShelfFirstFit,
+  ShelfBestWidthFit
 ) {
   var demoShelfNf = new Output('#demo-shelfnf'),
-      demoShelfFf = new Output('#demo-shelfff');
+      demoShelfFf = new Output('#demo-shelfff'),
+      demoShelfBwf = new Output('#demo-shelfbwf');
 
   function onFormChange(controls) {
     demoShelfNf.draw(ShelfNextFit.pack(controls));
     demoShelfFf.draw(ShelfFirstFit.pack(controls));
+    demoShelfBwf.draw(ShelfBestWidthFit.pack(controls));
   };
 
   new Controls(onFormChange);

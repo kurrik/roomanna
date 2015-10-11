@@ -1,11 +1,14 @@
 define(['jquery', 'icanhaz', 'common-random'], function initControls($, ich, RandomIft) {
-  var maxWordCount = 50,
+  var maxWordCount = 80,
       baseSize = 15;
 
   function renderControls($root, component) {
     var formData = {
       widths: $.map([ 128, 256, 512 ], function (v) {
-        return { value: v, selected: component.config.width == v };
+        return { value: v, selected: component.config.width === v };
+      }),
+      heights: $.map([ 128, 256, 512, 1024 ], function (v) {
+        return { value: v, selected: component.config.height === v };
       }),
       seed: {
         min: 1,
@@ -114,6 +117,7 @@ define(['jquery', 'icanhaz', 'common-random'], function initControls($, ich, Ran
     this.$root = $(document);
     this.config = {
       width: 512,
+      height: 256,
       seed: 1,
       wordCount: 5,
       wordExponent: 0.0,

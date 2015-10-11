@@ -12,7 +12,7 @@ define([
     var i,
         word,
         shelf = new Shelf(controls.config.width),
-        packing = new Packing(controls.config.width, 0);
+        packing = new Packing(controls.config.width, controls.config.height);
     for (i = 0; i < controls.words.length; i++) {
       word = controls.words[i];
       if (!shelf.canAdd(word)) {

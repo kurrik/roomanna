@@ -12,7 +12,7 @@ define([], function initShelf() {
   };
 
   Shelf.prototype.fitsY = function fitsY(wordHeight) {
-    return this.height <= wordHeight;
+    return this.height >= wordHeight;
   }
 
   Shelf.prototype.remainingX = function remainingX() {
