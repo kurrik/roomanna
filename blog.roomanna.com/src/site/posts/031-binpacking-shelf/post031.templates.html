@@ -186,7 +186,7 @@
         {{#demos}}
           <tr>
             <td>{{label}}</td>
-            <td>{{metrics.filledPercent}}</td>
+            <td>{{metrics.filledPercent}}%</td>
             <td>
               {{#metrics.overflowedPercent}}
                 {{metrics.overflowedPercent}}%
@@ -197,7 +197,7 @@
             </td>
             <td>
               {{#metrics.firstClipped}}
-                {{metrics.firstClipped}}%
+                {{metrics.firstClipped}}
               {{/metrics.firstClipped}}
               {{^metrics.firstClipped}}
                 <span class="text-muted">-</span>
