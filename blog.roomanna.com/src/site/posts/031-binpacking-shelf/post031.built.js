@@ -3160,7 +3160,7 @@ define('common-random',['seedrandom'], function initRandom(seedrandom) {
 });
 
 define('common-controls',['jquery', 'icanhaz', 'common-random'], function initControls($, ich, RandomIft) {
-  var maxWordCount = 120,
+  var maxWordCount = 100,
       baseSize = 15;
 
   function renderControls($root, component) {
@@ -3173,7 +3173,7 @@ define('common-controls',['jquery', 'icanhaz', 'common-random'], function initCo
       }),
       seed: {
         min: 1,
-        max: 10,
+        max: 30,
         step: 1,
         value: component.config.seed
       },
@@ -3191,7 +3191,7 @@ define('common-controls',['jquery', 'icanhaz', 'common-random'], function initCo
       },
       wordMaxLength: {
         min: 1,
-        max: 30,
+        max: 40,
         step: 1,
         value: component.config.wordMaxLength
       },
@@ -3282,7 +3282,7 @@ define('common-controls',['jquery', 'icanhaz', 'common-random'], function initCo
       seed: 1,
       wordCount: 25,
       wordExponent: 0.0,
-      wordMaxLength: 20,
+      wordMaxLength: 30,
       sizeExponent: 0.0,
       sizeVariance: 5
     };

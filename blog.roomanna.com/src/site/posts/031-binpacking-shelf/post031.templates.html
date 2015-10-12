@@ -79,7 +79,7 @@
 
 <script id="tmplControlsSeed" type="text/html">
   <div class="Controls row">
-    <div class="col-sm-6">
+    <div class="col-sm-12">
       {{#seed}}
         <div class="form-group">
           <label data-toggle="tooltip" title="Changes the random number generator to produce a different series">
@@ -103,7 +103,6 @@
           <input class="Controls-wordExponent" data-binding="wordExponent" type="range" min="{{min}}" max="{{max}}" step="{{step}}" value="{{value}}" />
         </div>
       {{/wordExponent}}
-      {{>tmplControlsCount}}
     </div>
     <div class="col-sm-6">
       {{#wordMaxLength}}
@@ -114,6 +113,11 @@
           <input class="Controls-wordMaxLength" data-binding="wordMaxLength" type="range" min="{{min}}" max="{{max}}" step="{{step}}" value="{{value}}" />
         </div>
       {{/wordMaxLength}}
+    </div>
+  </div>
+  <div class="Controls row">
+    <div class="col-sm-12">
+      {{>tmplControlsCount}}
     </div>
   </div>
 </script>

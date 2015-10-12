@@ -1,5 +1,5 @@
 define(['jquery', 'icanhaz', 'common-random'], function initControls($, ich, RandomIft) {
-  var maxWordCount = 120,
+  var maxWordCount = 100,
       baseSize = 15;
 
   function renderControls($root, component) {
@@ -12,7 +12,7 @@ define(['jquery', 'icanhaz', 'common-random'], function initControls($, ich, Ran
       }),
       seed: {
         min: 1,
-        max: 10,
+        max: 30,
         step: 1,
         value: component.config.seed
       },
@@ -30,7 +30,7 @@ define(['jquery', 'icanhaz', 'common-random'], function initControls($, ich, Ran
       },
       wordMaxLength: {
         min: 1,
-        max: 30,
+        max: 40,
         step: 1,
         value: component.config.wordMaxLength
       },
@@ -121,7 +121,7 @@ define(['jquery', 'icanhaz', 'common-random'], function initControls($, ich, Ran
       seed: 1,
       wordCount: 25,
       wordExponent: 0.0,
-      wordMaxLength: 20,
+      wordMaxLength: 30,
       sizeExponent: 0.0,
       sizeVariance: 5
     };
