@@ -97,7 +97,7 @@
     <div class="col-sm-6">
       {{#wordExponent}}
         <div class="form-group">
-          <label data-toggle="tooltip" title="'Color' of generated noise (see Amit's post)">
+          <label data-toggle="tooltip" title="'Color' of generated noise. Lower values result in regular sine-like output, higher values produce more chaos">
             Word length exponent (<span data-binding-label="wordExponent">{{value}}</span>)
           </label>
           <input class="Controls-wordExponent" data-binding="wordExponent" type="range" min="{{min}}" max="{{max}}" step="{{step}}" value="{{value}}" />
@@ -127,7 +127,7 @@
     <div class="col-sm-6">
       {{#sizeExponent}}
         <div class="form-group">
-          <label data-toggle="tooltip" title="'Color' of generated noise (see Amit's post)">
+          <label data-toggle="tooltip" title="'Color' of generated noise. Lower values result in regular sine-like output, higher values produce more chaos">
             Font size exponent (<span data-binding-label="sizeExponent">{{value}}</span>)
           </label>
           <input class="Controls-sizeExponent" data-binding="sizeExponent" type="range" min="{{min}}" max="{{max}}" step="{{step}}" value="{{value}}" />
@@ -137,7 +137,7 @@
     <div class="col-sm-6">
       {{#sizeVariance}}
         <div class="form-group">
-          <label data-toggle="tooltip" title="Variance of the sizes">
+          <label data-toggle="tooltip" title="How far apart the font sizes may be in pixels">
             Font size variance (<span data-binding-label="sizeVariance">{{value}}</span>)
           </label>
           <input class="Controls-sizeVariance" data-binding="sizeVariance" type="range" min="{{min}}" max="{{max}}" step="{{step}}" value="{{value}}" />
