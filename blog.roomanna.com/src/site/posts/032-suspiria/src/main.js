@@ -107,17 +107,13 @@ require(['jquery', 'seedrandom', 'common-demo'], function ($, seedrandom, Demo) 
     clusters.sort(function(a, b) {
       var A = getHSL(a.center[0], a.center[1], a.center[2]),
           B = getHSL(b.center[0], b.center[1], b.center[2]);
-
-      if (Math.abs(A[2] - B[2]) > 0.5) {
-        return A[2] - B[2]; // Lightness
-      }
-      if (Math.abs(A[1] - B[1]) > 0.5) {
-        return A[1] - B[1]; // Saturation
-      }
       if (Math.abs(A[0] - B[0]) > 30 ) {
         return A[0] - B[0]; // Hue
       }
-      return A[0] - B[0]; // Hue
+      if (Math.abs(A[2] - B[2]) > 0.0) {
+        return A[2] - B[2]; // Lightness
+      }
+      return A[1] - B[1]; // Saturation
     });
   }
 
@@ -219,7 +215,7 @@ require(['jquery', 'seedrandom', 'common-demo'], function ($, seedrandom, Demo) 
   var demo = new Demo(document.body);
   demo.addListener(process);
   demo.setState({
-    'seed': 5,
+    'seed': 1,
     'k': 16
   });
 });
