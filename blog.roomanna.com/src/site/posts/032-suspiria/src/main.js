@@ -1,64 +1,18 @@
-/*
-   var img = new Image();
-img.src = 'https://mdn.mozillademos.org/files/5397/rhino.jpg';
-img.onload = function() {
-  draw(this);
-};
+require(['jquery', 'seedrandom', 'common-demo'], function ($, seedrandom, Demo) {
 
-function draw(img) {
-  var canvas = document.getElementById('canvas');
-  var ctx = canvas.getContext('2d');
-  ctx.drawImage(img, 0, 0);
-  img.style.display = 'none';
-  var imageData = ctx.getImageData(0,0,canvas.width, canvas.height);
-  var data = imageData.data;
-    
-  var invert = function() {
-    for (var i = 0; i < data.length; i += 4) {
-      data[i]     = 255 - data[i];     // red
-      data[i + 1] = 255 - data[i + 1]; // green
-      data[i + 2] = 255 - data[i + 2]; // blue
-    }
-    ctx.putImageData(imageData, 0, 0);
-  };
-
-  var grayscale = function() {
-    for (var i = 0; i < data.length; i += 4) {
-      var avg = (data[i] + data[i +1] + data[i +2]) / 3;
-      data[i]     = avg; // red
-      data[i + 1] = avg; // green
-      data[i + 2] = avg; // blue
-    }
-    ctx.putImageData(imageData, 0, 0);
-  };
-
-  var invertbtn = document.getElementById('invertbtn');
-  invertbtn.addEventListener('click', invert);
-  var grayscalebtn = document.getElementById('grayscalebtn');
-  grayscalebtn.addEventListener('click', grayscale);
-}
- */
-require(['jquery'], function ($) {
-
-  function initClusters(imgData, k) {
+  function initClusters(rng, imgData, k) {
     var i,
         clusters = [],
         increment = Math.floor(256 / k),
         numPixels = Math.floor(imgData.length / 4),
         offset;
     for (i = 0; i < k; i++) {
-      offset = Math.floor(Math.random() * numPixels) * 4;
+      offset = Math.floor(rng() * numPixels) * 4;
       clusters.push({
         center: [
           imgData[offset],
           imgData[offset + 1],
           imgData[offset + 2]
-          //Math.floor(Math.random() * 256),
-          //Math.floor(Math.random() * 256),
-          //Math.floor(Math.random() * 256)
-          // increment * i,
-          // increment * i,
-          // increment * i
         ],
         sum: [ 0, 0, 0 ],
         count: 0,
@@ -97,7 +51,7 @@ require(['jquery'], function ($) {
     cluster.count++;
   }
 
-  function updateCenters(clusters) {
+  function updateCenters(rng, clusters) {
     var i,
         c,
         distanceMoved = 0,
@@ -113,10 +67,10 @@ require(['jquery'], function ($) {
         c.valid = true;
       } else {
         newCenter = [
-          Math.floor(Math.random() * 256),
-          Math.floor(Math.random() * 256),
-          Math.floor(Math.random() * 256)
-        ]
+          Math.floor(rng() * 256),
+          Math.floor(rng() * 256),
+          Math.floor(rng() * 256)
+        ];
         c.valid = false;
       }
       distanceMoved += distance(c.center, newCenter);
@@ -127,21 +81,21 @@ require(['jquery'], function ($) {
     return distanceMoved;
   }
 
-  function kMeans(imgData, k, thresh, maxiter) {
+  function kMeans(rng, imgData, k, thresh, maxiter) {
     var i,
         pt,
         clusters,
         best,
         iterations = 0,
         distanceMoved = Number.MAX_VALUE;
-    clusters = initClusters(imgData, k);
+    clusters = initClusters(rng, imgData, k);
     while (distanceMoved > thresh && iterations < maxiter) {
       for (i = 0; i < imgData.length; i += 4) {
         pt = [ imgData[i], imgData[i+1], imgData[i+2] ];
         best = findBestCluster(clusters, pt);
         addToCluster(clusters[best], pt);
       }
-      distanceMoved = updateCenters(clusters);
+      distanceMoved = updateCenters(rng, clusters);
       iterations++;
     }
     return clusters;
@@ -200,46 +154,69 @@ require(['jquery'], function ($) {
     return [ H, S, L ];
   }
 
-  function analyze(img, k) {
+  function processImage(img, state) {
     var canvas,
         ctx,
         ctxData,
         imgData,
-        clusters;
+        clusters,
+        rng,
+        $img,
+        seed = state.seed.toString() || "1",
+        k = state.k || 16;
 
+    rng = seedrandom(seed);
+    $img = $(img);
     canvas = document.createElement('canvas');
+    canvas.width = $img.width() / 4.0;
+    canvas.height = $img.height() / 4.0;
+    //$(document.body).append(canvas);
     ctx = canvas.getContext('2d');
-    ctx.drawImage(img, 0, 0);
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
     ctxData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     imgData = ctxData.data;
-    clusters = kMeans(imgData, 16, 0.1, 10);
+    clusters = kMeans(rng, imgData, k, 0.1, 5);
     sortClusters(clusters);
-    renderClusters(clusters, $(img).closest('p'));
+    renderClusters(clusters, $(img).closest('p'), $img);
   }
 
-  function renderCluster(cluster, $root) {
+  function renderCluster(cluster, $root, width) {
     var c = cluster.center,
         $div = $('<div class="Cluster"></div>');
-    if (cluster.valid && !isNaN(c[0] + c[1] + c[2])) {
-      $div.css('background', 'rgb(' + c[0] + ',' + c[1] + ',' + c[2] + ')');
-      $root.append($div);
+    $div.css('background', 'rgb(' + c[0] + ',' + c[1] + ',' + c[2] + ')');
+    $div.css('width', width + 'px');
+    $root.append($div);
+  }
+
+  function renderClusters(clusters, $root, $img) {
+    var i,
+        validClusters,
+        clusterWidth;
+    validClusters = $.grep(clusters, function(c) {
+      return c.valid && !isNaN(c.center[0] + c.center[1] + c.center[2]);
+    });
+    clusterWidth = $img.width() / validClusters.length;
+    for (i = 0; i < validClusters.length; i++) {
+      renderCluster(validClusters[i], $root, clusterWidth);
     }
   }
 
-  function renderClusters(clusters, $root) {
-    var i;
-    for (i = 0; i < clusters.length; i++) {
-      renderCluster(clusters[i], $root);
-    }
+  function process(demo) {
+    $('.analyze').each(function(i, img) {
+      if (img.complete) {
+        //console.log('loaded', img.src);
+        processImage(img, demo.state);
+      } else {
+        //console.log('adding onload', img.src);
+        $(img).load(function() { processImage(this, demo.state); });
+      }
+    });
   }
 
-  $('.analyze').each(function(i, img) {
-    if (img.complete) {
-      //console.log('loaded', img.src);
-      analyze(img);
-    } else {
-      //console.log('adding onload', img.src);
-      $(img).load(function() { analyze(this); });
-    }
+  var demo = new Demo(document.body);
+  demo.addListener(process);
+  demo.setState({
+    'seed': 5,
+    'k': 16
   });
 });

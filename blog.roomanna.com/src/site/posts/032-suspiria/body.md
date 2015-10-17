@@ -82,3 +82,7 @@ Oh boy, Suspiria.
     alt="" />
   <div class="caption centered"></div>
 </p>
+
+
+<label>Random seed (<span data-display="seed"></span>)</label>
+<input type="range" min="0", max="10" value="5" data-binding="seed" />

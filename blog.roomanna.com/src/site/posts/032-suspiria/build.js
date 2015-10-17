@@ -4,6 +4,7 @@
     icanhaz: '../../../../../lib/ICanHaz-0.10.2/ICanHaz',
     jquery: 'empty:', // Already in the page.
     requireLib: '../../../../../node_modules/requirejs/require',
+    seedrandom: '../../../../../lib/seedrandom/seedrandom'
   },
   shim: {
     icanhaz: { exports: 'ich' },
