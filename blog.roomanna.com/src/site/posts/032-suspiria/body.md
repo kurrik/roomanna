@@ -30,15 +30,15 @@ Italian, and German so everything is dubbed via ADR
 and none of the dialogue quite matches up with the actors' mouths.
 
 I don't want to tear Suspiria apart&mdash;I love a movie which wears
-its heart so proudly on its sleeve, and I did enjoy watching it, especially
+its heart so proudly on its sleeve. I especially enjoyed
 the absolutely stunning cinematography. Suspiria is a
 [Technicolor](https://en.wikipedia.org/wiki/Technicolor) movie through and
-through.  It's got that hyper-real contrast-too-high quality, and
-every single color pops.  In fact, it was apparently printed on the last
+through.  It's got that unreal contrast-too-high quality, and
+every single color pops.  It was apparently printed on the last
 Technicolor printer in Rome, two years after the last US plant was closed down.
 
-The production method appears to have abandoned for being
-slow and expensive, rather than producing inferior quality.
+The Technicolor process appears to have been abandoned for being
+slow and expensive, not because it was replaced by a higher quality alternative.
 Granted, modern films do [all sorts of grading](https://twitter.com/ThingsWork/status/653791549331935232)
 digitally, but to get the kinds of shots in
 Suspiria out of a slow analog process impresses me.
@@ -67,7 +67,7 @@ Several major scenes in the film take place at night, in darkness.  Suspiria
 gives each scene a unique dramatic atmosphere by flooding the frame with
 filtered red, green, or blue light.  It's understood that the characters
 are in pitch darkness, but we see everything going on in an eerie otherworldly
-way.
+(and voyeuristic) way.
 
 <div class="row">
   <div class="col-sm-4">
@@ -99,11 +99,11 @@ way.
   </div>
 </div>
 
-The tones in each scene are so dramatic that I've put palettes beneath the
+I've put palettes beneath the
 screenshots above to show how monochromatic these scenes are.  They run
 exclusively black/red, black/green, and black/blue, which, maybe not coincidentally,
 are the colors used in the three-strip Technicolor process.
-I have to wonder if these scenes were maybe only shot with a single strip,
+I have to wonder if these parts of the film were maybe only shot with a single strip,
 in order to save money on film and processing costs (in addition to giving
 the striking look).
 
@@ -192,7 +192,7 @@ K-means is an approach to classifying data. You pick a value of k
 "centroids" at random out of your data points.  For each remaining data point,
 you pick the centroid closest to the point and assign it to that centroid's
 cluster.  When all the points have been assigned, you move the centroids to
-the average of every point in their cluster, and then clear the clusters and
+the average of every point in its cluster, and then clear the clusters and
 repeat the process until the centroids stop moving.
 
 In this case, the data points are individual pixel colors, and k is the size
@@ -204,7 +204,8 @@ sliders below.  Every time you change the values a new palette is added below
 each image, so you can see how the changes affect things from iteration to
 iteration. As an example of things which can change, the red cross in the
 last image usually gets clustered into its own shade, but sometimes falls into
-another non-red cluster and is averaged out.
+another non-red cluster and is averaged out (this is more likely to happen if
+k is small).
 
 <div class="row">
   <div class="col-sm-6">
