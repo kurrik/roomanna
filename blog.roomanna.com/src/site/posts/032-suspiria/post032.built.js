@@ -2513,16 +2513,23 @@ define('common-demo',['jquery'], function ($) {
     this.$root = $(root);
     this.state = {};
     this.listeners = [];
-    this.$root.find('[data-binding]').change(function onChange(evt) {
-      var $target = $(this),
+    this.listenerTimeout = null;
+    function onInput(evt) {
+      var $target = $(evt.target),
           key = $target.attr('data-binding'),
           value = parseFloat($target.val());
       if (demo.state[key] !== value) {
         demo.state[key] = value;
         demo.renderState(key);
-        demo.callListeners();
       }
-    });
+    }
+    function onChange(evt) {
+      onInput(evt);
+      demo.callListeners();
+    }
+    this.$root.find('[data-binding]')
+      .on('input', onInput)
+      .change(onChange);
   }
 
   Demo.prototype.setState = function setState(state) {
@@ -2547,9 +2554,17 @@ define('common-demo',['jquery'], function ($) {
   };
 
   Demo.prototype.callListeners = function callListeners() {
-    for (i = 0; i < this.listeners.length; i++) {
-      this.listeners[i](this);
+    var demo = this;
+    if (this.listenerTimeout != null) {
+      window.clearTimeout(this.listenerTimeout);
     }
+    this.listenerTimeout = window.setTimeout(function onTimeout() {
+      var i;
+      demo.listenerTimeout = null;
+      for (i = 0; i < demo.listeners.length; i++) {
+        demo.listeners[i](demo);
+      }
+    }, 100);
   };
 
   Demo.prototype.renderState = function renderState(key) {
@@ -2741,7 +2756,7 @@ require(['jquery', 'seedrandom', 'common-demo'], function ($, seedrandom, Demo) 
     imgData = ctxData.data;
     clusters = kMeans(rng, imgData, k, 0.1, 5);
     sortClusters(clusters);
-    renderClusters(clusters, $(img).closest('p'), $img);
+    renderClusters(clusters, $(img).siblings('.Palettes'), $img);
   }
 
   function renderCluster(cluster, $root, width) {
@@ -2755,13 +2770,16 @@ require(['jquery', 'seedrandom', 'common-demo'], function ($, seedrandom, Demo) 
   function renderClusters(clusters, $root, $img) {
     var i,
         validClusters,
-        clusterWidth;
+        clusterWidth
+        $div = $('<div class="Clusters"></div>');
+    $root.append($div);
+    console.log('renderClusters', $root);
     validClusters = $.grep(clusters, function(c) {
       return c.valid && !isNaN(c.center[0] + c.center[1] + c.center[2]);
     });
     clusterWidth = $img.width() / validClusters.length;
     for (i = 0; i < validClusters.length; i++) {
-      renderCluster(validClusters[i], $root, clusterWidth);
+      renderCluster(validClusters[i], $div, clusterWidth);
     }
   }
 

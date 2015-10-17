@@ -4,16 +4,23 @@ define(['jquery'], function ($) {
     this.$root = $(root);
     this.state = {};
     this.listeners = [];
-    this.$root.find('[data-binding]').change(function onChange(evt) {
-      var $target = $(this),
+    this.listenerTimeout = null;
+    function onInput(evt) {
+      var $target = $(evt.target),
           key = $target.attr('data-binding'),
           value = parseFloat($target.val());
       if (demo.state[key] !== value) {
         demo.state[key] = value;
         demo.renderState(key);
-        demo.callListeners();
       }
-    });
+    }
+    function onChange(evt) {
+      onInput(evt);
+      demo.callListeners();
+    }
+    this.$root.find('[data-binding]')
+      .on('input', onInput)
+      .change(onChange);
   }
 
   Demo.prototype.setState = function setState(state) {
@@ -38,9 +45,17 @@ define(['jquery'], function ($) {
   };
 
   Demo.prototype.callListeners = function callListeners() {
-    for (i = 0; i < this.listeners.length; i++) {
-      this.listeners[i](this);
+    var demo = this;
+    if (this.listenerTimeout != null) {
+      window.clearTimeout(this.listenerTimeout);
     }
+    this.listenerTimeout = window.setTimeout(function onTimeout() {
+      var i;
+      demo.listenerTimeout = null;
+      for (i = 0; i < demo.listeners.length; i++) {
+        demo.listeners[i](demo);
+      }
+    }, 100);
   };
 
   Demo.prototype.renderState = function renderState(key) {
