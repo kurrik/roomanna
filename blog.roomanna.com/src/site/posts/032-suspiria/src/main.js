@@ -194,7 +194,7 @@ require(['jquery', 'seedrandom', 'common-demo'], function ($, seedrandom, Demo) 
     validClusters = $.grep(clusters, function(c) {
       return c.valid && !isNaN(c.center[0] + c.center[1] + c.center[2]);
     });
-    clusterWidth = $img.width() / validClusters.length;
+    clusterWidth = Math.floor(($img.width() / validClusters.length) * 10) / 10;
     for (i = 0; i < validClusters.length; i++) {
       renderCluster(validClusters[i], $div, clusterWidth);
     }
