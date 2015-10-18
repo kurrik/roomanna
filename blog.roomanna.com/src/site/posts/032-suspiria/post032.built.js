@@ -2743,8 +2743,8 @@ require(['jquery', 'seedrandom', 'common-demo'], function ($, seedrandom, Demo) 
     rng = seedrandom(seed);
     $img = $(img);
     canvas = document.createElement('canvas');
-    canvas.width = $img.width() / 4.0;
-    canvas.height = $img.height() / 4.0;
+    canvas.width = $img.width() / 2.0;
+    canvas.height = $img.height() / 2.0;
     //$(document.body).append(canvas);
     ctx = canvas.getContext('2d');
     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
