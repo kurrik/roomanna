@@ -67,6 +67,15 @@ module.exports = function(grunt) {
         dest: 'build/content/static/js/<%= pkg.name %>.js',
         separator: ';\n',
       },
+      resume: {
+        src: [
+          'lib/jquery/jquery-2.1.4.min.js',
+          'lib/bootstrap-3.3.5/dist/js/bootstrap.min.js',
+          'src/js/resume.js'
+        ],
+        dest: 'build/content/static/js/resume.js',
+        separator: ';\n',
+      },
       css: {
         src: [
           'lib/font-awesome/font-awesome.css',
@@ -96,6 +105,7 @@ module.exports = function(grunt) {
         },
         files: {
           'build/content/static/css/site.css': 'src/less/site.less',
+          'build/content/static/css/resume.css': 'src/less/resume.less'
         }
       }
     },
@@ -112,7 +122,7 @@ module.exports = function(grunt) {
             'jquery': 'lib/jquery/jquery-1.9.1'
           }
         }
-      },
+      }
     },
 
     uglify: {
