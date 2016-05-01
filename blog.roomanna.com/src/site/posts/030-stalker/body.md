@@ -1,4 +1,4 @@
-There's a point early on in Andrei Tarkovsky's Stalker where the Stalker, the Professor, and the Writer have snuck past a military blockade, dodged bullets and ridden a railway work car for a few silent minutes of screen time.  The film switches from sepia to color - they have entered The Zone, a mysterious alien-touched segment of the world.  "We are home" Stalker says.  "It is so quiet out here, it is the quietest place in the world."
+There's a point early on in Andrei Tarkovsky's STALKER where the Stalker, the Professor, and the Writer have snuck past a military blockade, dodged bullets and ridden a railway work car for a few silent minutes of screen time.  The film switches from sepia to color - they have entered The Zone, a mysterious alien-touched segment of the world.  "We are home" Stalker says.  "It is so quiet out here, it is the quietest place in the world."
 
 <!--BREAK-->
 

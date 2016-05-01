@@ -1,4 +1,4 @@
-Oh boy, Suspiria.  A prime example of the "cheesy horror movies so
+Oh boy, SUSPIRIA.  A prime example of the "cheesy horror movies so
 well crafted that they can be considered art films" genre.  I can't even
 remember what first added it to my queue, but I do remember seeing references
 to it in a crazy 2010
