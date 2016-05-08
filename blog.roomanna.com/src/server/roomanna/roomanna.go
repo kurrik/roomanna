@@ -36,7 +36,7 @@ func (h *Handler) HandleRequest(w http.ResponseWriter, r *http.Request) {
 		path string
 		info os.FileInfo
 	)
-	log.Printf("Path: %q", r.URL.Path)
+	log.Printf("[roomanna] Served path: %q", r.URL.Path)
 	path = filepath.Join(h.Path, r.URL.Path)
 	if info, err = os.Stat(path); err != nil {
 		http.NotFound(w, r)

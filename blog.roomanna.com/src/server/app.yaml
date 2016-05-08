@@ -1,8 +1,12 @@
 application: roomanna-blog-hrd
-version: 2
+version: 3
 runtime: go
 api_version: go1
 
 handlers:
+- url: /(.*\.(gif|png|jpg|mp4|js|css|woff|ico))$
+  static_files: content/\1
+  upload: content/.*\.(gif|png|jpg|mp4|js|css|woff|ico)$
+
 - url: /.*
   script: _go_app
