@@ -1,9 +1,12 @@
-.PHONY: create deploy develop clean
+.PHONY: create deploy develop clean build
+
+build:
+	./node_modules/.bin/grunt all
 
 create:
 	${GOPATH}/bin/ghostwriter -src=src/site -dst=build/content -action=create
 
-deploy:
+deploy: build
 	~/src/go_appengine/appcfg.py --oauth2 update build
 
 develop:

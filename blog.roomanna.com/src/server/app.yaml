@@ -1,12 +1,14 @@
 application: roomanna-blog-hrd
-version: 3
+version: 5
 runtime: go
 api_version: go1
+default_expiration: "7d"
 
 handlers:
 - url: /(.*\.(gif|png|jpg|mp4|js|css|woff|ico))$
   static_files: content/\1
   upload: content/.*\.(gif|png|jpg|mp4|js|css|woff|ico)$
+  expiration: "365d"
 
 - url: /.*
   script: _go_app
