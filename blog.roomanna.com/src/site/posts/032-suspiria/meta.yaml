@@ -4,5 +4,6 @@ title: Suspiria (1977)
 tags:
   - cinemaclub
   - reviews
+  - algorithms
 scripts:
   - ./post032.built.js
