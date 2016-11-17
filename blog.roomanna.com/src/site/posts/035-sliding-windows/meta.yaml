@@ -5,3 +5,5 @@ tags:
   - algorithms
   - javascript
   - games
+scripts:
+  - ./post035.built.js

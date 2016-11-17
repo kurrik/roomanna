@@ -1,0 +1,27 @@
+{
+  "name": "windows",
+  "version": "1.0.0",
+  "description": "Sliding windows",
+  "scripts": {
+    "watch": "gulp watch",
+    "build": "gulp build",
+    "test": "mocha --require babel-polyfill --compilers js:babel-register"
+  },
+  "author": "Arne Roomann-Kurrik",
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-polyfill": "^6.16.0",
+    "babel-preset-latest": "^6.16.0",
+    "babel-register": "^6.18.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.1.1",
+    "chai": "^3.5.0",
+    "gulp": "^3.9.1",
+    "gulp-exit": "0.0.2",
+    "gulp-sourcemaps": "^2.2.0",
+    "mocha": "^3.1.2",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.7.0"
+  }
+}

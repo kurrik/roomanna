@@ -1,0 +1,5 @@
+Building JavaScript for this post:
+
+    npm install
+    npm test
+    npm run build
