@@ -12,6 +12,11 @@ module.exports = function(grunt) {
         cmd: 'pkill -f dev_appserver || ~/src/go_appengine/dev_appserver.py --skip_sdk_update_check=yes --port=9998 build',
         bg: true,
       },
+
+      javascript: {
+        cmd: 'cd src/javascript && PROD=1 npm run watch',
+        bg: true,
+      }
     },
 
     clean: ['build'],
@@ -59,23 +64,6 @@ module.exports = function(grunt) {
     },
 
     concat: {
-      js: {
-        src: [
-          'build/content/static/js/site.js',
-          'lib/bootstrap-3.3.5/dist/js/bootstrap.min.js',
-        ],
-        dest: 'build/content/static/js/<%= pkg.name %>.js',
-        separator: ';\n',
-      },
-      resume: {
-        src: [
-          'lib/jquery/jquery-2.1.4.min.js',
-          'lib/bootstrap-3.3.5/dist/js/bootstrap.min.js',
-          'src/js/resume.js'
-        ],
-        dest: 'build/content/static/js/resume.js',
-        separator: ';\n',
-      },
       css: {
         src: [
           'lib/font-awesome/font-awesome.css',
@@ -110,34 +98,9 @@ module.exports = function(grunt) {
       }
     },
 
-    requirejs: {
-      compile: {
-        options: {
-          name: "node_modules/almond/almond",
-          out: "build/content/static/js/site.js",
-          baseUrl: "./",
-          include: ['src/js/site'],
-          insertRequire: ['src/js/site'],
-          paths: {
-            'jquery': 'lib/jquery/jquery-1.9.1'
-          }
-        }
-      }
-    },
-
-    uglify: {
-      options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
-      },
-      dist: {
-        src: 'build/content/static/js/<%= pkg.name %>.js',
-        dest: 'build/content/static/js/<%= pkg.name %>.min.js'
-      }
-    },
-
     watch: {
       frontend: {
-        files: ['lib/**/*', 'src/img/**/*', 'src/js/**/*', 'src/less/**/*'],
+        files: ['lib/**/*', 'src/img/**/*', 'src/less/**/*'],
         tasks: ['frontend']
       },
       server: {
@@ -163,7 +126,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Site components
-  grunt.registerTask('frontend', ['copy:frontend', 'less', 'requirejs', 'concat', 'cssmin', 'uglify']);
+  grunt.registerTask('frontend', ['copy:frontend', 'less', 'concat', 'cssmin', 'bgShell:javascript']);
   grunt.registerTask('server',   ['copy:server']);
   grunt.registerTask('content',  ['bgShell:ghostwriter']);
   grunt.registerTask('all',      ['clean', 'server', 'frontend', 'content']);
