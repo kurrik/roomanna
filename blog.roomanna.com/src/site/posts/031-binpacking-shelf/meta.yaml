@@ -5,4 +5,4 @@ tags:
   - games
   - algorithms
 scripts:
-  - ./post031.built.js
+  - /static/js/post031.js

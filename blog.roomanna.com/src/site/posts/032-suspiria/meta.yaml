@@ -6,4 +6,4 @@ tags:
   - reviews
   - algorithms
 scripts:
-  - ./post032.built.js
+  - /static/js/post032.min.js

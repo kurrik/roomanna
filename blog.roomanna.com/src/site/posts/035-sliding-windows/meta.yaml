@@ -6,4 +6,4 @@ tags:
   - javascript
   - games
 scripts:
-  - /static/js/post035.built.newbuild.js
+  - /static/js/post035.min.js

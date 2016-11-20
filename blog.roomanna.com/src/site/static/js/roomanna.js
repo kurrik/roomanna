@@ -12705,4 +12705,4 @@ _animated2.default.init();
 
 },{"./animated":15,"bootstrap":1,"jquery":14}]},{},[16]);
 
-//# sourceMappingURL=roomanna-blog.newbuild.js.map
+//# sourceMappingURL=roomanna.js.map

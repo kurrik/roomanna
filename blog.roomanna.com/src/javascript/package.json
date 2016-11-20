@@ -22,9 +22,11 @@
     "gulp-exit": "0.0.2",
     "gulp-minify": "0.0.14",
     "gulp-sourcemaps": "^2.2.0",
+    "icanhaz": "^0.10.3",
     "jquery": "^3.1.1",
     "merge-stream": "^1.0.0",
     "mocha": "^3.1.2",
+    "pathmodify": "^0.5.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0"

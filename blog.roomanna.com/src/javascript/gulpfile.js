@@ -9,10 +9,14 @@ var path = require('path');
 var source = require('vinyl-source-stream');
 var sourcemaps = require('gulp-sourcemaps');
 var watchify = require('watchify');
+var pathmodify = require('pathmodify');
 
 function compileTarget(src, dst, watch) {
   var transformed = browserify(src, { debug: false })
-    .transform(babel, { presets: ['es2015'] });
+    .transform(babel, { presets: ['es2015'] })
+    .plugin(pathmodify, {mods: [
+      pathmodify.mod.dir('lib', path.join(__dirname, 'lib'))
+    ]});
 
   var bundler = watchify(transformed);
 
@@ -38,8 +42,10 @@ function compileTarget(src, dst, watch) {
 
 function compile(watch) {
   var pipeline = merge(
-    compileTarget('./src/site/index.js', '../site/static/js/roomanna-blog.newbuild.js', watch),
-    compileTarget('./src/post035/index.js', '../site/static/js/post035.built.newbuild.js', watch)
+    compileTarget('./src/site/main.js', '../site/static/js/roomanna.js', watch),
+    compileTarget('./src/post031/main.js', '../site/static/js/post031.js', watch),
+    compileTarget('./src/post032/main.js', '../site/static/js/post032.js', watch),
+    compileTarget('./src/post035/main.js', '../site/static/js/post035.js', watch)
   );
   return watch ? pipeline : pipeline.pipe(exit());
 };
