@@ -4,30 +4,30 @@ webpackJsonp([3],{
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	exports.PointWindow = undefined;
-
+	
 	var _pointwindow = __webpack_require__(57);
-
+	
 	var _pointwindow2 = _interopRequireDefault(_pointwindow);
-
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
+	
 	var windowSize = 5;
 	var maxPoints = 50;
 	var halfPt = 6;
-
+	
 	var canvas = document.getElementById('canvas');
 	var w = parseInt(canvas.getAttribute('width'));
 	var h = parseInt(canvas.getAttribute('height'));
 	var ctx = canvas.getContext('2d');
-
+	
 	var points = [];
 	var win = new _pointwindow2.default(windowSize);
-
+	
 	function draw() {
 	  ctx.clearRect(0, 0, w, h);
 	  for (var i = 0; i < points.length; i++) {
@@ -39,7 +39,7 @@ webpackJsonp([3],{
 	  ctx.strokeStyle = 'rgb(0,0,200)';
 	  ctx.strokeRect(win.minX, win.minY, winW, winH);
 	}
-
+	
 	canvas.addEventListener('click', function (evt) {
 	  points.splice(0, 0, [evt.offsetX, evt.offsetY]);
 	  win.add(evt.offsetX, evt.offsetY);
@@ -48,7 +48,7 @@ webpackJsonp([3],{
 	  }
 	  draw();
 	});
-
+	
 	exports.PointWindow = _pointwindow2.default;
 
 /***/ },
@@ -57,31 +57,31 @@ webpackJsonp([3],{
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-
+	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
+	
 	var _slidingwindow = __webpack_require__(58);
-
+	
 	var _slidingwindow2 = _interopRequireDefault(_slidingwindow);
-
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
+	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
+	
 	var PointWindow = function () {
 	  function PointWindow(size) {
 	    _classCallCheck(this, PointWindow);
-
+	
 	    this.minx_ = new _slidingwindow2.default(size, _slidingwindow2.default.Min);
 	    this.miny_ = new _slidingwindow2.default(size, _slidingwindow2.default.Min);
 	    this.maxx_ = new _slidingwindow2.default(size, _slidingwindow2.default.Max);
 	    this.maxy_ = new _slidingwindow2.default(size, _slidingwindow2.default.Max);
 	  }
-
+	
 	  _createClass(PointWindow, [{
 	    key: 'add',
 	    value: function add(x, y) {
@@ -111,10 +111,10 @@ webpackJsonp([3],{
 	      return this.maxy_.value || 0;
 	    }
 	  }]);
-
+	
 	  return PointWindow;
 	}();
-
+	
 	exports.default = PointWindow;
 
 /***/ },
@@ -123,43 +123,43 @@ webpackJsonp([3],{
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-
+	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
+	
 	var _deque = __webpack_require__(59);
-
+	
 	var _deque2 = _interopRequireDefault(_deque);
-
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
+	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
+	
 	var Entry = function Entry(index, value) {
 	  _classCallCheck(this, Entry);
-
+	
 	  this.index = index;
 	  this.value = value;
 	};
-
+	
 	var SlidingWindow = function () {
 	  function SlidingWindow(size, compare) {
 	    _classCallCheck(this, SlidingWindow);
-
+	
 	    this.deque_ = new _deque2.default();
 	    this.count_ = 0;
 	    this.size_ = size;
 	    this.compare_ = compare;
 	  }
-
+	
 	  _createClass(SlidingWindow, [{
 	    key: 'add',
 	    value: function add(item) {
 	      var _this = this;
-
+	
 	      this.deque_.filter(function (x) {
 	        return _this.compare_(x.value, item);
 	      });
@@ -188,10 +188,10 @@ webpackJsonp([3],{
 	      return a < b;
 	    }
 	  }]);
-
+	
 	  return SlidingWindow;
 	}();
-
+	
 	exports.default = SlidingWindow;
 
 /***/ },
@@ -200,31 +200,31 @@ webpackJsonp([3],{
 /***/ function(module, exports) {
 
 	"use strict";
-
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-
+	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
+	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
+	
 	var Item = function Item(value) {
 	  _classCallCheck(this, Item);
-
+	
 	  this.value = value;
 	  this.next = null;
 	  this.prev = null;
 	};
-
+	
 	var Deque = function () {
 	  function Deque() {
 	    _classCallCheck(this, Deque);
-
+	
 	    this.head_ = null;
 	    this.tail_ = null;
 	  }
-
+	
 	  _createClass(Deque, [{
 	    key: "pushHead",
 	    value: function pushHead(i) {
@@ -308,12 +308,13 @@ webpackJsonp([3],{
 	      }
 	    }
 	  }]);
-
+	
 	  return Deque;
 	}();
-
+	
 	exports.default = Deque;
 
 /***/ }
 
 });
+//# sourceMappingURL=post035.js.map

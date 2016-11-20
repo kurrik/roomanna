@@ -47,5 +47,6 @@ module.exports = {
       'lib': path.join(__dirname, 'lib')
     }
   },
+  devtool: 'source-map',
   plugins: plugins
 };
