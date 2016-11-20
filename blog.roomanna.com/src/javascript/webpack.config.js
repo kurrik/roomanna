@@ -23,7 +23,7 @@ if (PROD) {
 module.exports = {
   entry: {
     'common': ['jquery', 'bootstrap'],
-    'roomanna': './src/site/main.js',
+    'roomanna': './src/roomanna/main.js',
     'post031': './src/post031/main.js',
     'post032': './src/post032/main.js',
     'post035': './src/post035/main.js'
