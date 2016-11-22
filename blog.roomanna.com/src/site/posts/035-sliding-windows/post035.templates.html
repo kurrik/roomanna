@@ -4,6 +4,22 @@
     margin: 0 auto;
     display: block;
     background: #fffeee;
+    cursor: pointer;
+  }
+  .point {
+    display: inline-block;
+    padding: 5px;
+  }
+
+  #windows {
+    table-layout: fixed;
+  }
+  #windows tbody tr th {
+    width: 100px;
   }
 </style>
-<canvas id='canvas' width='600' height='600'></canvas>
+<canvas id='canvas' width='600' height='400'></canvas>
+<div id='points'></div>
+<table id='windows' class='table table-striped'>
+  <tbody></tbody>
+</table>

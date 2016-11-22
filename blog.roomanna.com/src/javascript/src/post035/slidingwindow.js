@@ -31,6 +31,10 @@ export default class SlidingWindow {
     return head && head.value || null;
   }
 
+  toArray() {
+    return this.deque_.toArray();
+  }
+
   static Max(a,b) { return a > b };
   static Min(a,b) { return a < b };
 }

@@ -30,4 +30,13 @@ export default class PointWindow {
   get maxY() {
     return this.maxy_.value || 0;
   }
+
+  data() {
+    return [
+      { label: 'minx', data: this.minx_.toArray() },
+      { label: 'miny', data: this.miny_.toArray() },
+      { label: 'maxx', data: this.maxx_.toArray() },
+      { label: 'maxy', data: this.maxy_.toArray() }
+    ];
+  }
 }

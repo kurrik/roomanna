@@ -86,4 +86,14 @@ export default class Deque {
       item = item.next;
     }
   }
+
+  toArray() {
+    let item = this.head_;
+    let array = [];
+    while (item != null) {
+      array.push(item.value);
+      item = item.next;
+    }
+    return array;
+  }
 }
