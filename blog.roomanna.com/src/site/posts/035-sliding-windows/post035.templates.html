@@ -6,16 +6,39 @@
     background: #fffeee;
     cursor: pointer;
   }
-  .point {
-    display: inline-block;
-    padding: 5px;
+  #points {
+    margin-bottom: 10px;
   }
-
+  .point {
+    color: #437F97;
+    display: inline-block;
+    padding: 2px;
+  }
+  .point.active {
+    color: #FFB30F;
+  }
   #windows {
     table-layout: fixed;
   }
   #windows tbody tr th {
+    vertical-align: middle;
     width: 100px;
+  }
+  .entry {
+    display: inline-block;
+    padding: 5px;
+    margin-right: 5px;
+    border: 1px solid #999;
+    background: #efefef;
+  }
+  .entry .value {
+    color: #437F97;
+  }
+  .entry.active .value {
+    color: #FFB30F;
+  }
+  .entry .index {
+    color: #999;
   }
 </style>
 <canvas id='canvas' width='600' height='400'></canvas>

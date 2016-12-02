@@ -48,8 +48,8 @@ function drawPoints() {
       .append('span')
     .merge(elems)
       .classed('point', true)
-      .style('color', (x, i) => i < windowSize ? COLOR_ACTIVE : COLOR_EXTRA)
-      .text((x) => `(${x[0]},${x[1]})`);
+      .classed('active', (x, i) => i < windowSize)
+      .html((x) => `(${x[0]},${x[1]})`);
 
   elems.exit().remove();
 }
@@ -79,16 +79,16 @@ function drawWindows() {
     .select('tbody')
     .selectAll('tr')
     .select('td')
-    .selectAll('span')
+    .selectAll('div.entry')
     .data((x) => x.data);
 
   cells
     .enter()
-      .append('span')
+      .append('div')
     .merge(cells)
-      .classed('point', true)
-      .style('color', (x, i) => i == 0 ? COLOR_BORDER : COLOR_EXTRA)
-      .text((x) => `(${x.value},${x.index})`);
+      .classed('entry', true)
+      .classed('active', (x, i) => i == 0)
+      .html((x) => `<span class="index">${x.index}:</span> <span class="value">${x.value}</span>`);
 
   cells
     .exit()

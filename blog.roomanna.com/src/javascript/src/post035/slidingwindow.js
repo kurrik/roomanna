@@ -16,13 +16,17 @@ export default class SlidingWindow {
   }
 
   add(item) {
-    this.deque_.filter((x) => this.compare_(x.value, item));
+    let curr = this.deque_.peekTail();
+    while (curr && curr.index >= 0 && !this.compare_(curr.value, item)) {
+      this.deque_.popTail();
+      curr = this.deque_.peekTail();
+    }
     this.deque_.pushTail(new Entry(this.count_, item));
     this.count_++;
-    let head = this.deque_.peekHead();
-    while (head && head.index < (this.count_ - this.size_)) {
+    curr = this.deque_.peekHead();
+    while (curr && curr.index < (this.count_ - this.size_)) {
       this.deque_.popHead();
-      head = this.deque_.peekHead();
+      curr = this.deque_.peekHead();
     }
   }
 
