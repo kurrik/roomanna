@@ -2,25 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 var PROD = JSON.parse(process.env.PROD || '0');
 
-var plugins = [
-  new webpack.optimize.DedupePlugin(),
-  new webpack.optimize.CommonsChunkPlugin({
-    name: 'common'
-  }),
-  new webpack.ProvidePlugin({
-    jQuery: 'jquery',
-    $: 'jquery',
-    jquery: 'jquery'
-  })
-];
-
-if (PROD) {
-  plugins.push(new webpack.optimize.UglifyJsPlugin({
-    compress: { warnings: false }
-  }));
-}
-
-module.exports = {
+var config = {
   entry: {
     'common': ['jquery', 'bootstrap'],
     'roomanna': './src/roomanna/main.js',
@@ -29,7 +11,7 @@ module.exports = {
     'post035': './src/post035/main.js'
   },
   output: {
-    path: path.join(__dirname, '../site/static/js'),
+    path: path.join(__dirname, '../../build/content/static/js'),
     filename: '[name].js'
   },
   module: {
@@ -47,6 +29,25 @@ module.exports = {
       'lib': path.join(__dirname, 'lib')
     }
   },
-  devtool: 'source-map',
-  plugins: plugins
+  plugins: [
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'common'
+    }),
+    new webpack.ProvidePlugin({
+      jQuery: 'jquery',
+      $: 'jquery',
+      jquery: 'jquery'
+    })
+  ]
 };
+
+if (PROD) {
+  config.plugins.push(new webpack.optimize.UglifyJsPlugin({
+    compress: { warnings: false }
+  }));
+} else {
+  config.devtool = '#inline-source-map';
+}
+
+module.exports = config;

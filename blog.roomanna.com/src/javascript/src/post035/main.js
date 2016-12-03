@@ -6,35 +6,59 @@ const maxPoints = 50;
 const halfPt = 6;
 const lineWidth = 2;
 
-const canvasDom = document.getElementById('canvas');
+const svgDom = document.getElementById('svg');
 const pointsDom = document.getElementById('points');
-const minxDom = document.getElementById('minx');
-const minyDom = document.getElementById('miny');
-const maxxDom = document.getElementById('maxx');
-const maxyDom = document.getElementById('maxy');
-const w = parseInt(canvasDom.getAttribute('width'));
-const h = parseInt(canvasDom.getAttribute('height'));
-const ctx = canvasDom.getContext('2d');
+const windowsDom = document.getElementById('windows');
 
-const COLOR_ACTIVE = '#FFB30F';
-const COLOR_EXTRA = '#437F97';
-const COLOR_BORDER = '#FC020A';
+const allDom = [ svgDom, pointsDom, windowsDom ];
 
+let index = 0;
 let points = [];
 let win = new PointWindow(windowSize);
 
-function drawCanvas() {
-  ctx.globalCompositeOperation = 'source-over';
-  ctx.clearRect(0, 0, w, h);
-  for (var i = 0; i < points.length; i++) {
-    ctx.fillStyle = (i < windowSize) ? COLOR_ACTIVE : COLOR_EXTRA;
-    ctx.fillRect(points[i][0] - halfPt, points[i][1] - halfPt, halfPt * 2, halfPt * 2);
-  }
-  var winW = win.maxX - win.minX;
-  var winH = win.maxY - win.minY;
-  ctx.strokeStyle = COLOR_BORDER;
-  ctx.lineWidth = lineWidth;
-  ctx.strokeRect(win.minX, win.minY, winW, winH);
+function drawSvg() {
+  const rects = d3
+    .select('#svgPoints')
+    .selectAll('rect.point')
+    .data(points);
+
+  rects
+    .enter()
+      .append('rect')
+      .classed('point', true)
+      .attr('width', halfPt * 2)
+      .attr('height', halfPt * 2)
+    .merge(rects)
+      .attr('x', (p) => p[0] - halfPt)
+      .attr('y', (p) => p[1] - halfPt)
+      .attr('data-index', (p) => p[2])
+      .classed('active', (p, i) => i < windowSize);
+
+  rects.exit().remove();
+
+  const borderData = [{
+    x: win.minX,
+    y: win.minY,
+    w: win.maxX - win.minX,
+    h: win.maxY - win.minY
+  }];
+
+  const border = d3
+    .select('#svgBorder')
+    .selectAll('rect.border')
+    .data(borderData);
+
+  border
+    .enter()
+      .append('rect')
+      .classed('border', true)
+    .merge(border)
+      .attr('x', (p) => p.x)
+      .attr('y', (p) => p.y)
+      .attr('width', (p) => p.w)
+      .attr('height', (p) => p.h);
+
+  border.exit().remove();
 }
 
 function drawPoints() {
@@ -48,8 +72,9 @@ function drawPoints() {
       .append('span')
     .merge(elems)
       .classed('point', true)
-      .classed('active', (x, i) => i < windowSize)
-      .html((x) => `(${x[0]},${x[1]})`);
+      .classed('active', (p, i) => i < windowSize)
+      .attr('data-index', (p) => p[2])
+      .html((p) => `(${p[0]},${p[1]})`);
 
   elems.exit().remove();
 }
@@ -80,34 +105,82 @@ function drawWindows() {
     .selectAll('tr')
     .select('td')
     .selectAll('div.entry')
-    .data((x) => x.data);
+    .data((p) => p.data);
 
   cells
     .enter()
       .append('div')
     .merge(cells)
       .classed('entry', true)
-      .classed('active', (x, i) => i == 0)
-      .html((x) => `<span class="index">${x.index}:</span> <span class="value">${x.value}</span>`);
+      .classed('active', (p, i) => i == 0)
+      .attr('data-index', (p) => p.index)
+      .html((p) => `<span class='index'>${p.index}:</span> <span class='value'>${p.value}</span>`);
 
-  cells
-    .exit()
-    .remove();
+  cells.exit().remove();
 }
 
 function draw() {
-  drawCanvas();
+  drawSvg();
   drawPoints();
   drawWindows();
 }
 
-canvasDom.addEventListener('click', function(evt) {
-  points.splice(0, 0, [evt.offsetX, evt.offsetY]);
+function addPoint(evt) {
+  points.splice(0, 0, [evt.offsetX, evt.offsetY, index]);
   win.add(evt.offsetX, evt.offsetY);
   while (points.length > maxPoints) {
     points.pop();
   }
+  index++;
   draw();
-});
+}
+
+function addHover(idx) {
+  allDom.forEach((e) => {
+    e.querySelectorAll(`[data-index="${idx}"]`)
+      .forEach((x) => x.classList.add('hover'));
+  });
+}
+
+function clearHover() {
+  allDom.forEach((e) => {
+    e.querySelectorAll('[data-index].hover')
+      .forEach((x) => x.classList.remove('hover'));
+  });
+}
+
+function checkDisable(evt) {
+  const idx = getIdx(evt.target);
+  if (idx) {
+    evt.stopPropagation();
+    clearHover();
+  }
+}
+
+function checkEnable(evt) {
+  const idx = getIdx(evt.target);
+  if (idx) {
+    evt.stopPropagation();
+    clearHover();
+    addHover(idx);
+  }
+}
+
+function getIdx(node) {
+  let idx;
+  while (node && node != document) {
+    idx = node.getAttribute('data-index');
+    if (idx) {
+      return idx;
+    }
+    node = node.parentNode;
+  }
+  return null;
+}
+
+document.addEventListener('mouseover', checkEnable);
+document.addEventListener('mouseout', checkDisable);
+document.addEventListener('click', checkEnable);
+svgDom.addEventListener('click', addPoint);
 
 export { PointWindow };

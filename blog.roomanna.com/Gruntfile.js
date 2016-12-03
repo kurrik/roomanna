@@ -14,7 +14,12 @@ module.exports = function(grunt) {
       },
 
       javascript: {
-        cmd: 'cd src/javascript && PROD=1 npm run watch',
+        cmd: 'cd src/javascript && PROD=1 npm run build',
+        bg: false,
+      },
+
+      javascriptDevel: {
+        cmd: 'cd src/javascript && npm run watch',
         bg: true,
       }
     },
@@ -126,13 +131,15 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Site components
-  grunt.registerTask('frontend', ['copy:frontend', 'less', 'concat', 'cssmin', 'bgShell:javascript']);
-  grunt.registerTask('server',   ['copy:server']);
-  grunt.registerTask('content',  ['bgShell:ghostwriter']);
-  grunt.registerTask('all',      ['clean', 'server', 'frontend', 'content']);
+  grunt.registerTask('frontend',        ['copy:frontend', 'less', 'concat', 'cssmin', 'bgShell:javascript']);
+  grunt.registerTask('frontend-devel',  ['copy:frontend', 'less', 'concat', 'cssmin', 'bgShell:javascriptDevel']);
+  grunt.registerTask('server',          ['copy:server']);
+  grunt.registerTask('content',         ['bgShell:ghostwriter']);
+  grunt.registerTask('all-devel',       ['clean', 'server', 'frontend-devel', 'content']);
+  grunt.registerTask('all',             ['clean', 'server', 'frontend', 'content']);
 
   // Verbs
-  grunt.registerTask('serve',    ['copy:server', 'bgShell:serve']);
-  grunt.registerTask('develop',  ['all', 'serve', 'watch']);
-  grunt.registerTask('default',  ['all']);
+  grunt.registerTask('serve',           ['copy:server', 'bgShell:serve']);
+  grunt.registerTask('develop',         ['all-devel', 'serve', 'watch']);
+  grunt.registerTask('default',         ['all']);
 };
