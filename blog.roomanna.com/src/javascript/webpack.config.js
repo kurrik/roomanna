@@ -1,6 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var PROD = JSON.parse(process.env.PROD || '0');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var config = {
   entry: {
@@ -11,8 +12,8 @@ var config = {
     'post035': './src/post035/main.js'
   },
   output: {
-    path: path.join(__dirname, '../../build/content/static/js'),
-    filename: '[name].js'
+    path: path.join(__dirname, '../../build/content/static'),
+    filename: 'js/[name].js'
   },
   module: {
     loaders: [
@@ -21,6 +22,10 @@ var config = {
         exclude: /(node_modules)/,
         loader: 'babel-loader',
         query: { presets: ['es2015'], cacheDirectory: true }
+      },
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract('css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]')
       }
     ]
   },
@@ -38,7 +43,8 @@ var config = {
       jQuery: 'jquery',
       $: 'jquery',
       jquery: 'jquery'
-    })
+    }),
+    new ExtractTextPlugin('css/[name].css')
   ]
 };
 

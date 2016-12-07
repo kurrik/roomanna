@@ -1,5 +1,5 @@
 <style>
-  canvas, #svg {
+  #svg {
     box-sizing: content-box;
     border: 2px solid #eeeddd;
     margin: 0 auto;
@@ -10,59 +10,12 @@
   #points {
     margin-bottom: 10px;
   }
-  .point {
-    color: #437F97;
-    display: inline-block;
-    padding: 2px;
-    cursor: pointer;
-  }
-  .point.active {
-    color: #FFB30F;
-  }
-  .point.hover {
-    color: #FC020A;
-  }
   #windows {
     table-layout: fixed;
   }
   #windows tbody tr th {
     vertical-align: middle;
     width: 100px;
-  }
-  .entry {
-    display: inline-block;
-    padding: 5px;
-    margin-right: 5px;
-    border: 1px solid #999;
-    background: #efefef;
-    cursor: pointer;
-  }
-  .entry .value {
-    color: #437F97;
-  }
-  .entry.active .value {
-    color: #FFB30F;
-  }
-  .entry.hover .value {
-    color: #FC020A;
-  }
-  .entry .index {
-    color: #999;
-  }
-  rect.point {
-    fill: #437F97;
-    cursor: pointer;
-  }
-  rect.point.active {
-    fill: #FFB30F;
-  }
-  rect.point.hover {
-    fill: #FC020A;
-  }
-  rect.border {
-    fill: transparent;
-    stroke: #FC020A;
-    stroke-width: 2px;
   }
 </style>
 <svg id='svg' width='600' height='400' viewBox='0 0 600 400'>

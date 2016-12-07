@@ -7,6 +7,9 @@
   <meta name="twitter:title" content="{{textcontent .Post.Title}}" />
   <meta name="twitter:description" content="{{textcontent .Post.Snippet}}" />
 {{end}}
+{{define "styles"}}
+  {{range .Post.Styles}}<link rel="stylesheet" href="{{.}}" />{{end}}
+{{end}}
 {{define "scripts"}}
   {{range .Post.Scripts}}<script src="{{.}}"></script>{{end}}
 {{end}}
