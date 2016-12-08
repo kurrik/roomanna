@@ -1,0 +1,20 @@
+.entry {
+  display: inline-block;
+  padding: 5px;
+  margin-right: 5px;
+  border: 1px solid #999;
+  background: #efefef;
+  cursor: pointer;
+}
+.entry .value {
+  color: #437F97;
+}
+.entry.active .value {
+  color: #FFB30F;
+}
+.entry.hover .value {
+  color: #FC020A;
+}
+.entry .index {
+  color: #999;
+}

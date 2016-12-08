@@ -1,3 +1,22 @@
+:global #svg {
+  box-sizing: content-box;
+  border: 2px solid #eeeddd;
+  margin: 0 auto;
+  display: block;
+  background: #fffeee;
+  cursor: pointer;
+}
+:global #points {
+  margin-bottom: 10px;
+}
+:global #demosvg table {
+  table-layout: fixed;
+}
+:global #demosvg table tbody tr th {
+  vertical-align: middle;
+  width: 100px;
+}
+
 .point {
   color: #437F97;
   display: inline-block;
@@ -9,26 +28,6 @@
 }
 .point.hover {
   color: #FC020A;
-}
-.entry {
-  display: inline-block;
-  padding: 5px;
-  margin-right: 5px;
-  border: 1px solid #999;
-  background: #efefef;
-  cursor: pointer;
-}
-.entry .value {
-  color: #437F97;
-}
-.entry.active .value {
-  color: #FFB30F;
-}
-.entry.hover .value {
-  color: #FC020A;
-}
-.entry .index {
-  color: #999;
 }
 rect.point {
   fill: #437F97;
