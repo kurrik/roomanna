@@ -1,3 +1,5 @@
+/* Common */
+
 .entry {
   display: inline-block;
   padding: 5px;
@@ -5,6 +7,7 @@
   border: 1px solid #999;
   background: #efefef;
   cursor: pointer;
+  position: relative;
 }
 .entry .value {
   color: #437F97;
@@ -17,4 +20,73 @@
 }
 .entry .index {
   color: #999;
+}
+.entry[data-state=added] {
+  background: #efffef;
+  left: 20px;
+}
+.entry[data-state=added]::before {
+  content: "⬅";
+  color: #999;
+  position: absolute;
+  left: -20px;
+}
+
+.entry[data-state=removed] {
+  background: #ffefef;
+}
+
+/* Steps demo */
+:global #demosteps table tbody tr th {
+  vertical-align: middle;
+}
+
+/* SVG demo */
+
+:global #svg {
+  box-sizing: content-box;
+  border: 2px solid #eeeddd;
+  margin: 0 auto;
+  display: block;
+  background: #fffeee;
+  cursor: pointer;
+}
+:global #points {
+  margin-bottom: 10px;
+}
+:global #demosvg table {
+  table-layout: fixed;
+}
+:global #demosvg table tbody tr th {
+  vertical-align: middle;
+  width: 100px;
+}
+
+.point {
+  color: #437F97;
+  display: inline-block;
+  padding: 2px;
+  cursor: pointer;
+}
+.point.active {
+  color: #FFB30F;
+}
+.point.hover {
+  color: #FC020A;
+}
+rect.point {
+  fill: #437F97;
+  cursor: pointer;
+}
+rect.point.active {
+  fill: #FFB30F;
+}
+rect.point.hover {
+  fill: #FC020A;
+}
+rect.border {
+  pointer-events: none;
+  fill: transparent;
+  stroke: #FC020A;
+  stroke-width: 2px;
 }

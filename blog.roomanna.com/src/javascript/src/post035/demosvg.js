@@ -1,6 +1,6 @@
 import PointWindow from './pointwindow';
 import * as d3 from 'd3';
-import styles from './demosvg.css';
+import styles from './common.css';
 import { drawTable } from './common';
 
 const windowSize = 5;

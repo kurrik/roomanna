@@ -1,11 +1,8 @@
 import Deque from '../common/deque';
 import 'babel-polyfill';
 
-class Entry {
-  constructor(index, value) {
-    this.index = index;
-    this.value = value;
-  }
+function copyObject(obj, state) {
+  return Object.assign({}, obj, { state: state });
 }
 
 export default class SlidingWindow {
@@ -20,21 +17,56 @@ export default class SlidingWindow {
     for (let value of this.step(item)) {}
   }
 
-  *step(item) {
+  *step(item, audit) {
+    const entry = {
+      'index': this.count_,
+      'value': item,
+      'state': ''
+    };
+    if (audit) {
+      yield {
+        'label': `Adding item #${this.count_} with value ${item}...`,
+        'data': [ ...this.toArray(), copyObject(entry, 'added') ],
+      };
+    }
     let curr = this.deque_.peekTail();
+    let removedItems = [];
+    let removedItem;
     while (curr && curr.index >= 0 && !this.compare_(curr.value, item)) {
-      this.deque_.popTail();
-      yield `Remove tail item with value ${curr.value}`;
+      removedItem = this.deque_.popTail();
+      if (audit) {
+        removedItems.unshift(copyObject(removedItem, 'removed'));
+      }
       curr = this.deque_.peekTail();
     }
-    this.deque_.pushTail(new Entry(this.count_, item));
-    yield `Add new item with value ${item} to tail`;
+    if (audit && removedItems.length > 0) {
+      yield {
+        'label': `Remove tail items worse than ${item}`,
+        'data': [ ...this.toArray(), ...removedItems, copyObject(entry, 'added') ]
+      };
+    }
+    this.deque_.pushTail(entry);
     this.count_++;
+    if (audit) {
+      yield {
+        'label': `Push ${item} to tail`,
+        'data': [ ...this.toArray() ],
+      };
+    }
     curr = this.deque_.peekHead();
+    removedItems = [];
     while (curr && curr.index < (this.count_ - this.size_)) {
-      this.deque_.popHead();
-      yield `Remove head item with index ${curr.index}`;
+      removedItem = this.deque_.popHead();
+      if (audit) {
+        removedItems.unshift(copyObject(removedItem, 'removed'));
+      }
       curr = this.deque_.peekHead();
+    }
+    if (audit && removedItems.length > 0) {
+      yield {
+        'label': `Remove head items with index outside of [${this.count_ - this.size_}...${this.count_-1}]`,
+        'data': [ ...removedItems, ...this.toArray() ]
+      };
     }
   }
 

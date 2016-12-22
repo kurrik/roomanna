@@ -34,6 +34,7 @@ export function drawTable(data, domRoot) {
     .merge(cells)
       .classed(styles.entry, true)
       .classed(styles.active, (p, i) => i == 0)
+      .attr('data-state', (p) => p.state)
       .attr('data-index', (p) => p.index)
       .html((p) => `<span class='${styles.index}'>${p.index}:</span> <span class='${styles.value}'>${p.value}</span>`);
 
