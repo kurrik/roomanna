@@ -4,9 +4,13 @@ import styles from './common.css';
 export function drawTable(data, domRoot) {
   // Data should be an array of:
   // {
+  //   index: Number
   //   label: String
   //   data: Array<Entry>
   // }
+
+  const processedTo = parseInt(domRoot.getAttribute('data-processed-to') || '0');
+  domRoot.setAttribute('data-processed-to', data[data.length-1].index);
 
   const rows = d3.select(domRoot)
     .select('table tbody')
@@ -17,7 +21,10 @@ export function drawTable(data, domRoot) {
   newrow.append('th');
   newrow.append('td');
 
-  rows.merge(newrow).select('th').text((x) => x.label);
+  rows.merge(newrow)
+    .classed(styles.newRow, (x) => x.index > processedTo)
+    .attr('data-index', (x) => x.index)
+    .select('th').text((x) => x.label);
 
   rows.exit().remove();
 

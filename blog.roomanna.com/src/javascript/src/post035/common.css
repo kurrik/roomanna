@@ -31,14 +31,20 @@
   position: absolute;
   left: -20px;
 }
-
 .entry[data-state=removed] {
   background: #ffefef;
+}
+.newRow, .newRow th, .newRow td {
+  background: #eeefff !important;
 }
 
 /* Steps demo */
 :global #demosteps table tbody tr th {
   vertical-align: middle;
+}
+
+:global #demosteps table {
+  table-layout: fixed;
 }
 
 /* SVG demo */

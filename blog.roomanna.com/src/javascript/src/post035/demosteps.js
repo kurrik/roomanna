@@ -30,10 +30,11 @@ function onClick() {
   drawTable(audit, domRoot);
 }
 
-add(10);
+add(1);
 add(5);
 add(8);
 domAddInput.addEventListener('input', onInput);
 domAddButton.addEventListener('click', onClick);
+domAddInput.value = Math.round(Math.random() * 20);
 onInput();
 drawTable(audit, domRoot);
