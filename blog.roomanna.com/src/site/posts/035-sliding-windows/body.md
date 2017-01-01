@@ -37,7 +37,7 @@ For each new entry <i>N</i> at index <i>i</i>:
     Let <i>H</i> = the head tuple in <i>Q</i>.
 </code></pre>
 
-I found this a little unintuitive, so I've built a demo which shows the queue as elements are added and removed.  Add values below to convince yourself that the queue always remains sorted.  It's also useful to verify that it's not necessary to iterate over the entire queue as new values are added, meaning the algorithm runs in linear time:
+Originally, I found this a little unintuitive, so I've built a demo which shows the queue as elements are added and removed.  Add values below to convince yourself that the queue always remains sorted.  It's also useful to verify that it's not necessary to iterate over the entire queue as new values are added, meaning the algorithm runs in linear time:
 
 {{include "post035.demosteps.html"}}
 
@@ -45,5 +45,5 @@ To apply this back to my game, I created a data structure with four such deques.
 
 {{include "post035.demosvg.html"}}
 
-I expect to set the bounds of my game's viewport to a similar bounding box based off of touch events.  I'll have to make the viewport a little larger (so it's possible to zoom out by touching outside of the bounding box) and animate transitions as the bounding box changes, but the viewport should be smoother and slower moving than before.
+I expect to set the bounds of my game's viewport to a similar bounding box based off of touch events.  I'll have to make the viewport a little larger (so it's possible to zoom out by touching outside of the bounding box) and animate transitions as the bounding box changes, but the viewport should be smoother and more deliberate than before, even with an infant mashing on it.
 
