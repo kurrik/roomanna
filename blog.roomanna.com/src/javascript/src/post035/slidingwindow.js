@@ -27,7 +27,7 @@ export default class SlidingWindow {
     if (audit) {
       yield {
         'index': this.stepIndex_++,
-        'label': `Adding item #${this.count_} with value ${item}...`,
+        'label': `[#${this.count_}] Adding ${item}...`,
         'data': [ ...this.toArray(), copyObject(entry, 'added') ],
       };
     }
@@ -42,12 +42,12 @@ export default class SlidingWindow {
       curr = this.deque_.peekTail();
     }
     if (audit && removedItems.length > 0) {
-      const removed = removedItems.map((x) => x.value).join(',');
+      const removed = removedItems.map((x) => x.value).join(', ');
       const valueLabel = removedItems.length == 1 ? 'value' : 'values';
       const itemsLabel = removedItems.length == 1 ? 'item' : 'items';
       yield {
         'index': this.stepIndex_++,
-        'label': `Remove tail ${itemsLabel} with ${valueLabel} ${removed}`,
+        'label': `• Remove tail ${itemsLabel} with ${valueLabel} ${removed}`,
         'data': [ ...this.toArray(), ...removedItems, copyObject(entry, 'added') ]
       };
     }
@@ -56,7 +56,7 @@ export default class SlidingWindow {
     if (audit) {
       yield {
         'index': this.stepIndex_++,
-        'label': `Push ${item} to tail`,
+        'label': `• Push ${item} to tail`,
         'data': [ ...this.toArray() ],
       };
     }
@@ -72,7 +72,7 @@ export default class SlidingWindow {
     if (audit && removedItems.length > 0) {
       yield {
         'index': this.stepIndex_++,
-        'label': `Remove head indices outside of [${this.count_ - this.size_}...${this.count_-1}]`,
+        'label': `• Remove head indices outside of [${this.count_ - this.size_}...${this.count_-1}]`,
         'data': [ ...removedItems, ...this.toArray() ]
       };
     }

@@ -9,7 +9,7 @@ export function drawTable(data, domRoot) {
   //   data: Array<Entry>
   // }
 
-  const processedTo = parseInt(domRoot.getAttribute('data-processed-to') || '0');
+  const processedTo = parseInt(domRoot.getAttribute('data-processed-to') || '-1');
   domRoot.setAttribute('data-processed-to', data[data.length-1].index);
 
   const rows = d3.select(domRoot)
