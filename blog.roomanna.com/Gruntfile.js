@@ -97,8 +97,7 @@ module.exports = function(grunt) {
           yuicompress: true
         },
         files: {
-          'build/content/static/css/site.css': 'src/less/site.less',
-          'build/content/static/css/resume.css': 'src/less/resume.less'
+          'build/content/static/css/site.css': 'src/less/site.less'
         }
       }
     },
