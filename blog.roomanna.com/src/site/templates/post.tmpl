@@ -8,10 +8,10 @@
   <meta name="twitter:description" content="{{textcontent .Post.Snippet}}" />
 {{end}}
 {{define "styles"}}
-  {{range .Post.Styles}}<link rel="stylesheet" href="{{.}}" />{{end}}
+  {{range .Post.Styles}}<link rel="stylesheet" href="{{.}}?v={{$.Site.Rendered.Unix}}" />{{end}}
 {{end}}
 {{define "scripts"}}
-  {{range .Post.Scripts}}<script src="{{.}}"></script>{{end}}
+  {{range .Post.Scripts}}<script src="{{.}}?v={{$.Site.Rendered.Unix}}"></script>{{end}}
 {{end}}
 {{define "body"}}
   <article>

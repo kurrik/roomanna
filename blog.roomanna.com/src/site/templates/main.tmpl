@@ -3,7 +3,7 @@
   <head>
     <link href='http://fonts.googleapis.com/css?family=Sanchez' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Roboto:100,300,500,100italic,300italic,500italic' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="/static/css/roomanna-blog.min.css" />
+    <link rel="stylesheet" href="/static/css/roomanna-blog.min.css?v={{.Site.Rendered.Unix}}" />
     {{template "head" .}}
     <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed" />
     <meta property="twitter:account_id" content="7588892" />
@@ -47,8 +47,8 @@
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
     </script>
-    <script src="/static/js/common.js"></script>
-    <script src="/static/js/roomanna.js"></script>
+    <script src="/static/js/common.js?v={{.Site.Rendered.Unix}}"></script>
+    <script src="/static/js/roomanna.js?v={{.Site.Rendered.Unix}}"></script>
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
     {{template "scripts" .}}
   </body>
