@@ -21,7 +21,7 @@ I've been a bit nostalgic about this, so I reread [my initial thoughts on joinin
 
 <blockquote><p>And being part of being able to build out that product, especially during a time where product features such as photos, referral tracking and analytics are happening, while the leaders are having significant discussions around monetization is an exciting time - a time when big, impressive things get done.</p></blockquote>
 
-That was pretty accurate. Twitter has been a roller coaster of a company to work for but gave me plenty of opportunities to grow my skills and career. Throughout my tenure I think that I've been successful in finding a range of areas to contribute.  But I wasn't always very vocal about what I was doing, especially externally.  So in the interest of reflection and because I think others may find my path interesting, here's a review of what I can claim some soupçon of credit for during my tenure.
+That was pretty accurate. Twitter has been a roller coaster of a company to work for but gave me plenty of opportunities to grow my skills and career. I think that I've been successful in finding a range of areas to contribute.  But I wasn't always very vocal about what I was doing, especially externally.  So in the interest of reflection and because I think others may find my path interesting, here's a review of what I can claim some soupçon of credit for during my tenure.
 
 My first projects on the Platform Relations team were rote&mdash;answering developer questions in the forums, writing [announcement blog posts][4] and [developer documentation][3] (I'm still pretty proud of Working with Timelines).  Getting up to speed.
 
