@@ -9,7 +9,8 @@ var config = {
     'roomanna': './src/roomanna/main.js',
     'post031': './src/post031/main.js',
     'post032': './src/post032/main.js',
-    'post035': './src/post035/main.js'
+    'post035': './src/post035/main.js',
+    'post038': './src/post038/main.js'
   },
   output: {
     path: path.join(__dirname, '../../build/content/static'),
@@ -25,15 +26,23 @@ var config = {
       },
       {
         test: /\.css$/,
+        exclude: /(node_modules)/,
         loader: ExtractTextPlugin.extract([
           'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
         ])
+      },
+      {
+        test: /\.(gif|png|svg)$/,
+        loader: 'url-loader'
       }
     ]
   },
   resolve: {
     alias: {
-      'lib': path.join(__dirname, 'lib')
+      'lib': path.join(__dirname, 'lib'),
+      'default-skin.png': path.join(__dirname, 'node_modules/photoswipe/dist/default-skin/default-skin.png'),
+      'default-skin.svg': path.join(__dirname, 'node_modules/photoswipe/dist/default-skin/default-skin.svg'),
+      'preloader.gif': path.join(__dirname, 'node_modules/photoswipe/dist/default-skin/preloader.gif')
     }
   },
   plugins: [
