@@ -1,14 +1,12 @@
 {{define "gallery"}}
 <div class="roomanna-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-{{range .}}
-  <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+{{range .}}<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
   <a href="{{.Image.Path}}" itemprop="contentUrl" data-size="{{.Image.Width}}x{{.Image.Height}}">
     <img src="{{.Thumb.Path}}" itemprop="thumbnail" width="{{.Thumb.Width}}" height="{{.Thumb.Height}}" />
   </a>
   {{with .Description}}
     <figcaption itemprop="caption description">{{.}}</figcaption>
   {{end}}
-  </figure>
-{{end}}
+</figure>{{end}}
 </div>
 {{end}}

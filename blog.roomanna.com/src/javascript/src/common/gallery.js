@@ -3,12 +3,15 @@ import PhotoSwipeUI_Default from 'photoswipe/dist/photoswipe-ui-default.js';
 import 'style-loader!css-loader!photoswipe/dist/photoswipe.css';
 import 'style-loader!css-loader!photoswipe/dist/default-skin/default-skin.css';
 
+import styles from './gallery.css';
+
 export default class Gallery {
   constructor(selector) {
     const domGalleries = document.querySelectorAll(selector);
     Array.from(domGalleries).forEach((dom, i) => {
       dom.setAttribute('data-pswp-uid', i+1);
       dom.addEventListener('click', this.onThumbnailsClick.bind(this));
+      dom.classList.add(styles.gallery);
     });
     var hashData = this.photoswipeParseHash();
     if(hashData.has('pid') && hashData.has('gid')) {
@@ -34,7 +37,7 @@ export default class Gallery {
           w: dimensions[0],
           h: dimensions[1]
         };
-        Array.from(domFigure.querySelector('figcaption'))
+        Array.from(domFigure.querySelector('figcaption') || [])
           .forEach(dom => item.title = dom.textContent);
         Array.from(domAnchor.querySelector('img'))
           .forEach(dom => item.msrc = dom.getAttribute('src'));
