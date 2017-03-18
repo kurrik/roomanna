@@ -14,12 +14,12 @@ module.exports = function(grunt) {
       },
 
       javascript: {
-        cmd: 'cd src/javascript && PROD=1 npm run build',
+        cmd: 'cd src/javascript && PROD=1 npm run build-grunt',
         bg: false,
       },
 
       javascriptDevel: {
-        cmd: 'cd src/javascript && npm run watch',
+        cmd: 'cd src/javascript && npm run watch-grunt',
         bg: true,
       }
     },

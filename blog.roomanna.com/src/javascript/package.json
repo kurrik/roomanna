@@ -4,7 +4,9 @@
   "description": "Sliding windows",
   "scripts": {
     "watch": "webpack --progress -colors --watch",
+    "watch-grunt": "webpack --watch",
     "build": "webpack --progress --colors",
+    "build-grunt": "webpack",
     "test": "mocha --require babel-polyfill --compilers js:babel-register --recursive"
   },
   "author": "Arne Roomann-Kurrik",
