@@ -37,7 +37,7 @@ export default class Gallery {
           w: dimensions[0],
           h: dimensions[1]
         };
-        Array.from(domFigure.querySelector('figcaption') || [])
+        Array.from(domFigure.querySelector('figcaption[itemprop~=description]') || [])
           .forEach(dom => item.title = dom.textContent);
         Array.from(domAnchor.querySelector('img'))
           .forEach(dom => item.msrc = dom.getAttribute('src'));
@@ -93,6 +93,9 @@ export default class Gallery {
   }
 
   onThumbnailsClick(evt) {
+    if (evt.target.getAttribute("target") === "_blank") {
+      return;
+    }
     evt.preventDefault();
     const findFigure = e => e.tagName && e.tagName.toUpperCase() === 'FIGURE';
     const clickedListItem = this.closestParent(evt.target, findFigure);

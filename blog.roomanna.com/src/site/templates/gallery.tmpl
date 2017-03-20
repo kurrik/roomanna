@@ -7,6 +7,11 @@
   {{with .Description}}
     <figcaption itemprop="caption description">{{.}}</figcaption>
   {{end}}
+  {{with .Reference}}
+    <figcaption class="reference">
+      <a href="{{.Link}}" class="tooltip-trigger" data-placement="bottom" title="{{.Text}}" target="_blank">Reference</a>
+    </figcaption>
+  {{end}}
 </figure>{{end}}
 </div>
 {{end}}
