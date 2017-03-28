@@ -18,6 +18,6 @@ test:
 	npm run test
 
 deploy:
-	unset DEVEL
+	export DEVEL=0
 	npm run build
-	appcfg.py --oauth2 update src/server
+	appcfg.py update src/server
