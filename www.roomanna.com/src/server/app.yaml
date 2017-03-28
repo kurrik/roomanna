@@ -1,8 +1,7 @@
 application: roomanna-www-hrd
 version: 1
-runtime: python27
-threadsafe: false
-api_version: 1
+runtime: go
+api_version: go1
 
 handlers:
 - url: /favicon.ico
@@ -11,11 +10,11 @@ handlers:
 
 - url: /static/dev
   static_dir: static/dev/
-  expiration: "1d"
+  expiration: "1s"
 
 - url: /static
   static_dir: static/
   expiration: "365d"
 
 - url: /.*
-  script: main.py
+  script: _go_app

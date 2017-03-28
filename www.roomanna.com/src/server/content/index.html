@@ -1,10 +1,11 @@
+{{define "content"}}
 <!DOCTYPE html>
 <html>
   <head>
     <title>roomanna.com</title>
-    <link rel="stylesheet" href="static/dev/css/splash.css">
-    <script src="static/dev/js/common.js"></script>
-    <script src="static/dev/js/splash.js"></script>
+    <link rel="stylesheet" href="{{.StaticPrefix}}/css/splash.css">
+    <script src="{{.StaticPrefix}}/js/common.js"></script>
+    <script src="{{.StaticPrefix}}/js/splash.js"></script>
     <script>
     </script>
     <script type="text/javascript">
@@ -28,3 +29,4 @@
     <div id="fonty">roomanna.com</div>
   </body>
 </html>
+{{end}}

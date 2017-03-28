@@ -1,6 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
-var PROD = JSON.parse(process.env.PROD || '0');
+var PROD = !!!JSON.parse(process.env.DEVEL || '0'); // Defaults to PROD unless DEVEL=1
 var PUBLIC_PREFIX = PROD ? 'static/' : 'static/dev/';
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
