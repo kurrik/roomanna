@@ -5,7 +5,7 @@ usage:
 	@echo '    deploy        Deploy'
 
 serve:
-	dev_appserver.py --port=9997 --admin_port=8001 --skip_sdk_update_check=yes appengine
+	npm run watch& dev_appserver.py --port=9997 --admin_port=8001 --skip_sdk_update_check=yes src/server
 
 deploy:
 	appcfg.py --oauth2 update appengine

@@ -1,0 +1,41 @@
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+}
+
+body {
+  font: 14px Arial;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  background: #fafafa url('./bg-2.png');
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  -webkit-box-orient: vertical;
+}
+
+:global #fonty {
+  font: 25px LeagueGothic;
+  visibility: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+:global .texty {
+  background: #fff;
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid #999;
+  -webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+a {
+  color: #57e;
+}

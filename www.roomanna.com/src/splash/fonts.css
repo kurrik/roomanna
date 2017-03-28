@@ -1,0 +1,4 @@
+:global @font-face {
+  font-family: "LeagueGothic";
+  src: url('./LeagueGothic.otf') format("opentype");
+}

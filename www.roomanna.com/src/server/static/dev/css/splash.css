@@ -1,0 +1,47 @@
+@font-face {
+  font-family: "LeagueGothic";
+  src: url(/static/dev/fonts/LeagueGothic.otf) format("opentype");
+}
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+}
+
+body {
+  font: 14px Arial;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  background: #fafafa url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABZ0RVh0Q3JlYXRpb24gVGltZQAxMS8yMC8xMBfbjmsAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzQGstOgAAAB8ElEQVRogdWZzXKDMBCD95D0mDS0k+dq3/9Rwgy9JJn8YFuyPwM9cNOsF+0igYhpmiJ1XS6X34j4ioi9gPsWcZ8l3DiOPxFxFOsdI2JfAh2cYgJuEHHniNg5JOcYUSdRZNgkpQqXa05hxGFYwZ3EtXsjOXUTHyswrE52lmSbEZNhdWIHkbwkyVtgWFW7LMm3naMZVlUMIy+uhyoPtsow5jsmyasw7JidRjLBMO0713rWGlMM074zrOXsiO+Y71ios9O+U3zH+g/O3rTGNsOdfEedLOrstO+oOMbZayRRXCdkjR1ntyWxgFvW2VskEcAVSb73JxSrlsTaiZlrfI6IHcWc6jvOt71S795fDtQsiTM4co2f+qs+1LxZOj156y81ri07+2x/ryBaErH0pNRfDSOq79Df9tl6vSSRTk+K/d2cnZREOj1R++MD5SXXDnV2k2H1DWAVZ6fTE/vcHKhZEt01aZHs1kNV5hwVqyIlVawpUF7gZtudvVN60izZTQ8YhEMEwHV2Oj3BJNtxdjo9oSe2SnpC/8oekoCXNSGdnVaxIevsndKTboF3rhj9jkVL9lN/rQxvBjc3Luy/CC3Zuf7mmiP/i/QIvGfrPd4p/SBikq309+icSizqrAn9MZatF6bDaoHyOgLAB8rwJKT+/gB9FLLbX08TPwAAAABJRU5ErkJggg==);
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+  -webkit-box-orient: vertical;
+}
+
+#fonty {
+  font: 25px LeagueGothic;
+  visibility: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.texty {
+  background: #fff;
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid #999;
+  -webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+a {
+  color: #57e;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJjc3Mvc3BsYXNoLmNzcyIsInNvdXJjZVJvb3QiOiIifQ==*/
