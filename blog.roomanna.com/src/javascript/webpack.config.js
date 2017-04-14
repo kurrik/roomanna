@@ -10,7 +10,8 @@ var config = {
     'post031': './src/post031/main.js',
     'post032': './src/post032/main.js',
     'post035': './src/post035/main.js',
-    'post038': './src/post038/main.js'
+    'post038': './src/post038/main.js',
+    'post039': './src/post039/main.js'
   },
   output: {
     path: path.join(__dirname, '../../build/content/static'),
