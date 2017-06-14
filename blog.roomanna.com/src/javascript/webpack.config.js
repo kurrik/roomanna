@@ -11,7 +11,7 @@ var config = {
     'post032': './src/post032/main.js',
     'post035': './src/post035/main.js',
     'post038': './src/post038/main.js',
-    'post039': './src/post039/main.js'
+    'post039': './src/post039/main.jsx'
   },
   output: {
     path: path.join(__dirname, '../../build/content/static'),
@@ -24,6 +24,12 @@ var config = {
         exclude: /(node_modules)/,
         loader: 'babel-loader',
         query: { presets: ['es2015'], cacheDirectory: true }
+      },
+      {
+        test: /\.jsx$/,
+        exclude: /(node_modules)/,
+        loader: 'babel-loader',
+        query: { presets: ['es2015', 'react', 'stage-0'], cacheDirectory: true }
       },
       {
         test: /\.css$/,
@@ -40,11 +46,13 @@ var config = {
   },
   resolve: {
     alias: {
+      'components': path.join(__dirname, 'src/components'),
       'lib': path.join(__dirname, 'lib'),
       'default-skin.png': path.join(__dirname, 'node_modules/photoswipe/dist/default-skin/default-skin.png'),
       'default-skin.svg': path.join(__dirname, 'node_modules/photoswipe/dist/default-skin/default-skin.svg'),
       'preloader.gif': path.join(__dirname, 'node_modules/photoswipe/dist/default-skin/preloader.gif')
-    }
+    },
+    extensions: ['', '.js', '.jsx'],
   },
   plugins: [
     new webpack.optimize.DedupePlugin(),
@@ -60,10 +68,17 @@ var config = {
   ]
 };
 
+new webpack.optimize.UglifyJsPlugin()
+
 if (PROD) {
-  config.plugins.push(new webpack.optimize.UglifyJsPlugin({
-    compress: { warnings: false }
-  }));
+  config.plugins.push(
+    new webpack.optimize.UglifyJsPlugin({
+      compress: { warnings: false }
+    }),
+    new webpack.DefinePlugin({
+      'process.env': { NODE_ENV: JSON.stringify('production') }
+    })
+  );
 } else {
   config.devtool = '#inline-source-map';
 }
