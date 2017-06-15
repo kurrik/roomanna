@@ -18,29 +18,41 @@ var config = {
     filename: 'js/[name].js'
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /(node_modules)/,
-        loader: 'babel-loader',
-        query: { presets: ['es2015'], cacheDirectory: true }
+        use: [
+          {
+            loader: 'babel-loader',
+            options: { presets: ['es2015'], cacheDirectory: true }
+          }
+        ],
       },
       {
         test: /\.jsx$/,
         exclude: /(node_modules)/,
-        loader: 'babel-loader',
-        query: { presets: ['es2015', 'react', 'stage-0'], cacheDirectory: true }
+        use: [
+          {
+            loader: 'babel-loader',
+            options: { presets: ['es2015', 'react', 'stage-0'], cacheDirectory: true }
+          },
+        ]
       },
       {
         test: /\.css$/,
         exclude: /(node_modules)/,
-        loader: ExtractTextPlugin.extract([
-          'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
-        ])
+        use: ExtractTextPlugin.extract({
+          use: 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
+        })
       },
       {
         test: /\.(gif|png|svg)$/,
-        loader: 'url-loader'
+        use: [
+          {
+            loader: 'url-loader'
+          }
+        ]
       }
     ]
   },
@@ -52,10 +64,9 @@ var config = {
       'default-skin.svg': path.join(__dirname, 'node_modules/photoswipe/dist/default-skin/default-skin.svg'),
       'preloader.gif': path.join(__dirname, 'node_modules/photoswipe/dist/default-skin/preloader.gif')
     },
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['.js', '.jsx'],
   },
   plugins: [
-    new webpack.optimize.DedupePlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'common'
     }),
@@ -64,11 +75,9 @@ var config = {
       $: 'jquery',
       jquery: 'jquery'
     }),
-    new ExtractTextPlugin('css/[name].css')
+    new ExtractTextPlugin({ filename: 'css/[name].css' })
   ]
 };
-
-new webpack.optimize.UglifyJsPlugin()
 
 if (PROD) {
   config.plugins.push(
