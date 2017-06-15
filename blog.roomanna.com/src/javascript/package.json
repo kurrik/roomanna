@@ -8,7 +8,7 @@
     "build": "webpack --progress --colors",
     "build-grunt": "webpack",
     "test": "jest --verbose",
-    "components": "webpack-dev-server --hot --inline"
+    "components": "webpack-dev-server --hot --inline --content-base ../../build/content/static/"
   },
   "author": "Arne Roomann-Kurrik",
   "devDependencies": {

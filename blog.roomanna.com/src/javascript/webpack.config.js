@@ -6,6 +6,7 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var config = {
   entry: {
     'common': ['jquery', 'bootstrap'],
+    'components': ['./src/components/index.jsx', './src/components/index.html'],
     'roomanna': './src/roomanna/main.js',
     'post031': './src/post031/main.js',
     'post032': './src/post032/main.js',
@@ -45,6 +46,15 @@ var config = {
         use: ExtractTextPlugin.extract({
           use: 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
         })
+      },
+      {
+        test: /\.html$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: { name: '[name].[ext]' }
+          }
+        ]
       },
       {
         test: /\.(gif|png|svg)$/,
