@@ -1,12 +1,13 @@
 var path = require('path');
 var webpack = require('webpack');
 var PROD = JSON.parse(process.env.PROD || '0');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var FlowBabelWebpackPlugin = require('flow-babel-webpack-plugin');
 
 var config = {
   entry: {
     'common': ['jquery', 'bootstrap'],
-    'components': ['./src/components/index.jsx', './src/components/index.html'],
+    'components': './src/components/ComponentBrowser/index.jsx',
     'roomanna': './src/roomanna/main.js',
     'post031': './src/post031/main.js',
     'post032': './src/post032/main.js',
@@ -85,7 +86,8 @@ var config = {
       $: 'jquery',
       jquery: 'jquery'
     }),
-    new ExtractTextPlugin({ filename: 'css/[name].css' })
+    new ExtractTextPlugin({ filename: 'css/[name].css' }),
+    new FlowBabelWebpackPlugin(),
   ]
 };
 
