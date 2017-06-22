@@ -3,14 +3,14 @@
 import React from 'react';
 import type { Children } from 'react';
 
-import styles from './SectionBase.css';
+import styles from './Section.css';
 
-export type SectionBaseProps = {
+export type SectionProps = {
   title: string,
   children?: Children,
 };
 
-export default class SectionBase extends React.Component<any, SectionBaseProps, any> {
+export default class Section extends React.Component<any, SectionProps, any> {
   render() {
     const {children, title} = this.props;
     return (
