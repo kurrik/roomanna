@@ -13,19 +13,32 @@ import type Moment from 'moment';
 import styles from './TimestampChart.css';
 
 type DataPoint = {
-  value: number,
+  value: Moment,
+  points?: Array<DataPoint>,
 };
 
 type Props = {
-  data?: Array<DataPoint>,
+  data: Array<DataPoint>,
+  marginTop: number,
+  marginRight: number,
+  marginBottom: number,
+  marginLeft: number,
 };
 
 export default class TimestampChart extends React.Component {
   props: Props;
 
-  LessThanDayValues = ['hours', 'minutes', 'seconds'];
+  static defaultProps = {
+    data: [],
+    marginTop: 10,
+    marginRight: 25,
+    marginBottom: 15,
+    marginLeft: 35,
+  };
 
-  lessThanDay = (value: string) => this.LessThanDayValues.includes(value);
+  static LessThanDayValues = ['hours', 'minutes', 'seconds'];
+
+  lessThanDay = (value: string) => TimestampChart.LessThanDayValues.includes(value);
 
   getDate = (timestamp: number) => {
     const date = moment(timestamp);
@@ -43,10 +56,11 @@ export default class TimestampChart extends React.Component {
     return date.valueOf();
   }
 
-  timeRangePad = (timestamps: Array<number>) => {
+  timeRangePad = (points: Array<DataPoint>) => {
     let minDate;
     let maxDate;
     let pad = 'days';
+    const timestamps = points.map(x => x.value);
     if (timestamps.length > 1) {
       minDate = moment(Math.min(...timestamps));
       maxDate = moment(Math.max(...timestamps));
@@ -81,16 +95,18 @@ export default class TimestampChart extends React.Component {
   };
 
   renderChart = (dom: Node) => {
-    const {data} = this.props;
-    const padding = this.timeRangePad((data || []).map((x) => x.value));
-    const margin = { top: 10, right: 25, bottom: 15, left: 35 };
+    const {data, marginLeft, marginRight, marginTop, marginBottom} = this.props;
+    const padding = this.timeRangePad(data);
+    if (data.length > 0 && data[0].points) {
+      const paddingY = this.timeRangePad(data[0].points);
+    }
     const width = window.innerWidth - 150;
     const height = this.lessThanDay(padding.pad) ?
-      (100 - margin.top - margin.bottom) :
-      (300 - margin.top - margin.bottom);
+      (100 - marginTop - marginBottom) :
+      (300 - marginTop - marginBottom);
 
-    const x = d3.scaleTime().range([0 + margin.right, width - margin.left]);
-    const y = d3.scaleTime().range([margin.top, height - margin.bottom - margin.top]);
+    const x = d3.scaleTime().range([0 + marginRight, width - marginLeft]);
+    const y = d3.scaleTime().range([marginTop, height - marginBottom - marginTop]);
 
     const ticks = width > 800 ? 8 : 4;
 
@@ -119,29 +135,29 @@ export default class TimestampChart extends React.Component {
 
     var yAxis = d3.axisLeft(y)
       .ticks(5)
-      .tickSize(-width + margin.right, margin.left)
+      .tickSize(-width + marginRight, marginLeft)
       .tickFormat(d3.timeFormat(yFormat));
 
     var svg = d3.select(dom).append('svg')
-      .attr('width', width + margin.left + margin.right)
-      .attr('height', height + margin.top + margin.bottom);
+      .attr('width', width + marginLeft + marginRight)
+      .attr('height', height + marginTop + marginBottom);
 
     var context = svg.append('g')
       .attr('class', styles.context)
-      .attr('transform', `translate(${margin.left},${margin.top})`);
+      .attr('transform', `translate(${marginLeft},${marginTop})`);
 
     context.append('g')
       .attr('class', classnames('x', 'axis'))
-      .attr('transform', `translate(${margin.left},${margin.top + (height - margin.bottom)})`)
+      .attr('transform', `translate(${marginLeft},${marginTop + (height - marginBottom)})`)
       .call(xAxis);
 
     context.append('g')
       .attr('class', classnames('y', 'axis'))
-      .attr('transform', `translate(${margin.left},${margin.top})`)
+      .attr('transform', `translate(${marginLeft},${marginTop})`)
       .call(yAxis);
 
     var circles = context.append('g')
-      .attr('transform', `translate(${margin.left},${margin.top})`);
+      .attr('transform', `translate(${marginLeft},${marginTop})`);
 
     circles.selectAll('.circ')
       .data(data)
