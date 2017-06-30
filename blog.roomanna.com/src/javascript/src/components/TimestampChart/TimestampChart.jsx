@@ -14,11 +14,14 @@ import styles from './TimestampChart.css';
 
 type DataPoint = {
   value: Moment,
+};
+
+type DataSeries = DataPoint & {
   points?: Array<DataPoint>,
 };
 
 type Props = {
-  data: Array<DataPoint>,
+  data: Array<DataSeries>,
   marginTop: number,
   marginRight: number,
   marginBottom: number,
@@ -56,7 +59,7 @@ export default class TimestampChart extends React.Component {
     return date.valueOf();
   }
 
-  timeRangePad = (points: Array<DataPoint>) => {
+  timeRangePad = (points: $ReadOnlyArray<DataPoint>) => {
     let minDate;
     let maxDate;
     let pad = 'days';

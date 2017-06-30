@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "flow-babel-webpack-plugin": {
+      "version": "1.0.1",
+      "from": "flow-babel-webpack-plugin@^1.0.1",
+      "dependencies": {
+        "flow-bin": {
+          "version": "0.49.1",
+          "from": "flow-bin@^0.49.1"
+        }
+      }
+    }
+  }
+}
