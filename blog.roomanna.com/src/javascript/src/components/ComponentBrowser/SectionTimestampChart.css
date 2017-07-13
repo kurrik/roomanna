@@ -9,3 +9,7 @@
 .seriesC {
   fill: blue;
 }
+
+.highlight {
+  fill: pink !important;
+}

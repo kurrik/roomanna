@@ -16,13 +16,15 @@ type DataPoint = {
   value: Moment,
 };
 
-type DataSeries = DataPoint & {
+export type DataSeries = DataPoint & {
+  className?: string,
   points: Array<DataPoint>,
 };
 
 type Props = {
   data: Array<DataSeries>,
   chartHeight: number,
+  chartWidth: number,
   margin: {
     top: number,
     right: number,
@@ -40,6 +42,7 @@ type Props = {
 type TimeRange = {
   min: Moment,
   max: Moment,
+  className?: string,
 };
 
 export default class TimestampChart extends React.Component {
@@ -48,6 +51,7 @@ export default class TimestampChart extends React.Component {
   static defaultProps = {
     data: [],
     chartHeight: 300,
+    chartWidth: window.innerWidth - 150,
     margin: {
       top: 10,
       right: 25,
@@ -114,6 +118,7 @@ export default class TimestampChart extends React.Component {
     const {
       data,
       chartHeight,
+      chartWidth,
       margin,
       xLabelFormat,
       yLabelFormat,
@@ -124,7 +129,7 @@ export default class TimestampChart extends React.Component {
 
     const paddingY = this.timeRangePad(data);
     const paddingX = data.map((x) => this.timeRangePad(x.points)).reduce(this.reduceTimeRanges);
-    const width = window.innerWidth - 150;
+    const width = chartWidth;
     const height = chartHeight - margin.top - margin.bottom;
 
     const x = d3.scaleTime().range([0 + margin.right, width - margin.left]);
@@ -166,8 +171,8 @@ export default class TimestampChart extends React.Component {
 
     if (xHighlight) {
       const highlight = {
-        top: y(moment(xHighlight.min)),
-        bottom: y(moment(xHighlight.max)),
+        top: y(moment(xHighlight.min)) + margin.top,
+        bottom: y(moment(xHighlight.max)) + margin.top,
         left: margin.left,
         right: width + margin.left - margin.right,
       };
@@ -184,8 +189,8 @@ export default class TimestampChart extends React.Component {
       const highlight = {
         top: -margin.top,
         bottom: height - margin.bottom + margin.top,
-        left: x(moment(yHighlight.min)),
-        right: x(moment(yHighlight.max)),
+        left: x(moment(yHighlight.min)) + margin.left,
+        right: x(moment(yHighlight.max)) + margin.left,
       };
       context
         .append('rect')
@@ -213,9 +218,18 @@ export default class TimestampChart extends React.Component {
       .selectAll(`.${styles.point}`)
         .data((d) => d.points.map((x) => ({...x, parent: d})));
 
+    const pointClasses = (pt: Object): ?string => {
+      return classnames(
+        styles.point,
+        pt.parent.className,
+        this.pointRangeClass(pt, yHighlight),
+        this.pointRangeClass(pt.parent, xHighlight),
+      );
+    };
+
     points.enter()
       .append('circle')
-      .attr('class', (d) => classnames(styles.point, d.parent.class))
+      .attr('class', (d) => pointClasses(d))
       .attr('cx', (d) => x(moment(d.value)))
       .attr('cy', (d) => y(moment(d.parent.value)))
       .attr('r', pointRadius);
@@ -223,6 +237,13 @@ export default class TimestampChart extends React.Component {
     points.exit()
       .remove();
 
+  };
+
+  pointRangeClass = (point: DataPoint, range: ?TimeRange): ?string => {
+    if (range && range.className && point.value.isBetween(range.min, range.max, null, '[]')) {
+      return range.className;
+    }
+    return null;
   };
 
   render() {

@@ -1,38 +1,61 @@
+/* @flow */
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestComponent from 'components/TestComponent';
+import TimestampChart from 'components/TimestampChart';
+import type {DataSeries} from 'components/TimestampChart';
 
-ReactDOM.render(
-  <TestComponent />,
-  document.querySelector('.postbody')
-);
+import styles from './main.css';
 
-import './main.css';
-import 'seedrandom';
+import seedrandom from 'seedrandom';
 import * as d3 from 'd3';
+import moment from 'moment';
+import type Moment from 'moment';
 
-Math.seedrandom('hello.');
-console.log('foo', d3);
-console.log(d3.randomExponential(1/40)());
+class DataGenerator {
+  base: Moment;
+  data: Array<DataSeries>;
 
-const tweetCountGenerator = d3.randomNormal(20, 10.0);
-const tweetTimestampGenerator = d3.randomNormal(3600000, 1800000);
-const impressionCountGenerator = d3.randomNormal(100, 10.0);
-const impressionTimestampGenerator = d3.randomExponential(1/1000);
+  fromBase = (obj: Object) => this.base.clone().add(obj);
 
-let points = [];
-let start = new Date("6/1/2017").getTime();
+  constructor(base: Moment, seed: string) {
+    this.base = base;
+    seedrandom(seed, { global: true });
 
-const tweetCount = Math.round(tweetCountGenerator());
-for (let i = 0; i < tweetCount; i++) {
-  const impressionCount = Math.round(impressionCountGenerator());
-  start = start + tweetTimestampGenerator();
-  points.push([]);
-  let tweetStart = start;
-  for (let j = 0; j < impressionCount; j++) {
-    const timestamp = tweetStart + impressionTimestampGenerator();
-    points[i].push(new Date(timestamp));
+    const tweetCountGenerator = d3.randomNormal(10, 10.0);
+    const tweetMinuteSpacingGenerator = d3.randomNormal(240, 200);
+    const impressionCountGenerator = d3.randomNormal(100, 10.0);
+    const impressionSecondSpacingGenerator = d3.randomExponential(1/2000);
+    const tweetCount = Math.round(tweetCountGenerator());
+
+    this.data = [];
+    let tweetTime: Moment = this.base.clone();
+    for (let i = 0; i < tweetCount; i++) {
+      const impressionCount = Math.round(impressionCountGenerator());
+      tweetTime.add({minutes: tweetMinuteSpacingGenerator()});
+      const series: DataSeries = {
+        className: styles.point,
+        value: tweetTime.clone(),
+        points: [],
+      };
+      this.data.push(series);
+      let impressionTime: Moment = tweetTime.clone();
+      for (let j = 0; j < impressionCount; j++) {
+        impressionTime.add({
+          seconds: impressionSecondSpacingGenerator(),
+        });
+        this.data[i].points.push({
+          value: impressionTime.clone(),
+        });
+      }
+    }
   }
 }
 
-console.log('points', points);
+const example = new DataGenerator(moment('2017-06-01'), 'hi!');
+const range = { min: moment('2017-06-03'), max: moment('2017-06-04'), className: styles.highlight };
+
+ReactDOM.render(
+  <TimestampChart data={example.data} chartWidth={500} xHighlight={null} yHighlight={range} />,
+  document.getElementById('example01')
+);

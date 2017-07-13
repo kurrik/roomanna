@@ -15,7 +15,7 @@ export default class SectionTimestampChart extends React.Component {
   getData = () => {
     return [
       {
-        class: styles.seriesA,
+        className: styles.seriesA,
         value: this.fromNow({hours: 1}),
         points: [
           {value: this.fromNow({hours: 1, minutes: 30})},
@@ -23,16 +23,18 @@ export default class SectionTimestampChart extends React.Component {
         ],
       },
       {
-        class: styles.seriesB,
+        className: styles.seriesB,
         value: this.fromNow({hours: 2}),
         points: [
+          {value: this.fromNow({hours: 2, minutes: 0})},
           {value: this.fromNow({hours: 2, minutes: 10})},
           {value: this.fromNow({hours: 2, minutes: 25})},
+          {value: this.fromNow({hours: 2, minutes: 60})},
           {value: this.fromNow({hours: 2, minutes: 90})},
         ],
       },
       {
-        class: styles.seriesC,
+        className: styles.seriesC,
         value: this.fromNow({hours: 3}),
         points: [
           {value: this.fromNow({hours: 3, minutes: 13})},
@@ -47,13 +49,14 @@ export default class SectionTimestampChart extends React.Component {
   middleRange = {
     min: this.fromNow({hours: 2}),
     max: this.fromNow({hours: 3}),
+    className: styles.highlight,
   };
 
   render() {
     return (
       <Section title='TimestampChart'>
         <SectionSublabel>Normal chart</SectionSublabel>
-        <TimestampChart data={this.getData()} x />
+        <TimestampChart data={this.getData()} />
         <SectionSublabel>Highlights</SectionSublabel>
         <TimestampChart data={this.getData()} xHighlight={this.middleRange} yHighlight={this.middleRange} />
       </Section>
