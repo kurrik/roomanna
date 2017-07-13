@@ -56,6 +56,6 @@ const example = new DataGenerator(moment('2017-06-01'), 'hi!');
 const range = { min: moment('2017-06-03'), max: moment('2017-06-04'), className: styles.highlight };
 
 ReactDOM.render(
-  <TimestampChart data={example.data} chartWidth={500} xHighlight={null} yHighlight={range} />,
+  <TimestampChart data={example.data} chartWidth={500} yHighlight={range} />,
   document.getElementById('example01')
 );
