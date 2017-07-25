@@ -32,6 +32,8 @@ type Props = {
     left: number,
   },
   pad: 'seconds' | 'minutes' | 'hours' | 'days' | 'months' | 'years',
+  xLabel?: string,
+  yLabel?: string,
   xLabelFormat: string,
   yLabelFormat: string,
   xHighlight?: TimeRange,
@@ -53,10 +55,10 @@ export default class TimestampChart extends React.Component {
     chartHeight: 300,
     chartWidth: window.innerWidth - 150,
     margin: {
-      top: 10,
-      right: 25,
-      bottom: 15,
-      left: 35,
+      top: 15,
+      right: 15,
+      bottom: 35,
+      left: 75,
     },
     pad: 'days',
     xLabelFormat: '%x',  // e.g. '%m/%d/%y %H:%M'
@@ -120,6 +122,8 @@ export default class TimestampChart extends React.Component {
       chartHeight,
       chartWidth,
       margin,
+      xLabel,
+      yLabel,
       xLabelFormat,
       yLabelFormat,
       xHighlight,
@@ -129,52 +133,81 @@ export default class TimestampChart extends React.Component {
 
     const paddingY = this.timeRangePad(data);
     const paddingX = data.map((x) => this.timeRangePad(x.points)).reduce(this.reduceTimeRanges);
-    const width = chartWidth;
-    const height = chartHeight - margin.top - margin.bottom;
+    const innerWidth = chartWidth - margin.left - margin.right;
+    const innerHeight = chartHeight - margin.top - margin.bottom;
 
-    const x = d3.scaleTime().range([0 + margin.right, width - margin.left]);
-    const y = d3.scaleTime().range([margin.top, height - margin.bottom - margin.top]);
+    const x = d3.scaleTime().range([0, innerWidth]);
+    const y = d3.scaleTime().range([0, innerHeight]);
 
-    const ticks = width > 800 ? 8 : 4;
+    const ticks = innerWidth > 800 ? 8 : 4;
 
     x.domain(d3.extent([paddingX.min, paddingX.max]));
     y.domain(d3.extent([paddingY.min, paddingY.max]));
 
-    d3.select(`.${styles.axis}`)
     var xAxis = d3.axisBottom(x)
       .ticks(ticks)
-      .tickSize(-height, 0)
+      .tickSize(-innerHeight, 0)
       .tickFormat(d3.timeFormat(xLabelFormat));
 
     var yAxis = d3.axisLeft(y)
       .ticks(5)
-      .tickSize(-width + margin.right, margin.left)
+      .tickSize(-innerWidth, 0)
       .tickFormat(d3.timeFormat(yLabelFormat));
 
     var svg = d3.select(dom).append('svg')
-      .attr('width', width + margin.left + margin.right)
-      .attr('height', height + margin.top + margin.bottom);
+      .attr('class', classnames(styles.chart))
+      .attr('width', chartWidth)
+      .attr('height', chartHeight);
 
     var context = svg.append('g')
       .attr('class', styles.context)
       .attr('transform', `translate(${margin.left},${margin.top})`);
 
     context.append('g')
-      .attr('class', classnames('x', 'axis'))
-      .attr('transform', `translate(${margin.left},${margin.top + (height - margin.bottom)})`)
+      .attr('class', classnames('x', styles.axis))
+      .attr('transform', `translate(0,${innerHeight})`)
       .call(xAxis);
 
     context.append('g')
-      .attr('class', classnames('y', 'axis'))
-      .attr('transform', `translate(${margin.left},${margin.top})`)
+      .attr('class', classnames('y', styles.axis))
       .call(yAxis);
+
+    let xCoord;
+    let yCoord;
+
+    if (xLabel) {
+      xCoord = innerWidth / 2;
+      yCoord = innerHeight + margin.bottom;
+      context.append('g')
+        .attr('class', classnames('x', styles.axis, styles.label))
+        .append('text')
+        .attr('x', xCoord)
+        .attr('y', yCoord)
+        .style('text-anchor', 'middle')
+        .style('alignment-baseline', 'text-after-edge')
+        .text(xLabel);
+    }
+
+    if (yLabel) {
+      xCoord = 0 - margin.left;
+      yCoord = innerHeight / 2;
+      context.append('g')
+        .attr('class', classnames('y', styles.axis, styles.label))
+        .append('text')
+        .attr('x', -yCoord)
+        .attr('y', xCoord)
+        .attr('transform', 'rotate(-90)')
+        .style('text-anchor', 'middle')
+        .style('alignment-baseline', 'text-before-edge')
+        .text(yLabel);
+    }
 
     if (xHighlight) {
       const highlight = {
-        top: y(moment(xHighlight.min)) + margin.top,
-        bottom: y(moment(xHighlight.max)) + margin.top,
-        left: margin.left,
-        right: width + margin.left - margin.right,
+        top: y(moment(xHighlight.min)),
+        bottom: y(moment(xHighlight.max)),
+        left: 0,
+        right: innerWidth,
       };
       context
         .append('rect')
@@ -187,10 +220,10 @@ export default class TimestampChart extends React.Component {
 
     if (yHighlight) {
       const highlight = {
-        top: -margin.top,
-        bottom: height - margin.bottom + margin.top,
-        left: x(moment(yHighlight.min)) + margin.left,
-        right: x(moment(yHighlight.max)) + margin.left,
+        top: 0,
+        bottom: innerHeight,
+        left: x(moment(yHighlight.min)),
+        right: x(moment(yHighlight.max)),
       };
       context
         .append('rect')
@@ -203,7 +236,6 @@ export default class TimestampChart extends React.Component {
 
     var series = context
       .append('g')
-      .attr('transform', `translate(${margin.left},${margin.top})`)
       .selectAll(`.${styles.series}`)
         .data(data);
 

@@ -7,12 +7,12 @@
 :global(.domain) {
     display: none;
 }
-:global(.axis) path, :global(.axis) line {
+.axis path, .axis line {
     fill: none;
     stroke: #000;
     shape-rendering: crispEdges;
 }
-:global(.axis) text {
+.axis text {
     font-size: 12px;
 }
 :global(.tick) line {
@@ -29,4 +29,8 @@
 .highlight {
   fill: #36b;
   opacity: 0.3;
+}
+
+.chart {
+  /* border: 1px solid #d5d5d5; */
 }
