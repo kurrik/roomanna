@@ -44,12 +44,16 @@ type Props = {
   pad: 'seconds' | 'minutes' | 'hours' | 'days' | 'months' | 'years',
   xLabelHeight: number,
   xLabel: string,
+  xLabelClassName?: string,
   xAxisTickHeight: number,
   xAxisTickFormat: string,
+  xAxisTicks: number,
   yLabelWidth: number,
   yLabel: string,
+  yLabelClassName?: string,
   yAxisTickWidth: number,
   yAxisTickFormat: string,
+  yAxisTicks: number,
   xHighlight?: TimeRange,
   yHighlight?: TimeRange,
   pointRadius: number,
@@ -70,17 +74,19 @@ export default class TimestampChart extends React.Component {
     chartWidth: window.innerWidth - 150,
     padding: {
       top: 15,
-      right: 15,
+      right: 40,
       bottom: 15,
       left: 15,
     },
     pad: 'days',
     xLabelHeight: 0,
     xLabel: '',
+    xAxisTicks: 8,
     xAxisTickHeight: 25,
     xAxisTickFormat: '%x',  // e.g. '%m/%d/%y %H:%M'
     yLabelWidth: 0,
     yLabel: '',
+    yAxisTicks: 4,
     yAxisTickWidth: 75,
     yAxisTickFormat: '%x',
     pointRadius: 5,
@@ -157,10 +163,14 @@ export default class TimestampChart extends React.Component {
       padding,
       xLabelHeight,
       xLabel,
+      xLabelClassName,
+      xAxisTicks,
       xAxisTickHeight,
       xAxisTickFormat,
       yLabelWidth,
       yLabel,
+      yLabelClassName,
+      yAxisTicks,
       yAxisTickWidth,
       yAxisTickFormat,
       xHighlight,
@@ -207,9 +217,6 @@ export default class TimestampChart extends React.Component {
     const x = d3.scaleTime().range([0, innerBounds.width]);
     const y = d3.scaleTime().range([0, innerBounds.height]);
 
-    const xTicks = innerBounds.width > 800 ? 8 : 4;
-    const yTicks = innerBounds.height > 400 ? 6 : 3;
-
     const yExtentPadding = this.timeRangePad(data);
     const xExtentPadding = data
       .map((x) => this.timeRangePad(x.points))
@@ -218,12 +225,12 @@ export default class TimestampChart extends React.Component {
     y.domain(d3.extent([yExtentPadding.min, yExtentPadding.max]));
 
     var xAxis = d3.axisBottom(x)
-      .ticks(xTicks)
+      .ticks(xAxisTicks)
       .tickSize(-innerBounds.height, 0)
       .tickFormat(d3.timeFormat(xAxisTickFormat));
 
     var yAxis = d3.axisLeft(y)
-      .ticks(yTicks)
+      .ticks(yAxisTicks)
       .tickSize(-innerBounds.width, 0)
       .tickFormat(d3.timeFormat(yAxisTickFormat));
 
@@ -246,7 +253,7 @@ export default class TimestampChart extends React.Component {
 
     if (xLabel) {
       svg.append('g')
-        .attr('class', classnames('x', styles.axis, styles.label))
+        .attr('class', classnames('x', styles.axis, styles.label, xLabelClassName))
         .attr('transform', 'translate(0, 0)')
         .append('text')
         .attr('x', xLabelBounds.centerX)
@@ -258,7 +265,7 @@ export default class TimestampChart extends React.Component {
 
     if (yLabel) {
       svg.append('g')
-        .attr('class', classnames('y', styles.axis, styles.label))
+        .attr('class', classnames('y', styles.axis, styles.label, yLabelClassName))
         .attr('transform', 'translate(0, 0)')
         .append('text')
         .attr('x', -yLabelBounds.centerY) // Reversed on purpose
