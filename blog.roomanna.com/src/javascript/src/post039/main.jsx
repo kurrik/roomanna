@@ -55,7 +55,27 @@ class DataGenerator {
 const example = new DataGenerator(moment('2017-06-01'), 'hi!');
 const range = { min: moment('2017-06-03'), max: moment('2017-06-04'), className: styles.highlight };
 
+const chartProps = {
+  data: example.data,
+  chartWidth: 600,
+  xAxisTicks: 4,
+  xLabel: 'Impression time',
+  xLabelHeight: 15,
+  yLabel: 'Tweet creation time',
+  yLabelWidth: 15,
+};
+
 ReactDOM.render(
-  <TimestampChart data={example.data} chartWidth={500} yHighlight={range} />,
+  <TimestampChart yHighlight={range} {...chartProps} />,
   document.getElementById('example01')
+);
+
+ReactDOM.render(
+  <TimestampChart xHighlight={range} {...chartProps} />,
+  document.getElementById('example02')
+);
+
+ReactDOM.render(
+  <TimestampChart xHighlight={range} yHighlight={range} {...chartProps} />,
+  document.getElementById('example03')
 );

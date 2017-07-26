@@ -5,3 +5,5 @@ This is the post snippet.
 This is content after the break.
 
 <div id="example01"></div>
+<div id="example02"></div>
+<div id="example03"></div>
