@@ -1,4 +1,4 @@
-.PHONY: create deploy develop clean build
+.PHONY: create deploy develop clean build components
 
 build:
 	./node_modules/.bin/grunt all
@@ -14,3 +14,6 @@ develop:
 
 clean:
 	./node_modules/.bin/grunt clean
+
+components:
+	cd src/javascript && npm run components

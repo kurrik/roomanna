@@ -56,9 +56,9 @@ export default class SectionTimestampChart extends React.Component {
     return (
       <Section title='TimestampChart'>
         <SectionSublabel>Normal chart</SectionSublabel>
-        <TimestampChart data={this.getData()} yLabel="Y Axis Label" xLabel="X Axis Label" />
+        <TimestampChart className={styles.chart} data={this.getData()} yLabel="Y Axis Label" yLabelWidth={15} xLabel="X Axis Label" xLabelHeight={15} />
         <SectionSublabel>Highlights</SectionSublabel>
-        <TimestampChart data={this.getData()} xHighlight={this.middleRange} yHighlight={this.middleRange} />
+        <TimestampChart className={styles.chart} data={this.getData()} xHighlight={this.middleRange} yHighlight={this.middleRange} />
       </Section>
     );
   }

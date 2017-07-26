@@ -13,3 +13,7 @@
 .highlight {
   fill: pink !important;
 }
+
+.chart {
+  border: 1px solid #d5d5d5;
+}

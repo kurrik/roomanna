@@ -16,6 +16,20 @@ type DataPoint = {
   value: Moment,
 };
 
+type Bounds = {
+  top: number,
+  right: number,
+  bottom: number,
+  left: number,
+}
+
+type ComputedBounds = Bounds & {
+  width: number,
+  height: number,
+  centerX: number,
+  centerY: number,
+};
+
 export type DataSeries = DataPoint & {
   className?: string,
   points: Array<DataPoint>,
@@ -25,17 +39,17 @@ type Props = {
   data: Array<DataSeries>,
   chartHeight: number,
   chartWidth: number,
-  margin: {
-    top: number,
-    right: number,
-    bottom: number,
-    left: number,
-  },
+  className?: string,
+  padding: Bounds,
   pad: 'seconds' | 'minutes' | 'hours' | 'days' | 'months' | 'years',
-  xLabel?: string,
-  yLabel?: string,
-  xLabelFormat: string,
-  yLabelFormat: string,
+  xLabelHeight: number,
+  xLabel: string,
+  xAxisTickHeight: number,
+  xAxisTickFormat: string,
+  yLabelWidth: number,
+  yLabel: string,
+  yAxisTickWidth: number,
+  yAxisTickFormat: string,
   xHighlight?: TimeRange,
   yHighlight?: TimeRange,
   pointRadius: number,
@@ -54,15 +68,21 @@ export default class TimestampChart extends React.Component {
     data: [],
     chartHeight: 300,
     chartWidth: window.innerWidth - 150,
-    margin: {
+    padding: {
       top: 15,
       right: 15,
-      bottom: 35,
-      left: 75,
+      bottom: 15,
+      left: 15,
     },
     pad: 'days',
-    xLabelFormat: '%x',  // e.g. '%m/%d/%y %H:%M'
-    yLabelFormat: '%x',
+    xLabelHeight: 0,
+    xLabel: '',
+    xAxisTickHeight: 25,
+    xAxisTickFormat: '%x',  // e.g. '%m/%d/%y %H:%M'
+    yLabelWidth: 0,
+    yLabel: '',
+    yAxisTickWidth: 75,
+    yAxisTickFormat: '%x',
     pointRadius: 5,
   };
 
@@ -116,86 +136,133 @@ export default class TimestampChart extends React.Component {
     }
   };
 
+  computeBounds = (bounds: Bounds): ComputedBounds => {
+    const width = bounds.right - bounds.left;
+    const height = bounds.bottom - bounds.top;
+    return {
+      ...bounds,
+      width: width,
+      height: height,
+      centerX: width / 2 + bounds.left,
+      centerY: height / 2 + bounds.top,
+    };
+  };
+
   renderChart = (dom: Node) => {
     const {
       data,
       chartHeight,
       chartWidth,
-      margin,
+      className,
+      padding,
+      xLabelHeight,
       xLabel,
+      xAxisTickHeight,
+      xAxisTickFormat,
+      yLabelWidth,
       yLabel,
-      xLabelFormat,
-      yLabelFormat,
+      yAxisTickWidth,
+      yAxisTickFormat,
       xHighlight,
       yHighlight,
       pointRadius,
     } = this.props;
 
-    const paddingY = this.timeRangePad(data);
-    const paddingX = data.map((x) => this.timeRangePad(x.points)).reduce(this.reduceTimeRanges);
-    const innerWidth = chartWidth - margin.left - margin.right;
-    const innerHeight = chartHeight - margin.top - margin.bottom;
+    const innerBounds = this.computeBounds({
+      left: padding.left + yLabelWidth + yAxisTickWidth,
+      right: chartWidth - padding.right,
+      top: padding.top,
+      bottom: chartHeight - padding.bottom - xLabelHeight - xAxisTickHeight,
+    });
 
-    const x = d3.scaleTime().range([0, innerWidth]);
-    const y = d3.scaleTime().range([0, innerHeight]);
+    const xAxisBounds = this.computeBounds({
+      left: innerBounds.left,
+      right: innerBounds.right,
+      top: innerBounds.bottom,
+      bottom: innerBounds.bottom + xAxisTickHeight,
+    });
 
-    const ticks = innerWidth > 800 ? 8 : 4;
+    const xLabelBounds = this.computeBounds({
+      left: innerBounds.centerX,
+      right: innerBounds.centerX,
+      top: xAxisBounds.bottom,
+      bottom: xAxisBounds.bottom + xLabelHeight,
+    });
 
-    x.domain(d3.extent([paddingX.min, paddingX.max]));
-    y.domain(d3.extent([paddingY.min, paddingY.max]));
+    const yLabelBounds = this.computeBounds({
+      left: padding.left,
+      right: padding.left + yLabelWidth,
+      top: innerBounds.centerY,
+      bottom: innerBounds.centerY,
+    });
+
+    const yAxisBounds = this.computeBounds({
+      left: yLabelBounds.right,
+      right: yLabelBounds.right + yAxisTickWidth,
+      top: innerBounds.top,
+      bottom: innerBounds.bottom,
+    });
+
+
+    const x = d3.scaleTime().range([0, innerBounds.width]);
+    const y = d3.scaleTime().range([0, innerBounds.height]);
+
+    const xTicks = innerBounds.width > 800 ? 8 : 4;
+    const yTicks = innerBounds.height > 400 ? 6 : 3;
+
+    const yExtentPadding = this.timeRangePad(data);
+    const xExtentPadding = data
+      .map((x) => this.timeRangePad(x.points))
+      .reduce(this.reduceTimeRanges);
+    x.domain(d3.extent([xExtentPadding.min, xExtentPadding.max]));
+    y.domain(d3.extent([yExtentPadding.min, yExtentPadding.max]));
 
     var xAxis = d3.axisBottom(x)
-      .ticks(ticks)
-      .tickSize(-innerHeight, 0)
-      .tickFormat(d3.timeFormat(xLabelFormat));
+      .ticks(xTicks)
+      .tickSize(-innerBounds.height, 0)
+      .tickFormat(d3.timeFormat(xAxisTickFormat));
 
     var yAxis = d3.axisLeft(y)
-      .ticks(5)
-      .tickSize(-innerWidth, 0)
-      .tickFormat(d3.timeFormat(yLabelFormat));
+      .ticks(yTicks)
+      .tickSize(-innerBounds.width, 0)
+      .tickFormat(d3.timeFormat(yAxisTickFormat));
 
     var svg = d3.select(dom).append('svg')
-      .attr('class', classnames(styles.chart))
+      .attr('class', classnames(styles.chart, className))
       .attr('width', chartWidth)
       .attr('height', chartHeight);
 
-    var context = svg.append('g')
-      .attr('class', styles.context)
-      .attr('transform', `translate(${margin.left},${margin.top})`);
+    var innerContext = svg.append('g')
+      .attr('transform', `translate(${innerBounds.left},${innerBounds.top})`);
 
-    context.append('g')
+    innerContext.append('g')
       .attr('class', classnames('x', styles.axis))
-      .attr('transform', `translate(0,${innerHeight})`)
+      .attr('transform', `translate(0, ${innerBounds.height})`)
       .call(xAxis);
 
-    context.append('g')
+    innerContext.append('g')
       .attr('class', classnames('y', styles.axis))
       .call(yAxis);
 
-    let xCoord;
-    let yCoord;
-
     if (xLabel) {
-      xCoord = innerWidth / 2;
-      yCoord = innerHeight + margin.bottom;
-      context.append('g')
+      svg.append('g')
         .attr('class', classnames('x', styles.axis, styles.label))
+        .attr('transform', 'translate(0, 0)')
         .append('text')
-        .attr('x', xCoord)
-        .attr('y', yCoord)
+        .attr('x', xLabelBounds.centerX)
+        .attr('y', xLabelBounds.centerY)
         .style('text-anchor', 'middle')
         .style('alignment-baseline', 'text-after-edge')
         .text(xLabel);
     }
 
     if (yLabel) {
-      xCoord = 0 - margin.left;
-      yCoord = innerHeight / 2;
-      context.append('g')
+      svg.append('g')
         .attr('class', classnames('y', styles.axis, styles.label))
+        .attr('transform', 'translate(0, 0)')
         .append('text')
-        .attr('x', -yCoord)
-        .attr('y', xCoord)
+        .attr('x', -yLabelBounds.centerY) // Reversed on purpose
+        .attr('y', yLabelBounds.centerX) // Reversed on purpose
         .attr('transform', 'rotate(-90)')
         .style('text-anchor', 'middle')
         .style('alignment-baseline', 'text-before-edge')
@@ -203,38 +270,38 @@ export default class TimestampChart extends React.Component {
     }
 
     if (xHighlight) {
-      const highlight = {
+      const highlight = this.computeBounds({
         top: y(moment(xHighlight.min)),
         bottom: y(moment(xHighlight.max)),
         left: 0,
-        right: innerWidth,
-      };
-      context
+        right: innerBounds.width,
+      });
+      innerContext
         .append('rect')
         .attr('class', styles.highlight)
-        .attr('width', highlight.right - highlight.left)
-        .attr('height', highlight.bottom - highlight.top)
+        .attr('width', highlight.width)
+        .attr('height', highlight.height)
         .attr('x', highlight.left)
         .attr('y', highlight.top);
     }
 
     if (yHighlight) {
-      const highlight = {
+      const highlight = this.computeBounds({
         top: 0,
-        bottom: innerHeight,
+        bottom: innerBounds.height,
         left: x(moment(yHighlight.min)),
         right: x(moment(yHighlight.max)),
-      };
-      context
+      });
+      innerContext
         .append('rect')
         .attr('class', styles.highlight)
-        .attr('width', highlight.right - highlight.left)
-        .attr('height', highlight.bottom - highlight.top)
+        .attr('width', highlight.width)
+        .attr('height', highlight.height)
         .attr('x', highlight.left)
         .attr('y', highlight.top);
     }
 
-    var series = context
+    var series = innerContext
       .append('g')
       .selectAll(`.${styles.series}`)
         .data(data);
