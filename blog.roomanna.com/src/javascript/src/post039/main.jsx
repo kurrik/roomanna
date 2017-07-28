@@ -24,7 +24,7 @@ class DataGenerator {
 
     const tweetCountGenerator = d3.randomNormal(8, 5.0);
     const tweetMinuteSpacingGenerator = d3.randomNormal(300, 200);
-    const impressionCountGenerator = d3.randomNormal(30, 10.0);
+    const impressionCountGenerator = d3.randomNormal(20, 8.0);
     const impressionTimeGenerator = d3.randomExponential(1/80000);
     const tweetCount = Math.round(tweetCountGenerator());
 
