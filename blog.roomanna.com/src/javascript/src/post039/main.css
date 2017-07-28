@@ -1,7 +1,20 @@
-.highlight {
-  fill: pink;
+.highlightPointX {
+  fill: #BBA0B2;
+}
+
+.highlightPointY {
+  fill: #A4BFEB;
+}
+
+.highlightPointX.highlightPointY {
+  fill: #9095D1;
+}
+
+.highlightRect {
+  fill: #ABC1CF;
+  opacity: 0.3;
 }
 
 .point {
-  r: 2;
+  r: 3;
 }

@@ -22,10 +22,10 @@ class DataGenerator {
     this.base = base;
     seedrandom(seed, { global: true });
 
-    const tweetCountGenerator = d3.randomNormal(10, 10.0);
-    const tweetMinuteSpacingGenerator = d3.randomNormal(240, 200);
-    const impressionCountGenerator = d3.randomNormal(100, 10.0);
-    const impressionSecondSpacingGenerator = d3.randomExponential(1/2000);
+    const tweetCountGenerator = d3.randomNormal(8, 5.0);
+    const tweetMinuteSpacingGenerator = d3.randomNormal(300, 200);
+    const impressionCountGenerator = d3.randomNormal(30, 10.0);
+    const impressionTimeGenerator = d3.randomExponential(1/30000);
     const tweetCount = Math.round(tweetCountGenerator());
 
     this.data = [];
@@ -39,13 +39,13 @@ class DataGenerator {
         points: [],
       };
       this.data.push(series);
-      let impressionTime: Moment = tweetTime.clone();
       for (let j = 0; j < impressionCount; j++) {
+        let impressionTime: Moment = tweetTime.clone();
         impressionTime.add({
-          seconds: impressionSecondSpacingGenerator(),
+          seconds: impressionTimeGenerator(),
         });
         this.data[i].points.push({
-          value: impressionTime.clone(),
+          value: impressionTime,
         });
       }
     }
@@ -53,7 +53,21 @@ class DataGenerator {
 }
 
 const example = new DataGenerator(moment('2017-06-01'), 'hi!');
-const range = { min: moment('2017-06-03'), max: moment('2017-06-04'), className: styles.highlight };
+const rangeMin = moment('2017-06-03');
+const rangeMax = moment('2017-06-04');
+
+const rangeX = {
+  min: rangeMin,
+  max: rangeMax,
+  rectClassName: styles.highlightRect,
+  pointClassName: styles.highlightPointX
+};
+const rangeY = {
+  min: rangeMin,
+  max: rangeMax,
+  rectClassName: styles.highlightRect,
+  pointClassName: styles.highlightPointY
+};
 
 const chartProps = {
   data: example.data,
@@ -66,16 +80,16 @@ const chartProps = {
 };
 
 ReactDOM.render(
-  <TimestampChart yHighlight={range} {...chartProps} />,
+  <TimestampChart yHighlight={rangeY} {...chartProps} />,
   document.getElementById('example01')
 );
 
 ReactDOM.render(
-  <TimestampChart xHighlight={range} {...chartProps} />,
+  <TimestampChart xHighlight={rangeX} {...chartProps} />,
   document.getElementById('example02')
 );
 
 ReactDOM.render(
-  <TimestampChart xHighlight={range} yHighlight={range} {...chartProps} />,
+  <TimestampChart xHighlight={rangeX} yHighlight={rangeY} {...chartProps} />,
   document.getElementById('example03')
 );

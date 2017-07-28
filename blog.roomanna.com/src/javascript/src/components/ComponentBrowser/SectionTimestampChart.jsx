@@ -49,7 +49,7 @@ export default class SectionTimestampChart extends React.Component {
   middleRange = {
     min: this.fromNow({hours: 2}),
     max: this.fromNow({hours: 3}),
-    className: styles.highlight,
+    pointClassName: styles.highlight,
   };
 
   render() {

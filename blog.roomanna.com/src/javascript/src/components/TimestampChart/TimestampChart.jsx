@@ -62,7 +62,8 @@ type Props = {
 type TimeRange = {
   min: Moment,
   max: Moment,
-  className?: string,
+  rectClassName?: string,
+  pointClassName?: string,
 };
 
 export default class TimestampChart extends React.Component {
@@ -252,7 +253,7 @@ export default class TimestampChart extends React.Component {
       .call(yAxis);
 
     if (xLabel) {
-      svg.append('g')
+      const xLabelText = svg.append('g')
         .attr('class', classnames('x', styles.axis, styles.label, xLabelClassName))
         .attr('transform', 'translate(0, 0)')
         .append('text')
@@ -261,6 +262,7 @@ export default class TimestampChart extends React.Component {
         .style('text-anchor', 'middle')
         .style('alignment-baseline', 'text-after-edge')
         .text(xLabel);
+      /* TODO(kurrik): console.log(xLabelText.node().getBBox()); */
     }
 
     if (yLabel) {
@@ -285,7 +287,7 @@ export default class TimestampChart extends React.Component {
       });
       innerContext
         .append('rect')
-        .attr('class', styles.highlight)
+        .attr('class', classnames(styles.highlight, xHighlight.rectClassName))
         .attr('width', highlight.width)
         .attr('height', highlight.height)
         .attr('x', highlight.left)
@@ -301,7 +303,7 @@ export default class TimestampChart extends React.Component {
       });
       innerContext
         .append('rect')
-        .attr('class', styles.highlight)
+        .attr('class', classnames(styles.highlight, yHighlight.rectClassName))
         .attr('width', highlight.width)
         .attr('height', highlight.height)
         .attr('x', highlight.left)
@@ -346,8 +348,8 @@ export default class TimestampChart extends React.Component {
   };
 
   pointRangeClass = (point: DataPoint, range: ?TimeRange): ?string => {
-    if (range && range.className && point.value.isBetween(range.min, range.max, null, '[]')) {
-      return range.className;
+    if (range && range.pointClassName && point.value.isBetween(range.min, range.max, null, '[]')) {
+      return range.pointClassName;
     }
     return null;
   };
