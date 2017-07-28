@@ -80,6 +80,11 @@ const chartProps = {
 };
 
 ReactDOM.render(
+  <TimestampChart {...chartProps} />,
+  document.getElementById('example00')
+);
+
+ReactDOM.render(
   <TimestampChart yHighlight={rangeY} {...chartProps} />,
   document.getElementById('example01')
 );
