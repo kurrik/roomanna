@@ -104,3 +104,8 @@ cases where we elected to show less correct data in order to give a better
 user experience.  Eventually we did the same thing with media Tweets too, in
 that your Top Media Tweet would never be a Tweet which was already your
 Top Tweet.
+
+Of course, this kind of thing isn't unique to Twitter, or analytics.  One of
+my favorite examples is from Slack:
+
+<blockquote class="twitter-tweet" align="center" data-lang="en"><p lang="en" dir="ltr">When Hacker News commenters say &quot;I could build that app in a weekend!&quot; I think of this chart of how Slack decides to send a notification. <a href="https://t.co/LopicAyzkL">pic.twitter.com/LopicAyzkL</a></p>&mdash; Matt Haughey ❤️❤️💛 (@mathowie) <a href="https://twitter.com/mathowie/status/837735473745289218">March 3, 2017</a></blockquote>
