@@ -22,10 +22,10 @@ class DataGenerator {
     this.base = base;
     seedrandom(seed, { global: true });
 
-    const tweetCountGenerator = d3.randomNormal(8, 5.0);
-    const tweetMinuteSpacingGenerator = d3.randomNormal(300, 200);
+    const tweetCountGenerator = d3.randomNormal(10, 5.0);
+    const tweetMinuteSpacingGenerator = d3.randomNormal(4000, 3000);
     const impressionCountGenerator = d3.randomNormal(20, 8.0);
-    const impressionTimeGenerator = d3.randomExponential(1/80000);
+    const impressionTimeGenerator = d3.randomExponential(1/300000);
     const tweetCount = Math.round(tweetCountGenerator());
 
     this.data = [];
@@ -52,9 +52,9 @@ class DataGenerator {
   }
 }
 
-const example = new DataGenerator(moment('2017-06-01'), 'hi!');
-const rangeMin = moment('2017-06-03');
-const rangeMax = moment('2017-06-04');
+const example = new DataGenerator(moment('2017-06-15'), 'hi!');
+const rangeMin = moment('2017-07-01');
+const rangeMax = moment('2017-08-01');
 
 const rangeX = {
   min: rangeMin,
