@@ -238,7 +238,8 @@ export default class TimestampChart extends React.PureComponent {
     var svg = d3.select(dom).append('svg')
       .attr('class', classnames(styles.chart, className))
       .attr('width', chartWidth)
-      .attr('height', chartHeight);
+      .attr('height', chartHeight)
+      .attr('viewBox', `0 0 ${chartWidth} ${chartHeight}`);
 
     var innerContext = svg.append('g')
       .attr('transform', `translate(${innerBounds.left},${innerBounds.top})`);

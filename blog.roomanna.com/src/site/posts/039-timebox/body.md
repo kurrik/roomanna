@@ -56,8 +56,8 @@ impression for a Tweet created within the period.
 Turns out, this is not strictly what people expect if you say "Tweet
 impressions in July". The intuition for many of our users was to select all the
 Tweets which were created in July and sum up the impression number for
-each.  This was possible due to another feature our team built--all-time
-impressions on Tweet activity pages:
+each.  This was possible due to another feature our team built: all-time
+impressions on Tweet activity pages.
 
 {{template "image" (yamltemplate "imagedata").tweet_alltime_impressions}}
 
@@ -71,7 +71,7 @@ impression graph:
 Given these two methods of aggregation, imagine the method to select a "Top"
 Tweet for a given month.  Selecting the maximum by either horizontal or vertical
 slice might return a Tweet created in the wrong month (this could easily happen
-if a Tweet was create toward the end of a month and got the bulk of its
+if a Tweet was created toward the end of a month and got the bulk of its
 impressions in the following month).
 
 One approach we considered was to take the best Tweet from the intersection of
@@ -83,8 +83,9 @@ impressions equally across two months may not be the top in either.
 <div class="centered" id="example03"></div>
 
 Eventually, we figured the least surprising approach was to return the Tweet
-which got the most impressions in the given month.  This number is displayed
-as part of the Top Tweet UI:
+which got the most impressions in the given month.  Since this number is
+different from the all-time impression count, it is displayed as part of the
+Top Tweet UI:
 
 {{template "image" (yamltemplate "imagedata").tweet_monthly_impressions}}
 
