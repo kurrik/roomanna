@@ -9,6 +9,8 @@ scripts:
 styles:
   - /static/css/post039.css
 images:
+  twitter-card:
+    src: "monthly-impressions.png"
   monthly-impressions:
     src: "monthly-impressions.png"
     metadata:

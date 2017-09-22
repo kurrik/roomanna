@@ -5,6 +5,9 @@
   <meta name="twitter:site" content="@kurrik" />
   <meta name="twitter:url" content="{{.Post.Permalink}}" />
   <meta name="twitter:title" content="{{textcontent .Post.Title}}" />
+  {{with .Post.Image "twitter-card" -}}
+    <meta name="twitter:image" content="{{.Data.Path}}" />
+  {{- end}}
   <meta name="twitter:description" content="{{textcontent .Post.Snippet}}" />
 {{end}}
 {{define "styles"}}

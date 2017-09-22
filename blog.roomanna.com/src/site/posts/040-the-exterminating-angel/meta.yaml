@@ -5,6 +5,8 @@ tags:
   - cinemaclub
   - reviews
 images:
+  twitter-card:
+    src: "exterminating-angel.jpg"
   exterminating-angel:
     src: "exterminating-angel.jpg"
     metadata:
