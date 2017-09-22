@@ -1,0 +1,9 @@
+{{define "image"}}
+  {{- with .Metadata.href}}<a href="{{.}}">{{end -}}
+  {{- $img := or .Variants.thumb .Data -}}
+  <img src="{{$img.Path}}" width="{{$img.Width}}" height="{{$img.Height}}"
+    {{- with .Metadata.alt}}alt="{{.}}"{{end -}}
+    {{- with .Metadata.style}}style="{{.}}"{{end -}}
+  />
+  {{- with .Metadata.href}}</a>{{end -}}
+{{end}}

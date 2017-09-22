@@ -14,22 +14,6 @@ customers.
 
 <!--BREAK-->
 
-{{define "imagedata"}}
-monthly_impressions:
-  Image: {{imagemeta "monthly-impressions.png" | tojson}}
-  Alt: "Monthly impression counts"
-tweet_alltime_impressions:
-  Image: {{imagemeta "tweet-alltime-impressions.png" | tojson}}
-  Alt: "Alltime impression counts for a single Tweet"
-tweet_monthly_impressions:
-  Image: {{imagemeta "tweet-monthly-impressions.png" | tojson}}
-  Alt: "Monthly impression counts for a single Tweet"
-{{end}}
-
-{{define "image"}}
-  <p class="centered"><img style="width:50%;height:50%" width="{{.Image.Width}}" height="{{.Image.Height}}" src="{{.Image.Path}}" alt="{{.Alt}}" /></p>
-{{end}}
-
 For an example of this, it's interesting to consider that for the purposes of
 reporting analytics, a given Tweet impression is associated with two
 timestamps.  First is when the impression occurred, and second is when the
@@ -51,7 +35,9 @@ It represents the total number of impressions that month, but could include
 impressions from Tweets created before the period, and may not include every
 impression for a Tweet created within the period.
 
-{{template "image" (yamltemplate "imagedata").monthly_impressions}}
+<p class="centered">
+  {{template "image" (.Image "monthly-impressions")}}
+</p>
 
 Turns out, this is not strictly what people expect if you say "Tweet
 impressions in July". The intuition for many of our users was to select all the
@@ -59,7 +45,9 @@ Tweets which were created in July and sum up the impression number for
 each.  This was possible due to another feature our team built: all-time
 impressions on Tweet activity pages.
 
-{{template "image" (yamltemplate "imagedata").tweet_alltime_impressions}}
+<p class="centered">
+  {{template "image" (.Image "tweet-alltime-impressions")}}
+</p>
 
 For a Tweet created in July, this count might include impressions which
 occurred in August or even later.  So summing up this number for all Tweets in
@@ -87,7 +75,9 @@ which got the most impressions in the given month.  Since this number is
 different from the all-time impression count, it is displayed as part of the
 Top Tweet UI:
 
-{{template "image" (yamltemplate "imagedata").tweet_monthly_impressions}}
+<p class="centered">
+  {{template "image" (.Image "tweet-monthly-impressions")}}
+</p>
 
 Of course, this means that the Top Tweet in July might be a Tweet created in
 June, but we figured our users would understand.  When we tested this with

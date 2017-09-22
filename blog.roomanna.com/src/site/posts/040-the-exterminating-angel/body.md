@@ -42,17 +42,9 @@ implications of the world it builds.  In a way, it's almost like an inverted
 [Stalker][stalker] (theme movie night idea: people trying to either get into
 or out of rooms). It's a confident, entertaining and beautifully shot movie.
 
-{{define "imagedata"}}
-exterminating_angel:
-  Image: {{imagemeta "exterminating-angel.jpg" | tojson}}
-  Alt: "Still from The Exterminating Angel"
-{{end}}
-
-{{define "image"}}
-  <p class="centered"><img width="{{.Image.Width}}" height="{{.Image.Height}}" src="{{.Image.Path}}" alt="{{.Alt}}" /></p>
-{{end}}
-
-{{template "image" (yamltemplate "imagedata").exterminating_angel}}
+<p class="centered">
+  {{template "image" (.Image "exterminating-angel")}}
+</p>
 
 There's a lot of good discussion about the meaning of the film.  It's either an
 allegory about the [ruling class in Francoist Spain][ebert], a [Ballardian

@@ -8,3 +8,19 @@ scripts:
   - /static/js/post039.js
 styles:
   - /static/css/post039.css
+images:
+  monthly-impressions:
+    src: "monthly-impressions.png"
+    metadata:
+      alt: "Monthly impression counts WOO"
+      style: "width:50%;height:50%"
+  tweet-alltime-impressions:
+    src: "tweet-alltime-impressions.png"
+    metadata:
+      alt: "Alltime impression counts for a single Tweet WOO"
+      style: "width:50%;height:50%"
+  tweet-monthly-impressions:
+    src: "tweet-monthly-impressions.png"
+    metadata:
+      alt: "Monthly impression counts for a single Tweet WOO"
+      style: "width:50%;height:50%"

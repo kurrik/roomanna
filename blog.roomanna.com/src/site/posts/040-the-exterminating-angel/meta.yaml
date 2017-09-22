@@ -4,4 +4,8 @@ title: The Exterminating Angel (1962)
 tags:
   - cinemaclub
   - reviews
-
+images:
+  exterminating-angel:
+    src: "exterminating-angel.jpg"
+    metadata:
+      alt: "Still from The Exterminating Angel"
