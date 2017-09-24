@@ -5,9 +5,9 @@
   <meta name="twitter:site" content="@kurrik" />
   <meta name="twitter:url" content="{{.Post.Permalink}}" />
   <meta name="twitter:title" content="{{textcontent .Post.Title}}" />
-  {{- $img := .Post.Image "twitter-card" -}}
+  {{$img := .Post.Image "twitter-card" -}}
   {{if $img -}}
-    <meta name="twitter:image" content="{{.Site.Root}}{{$img.Data.Path}}" />
+    <meta name="twitter:image" content="{{$img.Data.Permalink}}" />
   {{- end}}
   <meta name="twitter:description" content="{{textcontent .Post.Snippet}}" />
 {{end}}
