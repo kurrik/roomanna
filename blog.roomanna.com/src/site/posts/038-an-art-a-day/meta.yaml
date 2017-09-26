@@ -8,3 +8,251 @@ scripts:
   - /static/js/post038.js
 styles:
   - /static/css/post038.css
+images:
+  twitter-card:
+    src: images/2017-01-09.jpg
+  2017-01-01:
+    src: images/2017-01-01.jpg
+    variants:
+      thumb:
+        src: thumbs/2017-01-01.jpg
+    metadata:
+      alt: 1/1/2017
+      referenceurl: https://www.google.com/culturalinstitute/beta/u/0/asset/st-peter-penitent/PQHwLQK-rnIW_Q
+      reference: St.Peter Penitent - Gerrit van Honthorst
+  2017-01-02:
+    src: images/2017-01-02.jpg
+    variants:
+      thumb:
+        src: thumbs/2017-01-02.jpg
+    metadata:
+      alt: 1/2/2017
+      referenceurl: https://www.google.com/culturalinstitute/beta/u/0/asset/still-life-with-golden-bream/_wF25zyWxL0HNg
+      reference: Still Life with Golden Bream - Francisco de Goya
+  2017-01-03:
+    src: images/2017-01-03.jpg
+    variants:
+      thumb:
+        src: thumbs/2017-01-03.jpg
+    metadata:
+      alt: 1/3/2017
+      referenceurl: https://www.google.com/culturalinstitute/beta/asset/he-can-no-longer-at-the-age-of-ninety-eight/kgEEv3oMtfYbEA
+      reference: He Can No Longer at the Age of Ninety-Eight - Francisco de Goya
+  2017-01-04:
+    src: images/2017-01-04.jpg
+    variants:
+      thumb:
+        src: thumbs/2017-01-04.jpg
+    metadata:
+      alt: 1/4/2017
+      referenceurl: https://www.google.com/culturalinstitute/beta/asset/the-wave/-gEaE1qjRL-dDA
+      reference: The Wave - Gustave Courbet
+  2017-01-05:
+    src: images/2017-01-05.jpg
+    variants:
+      thumb:
+        src: thumbs/2017-01-05.jpg
+    metadata:
+      alt: 1/5/2017
+      referenceurl: https://www.google.com/culturalinstitute/beta/asset/self-portrait/dAHoypIzxT84Ug
+      reference: Self-portrait - Joseph Wright of Derby
+  2017-01-06:
+    src: images/2017-01-06.jpg
+    variants:
+      thumb:
+        src: thumbs/2017-01-06.jpg
+    metadata:
+      alt: 1/6/2017
+      referenceurl: https://www.google.com/culturalinstitute/beta/asset/lady-in-black-with-spanish-scarf-o-in-black-with-a-scarf/7QEUFBZ-RQfDiw
+      reference: Lady in Black with Spanish Scarf - Robert Henri
+  2017-01-07:
+    src: images/2017-01-07.jpg
+    variants:
+      thumb:
+        src: thumbs/2017-01-07.jpg
+    metadata:
+      alt: 1/7/2017
+      referenceurl: https://www.google.com/culturalinstitute/beta/asset/talcott-williams/nAFSnZZc-oRYeg
+      reference: Talcott Williams - Thomas Cowperthwaite Eakins
+  2017-01-08:
+    src: images/2017-01-08.jpg
+    variants:
+      thumb:
+        src: thumbs/2017-01-08.jpg
+    metadata:
+      alt: 1/8/2017
+  2017-01-09:
+    src: images/2017-01-09.jpg
+    variants:
+      thumb:
+        src: thumbs/2017-01-09.jpg
+    metadata:
+      alt: 1/9/2017
+      referenceurl: https://www.google.com/culturalinstitute/beta/asset/the-golden-hour/rQEMba9jB6XNzA
+      reference: The Golden Hour - Thomas Moran
+  2017-01-10:
+    src: images/2017-01-10.jpg
+    variants:
+      thumb:
+        src: thumbs/2017-01-10.jpg
+    metadata:
+      alt: 1/10/2017
+      referenceurl: https://www.wikiart.org/en/albert-bierstadt/among-the-bernese-alps
+      reference: Albert Bierstadt - Among the Bernese Alps
+  2017-01-11:
+    src: images/2017-01-11.jpg
+    variants:
+      thumb:
+        src: thumbs/2017-01-11.jpg
+    metadata:
+      alt: 1/11/2017
+  2017-01-12:
+    src: images/2017-01-12.jpg
+    variants:
+      thumb:
+        src: thumbs/2017-01-12.jpg
+    metadata:
+      alt: 1/12/2017
+  2017-01-13:
+    src: images/2017-01-13.jpg
+    variants:
+      thumb:
+        src: thumbs/2017-01-13.jpg
+    metadata:
+      alt: 1/13/2017
+  2017-01-14:
+    src: images/2017-01-14.jpg
+    variants:
+      thumb:
+        src: thumbs/2017-01-14.jpg
+    metadata:
+      alt: 1/14/2017
+      referenceurl: https://www.google.com/culturalinstitute/beta/asset/louise-antoinette-feuardent/gQGmaRXk5yi1OQ
+      reference: Louise-Antoinette Feuardent - Jean-François Millet
+  2017-01-15:
+    src: images/2017-01-15.jpg
+    variants:
+      thumb:
+        src: thumbs/2017-01-15.jpg
+    metadata:
+      alt: 1/15/2017
+  2017-01-16:
+    src: images/2017-01-16.jpg
+    variants:
+      thumb:
+        src: thumbs/2017-01-16.jpg
+    metadata:
+      alt: 1/16/2017
+      referenceurl: https://www.google.com/culturalinstitute/beta/asset/still-life-with-tin-pitcher-and-peaches/owEaRtu7bNxUng
+      reference: Still Life with Tin Pitcher and Peaches - Jean-Baptiste-Siméon Chardin
+  2017-01-17:
+    src: images/2017-01-17.jpg
+    variants:
+      thumb:
+        src: thumbs/2017-01-17.jpg
+    metadata:
+      alt: 1/17/2017
+  2017-01-18:
+    src: images/2017-01-18.jpg
+    variants:
+      thumb:
+        src: thumbs/2017-01-18.jpg
+    metadata:
+      alt: 1/18/2017
+  2017-01-19:
+    src: images/2017-01-19.jpg
+    variants:
+      thumb:
+        src: thumbs/2017-01-19.jpg
+    metadata:
+      alt: 1/19/2017
+      referenceurl: https://www.google.com/culturalinstitute/beta/asset/a-bowl-of-plums/pwFFzDucn1HAQA
+      reference: A Bowl of Plums - Jean-Baptiste Simeon Chardin
+  2017-01-20:
+    src: images/2017-01-20.jpg
+    variants:
+      thumb:
+        src: thumbs/2017-01-20.jpg
+    metadata:
+      alt: 1/20/2017
+  2017-01-21:
+    src: images/2017-01-21.jpg
+    variants:
+      thumb:
+        src: thumbs/2017-01-21.jpg
+    metadata:
+      alt: 1/21/2017
+  2017-01-22:
+    src: images/2017-01-22.jpg
+    variants:
+      thumb:
+        src: thumbs/2017-01-22.jpg
+    metadata:
+      alt: 1/22/2017
+  2017-01-23:
+    src: images/2017-01-23.jpg
+    variants:
+      thumb:
+        src: thumbs/2017-01-23.jpg
+    metadata:
+      alt: 1/23/2017
+  2017-01-24:
+    src: images/2017-01-24.jpg
+    variants:
+      thumb:
+        src: thumbs/2017-01-24.jpg
+    metadata:
+      alt: 1/24/2017
+      referenceurl: https://www.wikiart.org/en/anthony-van-dyck/portrait-of-cornelis-van-der-geest
+      reference: Cornelis van der Geest - Anthony van Dyck
+  2017-01-25:
+    src: images/2017-01-25.jpg
+    variants:
+      thumb:
+        src: thumbs/2017-01-25.jpg
+    metadata:
+      alt: 1/25/2017
+      referenceurl: https://www.wikiart.org/en/thomas-couture/etude-de-jeune-fille
+      reference: Etude de Jeune Fille - Thomas Couture
+  2017-01-26:
+    src: images/2017-01-26.jpg
+    variants:
+      thumb:
+        src: thumbs/2017-01-26.jpg
+    metadata:
+      alt: 1/26/2017
+  2017-01-27:
+    src: images/2017-01-27.jpg
+    variants:
+      thumb:
+        src: thumbs/2017-01-27.jpg
+    metadata:
+      alt: 1/27/2017
+  2017-01-28:
+    src: images/2017-01-28.jpg
+    variants:
+      thumb:
+        src: thumbs/2017-01-28.jpg
+    metadata:
+      alt: 1/28/2017
+  2017-01-29:
+    src: images/2017-01-29.jpg
+    variants:
+      thumb:
+        src: thumbs/2017-01-29.jpg
+    metadata:
+      alt: 1/29/2017
+  2017-01-30:
+    src: images/2017-01-30.jpg
+    variants:
+      thumb:
+        src: thumbs/2017-01-30.jpg
+    metadata:
+      alt: 1/30/2017
+  2017-01-31:
+    src: images/2017-01-31.jpg
+    variants:
+      thumb:
+        src: thumbs/2017-01-31.jpg
+    metadata:
+      alt: 1/31/2017

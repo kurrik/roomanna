@@ -1,15 +1,15 @@
 {{define "gallery"}}
 <div class="roomanna-gallery" itemscope itemtype="http://schema.org/ImageGallery">
 {{range .}}<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-  <a href="{{.Image.Path}}" itemprop="contentUrl" data-size="{{.Image.Width}}x{{.Image.Height}}">
-    <img src="{{.Thumb.Path}}" itemprop="thumbnail" width="{{.Thumb.Width}}" height="{{.Thumb.Height}}" />
+  <a href="{{.Data.Permalink}}" itemprop="contentUrl" data-size="{{.Data.Width}}x{{.Data.Height}}">
+    <img src="{{.Variants.thumb.Permalink}}" itemprop="thumbnail" width="{{.Variants.thumb.Width}}" height="{{.Variants.thumb.Height}}" />
   </a>
-  {{with .Description}}
+  {{with .Metadata.alt}}
     <figcaption itemprop="caption description">{{.}}</figcaption>
   {{end}}
-  {{with .Reference}}
+  {{if .Metadata.reference}}
     <figcaption class="reference">
-      <a href="{{.Link}}" class="tooltip-trigger" data-placement="bottom" title="{{.Text}}" target="_blank">Reference</a>
+      <a href="{{.Metadata.referenceurl}}" class="tooltip-trigger" data-placement="bottom" title="{{.Metadata.reference}}" target="_blank">Reference</a>
     </figcaption>
   {{end}}
 </figure>{{end}}
