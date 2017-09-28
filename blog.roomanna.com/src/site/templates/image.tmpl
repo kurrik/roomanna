@@ -4,6 +4,7 @@
   <img src="{{$img.Path}}" width="{{$img.Width}}" height="{{$img.Height}}"
     {{- with .Metadata.alt}}alt="{{.}}"{{end -}}
     {{- with .Metadata.style}}style="{{.}}"{{end -}}
+    {{- with .Metadata.class}}class="{{.}}"{{end -}}
   />
   {{- with .Metadata.href}}</a>{{end -}}
 {{end}}

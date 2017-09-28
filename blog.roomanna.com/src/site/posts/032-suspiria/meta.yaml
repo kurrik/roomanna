@@ -7,3 +7,55 @@ tags:
   - algorithms
 scripts:
   - /static/js/post032.js
+images:
+  twitter-card:
+    src: suspiria-gold-lg.jpg
+  blue:
+    src: suspiria-blue-lg.jpg
+    variants:
+      md:
+        src: suspiria-blue-md.jpg
+    metadata:
+      alt: Blue nighttime scene from Suspiria
+      class: analyze
+  green:
+    src: suspiria-green-lg.jpg
+    variants:
+      md:
+        src: suspiria-green-md.jpg
+    metadata:
+      alt: Green nighttime scene from Suspiria
+      class: analyze
+  red:
+    src: suspiria-red-lg.jpg
+    variants:
+      md:
+        src: suspiria-red-md.jpg
+    metadata:
+      alt: Red nighttime scene from Suspiria
+      class: analyze
+  gold:
+    src: suspiria-gold-lg.jpg
+    metadata:
+      alt: Black and gold scene from Suspiria
+      class: analyze
+  hallway-01:
+    src: suspiria-hallway-01-lg.jpg
+    metadata:
+      alt: Red / tan hallway scene from Suspiria
+      class: analyze
+  hallway-02:
+    src: suspiria-hallway-02-lg.jpg
+    metadata:
+      alt: Red / black hallway scene from Suspiria
+      class: analyze
+  light:
+    src: suspiria-light-lg.jpg
+    metadata:
+      alt: Blue and orange scene from Suspiria
+      class: analyze
+  shadow:
+    src: suspiria-shadow-lg.jpg
+    metadata:
+      alt: Plaza scene with white cane and red cross from Suspiria
+      class: analyze
