@@ -3,7 +3,7 @@
 [link-3]: https://twitter.com/#!/ebidel
 [link-4]: http://music.google.com/
 [link-5]: http://blog.golang.org/2011/05/go-and-google-app-engine.html
-[link-6]: http://slides.html5rocks.com/
+[link-6]: /410.html
 [link-7]: http://www.youtube.com/watch?v=BatqHLWy5NE
 [img-1]: {{link "bio.png"}}
 
