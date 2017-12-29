@@ -20,10 +20,10 @@ didn't want to be limited.  The biggest obstacle in my mind was that it pretty
 much forced us to have a weapon, which we had avoided in the past by making
 puzzle or exploration based games.
 
-<div class="centered">
+<p class="centered">
   {{template "image" (.Image "slack_theme_hate")}}
   <div class="caption centered">The team hates on the theme in our Slack channel</div>
-</div>
+</p>
 
 When I'm working on such a tight timeframe, trimming early and aggressively is
 my favorite way to stay on track.  We always trimmed enemies from our previous

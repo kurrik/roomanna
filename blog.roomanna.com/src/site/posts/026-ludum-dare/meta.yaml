@@ -4,3 +4,8 @@ title: Ludum Dare
 tags:
   - games
   - ludumdare
+images:
+  twitter-card:
+    src: gurus.png
+  gurus:
+    src: gurus.png
