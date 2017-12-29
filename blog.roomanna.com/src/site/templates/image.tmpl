@@ -1,11 +1,13 @@
 {{define "image"}}
   {{- with .Metadata.href}}<a href="{{.}}">{{end -}}
   {{- $img := or .Variants.thumb .Data -}}
+  {{- if $img -}}
   <img src="{{$img.Path}}" width="{{$img.Width}}" height="{{$img.Height}}"
     {{- with .Metadata.alt}}alt="{{.}}"{{end -}}
     {{- with .Metadata.style}}style="{{.}}"{{end -}}
     {{- with .Metadata.class}}class="{{.}}"{{end -}}
     {{- with .Variants.animated}}data-animated="{{.Path}}"{{end -}}
   />
+  {{- end -}}
   {{- with .Metadata.href}}</a>{{end -}}
 {{end}}
