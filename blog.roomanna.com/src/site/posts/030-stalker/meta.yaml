@@ -4,3 +4,14 @@ title: Stalker (1979)
 tags:
   - cinemaclub
   - reviews
+images:
+  twitter-card:
+    src: stalker.jpg
+  stalker:
+    src: stalker.jpg
+    metadata:
+      alt: The Stalker and the Writer
+  stalker2:
+    src: stalker2.jpg
+    metadata:
+      alt: Dangers in The Zone
