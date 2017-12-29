@@ -3,3 +3,14 @@ slug: go-templates
 title: Go templates
 tags:
   - go
+images:
+  twitter-card:
+    src: templates04.png
+  templates01:
+    src: templates01.png
+  templates02:
+    src: templates02.png
+  templates03:
+    src: templates03.png
+  templates04:
+    src: templates04.png

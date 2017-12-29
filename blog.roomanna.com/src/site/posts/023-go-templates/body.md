@@ -1,42 +1,42 @@
 [1]: http://golang.org/pkg/html/template/
 
-Go's [html template][1] package has some really powerful safety features
-but is unfortunately not designed to be as simple as some of the other
-template packages I've used in the past.
+Go's [html template][1] package has some really powerful safety features but is
+unfortunately not designed to be as simple as some of the other template
+packages I've used in the past.
 
 <!--BREAK-->
 
 In most templating packages I've seen, inheritance is expressed inside of the
 template itself.  So if you have two pages `index` and `post` which inherit
 from a common `root`, the inheritence is expressed inside of the templates
-themselves.  It's sufficient to parse `index` and `post` in code, and let
-the templating engine handle the lookup of `root` on its own:
+themselves.  It's sufficient to parse `index` and `post` in code, and let the
+templating engine handle the lookup of `root` on its own:
 
 <p class="centered">
-  <img src="{{link "templates01.png" }}" />
+  {{template "image" (.Image "templates01")}}
 </p>
 
 Go's templates don't allow a template to specify which template(s) it inherits
-from, only ones which the root template calls.  Therefore the association points
-downstream, which means that you call render on the parent.
+from, only ones which the root template calls.  Therefore the association
+points downstream, which means that you call render on the parent.
 
 <p class="centered">
-  <img src="{{link "templates02.png" }}" />
+  {{template "image" (.Image "templates02")}}
 </p>
 
-Therefore inheritance needs to be managed in code.  Luckily, a template exposes a
-`Clone` method which allows you to copy a parsed template and then populate
+Therefore inheritance needs to be managed in code.  Luckily, a template exposes
+a `Clone` method which allows you to copy a parsed template and then populate
 any empty sections on a per-clone basis.
 
 <p class="centered">
-  <img src="{{link "templates03.png" }}" />
+  {{template "image" (.Image "templates03")}}
 </p>
 
-It's easy enough to define a simple class which allows you to parse a set
-of files as a `root` template and then split that into new templates
-as needed.  Following is a rough example.  Instantiate it by calling
-`NewTemplatesFromGlob`, specifying a glob pattern which defines the entire
-set of base templates:
+It's easy enough to define a simple class which allows you to parse a set of
+files as a `root` template and then split that into new templates as needed.
+Following is a rough example.  Instantiate it by calling
+`NewTemplatesFromGlob`, specifying a glob pattern which defines the entire set
+of base templates:
 
     type Templates struct {
     	tmpl map[string]*template.Template
@@ -75,14 +75,14 @@ set of base templates:
 For a concrete example, assume you have the following template structure:
 
 **templates/root/base.html**
-This is the base all clones will inherit from.
-Note that the `root` template is explicitly defined,
-as `ParseFiles` seems to break if it isn't (even though you should be able
-to have a single unwrapped template - this may be a bug with Go's library).
+This is the base all clones will inherit from.  Note that the `root` template
+is explicitly defined, as `ParseFiles` seems to break if it isn't (even though
+you should be able to have a single unwrapped template - this may be a bug with
+Go's library).
 
-Note the empty `head` and `body` templates.  Because they're empty, they'll
-be overrideable in clones.  Trying to override a populated
-template will unfortunately cause an error.
+Note the empty `head` and `body` templates.  Because they're empty, they'll be
+overrideable in clones.  Trying to override a populated template will
+unfortunately cause an error.
 <pre>
 \{\{define &quot;root&quot;}}&lt;!DOCTYPE html&gt;
 &lt;html&gt;
@@ -100,8 +100,8 @@ template will unfortunately cause an error.
 
 **templates/root/post.html**
 For the sake of the example, there's another template included in the base
-called `post`.  This can be called from any cloned template, so it shows
-how you can make a set of common templates which may be called by individual
+called `post`.  This can be called from any cloned template, so it shows how
+you can make a set of common templates which may be called by individual
 overrides.
 <pre>
 \{\{define &quot;post&quot;}}
@@ -165,8 +165,8 @@ The beauty of Go is that this is probably clearer when expressed in code:
 
 
 Rendering is very straightforward and relies on the built in `Execute` method.
-Just `Get` the template you want to render and call the built-in package
-as you would normally:
+Just `Get` the template you want to render and call the built-in package as you
+would normally:
 
     var (
     	out       string
@@ -224,18 +224,17 @@ This produces the following output:
       </body>
     </html>
 
-You can build more complicated template hierarchies
-by adding wrapper templates.  In the following diagram, I've called them
-variants:
+You can build more complicated template hierarchies by adding wrapper
+templates.  In the following diagram, I've called them variants:
 
 <p class="centered">
-  <img src="{{link "templates04.png" }}" />
+  {{template "image" (.Image "templates04")}}
 </p>
 
-Imagine you have a set of pages which depend on an administrator menu
-which you wish to insert above or wrapping the `body` content.  The most
-direct approach I've discovered involves creating another layer of template
-and then creating both regular and admin variants.
+Imagine you have a set of pages which depend on an administrator menu which you
+wish to insert above or wrapping the `body` content.  The most direct approach
+I've discovered involves creating another layer of template and then creating
+both regular and admin variants.
 
 **templates/regular.html**
 <pre>
@@ -261,13 +260,12 @@ Then every page living in the third tier of templates must implement
 you could theoretically make any page an `admin` page just by changing its
 variant and reparsing.
 
-It's honestly not the most intuitive
-system.  I'm not really sold on the utility of managing template
-inheritance through code.  I do believe that it should be possible to
-extend the rudimentary template management framework I've included here into a
-real library which would be able to infer inheritance through some sort of
-template file metadata.  For example, imagine a directory structure like the
-following:
+It's honestly not the most intuitive system.  I'm not really sold on the
+utility of managing template inheritance through code.  I do believe that it
+should be possible to extend the rudimentary template management framework I've
+included here into a real library which would be able to infer inheritance
+through some sort of template file metadata.  For example, imagine a directory
+structure like the following:
 
 <pre>
 templates/
@@ -280,10 +278,10 @@ templates/
      \- posts.html
 </pre>
 
-All of the inhertance could be inferred by the directory path, which would
-keep template logic contained to the template files and organization themselves.
+All of the inhertance could be inferred by the directory path, which would keep
+template logic contained to the template files and organization themselves.
 
-Eventually someone may port a more sophisticated system to Go, but it would lose
-a lot of the attractive security features already implemented in `html/template`.
-Learning to juggle clones may be the best way to present untrusted data
-in HTML format to your website's users.
+Eventually someone may port a more sophisticated system to Go, but it would
+lose a lot of the attractive security features already implemented in
+`html/template`.  Learning to juggle clones may be the best way to present
+untrusted data in HTML format to your website's users.
