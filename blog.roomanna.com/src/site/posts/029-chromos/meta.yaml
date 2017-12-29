@@ -4,3 +4,56 @@ title: Chromos
 tags:
   - games
   - ludumdare
+images:
+  twitter-card:
+    src: ld32_16_360_poster.gif
+  boss:
+    src: boss.gif
+    metadata:
+      alt: Boss death animation
+  slack_theme_hate:
+    src: slack_theme_hate.png
+    metadata:
+      alt: The team hates on the theme in our Slack channel
+  ld32_01_360:
+    src: ld32_01_360_poster.gif
+    variants:
+      animated:
+        src: ld32_01_360.gif
+    metadata:
+      alt: An early tech demo of the twodee engine
+  ld32_05_360:
+    src: ld32_05_360_poster.gif
+    variants:
+      animated:
+        src: ld32_05_360.gif
+  ld32_09_360:
+    src: ld32_09_360_poster.gif
+    variants:
+      animated:
+        src: ld32_09_360.gif
+  ld32_12_360:
+    src: ld32_12_360_poster.gif
+    variants:
+      animated:
+        src: ld32_12_360.gif
+  ld32_13_360:
+    src: ld32_13_360_poster.gif
+    variants:
+      animated:
+        src: ld32_13_360.gif
+  ld32_14_360:
+    src: ld32_14_360_poster.gif
+    variants:
+      animated:
+        src: ld32_14_360.gif
+  ld32_16_360:
+    src: ld32_16_360_poster.gif
+    variants:
+      animated:
+        src: ld32_16_360.gif
+  ld32_17_360:
+    src: ld32_17_360_poster.gif
+    variants:
+      animated:
+        src: ld32_17_360.gif
