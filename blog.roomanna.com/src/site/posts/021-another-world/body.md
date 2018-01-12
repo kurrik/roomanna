@@ -11,14 +11,13 @@ exhilaratingly wild and astounding that will be.
 
 <!--BREAK-->
 
-When rendered in a high definition 360 degree view, the sheer mundanity of
-what we see (these rocks are like _our_ rocks) implies a terrifying vastness
-of shared experience across the solar system.  We may find unimaginable
-sights in deep space, but there are also anchor points.
+When rendered in a high definition 360 degree view, the sheer mundanity of what
+we see (these rocks are like _our_ rocks) implies a terrifying vastness of
+shared experience across the solar system.  We may find unimaginable sights in
+deep space, but there are also anchor points.
 
 This mission, which has been fed by every cultural achievement humans have
 made, seems to be on a laser-straight path toward a golden,
-existence-redefining moment.  That we will find evidence of life on Mars
-seems like a
-certainty to me.  We'll probably eventually be surprised by the sheer volume
-of what we find, given better tools to help detect it.
+existence-redefining moment.  That we will find evidence of life on Mars seems
+like a certainty to me.  We'll probably eventually be surprised by the sheer
+volume of what we find, given better tools to help detect it.

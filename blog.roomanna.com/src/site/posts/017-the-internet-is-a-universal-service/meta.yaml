@@ -5,3 +5,8 @@ tags:
   - google
   - internet
   - estonia
+images:
+  twitter-card:
+    src: screen.png
+  screen:
+    src: screen.png
