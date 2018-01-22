@@ -13,36 +13,39 @@
 Since [starting my job at Twitter][3], I've spent a *lot* of time on
 [dev.twitter.com][4], either reading documentation or posting on the discussion
 group.  I've also been Tweeting a lot more, and I tend to switch back and forth
-a lot throughout the work day.  My browsing habits tend to lead to a
-bunch of open tabs in Chrome, and I realized that I was
-losing productivity.
+a lot throughout the work day.  My browsing habits tend to lead to a bunch of
+open tabs in Chrome, and I realized that I was losing productivity.
 
 <!--BREAK-->
 
-To illustrate, quickly tell me which of
-the following tabs is for **twitter.com**, and which are **dev.twitter.com**:
+To illustrate, quickly tell me which of the following tabs is for
+**twitter.com**, and which are **dev.twitter.com**:
 
-<img class="centered" src="{{link "twitterbars.png"}}"/>
+<p class="centered">
+  {{template "image" (.Image "twitterbars")}}
+</p>
 
 Not very easy, huh?
 
 So I did what I always do in this case - turned to my good friend, the [Chrome
-Extension content script][5].  Using some Javascript,
-the <code>&lt;link rel="icon"&gt;</code> element, and the HTML5 canvas
-API, I was able to quickly turn the tab strip into this:
+Extension content script][5].  Using some Javascript, the <code>&lt;link
+rel="icon"&gt;</code> element, and the HTML5 canvas API, I was able to quickly
+turn the tab strip into this:
 
-<img class="centered" src="{{link "twitterbars2.png"}}"/>
+<p class="centered">
+  {{template "image" (.Image "twitterbars2")}}
+</p>
 
 Much better!  And the technique is general-purpose enough to be used on any
 domain, or even in a non-Chrome extension context (if you can run code on the
-target domain, that is).  The extension itself can be found [in the Chrome
-Web Store][1].  Read on for a walkthrough of the code.
+target domain, that is).  The extension itself can be found [in the Chrome Web
+Store][1].  Read on for a walkthrough of the code.
 
 # Boilerplate
 
 I could've written this as a [user script][7], but I like hosting stuff in the
-Chrome Web Store, so I decided to do a full-on packaged extension.  So I made
-a simple **manifest.json** file:
+Chrome Web Store, so I decided to do a full-on packaged extension.  So I made a
+simple **manifest.json** file:
 
 <pre>
 {
@@ -57,16 +60,16 @@ a simple **manifest.json** file:
 }
 </pre>
 
-The only thing truly important to note here is that I specified a content script
-which executes a file named **favicon.js** any time Chrome visits an URL matching
-<code>https://dev.twitter.com</code>. If you are planning on adapting this
-script to a different domain, this is where you would configure where the script
-runs.
+The only thing truly important to note here is that I specified a content
+script which executes a file named **favicon.js** any time Chrome visits an URL
+matching <code>https://dev.twitter.com</code>. If you are planning on adapting
+this script to a different domain, this is where you would configure where the
+script runs.
 
 # Content script
 
-The actual meat of the script lives in **favicon.js** and runs in the context of
-the target page.  It does the following:
+The actual meat of the script lives in **favicon.js** and runs in the context
+of the target page.  It does the following:
 
 1. Gets or creates a `<link rel="icon">` element to render the favicon.
 1. Loads the page's favicon and draws it into a canvas.
@@ -92,32 +95,31 @@ if (!link) {
 
 ## Get the favicon
 
-Now that the code has a handle to an appropriate link element, it
-loads the existing favicon into a `<canvas>`.  In the case of
-**dev.twitter.com**,
-the favicon's URL can be found as the `href` of the link element located by
-the previous snippet of code.
+Now that the code has a handle to an appropriate link element, it loads the
+existing favicon into a `<canvas>`.  In the case of **dev.twitter.com**, the
+favicon's URL can be found as the `href` of the link element located by the
+previous snippet of code.
 
 For a more general-purpose script, a given page is not guaranteed to have a
-`<link rel="icon">` element, but since favicons live in canonical
-locations, it is possible to guess the favicon URL from the page's origin:
+`<link rel="icon">` element, but since favicons live in canonical locations, it
+is possible to guess the favicon URL from the page's origin:
 
 <pre class="brush:javascript">
 var faviconUrl = link.href || window.location.origin + "/favicon.ico";
 </pre>
 
-<div class="alert">
+<div class="alert alert-warning">
 <strong>Note:</strong> Because the content script is going to be manipulating
-the pixels of the favicon using a canvas, the favicon <em>must</em>
-be hosted on the same domain as the current page.  Unfortunately,
-some sites redirect their favicons to a different domain, for example
-<code>http://news.ycombinator.com/&#8203;favicon.ico</code> actually
-redirects to <code>http://ycombinator.com/&#8203;favicon.ico</code>.
-See <a href="#extending">below</a> for a way to address this problem.</div>
+the pixels of the favicon using a canvas, the favicon <em>must</em> be hosted
+on the same domain as the current page.  Unfortunately, some sites redirect
+their favicons to a different domain, for example
+<code>http://news.ycombinator.com/&#8203;favicon.ico</code> actually redirects
+to <code>http://ycombinator.com/&#8203;favicon.ico</code>.  See <a
+href="#extending">below</a> for a way to address this problem.</div>
 
-The image pointed to by this URL needs to be drawn to a canvas, but there is
-no canvas `drawImage` API which will take an URL as a parameter.  Thankfully,
-HTML `<img>` elements act as a good proxy between URLs and canvas elements.
+The image pointed to by this URL needs to be drawn to a canvas, but there is no
+canvas `drawImage` API which will take an URL as a parameter.  Thankfully, HTML
+`<img>` elements act as a good proxy between URLs and canvas elements.
 
 First, load the URL is loaded into an image tag:
 
@@ -145,15 +147,17 @@ function onImageLoaded() {
 Even though the canvas isn't really placed in the DOM anywhere, this is what it
 would look like if it were visible:
 
-<img class="centered" src="{{link "favicon1.png"}}"/>
+<p class="centered">
+  {{template "image" (.Image "favicon1")}}
+</p>
 
 I've enlarged the image 20x and changed the alpha channel to show pink instead
 of transparency.
 
 ## Recolor the drawn image
 
-Once the favicon is loaded in a canvas element, any number of modifications
-are possible.  Personally, I preferred to use the fairly new
+Once the favicon is loaded in a canvas element, any number of modifications are
+possible.  Personally, I preferred to use the fairly new
 [`globalCompositeOperation`][8] 2d context attribute to recolor the image.
 Here's an implementation:
 
@@ -187,35 +191,37 @@ Display the source image wherever the source image is opaque. Display the
 destination image elsewhere.
 </blockquote>
 
-Which is just a fancy way of saying "draw over the existing
-image".  By changing this value to `source-in`, the implementation will:
+Which is just a fancy way of saying "draw over the existing image".  By
+changing this value to `source-in`, the implementation will:
 
 <blockquote>
-Display the source image wherever both the source image and destination
-image are opaque. Display transparency elsewhere.
+Display the source image wherever both the source image and destination image
+are opaque. Display transparency elsewhere.
 </blockquote>
 
-This means that the layer to be drawn will only be drawn where the
-current canvas is opaque, so if the canvas contains the original favicon,
-and a 16x16 red square is drawn over it:
+This means that the layer to be drawn will only be drawn where the current
+canvas is opaque, so if the canvas contains the original favicon, and a 16x16
+red square is drawn over it:
 
 <p class="centered">
-  <img src="{{link "favicon1.png"}}" style="width: 240px" />
-  <img src="{{link "favicon2.png"}}" style="width: 240px" />
+  {{template "image" (.Image "favicon1smaller")}}
+  {{template "image" (.Image "favicon2smaller")}}
 </p>
 
 The result will be a solid red image, but with an alpha channel matching the
 original favicon:
 
-<img class="centered" src="{{link "favicon3.png"}}" />
+<p class="centered">
+  {{template "image" (.Image "favicon3")}}
+</p>
 
 ## Setting the favicon
 
-This image exists in memory, but needs to be pointed at by an URL so that
-the `<link>` element can reference it.  Due to the small size of a favicon,
-this is an ideal use for a data URL.  If you're not familiar with the way
-data URLs work, they encode the contents of an entire file into a string which
-may be used anywhere an URL would be accepted.
+This image exists in memory, but needs to be pointed at by an URL so that the
+`<link>` element can reference it.  Due to the small size of a favicon, this is
+an ideal use for a data URL.  If you're not familiar with the way data URLs
+work, they encode the contents of an entire file into a string which may be
+used anywhere an URL would be accepted.
 
 For example. if you paste the following string into the browser's address bar,
 you'll see the modified Twitter favicon:
@@ -232,7 +238,8 @@ xxbLBj/NWU6Dr9zzIFux+ZQIF1w27e3gJiuTZNf8E5YMzrjhNUpSFGaI9kieCpNsE1zk
 a01v4AkvBSO+ESsK0AAAAASUVORK5CYII=
 </pre>
 
-(Or just click <a target="_blank" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABZ0lEQVQ4T6WTvUsDQRDF32mh2NiKIKIG65QWFtFGFEELC8tUFum1DQRRbATRXjvFJqiVphD/A0vBj2ghxCoRRGz8+E24Xe7CXQzkYNjZt2/ezOzsBeryC7qMV8cCD1Ie8pglnJCKLnFT4Eka/ZUaHLwnVfQoHYLn4Xyw7mSkzZgAhEWAC6wM6RzCkSOEmU3Afz1SjlJuDPAV/EglNitgA1gd27dSEXgFH26p7IqzOS9gDlVMs1Sw/gj5Fj+b0NYnVSx8cyf+EhEYZFOihbUWkaRrcVgxNgVEJhEoA47/I2ItNuBWYgL3Uh/AModboUha9hOCL3ulakDWXch7pHxxbLBj/NWU6Dr9zzIFux+ZQIF1w27e3gJiuTZNf8E5YMzrjhNUpSFGaI9kieCpNsE1zk+xbbLXvIA5Ye/zlDaDkI1txBHYv+Fbe9f0fBYNbrYQzWijRCRr83U4QZbtGeAuqbqOf6a01v4AkvBSO+ESsK0AAAAASUVORK5CYII=">here</a>)
+(Or just click <a target="_blank"
+href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABZ0lEQVQ4T6WTvUsDQRDF32mh2NiKIKIG65QWFtFGFEELC8tUFum1DQRRbATRXjvFJqiVphD/A0vBj2ghxCoRRGz8+E24Xe7CXQzkYNjZt2/ezOzsBeryC7qMV8cCD1Ie8pglnJCKLnFT4Eka/ZUaHLwnVfQoHYLn4Xyw7mSkzZgAhEWAC6wM6RzCkSOEmU3Afz1SjlJuDPAV/EglNitgA1gd27dSEXgFH26p7IqzOS9gDlVMs1Sw/gj5Fj+b0NYnVSx8cyf+EhEYZFOihbUWkaRrcVgxNgVEJhEoA47/I2ItNuBWYgL3Uh/AModboUha9hOCL3ulakDWXch7pHxxbLBj/NWU6Dr9zzIFux+ZQIF1w27e3gJiuTZNf8E5YMzrjhNUpSFGaI9kieCpNsE1zk+xbbLXvIA5Ye/zlDaDkI1txBHYv+Fbe9f0fBYNbrYQzWijRCRr83U4QZbtGeAuqbqOf6a01v4AkvBSO+ESsK0AAAAASUVORK5CYII=">here</a>)
 
 It is possible to get the data URL corresponding to a canvas by calling
 `toDataURL()` on the canvas element.  The modified `onImageLoaded` function
@@ -307,18 +314,18 @@ The above content script works pretty well on the vast majority of sites I've
 tested.  If you want to implement this technique for a specific set of sites
 and it works on all of them, I recommend using that approach.
 
-For a small set of sites, however, a `Uncaught Error: SECURITY_ERR:
-DOM Exception 18` message will be displayed in the console.  This is because
-these sites load a cross-domain favicon, setting the canvas' *origin-clean*
-flag to false and disabling the `toDataURL` function.
+For a small set of sites, however, a `Uncaught Error: SECURITY_ERR: DOM
+Exception 18` message will be displayed in the console.  This is because these
+sites load a cross-domain favicon, setting the canvas' *origin-clean* flag to
+false and disabling the `toDataURL` function.
 
 Luckily, there's a reliable way to get favicon data from a Chrome extension.
-Extensions may request the `chrome://favicon` permission, which allows
-them to reference URLs like `chrome://favicon/https://twitter.com` from
-extension pages.  The downside to this is that this permission doesn't extend
-to content scripts, meaning that an extension which uses this pretty much needs
-to have a background page.  The upside is that this approach works on every
-domain I've tested.
+Extensions may request the `chrome://favicon` permission, which allows them to
+reference URLs like `chrome://favicon/https://twitter.com` from extension
+pages.  The downside to this is that this permission doesn't extend to content
+scripts, meaning that an extension which uses this pretty much needs to have a
+background page.  The upside is that this approach works on every domain I've
+tested.
 
 Adding the appropriate permissions and background page to **manifest.json**
 results in:
@@ -390,9 +397,9 @@ Finally, **favicon.js** is simplified to find or create a `<link>` element,
 request the modified favicon data URL for the current page's URL, and render
 that data URL back into the page.  I also added a quick caching mechanism to
 store the modified favicon in localStorage, so that the script doesn't make
-additional favicon requests every time the page is loaded.  This could certainly
-be made more sophisticated to expire cached favicons periodically, but works
-as a simple example:
+additional favicon requests every time the page is loaded.  This could
+certainly be made more sophisticated to expire cached favicons periodically,
+but works as a simple example:
 
 <pre class="brush: javascript">
 /*
@@ -431,4 +438,3 @@ if (betterFavicon) {
 </pre>
 
 This works consistently on all domains I've tried. Enjoy your red icons!
-

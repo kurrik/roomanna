@@ -7,3 +7,24 @@ tags:
   - extensions
   - javascript
   - twitter
+images:
+  twitter-card:
+    src: favicon1.png
+  favicon1:
+    src: favicon1.png
+  favicon1smaller:
+    src: favicon1.png
+    metadata:
+      style: "width:240px"
+  favicon2:
+    src: favicon2.png
+  favicon2smaller:
+    src: favicon2.png
+    metadata:
+      style: "width:240px"
+  favicon3:
+    src: favicon3.png
+  twitterbars:
+    src: twitterbars.png
+  twitterbars2:
+    src: twitterbars2.png

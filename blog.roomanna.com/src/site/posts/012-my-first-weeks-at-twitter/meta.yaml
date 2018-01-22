@@ -5,3 +5,8 @@ tags:
   - arne
   - twitter
   - work
+images:
+  twitter-card:
+    src: "bird-shark.jpg"
+  twitter:
+    src: "twitter.png"
