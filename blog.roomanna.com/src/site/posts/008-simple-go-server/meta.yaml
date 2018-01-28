@@ -4,3 +4,11 @@ title: Simple Go Server
 tags:
   - go
   - appengine
+images:
+  twitter-card:
+    src: "gogopher.png"
+  gogopher-right:
+    src: "gogopher.png"
+    metadata:
+      alt: Go Gopher
+      class: pull-right
