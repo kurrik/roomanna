@@ -6,3 +6,8 @@ tags:
   - arne
   - google
   - twitter
+images:
+  twitter-card:
+    src: "bust.jpg"
+  bust:
+    src: "bust.jpg"
