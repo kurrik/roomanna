@@ -23,26 +23,30 @@ capable of answering if you had any questions.
 
 In chronological order:
 
-*  **May 18th, 2011 - Boston GTUG**:<br>
+## May 18th, 2011 - Boston GTUG
 At Google Cambridge, [5 Cambridge Center in Kendall Square][link-map-3]<br>
-Starts at 6:30 PM<br>
-[Event page][link-3]
+Starts at 6:30 PM
 
-*  **May 23rd, 2011 - Philly/Delaware GTUG**<br>
-At [2 West Liberty Blvd, Malvern, PA, 19355][link-map-6]<br>
-Starts at 5:30 PM and ends around 8:00 PM.<br>
-[Event page][link-6]<br>
-[Registration][link-6-register]
+* [Event page][link-3]
 
-*  **May 25th, 2011 - NYC GTUG:**<br>
-At Google NYC, [111 8th Ave. 10th Floor, New York, NY][link-map-4]<br>
-Starts at 6:30 PM<br>
-[Event page][[link-4]
+##  May 23rd, 2011 - Philly/Delaware GTUG
+At [2 West Liberty Blvd, Malvern, PA, 19355][link-map-6]<br> Starts at 5:30 PM
+and ends around 8:00 PM.
 
-*  **June 1st, 2011 - DC area:**<br>
-At AOL, [22000 AOL Way Dulles, VA][link-map-2]<br>
-Starts at 6:30 PM and ends around 8:45 PM<br>
-[Event page][link-2]
+* [Event page][link-6]
+* [Registration][link-6-register]
+
+## May 25th, 2011 - NYC GTUG:
+At Google NYC, [111 8th Ave. 10th Floor, New York, NY][link-map-4]<br> Starts
+at 6:30 PM
+
+* [Event page][link-4]
+
+## June 1st, 2011 - DC area:
+At AOL, [22000 AOL Way Dulles, VA][link-map-2]<br> Starts at 6:30 PM and ends
+around 8:45 PM
+
+* [Event page][link-2]
 
 I usually don't do US events outside of Silicon Valley, so it's great to be
 able to do this many events in such a short span.  The GTUG organizers have
