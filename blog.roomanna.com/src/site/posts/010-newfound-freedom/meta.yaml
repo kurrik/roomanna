@@ -3,3 +3,8 @@ slug: newfound-freedom
 title: Freedom Week!
 tags:
   - arne
+images:
+  twitter-card:
+    src: "freedom.jpg"
+  freedom:
+    src: "freedom.jpg"

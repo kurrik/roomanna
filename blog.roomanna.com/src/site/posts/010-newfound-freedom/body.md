@@ -1,4 +1,3 @@
-[1]: {{link "freedom.jpg"}}
 [2]: http://blog.roomanna.com/08-29-2011/my-last-day-at-google
 [3]: http://www.twitch.tv/realnotch/b/293076467
 [4]: http://www.ludumdare.com/compo/ludum-dare-21/?action=preview&uid=398
@@ -14,13 +13,15 @@ week.  I have named this week **Freedom Week**.
 
 <!--BREAK-->
 
-<img src="{{link "freedom.jpg"}}" title="Like Shark week but for freedom" class="centered">
+<p class="centered">
+  {{template "image" (.Image "freedom")}}
+</p>
 
 Like [Shark Week][6], **Freedom Week** will be free as in beer (as in I will be
 drinking some).  Unlike Shark Week, **Freedom Week** will be free as in
 freedom, meaning that for once in my life, I have full control over copyright
-and licensing for any code I manage to create.  Naturally, I'm reminded of
-[the best description of a summer break, ever][5]:
+and licensing for any code I manage to create.  Naturally, I'm reminded of [the
+best description of a summer break, ever][5]:
 
 > It's the beginning of the summer and I'm standing in the lobby of a
 > thousand-story grand hotel, where a bank of elevators a mile long and
@@ -34,44 +35,42 @@ and licensing for any code I manage to create.  Naturally, I'm reminded of
 > spine of a lemon wedge at the bottom of a drink. I said, "I anticipate
 > a coming season of dilated time and of women all in disarray."
 
-It would be a shame to squander
-such an opportunity, so I've come up with some principles to adhere to:
+It would be a shame to squander such an opportunity, so I've come up with some
+principles to adhere to:
 
 <!-- -**-END-**- -->
 
-# Have fun
-For once I actually have nothing on my plate, so I should pick things
-which interest me and look like they'd be fun to do.  [Watching Notch
-program][3] an [entire game][4] in 48 hours last week was amazing not
-only because he got so much done, but because he seemed to be having
-so much fun doing it.  Ultimately he spent more time adding features
-rather than infrastructure, which, while bad for a long term project,
-seems like the most effective use of time for writing code in a short
-time span.
+## Have fun
+For once I actually have nothing on my plate, so I should pick things which
+interest me and look like they'd be fun to do.  [Watching Notch program][3] an
+[entire game][4] in 48 hours last week was amazing not only because he got so
+much done, but because he seemed to be having so much fun doing it.  Ultimately
+he spent more time adding features rather than infrastructure, which, while bad
+for a long term project, seems like the most effective use of time for writing
+code in a short time span.
 
-# Write something useful
-Given #1, I also want to write something that could be useful to others.
-I intend to [open source][7] everything under Apache 2, and I will try to
-write at least one client library for Twitter, which brings me to...
+## Write something useful
+Given #1, I also want to write something that could be useful to others.  I
+intend to [open source][7] everything under Apache 2, and I will try to write
+at least one client library for Twitter, which brings me to...
 
-# Learn something new
-I shouldn't be afraid to spend time learning things which will help me
-in the future.  I don't know enough of the Twitter APIs, so writing a client
-library will help me explore them.  I'm also considering writing a better
-blog backend, since posting right now has too much overhead.
+## Learn something new
+I shouldn't be afraid to spend time learning things which will help me in the
+future.  I don't know enough of the Twitter APIs, so writing a client library
+will help me explore them.  I'm also considering writing a better blog backend,
+since posting right now has too much overhead.
 
-Additionally, I've got a few books lying around that I've been meaning
-to poke around in.  The most *fun* looks to be [Real-Time Rendering][8]
-since I've just started playing around with WebGL and want to learn
-how to do things like shadows or crazy glowy effects.
+Additionally, I've got a few books lying around that I've been meaning to poke
+around in.  The most *fun* looks to be [Real-Time Rendering][8] since I've just
+started playing around with WebGL and want to learn how to do things like
+shadows or crazy glowy effects.
 
-# Don't get bored
-I only have one week, yet tons of ideas and dream projects. So one thing
-I don't have the luxury of doing is getting bored and deciding to play
-Mass Effect or watch movies on Netflix instead.  I need to be able to
-dump a project which is becoming a bore in favor of something which satisfies
-principle #1 better.
+## Don't get bored
+I only have one week, yet tons of ideas and dream projects. So one thing I
+don't have the luxury of doing is getting bored and deciding to play Mass
+Effect or watch movies on Netflix instead.  I need to be able to dump a project
+which is becoming a bore in favor of something which satisfies principle #1
+better.
 
 I don't really know what I'll be doing first, but if you're interested in
 following along, I'll be posting to [GitHub][7] and [Twitter][9] as I go.
-
