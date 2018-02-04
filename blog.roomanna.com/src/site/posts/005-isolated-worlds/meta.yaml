@@ -4,3 +4,22 @@ title: Isolated Worlds
 tags:
   - chrome
   - extensions
+images:
+  twitter-card:
+    src: "puttogether03.png"
+  puttogether01:
+    src: "puttogether01.png"
+    metadata:
+      alt: Standard extension format
+  puttogether02:
+    src: "puttogether02.png"
+    metadata:
+      alt: Background page and popup talking to each other
+  puttogether03:
+    src: "puttogether03.png"
+    metadata:
+      alt: Background page and content script are separated by a process boundary
+  puttogether04:
+    src: "puttogether04.png"
+  puttogether05:
+    src: "puttogether05.png"

@@ -3,3 +3,10 @@ slug: hello-world
 title: Before we begin, a little bit about me...
 tags:
   - arne
+images:
+  twitter-card:
+    src: "arne.jpg"
+  arne:
+    src: "arne.jpg"
+    metadata:
+      alt: So young, so full of hope...

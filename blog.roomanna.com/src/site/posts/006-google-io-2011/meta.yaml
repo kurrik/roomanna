@@ -6,3 +6,8 @@ tags:
   - html
   - google
   - work
+images:
+  twitter-card:
+    src: "bio.png"
+  bio:
+    src: "bio.png"

@@ -17,16 +17,16 @@ I've been working at Google for about three years now, and was fortunate enough
 to transfer onto the Chrome extensions team about a year ago.  Mostly, I
 support developers working on Chrome extensions, but from time to time I work
 on projects for the team to keep my sanity.  A good example of this is the
-[Chrome extensions samples browser][link-samples].  The extension docs
-are built and hosted automatically from the [Chromium source tree][link-docs]
-so I modified the docs build script to generate the gallery and zip each
-sample into an easily-downloadable archive.
+[Chrome extensions samples browser][link-samples].  The extension docs are
+built and hosted automatically from the [Chromium source tree][link-docs] so I
+modified the docs build script to generate the gallery and zip each sample into
+an easily-downloadable archive.
 
 <!--BREAK-->
 
 Of course zips are fine if you want to peek into sample code, but not so good
-if you just want to quickly test a sample to see what it does.  To address this,
-I've been working on a method to offer each zip as a packaged crx.
+if you just want to quickly test a sample to see what it does.  To address
+this, I've been working on a method to offer each zip as a packaged crx.
 
 Some considerations:
 
@@ -40,12 +40,12 @@ Some considerations:
    already [solutions for packing extensions in Python][link-pack], they
    rely on OpenSSL, which isn't available on App Engine.
 
-I decided to write a Python library which could run on App Engine and convert
-a directory of files into a Chrome extension crx archive.  I didn't
-find a ton of information online to help me do this automatically, so I decided
-to write up my findings for anyone heading down this road in the future.  It
-should be pretty useful if you ever want to host a CRX from an app engine app
-for whatever reason (offering a debug/trusted tester version, for example).
+I decided to write a Python library which could run on App Engine and convert a
+directory of files into a Chrome extension crx archive.  I didn't find a ton of
+information online to help me do this automatically, so I decided to write up
+my findings for anyone heading down this road in the future.  It should be
+pretty useful if you ever want to host a CRX from an app engine app for
+whatever reason (offering a debug/trusted tester version, for example).
 
 # Figuring out the format
 
@@ -53,20 +53,18 @@ From [the CRX format documentation][link-crx-format] I knew I needed to create
 a binary file containing a header, an RSA public key, an RSA signature, and the
 bytes of a zip file with the extension contents.
 
-The RSA key is used to generate
-a signature of the zip file contents, so I needed to figure out how to get a
-zip of a directory first.
+The RSA key is used to generate a signature of the zip file contents, so I
+needed to figure out how to get a zip of a directory first.
 
 # Obtaining a zip file
 
-Technically, the Chrome extension documentation samples are already zipped
-and checked into
-source control, but it's fairly easy to zip up a directory in Python.  Most
-projects probably won't have a zip handy, so I'm including the step here.
+Technically, the Chrome extension documentation samples are already zipped and
+checked into source control, but it's fairly easy to zip up a directory in
+Python.  Most projects probably won't have a zip handy, so I'm including the
+step here.
 
-I wanted some code that wouldn't have to write the
-zip to the filesystem, so I used the `StringIO` module to generate a zip file
-in memory:
+I wanted some code that wouldn't have to write the zip to the filesystem, so I
+used the `StringIO` module to generate a zip file in memory:
 
 <pre class="brush: python">
 import StringIO
@@ -112,9 +110,9 @@ Python 2.6 on Windows and Unix, so I try not to rely on it.
 # Generating an RSA key
 
 For the rest of the file contents, I needed to sign the zip file with an RSA
-key, which had to be generated.  While App Engine doesn't have OpenSSL
-module support (which I would normally use), it does include a simple RSA
-package which can be used to generate a key:
+key, which had to be generated.  While App Engine doesn't have OpenSSL module
+support (which I would normally use), it does include a simple RSA package
+which can be used to generate a key:
 
 <pre class="brush: python">
 from Crypto.PublicKey import RSA
@@ -129,18 +127,18 @@ This is computationally intensive, so I usually generate a key if needed and
 store it in the data store for reuse. For local development, you can install
 the package from the [PyCrypto homepage][link-pycrypto].
 
-At this point I had a zip file and a key, so I needed to figure out exactly
-how to sign a piece of data according to the RSA specification in order to
-obtain the signature.
+At this point I had a zip file and a key, so I needed to figure out exactly how
+to sign a piece of data according to the RSA specification in order to obtain
+the signature.
 
 # Figuring out the RSA signature payload format
 
 From the packaging instructions, I knew I could use OpenSSL to generate a
 signature, but wasn't really sure what it was doing under the covers.  So I
-figured the best approach would be to sign an existing extension and see
-what the signature was using OpenSSL's command line tools.  I packaged an
-extension using Chrome to generate a .pem key, then zipped the sources and ran
-the following:
+figured the best approach would be to sign an existing extension and see what
+the signature was using OpenSSL's command line tools.  I packaged an extension
+using Chrome to generate a .pem key, then zipped the sources and ran the
+following:
 
 <pre class="blockquote">
 <strong>$ openssl sha1 -sign key.pem extension.zip > extension.sig
@@ -155,9 +153,9 @@ $ openssl rsautl -verify -in extension.sig -inkey key.pem -raw -hexdump</strong>
 0070 - 4a a1 68 a9 a0 64 b2 c7-11 36 da ce 92 17 e9 29   J.h..d...6.....)
 </pre>
 
-This gave me a raw hex dump of the signature, so I started going through
-the RSA-related specifications to figure out what I was looking at. Turns
-out this is actually formatted according to <u>Section 8.1 Encryption-block
+This gave me a raw hex dump of the signature, so I started going through the
+RSA-related specifications to figure out what I was looking at. Turns out this
+is actually formatted according to <u>Section 8.1 Encryption-block
 formatting</u> of the [PKCS#1 specification][link-pkcs]:
 
 <pre class="blockquote">
@@ -178,13 +176,13 @@ pseudorandomly generated and nonzero. This makes the length of the
 encryption block EB equal to k.
 </pre>
 
-The format of the hext dump corresponds with block type 01.  Knowing that
-the octet string started at the first <code>30</code> octet, I thought a good
+The format of the hext dump corresponds with block type 01.  Knowing that the
+octet string started at the first <code>30</code> octet, I thought a good
 approach would be to write a script to decode that data and see what exactly
-was stored there.  I've done some work
-with RSA signatures before and know that everything is encoded using the ASN.1
-format.  Luckily there's a [great Python pyasn library][link-pyasn] which
-will decode this data and work on App Engine, to boot.
+was stored there.  I've done some work with RSA signatures before and know that
+everything is encoded using the ASN.1 format.  Luckily there's a [great Python
+pyasn library][link-pyasn] which will decode this data and work on App Engine,
+to boot.
 
 Here's the script I wrote:
 
@@ -196,8 +194,8 @@ raw_obj = ('3021300906052b0e03021a050004142dbf9'
 der_obj = decoder.decode(raw_obj)
 </pre>
 
-You'll see that the string I'm decoding corresponds with the contents of the hex
-dump listed above.  Dumping the resulting <code>der_obj</code> gave me this
+You'll see that the string I'm decoding corresponds with the contents of the
+hex dump listed above.  Dumping the resulting <code>der_obj</code> gave me this
 ASN.1 structure:
 
 <pre class="blockquote">
@@ -225,8 +223,8 @@ filesystem, or generated using the <code>StringIO</code> approach I listed
 above.
 
 I wanted to know what the <code>ObjectIdentifier</code> string represented.  I
-had a hunch it was the signing algorithm, and from [PKCS #1][link-digestalgo]
-I found that the digest information should be encoded in the following way:
+had a hunch it was the signing algorithm, and from [PKCS #1][link-digestalgo] I
+found that the digest information should be encoded in the following way:
 
 <pre class="blockquote">
 DigestInfo ::= SEQUENCE {
@@ -248,8 +246,8 @@ that type, which has the algorithm-specific syntax ANY DEFINED BY
 algorithm, would have ASN.1 type NULL for these algorithms.
 </pre>
 
-So cool, at least that explains the
-<code>.setComponentByPosition(1, Null(''))</code> in the algorithm identifier.
+So cool, at least that explains the <code>.setComponentByPosition(1,
+Null(&apos;&apos;))</code> in the algorithm identifier.
 
 At this point I was pretty sure that <code>'1.3.14.3.2.26'</code> was the
 algorithm identifier for SHA1, but I wanted to make sure.  Looking a bit more,
@@ -333,10 +331,10 @@ signature = ('%X' % signature_bytes).decode('hex')
 </pre>
 
 There are a lot of conversions back and forth between hex and binary here.  I
-feel that could be cleaned up a bit and everything could probably be kept
-in binary, but it'd be a bit harder to follow what was going on.  At the end
-of the day, the <code>signature</code> variable contains the raw bytes of a
-RSA signature of the zip file contents.
+feel that could be cleaned up a bit and everything could probably be kept in
+binary, but it'd be a bit harder to follow what was going on.  At the end of
+the day, the <code>signature</code> variable contains the raw bytes of a RSA
+signature of the zip file contents.
 
 # Obtaining a public key
 
@@ -351,17 +349,17 @@ key:
 $ openssl rsa -pubout -outform DER
 </pre>
 
-From the [documentation][link-opensslrsa] the <code>-outform DER</code>
-option states:
+From the [documentation][link-opensslrsa] the <code>-outform DER</code> option
+states:
 
 <pre class="blockquote">
 The DER option uses an ASN1 DER encoded form compatible with the PKCS#1
 RSAPrivateKey or SubjectPublicKeyInfo format.
 </pre>
 
-Strangely, I couldn't find a reference to <code>SubjectPublicKeyInfo</code>
-in PKCS #1, but it was in the
-[X.509 certificate profile spec][link-x509publickey]:
+Strangely, I couldn't find a reference to <code>SubjectPublicKeyInfo</code> in
+PKCS #1, but it was in the [X.509 certificate profile
+spec][link-x509publickey]:
 
 <pre class="blockquote">
 SubjectPublicKeyInfo  ::=  SEQUENCE  {
@@ -467,22 +465,22 @@ crx_buffer.write(zip_string)
 crx_file = crx_buffer.getvalue()
 </pre>
 
-Outputting <code>crx_file</code> to a file or serving it from a webserver
-as a binary file will deliver the CRX file in a package that can be installed
-into Chrome.
+Outputting <code>crx_file</code> to a file or serving it from a webserver as a
+binary file will deliver the CRX file in a package that can be installed into
+Chrome.
 
 # Conclusion
 
-It was certainly a lot of research to accomplish the same effect as this
-[42 line script][link-bash], but I find it pretty satisfying to be able to
-figure out the component parts of the CRX format.  Having been on the [author
-end of a specification][link-opensocial], I really appreciate how much work
-went into making these RFCs comprehensive yet still understandable.
+It was certainly a lot of research to accomplish the same effect as this [42
+line script][link-bash], but I find it pretty satisfying to be able to figure
+out the component parts of the CRX format.  Having been on the [author end of a
+specification][link-opensocial], I really appreciate how much work went into
+making these RFCs comprehensive yet still understandable.
 
 At the end of the day, I had a script that could run on App Engine and package
 a directory into a CRX file.  If you're interested in running it, I've included
-a finished version below.  You can download the
-[entire sample project][link-sample] on github.
+a finished version below.  You can download the [entire sample
+project][link-sample] on github.
 
 **main.py**
 

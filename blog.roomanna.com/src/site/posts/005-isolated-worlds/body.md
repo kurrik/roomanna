@@ -1,16 +1,11 @@
 [link-groups]: http://groups.google.com/a/chromium.org/group/chromium-extensions/browse_thread/thread/0d65a331cfaeb7ab#
 [link-docs]: http://code.google.com/chrome/extensions/content_scripts.html#registration
-[img01]: {{link "puttogether01.png"}}
-[img02]: {{link "puttogether02.png"}}
-[img03]: {{link "puttogether03.png"}}
-[img04]: {{link "puttogether04.png"}}
-[img05]: {{link "puttogether05.png"}}
 
 Chrome Extensions have been praised as being really easy to write, especially
 when compared with writing a Firefox xpi or a plugin for IE.  But there's still
-a few concepts that trip up developers regularly.  One of these is the
-isolated worlds concept, and it leads to
-[a lot of support questions in the group][link-groups].
+a few concepts that trip up developers regularly.  One of these is the isolated
+worlds concept, and it leads to [a lot of support questions in the
+group][link-groups].
 
 <!--BREAK-->
 
@@ -43,39 +38,42 @@ The code in question usually winds up being something like:
    }
 </pre>
 
-This is a pretty interesting situation
-because if you were to use the snippet on a regular web page, there
-would be a decent chance of getting it to work.  But Content Scripts don't
-work just like regular web pages, and not understanding that difference will
-lead to painful-to-debug issues like this one.
+This is a pretty interesting situation because if you were to use the snippet
+on a regular web page, there would be a decent chance of getting it to work.
+But Content Scripts don't work just like regular web pages, and not
+understanding that difference will lead to painful-to-debug issues like this
+one.
 
 # An overview of extension architecture
 
 A lot of Chrome extensions have structures similar to this:
 
-!['Standard extension format'][img01]
+<p class="centered">
+  {{template "image" (.Image "puttogether01")}}
+</p>
 
-That is, a **manifest.json** file which points to a **background page**,
-a **popup**, and a **content script**.  The content script runs on a few URLs
-defined in the
-manifest, the popup is shown whenever a user clicks on a browser or page action
-(also defined in the manifest) and the background page just runs all the time.
+That is, a **manifest.json** file which points to a **background page**, a
+**popup**, and a **content script**.  The content script runs on a few URLs
+defined in the manifest, the popup is shown whenever a user clicks on a browser
+or page action (also defined in the manifest) and the background page just runs
+all the time.
 
 The three files pointed to by the manifest have a lot of similarities.  They
 run JavaScript, have access to a lot of the built-in DOM/JS functions in the
 browser, have *some* access to the `chrome.*` namespace, and can communicate
 with each other.
 
-The communication is where a few differences pop up.  You might expect
-that all parts of an extension are alike, but that's not true.  For example,
-a **background page** and a **popup** both exist in the same Chrome process,
-so they can directly share memory.  This means that you can access a background
+The communication is where a few differences pop up.  You might expect that all
+parts of an extension are alike, but that's not true.  For example, a
+**background page** and a **popup** both exist in the same Chrome process, so
+they can directly share memory.  This means that you can access a background
 page's window object from a popup by calling
-`chrome.extension.getBackgroundPage`
-and access a popup's window object from a background page by calling
-`chrome.extension.getViews`:
+`chrome.extension.getBackgroundPage` and access a popup's window object from a
+background page by calling `chrome.extension.getViews`:
 
-!['Background page and popup talking to each other'][img02]
+<p class="centered">
+  {{template "image" (.Image "puttogether02")}}
+</p>
 
 This is pretty cool, because a popup could log to the background page's console
 like this:
@@ -89,7 +87,9 @@ bg.console.log('This is sent from the popup but shows up in the bg page log!');
 so they need to be loaded in that process.  This means that the content script
 and the background page cannot directly share objects in memory:
 
-!['Background page and content script are separated by a process boundary'][img03]
+<p class="centered">
+  {{template "image" (.Image "puttogether03")}}
+</p>
 
 The two can still pass messages back and forth using
 **chrome.extension.sendRequest** but these messages are serialized and
@@ -103,17 +103,18 @@ page* and move on.
 But that's not completely right- there's one more level of isolation in effect,
 which is that a content script can't access everything in the web page it is
 currently running on.  While the content script can read and write the DOM
-nodes on the page without any issue, it can't access native JavaScript code
-in the page:
+nodes on the page without any issue, it can't access native JavaScript code in
+the page:
 
-![''][img04]
+<p class="centered">
+  {{template "image" (.Image "puttogether04")}}
+</p>
 
 The reason for this has a lot to do with JavaScript's dynamic nature.  If the
-page and the content script shared a JavaScript execution environment, then
-the page could conceivably start calling things like
-`chrome.extension.sendRequest` and messing around with the internals of the
-extension.  Since extensions have a lot more power over the system than
-regular websites, this is a no-no.
+page and the content script shared a JavaScript execution environment, then the
+page could conceivably start calling things like `chrome.extension.sendRequest`
+and messing around with the internals of the extension.  Since extensions have
+a lot more power over the system than regular websites, this is a no-no.
 
 # Fixing the problem
 
@@ -145,13 +146,12 @@ function loadMyScript() {
 </pre>
 
 you would be able to load JavaScript resources packaged with your extension
-into the context
-of arbitrary web pages.  Which can be useful if you really need to get into
-that JavaScript context for whatever reason.
+into the context of arbitrary web pages.  Which can be useful if you really
+need to get into that JavaScript context for whatever reason.
 
 An extension can still rely on jQuery, although not dynamically.  Just
-reference the appropriate file
-in the `content_scripts` section of your **manifest.json** file:
+reference the appropriate file in the `content_scripts` section of your
+**manifest.json** file:
 
 <pre class="brush:javascript">
 {

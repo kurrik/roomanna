@@ -8,8 +8,8 @@ crucial portion for anyone looking to host their own CRX from a server.
 <!--BREAK-->
 
 In order to get the advantages of auto-updating your extension, you'll need to
-host an autoupdate manifest file.  From the [documentation][link-autoupdate]
-of this feature, the file should be similar to the following:
+host an autoupdate manifest file.  From the [documentation][link-autoupdate] of
+this feature, the file should be similar to the following:
 
 <pre class="blockquote">
 &lt;?xml version=&#x27;1.0&#x27; encoding=&#x27;UTF-8&#x27;?&gt;
@@ -25,13 +25,13 @@ identifier for the extension (the same one printed in each extension's listing
 on the <code>chrome://extensions</code> page).
 
 While it's easy enough to obtain this value by installing an extension and
-copying and pasting from the extensions information page,
-this approach is not ideal if you're generating your own
-signing keys, which the previous article covered in depth.
+copying and pasting from the extensions information page, this approach is not
+ideal if you're generating your own signing keys, which the previous article
+covered in depth.
 
-I thought it might be good to cover that as an addendum here.  Luckily,
-Erik Kay explained the format of this number in
-[this post on StackOverflow][link-overflow]:
+I thought it might be good to cover that as an addendum here.  Luckily, Erik
+Kay explained the format of this number in [this post on
+StackOverflow][link-overflow]:
 
 <pre class="blockquote">
 To be precise, it's the first 128 bits of the SHA256 of an RSA public key
@@ -98,8 +98,8 @@ encoded RSA public key.
 According to Erik's instructions, we need to generate the <code>sha256</code>
 hash of this key, then take the first 128 bits and encode it to hex.  128 bits
 worth of hex is 32 characters, so we'll use the Python <code>hashlib</code>
-module to <code>sha256</code> the public key, and pull the first 32
-characters from the hex version of the hash:
+module to <code>sha256</code> the public key, and pull the first 32 characters
+from the hex version of the hash:
 
 <pre class="brush: python">
 import hashlib
@@ -109,9 +109,9 @@ import hashlib
 digest = hashlib.sha256(publickey).hexdigest()[:32]
 </pre>
 
-Finally, encode the "mpdecimal" version of the hex-encoded
-<code>digest</code> variable.  This just involves shifting each character
-in the hex string over by 10 characters:
+Finally, encode the "mpdecimal" version of the hex-encoded <code>digest</code>
+variable.  This just involves shifting each character in the hex string over by
+10 characters:
 
 <pre>
 extension_id = ''.join(["abcdefghijklmnop"[int(i,16)] for i in digest])
@@ -120,5 +120,3 @@ extension_id = ''.join(["abcdefghijklmnop"[int(i,16)] for i in digest])
 Voilà! <code>extension_id</code> now contains a 32 character string that
 represents the extension's ID number.  This is suitable for including in the
 extension's autoupdate manifest file, as described above.
-
-

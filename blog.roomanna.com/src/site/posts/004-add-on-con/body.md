@@ -1,43 +1,42 @@
 [link-extension]: https://chrome.google.com/extensions/detail/igocgkpcgelnhiojhabmkhkgcdlpanhp
 [link-addoncon]: http://addoncon.com/
 [link-chromewebstore]: http://googleblog.blogspot.com/2010/12/update-on-chrome-web-store-and-chrome.html
-[img-melting]: {{link "melting.png"}}
 [link-doom]: http://doom.wikia.com/wiki/Screen_melt
 
 Last year between the time that the [Chrome web store][link-chromewebstore]
-crazied everything up and the holidays shut everything down, I was invited
-to give an educational session at [Add-on-Con 2010][link-addoncon] on the
-topic of Chrome extensions.
+crazied everything up and the holidays shut everything down, I was invited to
+give an educational session at [Add-on-Con 2010][link-addoncon] on the topic of
+Chrome extensions.
 
 <!--BREAK-->
 
 Despite starting at 9:00am on the teaching day (the day before the conference
 began in earnest), I think the session went well.  I have a Chrome extensions
-presentation which is also
-[a chrome extension itself][link-extension], but it had gotten a bit out of
-date.  I took the opportunity to do a bit of work updating the content and
-sprucing up the demos a bit.
+presentation which is also [a chrome extension itself][link-extension], but it
+had gotten a bit out of date.  I took the opportunity to do a bit of work
+updating the content and sprucing up the demos a bit.
 
-Of particular note is the demo which uses `chrome.tabs.captureVisibleTab`
-to draw the current browser contents into a canvas, and then 2d manipulations
-to "melt" the screen (an effect inspired by
-[one of my favorite games][link-doom]):
+Of particular note is the demo which uses `chrome.tabs.captureVisibleTab` to
+draw the current browser contents into a canvas, and then 2d manipulations to
+"melt" the screen (an effect inspired by [one of my favorite
+games][link-doom]):
 
-<img src="{{link "melting.png"}}" title="Melting" class="centered" />
+<p class="centered">
+  {{template "image" (.Image "melting")}}
+</p>
 
 I suggest you install the [slides][link-extension] to see it in action.  The
 demo is near the end.  This was actually fairly simple to accomplish, so I'll
 go over how I built it here.
 
-The code that initializes
-the animation creates an `<image>`  and a `<canvas>`, then
-calls `chrome.tabs.captureVisibleTab` to get a screenshot, which is returned as
-a data URL. Since you can't load a data URL directly into a canvas, the data URL
-is assigned to the src of the image. When that loads, the canvas is
-adjusted to match the dimensions of the image and injected into the page's DOM
-(with a CSS style to position it absolutely over every other element).
-Then it's a matter of stepping through the animation frames until the
-effect is finished.
+The code that initializes the animation creates an `<image>`  and a `<canvas>`,
+then calls `chrome.tabs.captureVisibleTab` to get a screenshot, which is
+returned as a data URL. Since you can't load a data URL directly into a canvas,
+the data URL is assigned to the src of the image. When that loads, the canvas
+is adjusted to match the dimensions of the image and injected into the page's
+DOM (with a CSS style to position it absolutely over every other element).
+Then it's a matter of stepping through the animation frames until the effect is
+finished.
 
 <pre class="brush:javascript">
 function renderAnimation() {
@@ -69,10 +68,9 @@ for (var i = 0; i &lt; slices; i++) {
 }
 </pre>
 
-The slices move at a constant velocity in a wavy sort of pattern. I like
-using the trigonometric functions for this kind of thing
-because I feel like it leads to nice patterns, as you can see from the
-screenshot above.
+The slices move at a constant velocity in a wavy sort of pattern. I like using
+the trigonometric functions for this kind of thing because I feel like it leads
+to nice patterns, as you can see from the screenshot above.
 
 Once initialized, I set up a closure which will continue animating the scene
 until it determines that the animation is over (every slice is beyond the

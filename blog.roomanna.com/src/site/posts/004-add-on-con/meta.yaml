@@ -6,3 +6,10 @@ tags:
   - extensions
   - presentations
   - work
+images:
+  twitter-card:
+    src: "melting.png"
+  melting:
+    src: "melting.png"
+    metadata:
+      alt: Melting effect from DOOM
