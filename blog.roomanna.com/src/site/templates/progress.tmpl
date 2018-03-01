@@ -1,5 +1,5 @@
 {{define "progress"}}
-  <div class="progress">
+  <div class="progress{{- with .ClassName}} {{.}}{{end}}">
     <div class="progress-bar{{- with .Class}} progress-bar-{{.}}{{end}}" role="progressbar" aria-valuenow="{{.Value}}" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: {{.Value}}%">
       {{.Value}}%
     </div>
