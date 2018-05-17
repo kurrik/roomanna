@@ -1,0 +1,12 @@
+.letter {
+  display: inline-block;
+  width: 1.3em;
+  height: 1.3em;
+  overflow: hidden;
+  line-height: 1;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.alphabet {
+}
