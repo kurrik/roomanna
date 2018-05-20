@@ -1,6 +1,6 @@
 /* @flow */
 
-import React from 'react';
+import * as React from 'react';
 
 import styles from './Alphabet.css';
 
@@ -8,9 +8,7 @@ type Props = {
   letters: Array<string>,
 };
 
-export default class Alphabet extends React.PureComponent {
-  props: Props;
-
+export default class Alphabet extends React.PureComponent<Props> {
   static defaultProps = {
     letters: 'abcdefghijklmnopqrstuvwxyz'.split(''),
   };

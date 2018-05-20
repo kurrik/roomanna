@@ -7,7 +7,7 @@ import Section, {SectionSublabel} from './Section';
 import TimestampChart from 'components/TimestampChart';
 import styles from './SectionTimestampChart.css';
 
-export default class SectionTimestampChart extends React.Component {
+export default class SectionTimestampChart extends React.Component<{}> {
   baseTime = moment();
 
   fromNow = (obj: Object) => this.baseTime.clone().add(obj);

@@ -1,26 +1,25 @@
 /* @flow */
 
-import React from 'react';
-import type { Children } from 'react';
+import * as React from 'react';
 
 import styles from './Section.css';
 
 export type SectionProps = {
   title: string,
-  children?: Children,
+  children?: React.Node,
 };
 
-export class SectionSublabel extends React.Component {
-  props: {
-    children?: Children,
-  }
+type SectionSublabelProps = {
+  children?: React.Node,
+}
 
+export class SectionSublabel extends React.Component<SectionSublabelProps> {
   render() {
     return (<h4>{this.props.children}</h4>);
   }
 }
 
-export default class Section extends React.Component<any, SectionProps, any> {
+export default class Section extends React.Component<SectionProps> {
   render() {
     const {children, title} = this.props;
     return (

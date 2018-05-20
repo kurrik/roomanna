@@ -1,0 +1,7 @@
+date: 05-19-2018
+slug: caesar-cipher
+title: Caesar Cipher
+tags:
+  - ciphers
+scripts:
+  - /static/js/post044.js

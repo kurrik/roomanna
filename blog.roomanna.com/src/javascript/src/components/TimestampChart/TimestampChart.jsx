@@ -66,9 +66,7 @@ type TimeRange = {
   pointClassName?: string,
 };
 
-export default class TimestampChart extends React.PureComponent {
-  props: Props;
-
+export default class TimestampChart extends React.PureComponent<Props> {
   static defaultProps = {
     data: [],
     chartHeight: 300,
@@ -155,7 +153,11 @@ export default class TimestampChart extends React.PureComponent {
     };
   };
 
-  renderChart = (dom: Node) => {
+  renderChart = (dom: ?Node) => {
+    if (!dom) {
+      return;
+    }
+    
     const {
       data,
       chartHeight,

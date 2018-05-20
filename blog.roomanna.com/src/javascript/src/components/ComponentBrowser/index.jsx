@@ -12,15 +12,18 @@ import TestComponent from 'components/TestComponent';
 
 import 'components/ComponentBrowser/index.html';
 
-ReactDOM.render(
-  <ComponentBrowser>
-    <Section title='TestComponent'>
-      <TestComponent />
-    </Section>
-    <Section title='Alphabet'>
-      <Alphabet />
-    </Section>
-    <SectionTimestampChart />
-  </ComponentBrowser>,
-  document.getElementById('root')
-);
+const rootElement = document.getElementById('root');
+if (rootElement) {
+  ReactDOM.render(
+    <ComponentBrowser>
+      <Section title='TestComponent'>
+        <TestComponent />
+      </Section>
+      <Section title='Alphabet'>
+        <Alphabet />
+      </Section>
+      <SectionTimestampChart />
+    </ComponentBrowser>,
+    rootElement
+  );
+}

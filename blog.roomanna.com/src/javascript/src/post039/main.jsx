@@ -79,22 +79,34 @@ const chartProps = {
   yLabelWidth: 15,
 };
 
-ReactDOM.render(
-  <TimestampChart {...chartProps} />,
-  document.getElementById('example00')
-);
+const example00Element = document.getElementById('example00');
+if (example00Element) {
+  ReactDOM.render(
+    <TimestampChart {...chartProps} />,
+    example00Element
+  );
+}
 
-ReactDOM.render(
-  <TimestampChart yHighlight={rangeY} {...chartProps} />,
-  document.getElementById('example01')
-);
+const example01Element = document.getElementById('example01');
+if (example01Element) {
+  ReactDOM.render(
+    <TimestampChart yHighlight={rangeY} {...chartProps} />,
+    example01Element
+  );
+}
 
-ReactDOM.render(
-  <TimestampChart xHighlight={rangeX} {...chartProps} />,
-  document.getElementById('example02')
-);
+const example02Element = document.getElementById('example02');
+if (example02Element) {
+  ReactDOM.render(
+    <TimestampChart xHighlight={rangeX} {...chartProps} />,
+    example02Element
+  );
+}
 
-ReactDOM.render(
-  <TimestampChart xHighlight={rangeX} yHighlight={rangeY} {...chartProps} />,
-  document.getElementById('example03')
-);
+const example03Element = document.getElementById('example03');
+if (example03Element) {
+  ReactDOM.render(
+    <TimestampChart xHighlight={rangeX} yHighlight={rangeY} {...chartProps} />,
+    example03Element
+  );
+}
