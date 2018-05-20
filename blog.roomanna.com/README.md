@@ -13,7 +13,7 @@ Run:
     brew install bzr # (osx)
 
     go get -u github.com/kurrik/ghostwriter
-    npm install
+    yarn
 
 Building
 ========
