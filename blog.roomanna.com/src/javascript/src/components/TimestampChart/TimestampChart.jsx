@@ -21,7 +21,7 @@ type Bounds = {
   right: number,
   bottom: number,
   left: number,
-}
+};
 
 type ComputedBounds = Bounds & {
   width: number,

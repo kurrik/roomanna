@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 
 import ComponentBrowser from './ComponentBrowser';
 import SectionTimestampChart from './SectionTimestampChart';
+import SectionControls from './SectionControls';
 import Section from './Section';
 
 import Alphabet from 'components/Alphabet';
@@ -22,6 +23,7 @@ if (rootElement) {
       <Section title='Alphabet'>
         <Alphabet />
       </Section>
+      <SectionControls />
       <SectionTimestampChart />
     </ComponentBrowser>,
     rootElement

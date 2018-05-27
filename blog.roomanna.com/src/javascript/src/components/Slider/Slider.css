@@ -1,0 +1,12 @@
+.slider {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-gap: 20px;
+}
+
+.sliderInput {
+}
+
+.sliderDisplay {
+  font-weight: bold;
+}
