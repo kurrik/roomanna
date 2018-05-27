@@ -7,12 +7,13 @@ import { createStore, combineReducers } from 'redux';
 
 import Alphabet from 'components/Alphabet';
 import Slider from 'components/Slider';
-import sliderReducer, {onValue, ONVALUE} from 'components/Slider/ducks';
 
 const initialState = {
-  alphabet: 'abc',
+  alphabet: 'abcdefghijklmnopqrstuvwxyz',
   rot: 13,
 }
+
+const ONVALUE = 'roomanna/post044/ONVALUE';
 
 function reducer(state = initialState, action) {
   switch (action.type) {
@@ -26,20 +27,20 @@ function reducer(state = initialState, action) {
 const store = createStore(reducer);
 
 const AlphabetContainer = connect(
-  // mapStateToProps
   state => {
     return {
       letters: state.alphabet.split(''),
     };
   },
-  // mapDispatchToProps
-  dispatch => {
+)(Alphabet);
+
+const RotAlphabetContainer = connect(
+  state => {
     return {
-      // onTodoClick: id => {
-      //   dispatch(toggleTodo(id))
-      // }
+      letters: state.alphabet.split(''),
+      rot: state.rot,
     };
-  }
+  },
 )(Alphabet);
 
 const SliderContainer = connect(
@@ -50,7 +51,7 @@ const SliderContainer = connect(
   },
   dispatch => {
     return {
-      onValue: x => { dispatch(onValue(x)); },
+      onValue: x => { dispatch({ type: ONVALUE, value: x}); },
     };
   }
 )(Slider);
@@ -61,6 +62,7 @@ if (testElement) {
     <Provider store={store}>
       <div>
         <AlphabetContainer />
+        <RotAlphabetContainer />
         <SliderContainer min={0} max={26} />
       </div>
     </Provider>,
