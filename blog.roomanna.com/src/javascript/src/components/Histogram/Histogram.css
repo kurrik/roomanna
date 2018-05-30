@@ -1,0 +1,32 @@
+:global(.domain) {
+    display: none;
+}
+
+.axis path, .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+.axis text {
+    font-size: 12px;
+}
+
+:global(.tick) line {
+    stroke: #d5d5d5;
+    opacity: 0.7;
+}
+
+.series {
+}
+
+.bar {
+  fill: #36b;
+}
+
+.chart {
+}
+
+.label {
+  font-weight: bold;
+}
