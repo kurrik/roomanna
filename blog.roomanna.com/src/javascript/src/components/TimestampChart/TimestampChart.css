@@ -1,3 +1,5 @@
+@import 'common/roomanna.config.css';
+
 .circ {
     fill: #D35400;
     opacity: 0.6;
@@ -27,7 +29,7 @@
 }
 
 .highlight {
-  fill: #36b;
+  fill: var(--color-blue);
   opacity: 0.3;
 }
 

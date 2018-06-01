@@ -46,7 +46,15 @@ var config = {
         test: /\.css$/,
         exclude: /(node_modules)/,
         use: ExtractTextPlugin.extract({
-          use: 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
+          use: [
+            {
+              loader: 'css-loader',
+              options: 'modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+            },
+            {
+              loader: 'postcss-loader',
+            }
+          ]
         })
       },
       {
@@ -70,6 +78,7 @@ var config = {
   },
   resolve: {
     alias: {
+      'common': path.join(__dirname, 'src/common'),
       'components': path.join(__dirname, 'src/components'),
       'lib': path.join(__dirname, 'lib'),
       'default-skin.png': path.join(__dirname, 'node_modules/photoswipe/dist/default-skin/default-skin.png'),

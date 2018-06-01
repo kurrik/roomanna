@@ -1,3 +1,5 @@
+@import 'common/roomanna.config.css';
+
 :global(.domain) {
     display: none;
 }
@@ -21,7 +23,7 @@
 }
 
 .bar {
-  fill: #36b;
+  fill: var(--color-blue);
 }
 
 .chart {

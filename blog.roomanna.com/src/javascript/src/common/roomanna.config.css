@@ -1,0 +1,24 @@
+/* variables.config.css */
+
+:root {
+  /* Base: https://coolors.co/4d9de0-e15554-e1bc29-3bb273-7768ae */
+  --color-blue: #4d9de0;
+  --color-red: #e15554;
+  --color-yelow: #e1bc29;
+  --color-green: #3bb273;
+  --color-purple: #7768ae;
+
+  /* Light:  https://coolors.co/deedf9-f9e0df-f9f2d8-dbf1e5-e6e3f0 */
+  --color-blue-light: #deedf9;
+  --color-red-light: #f9e0df;
+  --color-yelow-light: #f9f2d8;
+  --color-green-light: #dbf1e5;
+  --color-purple-light: #e6e3f0;
+
+  /* Dark: https://coolors.co/32648f-903736-90781b-26724a-4c436f */
+  --color-blue-dark: #32648f;
+  --color-red-dark: #903736;
+  --color-yelow-dark: #90781b;
+  --color-green-dark: #26724a;
+  --color-purple-dark: #4c436f;
+}

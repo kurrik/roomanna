@@ -1,17 +1,19 @@
+@import 'common/roomanna.config.css';
+
 .seriesA {
-  fill: red;
+  fill: var(--color-red);
 }
 
 .seriesB {
-  fill: green;
+  fill: var(--color-green);
 }
 
 .seriesC {
-  fill: blue;
+  fill: var(--color-blue);
 }
 
 .highlight {
-  fill: pink !important;
+  fill: var(--color-purple) !important;
 }
 
 .chart {
