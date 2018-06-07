@@ -24,6 +24,7 @@ export default class SectionHistogram extends React.Component<{}> {
     return (
       <Section title='Histogram'>
         <Histogram data={this.getData()} yLabel="Y Axis Label" yLabelWidth={15} xLabel="X Axis Label" xLabelHeight={15} />
+        <Histogram theme="red" data={this.getData()} yLabel="Y Axis Label" yLabelWidth={15} xLabel="X Axis Label" xLabelHeight={15} />
       </Section>
     );
   }

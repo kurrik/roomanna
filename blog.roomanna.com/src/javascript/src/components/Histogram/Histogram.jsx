@@ -5,6 +5,7 @@ import * as d3 from 'd3';
 import classnames from 'classnames';
 import moment from 'moment';
 import type Moment from 'moment';
+import type {Theme} from 'components/types';
 
 import styles from './Histogram.css';
 
@@ -33,6 +34,7 @@ type Props = {
   chartWidth: number,
   className?: string,
   padding: Bounds,
+  theme?: Theme,
   xLabelHeight: number,
   xLabel: string,
   xLabelClassName?: string,
@@ -54,6 +56,7 @@ export default class Histogram extends React.PureComponent<Props> {
       bottom: 15,
       left: 15,
     },
+    theme: 'blue',
     xLabelHeight: 0,
     xLabel: '',
     xAxisTickHeight: 25,
@@ -218,8 +221,10 @@ export default class Histogram extends React.PureComponent<Props> {
   };
 
   render() {
+    const {theme} = this.props;
+    const className = classnames(styles.histogram, styles[theme]);
     return (
-      <div ref={this.renderChart}></div>
+      <div ref={this.renderChart} className={className}></div>
     );
   }
 }

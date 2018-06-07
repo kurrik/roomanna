@@ -1,8 +1,10 @@
 /* @flow */
 
 import * as React from 'react';
+import classnames from 'classnames';
 
 import styles from './Slider.css';
+import type {Theme} from 'components/types';
 
 type Props = {
   value: number,
@@ -11,6 +13,7 @@ type Props = {
   min: number,
   max: number,
   step: number,
+  theme?: Theme,
 };
 
 export default class Slider extends React.PureComponent<Props> {
@@ -31,9 +34,10 @@ export default class Slider extends React.PureComponent<Props> {
   }
 
   render() {
-    const {min, max, step, value, formatDisplay} = this.props;
+    const {min, max, step, formatDisplay, theme, value} = this.props;
+    const className = classnames(styles.slider, styles[theme]);
     return (
-      <div className={styles.slider}>
+      <div className={className}>
         <input
           className={styles.sliderInput}
           type="range"

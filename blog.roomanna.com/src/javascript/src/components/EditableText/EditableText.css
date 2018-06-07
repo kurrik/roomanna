@@ -1,9 +1,43 @@
 @import 'common/roomanna.config.css';
 
+
+.editableText {
+  --text-background: var(--color-gray-light);
+  --text-border: var(--color-black);
+  --text-color: var(--color-black);
+}
+.editableText.blue {
+  --text-background: var(--color-blue-light);
+  --text-border: var(--color-blue);
+  --text-color: var(--color-blue);
+}
+.editableText.red {
+  --text-background: var(--color-red-light);
+  --text-border: var(--color-red);
+  --text-color: var(--color-red);
+}
+.editableText.yellow {
+  --text-background: var(--color-yellow-light);
+  --text-border: var(--color-yellow);
+  --text-color: var(--color-yellow);
+}
+.editableText.green {
+  --text-background: var(--color-green-light);
+  --text-border: var(--color-green);
+  --text-color: var(--color-green);
+}
+.editableText.purple {
+  --text-background: var(--color-purple-light);
+  --text-border: var(--color-purple);
+  --text-color: var(--color-purple);
+}
+
 .editableText {
   padding: 5px;
-  background: var(--color-purple-light);
-  border: 2px solid var(--color-purple);
-  color: var(--color-purple);
+  background: var(--text-background);
+  border: 2px solid var(--text-border);
+  color: var(--text-color);
   border-radius: 5px;
+  margin-top: var(--vertical-spacing);
+  margin-bottom: var(--vertical-spacing);
 }

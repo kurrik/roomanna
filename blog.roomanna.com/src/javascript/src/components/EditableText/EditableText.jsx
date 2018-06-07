@@ -1,11 +1,14 @@
 /* @flow */
 
 import * as React from 'react';
+import classnames from 'classnames';
 
 import styles from './EditableText.css';
+import type {Theme} from 'components/types';
 
 type Props = {
   text: string,
+  theme?: Theme,
   onChange?: (string) => void,
 };
 
@@ -22,10 +25,11 @@ export default class EditableText extends React.PureComponent<Props> {
   }
 
   render() {
-    const {text} = this.props;
+    const {text, theme} = this.props;
+    const className = classnames(styles.editableText, styles[theme]);
     return (
       <div
-        className={styles.editableText}
+        className={className}
         contentEditable
         suppressContentEditableWarning
         onChange={this.handleChange.bind(this)}

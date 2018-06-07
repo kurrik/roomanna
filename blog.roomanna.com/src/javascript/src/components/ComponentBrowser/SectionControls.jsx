@@ -63,8 +63,18 @@ export default class SectionControls extends React.Component<{}> {
         <Section title='Controls'>
           <SectionSublabel>Slider</SectionSublabel>
           <SliderContainer min={0} max={100} />
+          <SliderContainer theme="blue" min={0} max={100} />
+          <SliderContainer theme="red" min={0} max={100} />
+          <SliderContainer theme="yellow" min={0} max={100} />
+          <SliderContainer theme="green" min={0} max={100} />
+          <SliderContainer theme="purple" min={0} max={100} />
           <SectionSublabel>EditableText</SectionSublabel>
           <EditableTextContainer />
+          <EditableTextContainer theme="blue" />
+          <EditableTextContainer theme="red" />
+          <EditableTextContainer theme="yellow" />
+          <EditableTextContainer theme="green" />
+          <EditableTextContainer theme="purple" />
         </Section>
       </Provider>
     );

@@ -1,12 +1,27 @@
 @import 'common/roomanna.config.css';
 
-:global(.domain) {
-    display: none;
+.histogram {
+  --bar-fill: var(--color-black);
+}
+.histogram.blue {
+  --bar-fill: var(--color-blue);
+}
+.histogram.red {
+  --bar-fill: var(--color-red);
+}
+.histogram.yellow {
+  --bar-fill: var(--color-yellow);
+}
+.histogram.green {
+  --bar-fill: var(--color-green);
+}
+.histogram.purple {
+  --bar-fill: var(--color-purple);
 }
 
 .axis path, .axis line {
     fill: none;
-    stroke: #000;
+    stroke: var(--color-black);
     shape-rendering: crispEdges;
 }
 
@@ -14,16 +29,11 @@
     font-size: 12px;
 }
 
-:global(.tick) line {
-    stroke: #d5d5d5;
-    opacity: 0.7;
-}
-
 .series {
 }
 
 .bar {
-  fill: var(--color-blue);
+  fill: var(--bar-fill);
 }
 
 .chart {
