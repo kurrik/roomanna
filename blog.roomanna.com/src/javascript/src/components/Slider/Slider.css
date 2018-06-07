@@ -38,6 +38,7 @@
 
 .sliderDisplay {
   font-weight: bold;
+  align-self: center;
 }
 
 /* Via http://danielstern.ca/range.css/#/ */
