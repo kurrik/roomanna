@@ -28,14 +28,12 @@ export default class EditableText extends React.PureComponent<Props> {
     const {text, theme} = this.props;
     const className = classnames(styles.editableText, styles[theme]);
     return (
-      <div
+      <input
+        type='text'
         className={className}
-        contentEditable
-        suppressContentEditableWarning
         onChange={this.handleChange.bind(this)}
-      >
-        {text}
-      </div>
+        value={text}
+      />
     );
   }
 }
