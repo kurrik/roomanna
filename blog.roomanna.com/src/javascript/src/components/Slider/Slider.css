@@ -39,6 +39,7 @@
 .sliderDisplay {
   font-weight: bold;
   align-self: center;
+  color: var(--dark);
 }
 
 /* Via http://danielstern.ca/range.css/#/ */

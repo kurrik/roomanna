@@ -23,6 +23,11 @@ if (rootElement) {
       </Section>
       <Section title='Alphabet'>
         <Alphabet />
+        <Alphabet theme='blue' />
+        <Alphabet theme='red' />
+        <Alphabet theme='yellow' />
+        <Alphabet theme='green' />
+        <Alphabet theme='purple' />
       </Section>
       <SectionControls />
       <SectionHistogram />

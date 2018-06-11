@@ -1,12 +1,61 @@
+@import 'common/roomanna.config.css';
+
+.alphabet {
+  --alphabet-background: var(--color-gray-light);
+  --alphabet-border: var(--color-black);
+  --alphabet-text: var(--color-black);
+}
+.alphabet.blue {
+  --alphabet-background: var(--color-blue-light);
+  --alphabet-border: var(--color-blue);
+  --alphabet-text: var(--color-blue);
+}
+.alphabet.red {
+  --alphabet-background: var(--color-red-light);
+  --alphabet-border: var(--color-red);
+  --alphabet-text: var(--color-red);
+}
+.alphabet.yellow {
+  --alphabet-background: var(--color-yellow-light);
+  --alphabet-border: var(--color-yellow);
+  --alphabet-text: var(--color-yellow);
+}
+.alphabet.green {
+  --alphabet-background: var(--color-green-light);
+  --alphabet-border: var(--color-green);
+  --alphabet-text: var(--color-green);
+}
+.alphabet.purple {
+  --alphabet-background: var(--color-purple-light);
+  --alphabet-border: var(--color-purple);
+  --alphabet-text: var(--color-purple);
+}
+
 .letter {
-  display: inline-block;
-  width: 1.3em;
-  height: 1.3em;
+  grid-row: 1;
   overflow: hidden;
-  line-height: 1;
   text-align: center;
-  border: 1px solid #ddd;
+  line-height: 1;
+  border-right: 2px solid var(--alphabet-border);
+  color: var(--alphabet-text);
+  padding: 4px;
+}
+
+.letter:last-child {
+  border: 0;
 }
 
 .alphabet {
+  margin-top: var(--vertical-spacing);
+  margin-bottom: var(--vertical-spacing);
+}
+
+.container {
+  display: inline-grid;
+  align-items: stretch;
+  justify-content: start;
+  grid-auto-columns: 1.5em;
+  background: var(--alphabet-background);
+  border: 2px solid var(--alphabet-border);
+  border-radius: 5px;
 }

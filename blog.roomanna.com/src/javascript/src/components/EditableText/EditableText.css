@@ -1,6 +1,5 @@
 @import 'common/roomanna.config.css';
 
-
 .editableText {
   --text-background: var(--color-gray-light);
   --text-border: var(--color-black);
@@ -42,4 +41,6 @@
   border-radius: 5px;
   margin-top: var(--vertical-spacing);
   margin-bottom: var(--vertical-spacing);
+  outline: none;
+  resize: none;
 }

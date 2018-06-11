@@ -12,7 +12,7 @@ import Slider from 'components/Slider';
 
 // Text from http://www.gutenberg.org/files/42455/42455-0.txt
 
-const initialState = {
+const initialState = computeState({
   alphabet: 'abcdefghijklmnopqrstuvwxyz',
   rot: 13,
   englishFrequencies: [
@@ -43,13 +43,7 @@ const initialState = {
     { label: 'Y', value: 0.0211 },
     { label: 'Z', value: 0.0007 },
   ],
-  text: `
-    We found the spot which I had indicated admirably adapted for our
-    purpose. One could sit on the stone roof, well back from the wall, and
-    through one of the openings in the castellation see the top of the
-    monument amongst the tree tops; and could yet be unobserved oneself from
-    any other spot around. The angles of the castellation of the various
-    walls shut out the tops of the other hills or mounds on every side.
+  text: cleanText(`
     As the signs of our code were already complete we had only to fix on
     some means of signalling 'A' and 'B'. This we did by deciding that by
     daylight A should be signified by red and B by white and at night A by
@@ -61,18 +55,55 @@ const initialState = {
     red and green side lights could be shown as required. Then and there we
     arranged that that very afternoon when I had left the castle I should
     steal back to the monument and we should make a trial of our signalling.
-  `,
-}
+  `),
+  rotText: '',
+});
 
 const ONVALUE = 'roomanna/post044/ONVALUE';
 const ONTEXT = 'roomanna/post044/ONTEXT';
 
+function cleanText(text) {
+  return text.split('\n')
+    .map(t => t.trim())
+    .filter(l => l.length > 0)
+    .join(' ');
+}
+
+function rotText(text, rot, alphabet) {
+  var output = [];
+  var offset = 0;
+  const baseOffset = 'A'.charCodeAt(0);
+  const alphabetSize = alphabet.length;
+  for (var i = 0; i < text.length; i++) {
+    const c = text[i].toUpperCase();
+    if (c >= 'A' && c <= 'Z') {
+      const startLetterIndex = c.charCodeAt(0) - baseOffset;
+      const endLetterIndex = (startLetterIndex + rot) % alphabetSize;
+      offset = endLetterIndex - startLetterIndex;
+      output.push(String.fromCharCode(text.charCodeAt(i) + offset));
+    } else {
+      output.push(text[i]);
+    }
+  }
+  return output.join('');
+}
+
+function computeHistogram(text) {
+  const letters = {};
+
+}
+
+function computeState(state) {
+  state.rotText = rotText(state.text, state.rot, state.alphabet);
+  return state;
+}
+
 function reducer(state = initialState, action) {
   switch (action.type) {
     case ONVALUE:
-      return { ...state, rot: action.value };
+      return computeState({ ...state, rot: action.value });
     case ONTEXT:
-      return { ...state, text: action.text };
+      return computeState({ ...state, text: action.text });
     default:
       return state;
   }
@@ -102,16 +133,21 @@ const EditableTextContainer = connect(
   dispatch => ({ onChange: x => { dispatch({ type: ONTEXT, text: x}); }}),
 )(EditableText);
 
+const RotTextContainer = connect(
+  state => ({ text: state.rotText, disabled: true }),
+)(EditableText);
+
 const testElement = document.getElementById('test');
 if (testElement) {
   ReactDOM.render(
     <Provider store={store}>
       <div>
-        <AlphabetContainer />
-        <RotAlphabetContainer />
-        <SliderContainer min={0} max={26} />
-        <HistogramContainer />
-        <EditableTextContainer />
+        <AlphabetContainer theme='blue' />
+        <RotAlphabetContainer theme='purple' />
+        <SliderContainer min={0} max={26} theme='green' />
+        <HistogramContainer theme='blue' />
+        <EditableTextContainer theme='blue' />
+        <RotTextContainer theme='purple' />
       </div>
     </Provider>,
     testElement

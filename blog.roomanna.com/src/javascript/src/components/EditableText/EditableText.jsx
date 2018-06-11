@@ -2,11 +2,13 @@
 
 import * as React from 'react';
 import classnames from 'classnames';
+import TextareaAutosize from 'react-autosize-textarea';
 
 import styles from './EditableText.css';
 import type {Theme} from 'components/types';
 
 type Props = {
+  disabled?: bool,
   text: string,
   theme?: Theme,
   onChange?: (string) => void,
@@ -14,6 +16,7 @@ type Props = {
 
 export default class EditableText extends React.PureComponent<Props> {
   static defaultProps = {
+    disabled: false,
     text: '',
   };
 
@@ -25,11 +28,11 @@ export default class EditableText extends React.PureComponent<Props> {
   }
 
   render() {
-    const {text, theme} = this.props;
+    const {disabled, text, theme} = this.props;
     const className = classnames(styles.editableText, styles[theme]);
     return (
-      <input
-        type='text'
+      <TextareaAutosize
+        disabled={disabled}
         className={className}
         onChange={this.handleChange.bind(this)}
         value={text}
