@@ -1,10 +1,11 @@
 var path = require('path');
 var webpack = require('webpack');
 var PROD = JSON.parse(process.env.PROD || '0');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var MiniCssExtractPlugin = require('mini-css-extract-plugin');
 var FlowBabelWebpackPlugin = require('flow-babel-webpack-plugin');
 
 var config = {
+  mode: 'none', // TODO: Replace with prod / dev and remove optimization plugins.
   entry: {
     'common': ['jquery', 'bootstrap'],
     'components': './src/components/ComponentBrowser/index.jsx',
@@ -28,7 +29,7 @@ var config = {
         use: [
           {
             loader: 'babel-loader',
-            options: { presets: ['es2015'], cacheDirectory: true }
+            options: { presets: ['env'], cacheDirectory: true }
           }
         ],
       },
@@ -38,24 +39,24 @@ var config = {
         use: [
           {
             loader: 'babel-loader',
-            options: { presets: ['es2015', 'react', 'stage-0'], cacheDirectory: true }
+            options: { presets: ['env', 'react', 'stage-0'], cacheDirectory: true }
           },
         ]
       },
       {
         test: /\.css$/,
         exclude: /(node_modules)/,
-        use: ExtractTextPlugin.extract({
-          use: [
-            {
-              loader: 'css-loader',
-              options: 'modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
-            },
-            {
-              loader: 'postcss-loader',
-            }
-          ]
-        })
+        use: [
+          //PROD ? MiniCssExtractPlugin.loader : 'style-loader',
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: 'modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+          },
+          {
+            loader: 'postcss-loader',
+          }
+        ]
       },
       {
         test: /\.html$/,
@@ -78,7 +79,7 @@ var config = {
   },
   resolve: {
     alias: {
-      'common': path.join(__dirname, 'src/common'),
+      './common/roomanna.config.css': path.join(__dirname, 'src/common/roomanna.config.css'),
       'components': path.join(__dirname, 'src/components'),
       'lib': path.join(__dirname, 'lib'),
       'default-skin.png': path.join(__dirname, 'node_modules/photoswipe/dist/default-skin/default-skin.png'),
@@ -88,17 +89,30 @@ var config = {
     extensions: ['.js', '.jsx'],
   },
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'common'
-    }),
     new webpack.ProvidePlugin({
       jQuery: 'jquery',
       $: 'jquery',
-      jquery: 'jquery'
+      jquery: 'jquery',
+      Popper: ['popper.js', 'default'],
     }),
-    new ExtractTextPlugin({ filename: 'css/[name].css' }),
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].css',
+      chunkFilename: 'css/[id].css',
+    }),
     new FlowBabelWebpackPlugin(),
-  ]
+  ],
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          chunks: 'initial',
+          test: /\.js$/,
+          name: 'common',
+          enforce: true
+        }
+      }
+    }
+  }
 };
 
 if (PROD) {
