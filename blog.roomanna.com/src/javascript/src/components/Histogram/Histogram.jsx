@@ -45,7 +45,13 @@ type Props = {
   yAxisTickWidth: number,
 };
 
-export default class Histogram extends React.PureComponent<Props> {
+type ReactObjRef = {
+  current: null | React$ElementRef<'div'>
+};
+
+export default class Histogram extends React.Component<Props> {
+  graphRoot: ReactObjRef;
+
   static defaultProps = {
     data: [],
     chartHeight: 300,
@@ -65,6 +71,11 @@ export default class Histogram extends React.PureComponent<Props> {
     yAxisTickWidth: 75,
   };
 
+  constructor(props: Props) {
+    super(props);
+    this.graphRoot = React.createRef();
+  }
+
   computeBounds = (bounds: Bounds): ComputedBounds => {
     const width = bounds.right - bounds.left;
     const height = bounds.bottom - bounds.top;
@@ -78,6 +89,7 @@ export default class Histogram extends React.PureComponent<Props> {
   };
 
   renderChart = (dom: ?Node) => {
+    console.log('render');
     if (!dom) {
       return;
     }
@@ -98,6 +110,7 @@ export default class Histogram extends React.PureComponent<Props> {
       yAxisTickWidth,
     } = this.props;
 
+    console.log('DATA', data);
     const innerBounds = this.computeBounds({
       left: padding.left + yLabelWidth + yAxisTickWidth,
       right: chartWidth - padding.right,
@@ -207,24 +220,35 @@ export default class Histogram extends React.PureComponent<Props> {
       .selectAll(`.${styles.bar}`)
         .data((d) => d);
 
-    bars.enter()
-      .append('rect')
-      .attr('class', (d) => classnames(styles.bar))
-      .attr('x', (d) => x(d.label))
-      .attr('y', (d) => y(d.value))
-      .attr('width', x.bandwidth())
-      .attr('height', (d) => innerBounds.height - y(d.value));
+    bars
+      .enter()
+        .append('rect')
+        .attr('class', (d) => classnames(styles.bar))
+      .merge(bars)
+        .attr('x', (d) => x(d.label))
+        .attr('y', (d) => y(d.value))
+        .attr('width', x.bandwidth())
+        .attr('height', (d) => innerBounds.height - y(d.value));
 
     bars.exit()
       .remove();
 
   };
 
+  shouldComponentUpdate(nextProps: Props) {
+    console.log('Should update?');
+    return true;
+  }
+
+  componentDidMount() {
+    this.renderChart(this.graphRoot.current);
+  }
+
   render() {
     const {theme} = this.props;
     const className = classnames(styles.histogram, styles[theme]);
     return (
-      <div ref={this.renderChart} className={className}></div>
+      <div ref={this.graphRoot} className={className}></div>
     );
   }
 }

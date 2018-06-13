@@ -43,6 +43,7 @@ const initialState = computeState({
     { label: 'Y', value: 0.0211 },
     { label: 'Z', value: 0.0007 },
   ],
+  cipherFrequencies: [],
   text: cleanText(`
     As the signs of our code were already complete we had only to fix on
     some means of signalling 'A' and 'B'. This we did by deciding that by
@@ -89,12 +90,23 @@ function rotText(text, rot, alphabet) {
 }
 
 function computeHistogram(text) {
-  const letters = {};
-
+  const letters: Map<string, number> = new Map();
+  var total = 0;
+  for (var i = 0; i < text.length; i++) {
+    const c = text[i].toUpperCase();
+    if (c >= 'A' && c <= 'Z') {
+      letters.set(c, (letters.get(c) || 0) + 1);
+      total += 1;
+    }
+  }
+  return [...letters.entries()]
+    .map(x => ({label: x[0], value: x[1] / total}))
+    .sort((a, b) => a.label.localeCompare(b.label));
 }
 
 function computeState(state) {
   state.rotText = rotText(state.text, state.rot, state.alphabet);
+  state.cipherFrequencies = computeHistogram(state.rotText);
   return state;
 }
 
@@ -128,6 +140,10 @@ const HistogramContainer = connect(
   state => ({ data: state.englishFrequencies }),
 )(Histogram);
 
+const CipherHistogramContainer = connect(
+  state => ({ data: state.cipherFrequencies }),
+)(Histogram);
+
 const EditableTextContainer = connect(
   state => ({ text: state.text }),
   dispatch => ({ onChange: x => { dispatch({ type: ONTEXT, text: x}); }}),
@@ -145,7 +161,8 @@ if (testElement) {
         <AlphabetContainer theme='blue' />
         <RotAlphabetContainer theme='purple' />
         <SliderContainer min={0} max={26} theme='green' />
-        <HistogramContainer theme='blue' />
+        <HistogramContainer theme='green' />
+        <CipherHistogramContainer theme='purple' />
         <EditableTextContainer theme='blue' />
         <RotTextContainer theme='purple' />
       </div>
