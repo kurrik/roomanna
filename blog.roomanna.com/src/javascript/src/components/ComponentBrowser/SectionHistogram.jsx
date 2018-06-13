@@ -10,7 +10,18 @@ type LabelData = {
   value: number,
 };
 
-export default class SectionHistogram extends React.Component<{}> {
+type State = {
+  counter: number,
+};
+
+export default class SectionHistogram extends React.Component<{}, State> {
+  constructor() {
+    super();
+    this.state = {
+      counter: 0,
+    };
+  }
+
   getData(): Array<LabelData> {
     return Array
       .from('abcdefghijklmnopqrstuvwxyz')
@@ -20,11 +31,18 @@ export default class SectionHistogram extends React.Component<{}> {
       }));
   }
 
+  refresh = () => {
+    this.setState({
+      counter: this.state.counter + 1,
+    });
+  }
+
   render() {
     return (
       <Section title='Histogram'>
-        <Histogram data={this.getData()} yLabel="Y Axis Label" yLabelWidth={15} xLabel="X Axis Label" xLabelHeight={15} />
-        <Histogram theme="red" data={this.getData()} yLabel="Y Axis Label" yLabelWidth={15} xLabel="X Axis Label" xLabelHeight={15} />
+        <Histogram data={this.getData()} yLabel='Y Axis Label' yLabelWidth={15} xLabel='X Axis Label' xLabelHeight={15} />
+        <Histogram theme='red' data={this.getData()} yLabel='Y Axis Label' yLabelWidth={15} xLabel='X Axis Label' xLabelHeight={15} />
+        <button onClick={this.refresh}>Refresh</button>
       </Section>
     );
   }

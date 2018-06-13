@@ -12,6 +12,8 @@
     "components": "webpack-dev-server --hot --inline --content-base ../../build/content/static/"
   },
   "author": "Arne Roomann-Kurrik",
+  "dependencies": {
+  },
   "devDependencies": {
     "@webpack-cli/init": "^0.0.8",
     "babel-core": "^6.25.0",
@@ -37,6 +39,7 @@
     "jquery": "^3.2.1",
     "mini-css-extract-plugin": "^0.4.0",
     "moment": "^2.22.2",
+    "optimize-css-assets-webpack-plugin": "^4.0.2",
     "photoswipe": "^4.1.2",
     "popper.js": "^1.14.3",
     "postcss-loader": "^2.1.5",
@@ -49,8 +52,10 @@
     "redux": "^4.0.0",
     "seedrandom": "^2.4.3",
     "style-loader": "^0.21.0",
+    "uglifyjs-webpack-plugin": "^1.2.5",
     "url-loader": "^1.0.1",
     "webpack": "^4.12.0",
+    "webpack-cli": "^3.0.4",
     "webpack-dev-server": "^3.1.4"
   },
   "browser": {
@@ -63,8 +68,5 @@
     "transform": [
       "browserify-shim"
     ]
-  },
-  "dependencies": {
-    "webpack-cli": "^3.0.4"
   }
 }

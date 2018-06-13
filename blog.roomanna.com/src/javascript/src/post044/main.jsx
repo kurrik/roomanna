@@ -89,13 +89,16 @@ function rotText(text, rot, alphabet) {
   return output.join('');
 }
 
-function computeHistogram(text) {
+function computeHistogram(text, alphabet) {
   const letters: Map<string, number> = new Map();
+  for (var i = 0; i < alphabet.length; i++) {
+    letters.set(alphabet[i].toUpperCase(), 0);
+  }
   var total = 0;
   for (var i = 0; i < text.length; i++) {
     const c = text[i].toUpperCase();
-    if (c >= 'A' && c <= 'Z') {
-      letters.set(c, (letters.get(c) || 0) + 1);
+    if (letters.has(c)) {
+      letters.set(c, letters.get(c) + 1);
       total += 1;
     }
   }
@@ -106,7 +109,7 @@ function computeHistogram(text) {
 
 function computeState(state) {
   state.rotText = rotText(state.text, state.rot, state.alphabet);
-  state.cipherFrequencies = computeHistogram(state.rotText);
+  state.cipherFrequencies = computeHistogram(state.rotText, state.alphabet);
   return state;
 }
 

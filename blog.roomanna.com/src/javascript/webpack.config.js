@@ -1,11 +1,13 @@
-var path = require('path');
-var webpack = require('webpack');
-var PROD = JSON.parse(process.env.PROD || '0');
-var MiniCssExtractPlugin = require('mini-css-extract-plugin');
-var FlowBabelWebpackPlugin = require('flow-babel-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
+const PROD = JSON.parse(process.env.PROD || '0');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const FlowBabelWebpackPlugin = require('flow-babel-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 var config = {
-  mode: 'none', // TODO: Replace with prod / dev and remove optimization plugins.
+  mode: PROD ? 'production' : 'development',
   entry: {
     'common': ['jquery', 'bootstrap'],
     'components': './src/components/ComponentBrowser/index.jsx',
@@ -47,8 +49,7 @@ var config = {
         test: /\.css$/,
         exclude: /(node_modules)/,
         use: [
-          //PROD ? MiniCssExtractPlugin.loader : 'style-loader',
-          MiniCssExtractPlugin.loader,
+          PROD ? MiniCssExtractPlugin.loader : 'style-loader',
           {
             loader: 'css-loader',
             options: 'modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
@@ -95,13 +96,17 @@ var config = {
       jquery: 'jquery',
       Popper: ['popper.js', 'default'],
     }),
-    new MiniCssExtractPlugin({
-      filename: 'css/[name].css',
-      chunkFilename: 'css/[id].css',
-    }),
     new FlowBabelWebpackPlugin(),
   ],
   optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: true
+      }),
+      new OptimizeCSSAssetsPlugin({})
+    ],
     splitChunks: {
       cacheGroups: {
         commons: {
@@ -117,8 +122,9 @@ var config = {
 
 if (PROD) {
   config.plugins.push(
-    new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false }
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].css',
+      chunkFilename: 'css/[id].css',
     }),
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: JSON.stringify('production') }

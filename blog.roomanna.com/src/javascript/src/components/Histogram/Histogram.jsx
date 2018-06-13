@@ -89,7 +89,6 @@ export default class Histogram extends React.Component<Props> {
   };
 
   renderChart = (dom: ?Node) => {
-    console.log('render');
     if (!dom) {
       return;
     }
@@ -110,7 +109,6 @@ export default class Histogram extends React.Component<Props> {
       yAxisTickWidth,
     } = this.props;
 
-    console.log('DATA', data);
     const innerBounds = this.computeBounds({
       left: padding.left + yLabelWidth + yAxisTickWidth,
       right: chartWidth - padding.right,
@@ -161,64 +159,106 @@ export default class Histogram extends React.Component<Props> {
     var yAxis = d3.axisLeft(y)
       .tickSize(-innerBounds.width, 0);
 
-    var svg = d3.select(dom).append('svg')
-      .attr('class', classnames(styles.chart, className))
-      .attr('width', chartWidth)
-      .attr('height', chartHeight)
-      .attr('viewBox', `0 0 ${chartWidth} ${chartHeight}`);
+    const svg = d3.select(dom)
+      .selectAll(`.${styles.chart}`)
+      .data([1]);
+    svg
+      .enter()
+        .append('svg')
+        .attr('class', classnames(styles.chart, className))
+      .merge(svg)
+        .attr('width', chartWidth)
+        .attr('height', chartHeight)
+        .attr('viewBox', `0 0 ${chartWidth} ${chartHeight}`);
+    svg.exit().remove();
 
-    var innerContext = svg.append('g')
-      .attr('transform', `translate(${innerBounds.left},${innerBounds.top})`);
+    const innerContextLayer = d3.select(dom)
+      .selectAll(`.${styles.chart}`)
+      .selectAll('.innerContext')
+      .data([1]);
+    innerContextLayer
+      .enter()
+        .append('g')
+        .attr('class', 'innerContext')
+      .merge(innerContextLayer)
+        .attr('transform', `translate(${innerBounds.left},${innerBounds.top})`);
 
-    innerContext.append('g')
-      .attr('class', classnames('x', styles.axis))
-      .attr('transform', `translate(0, ${innerBounds.height})`)
-      .call(xAxis);
+    const xAxisLayer = d3.select(dom)
+      .selectAll('.innerContext')
+      .selectAll('.x')
+      .data([1]);
+    xAxisLayer
+      .enter()
+        .append('g')
+        .attr('class', classnames('x', styles.axis))
+      .merge(xAxisLayer)
+        .attr('transform', `translate(0, ${innerBounds.height})`)
+        .call(xAxis);
 
-    innerContext.append('g')
-      .attr('class', classnames('y', styles.axis))
-      .call(yAxis);
+    const yAxisLayer = d3.select(dom)
+      .selectAll('.innerContext')
+      .selectAll('.y')
+      .data([1]);
+    yAxisLayer
+      .enter()
+        .append('g')
+        .attr('class', classnames('y', styles.axis))
+      .merge(yAxisLayer)
+        .call(yAxis);
 
     if (xLabel) {
-      const xLabelText = svg.append('g')
-        .attr('class', classnames('x', styles.axis, styles.label, xLabelClassName))
-        .attr('transform', 'translate(0, 0)')
-        .append('text')
-        .attr('x', xLabelBounds.centerX)
-        .attr('y', xLabelBounds.centerY)
-        .style('text-anchor', 'middle')
-        .style('alignment-baseline', 'text-after-edge')
-        .text(xLabel);
+      const xLabelText = d3.select(dom)
+        .selectAll(`.${styles.chart}`)
+        .selectAll(`.x.${styles.label}`)
+        .data([1]);
+      xLabelText
+        .enter()
+          .append('g')
+          .attr('class', classnames('x', styles.axis, styles.label, xLabelClassName))
+          .attr('transform', 'translate(0, 0)')
+          .append('text')
+          .attr('x', xLabelBounds.centerX)
+          .attr('y', xLabelBounds.centerY)
+          .style('text-anchor', 'middle')
+          .style('alignment-baseline', 'text-after-edge')
+          .text(xLabel);
     }
 
     if (yLabel) {
-      svg.append('g')
-        .attr('class', classnames('y', styles.axis, styles.label, yLabelClassName))
-        .attr('transform', 'translate(0, 0)')
-        .append('text')
-        .attr('x', -yLabelBounds.centerY) // Reversed on purpose
-        .attr('y', yLabelBounds.centerX) // Reversed on purpose
-        .attr('transform', 'rotate(-90)')
-        .style('text-anchor', 'middle')
-        .style('alignment-baseline', 'text-before-edge')
-        .text(yLabel);
+      const yLabelText = d3.select(dom)
+        .selectAll(`.${styles.chart}`)
+        .selectAll(`.y.${styles.label}`)
+        .data([1]);
+      yLabelText
+        .enter()
+          .append('g')
+          .attr('class', classnames('y', styles.axis, styles.label, yLabelClassName))
+          .attr('transform', 'translate(0, 0)')
+          .append('text')
+          .attr('x', -yLabelBounds.centerY) // Reversed on purpose
+          .attr('y', yLabelBounds.centerX) // Reversed on purpose
+          .attr('transform', 'rotate(-90)')
+          .style('text-anchor', 'middle')
+          .style('alignment-baseline', 'text-before-edge')
+          .text(yLabel);
     }
 
-    var series = innerContext
-      .append('g')
+    var series = d3.select(dom)
+      .selectAll('.innerContext')
       .selectAll(`.${styles.series}`)
-        .data([data]);
-
-    series.exit()
-      .remove();
+      .data([data]);
 
     series.enter()
       .append('g')
       .attr('class', styles.series);
 
-    var bars = series.enter().merge(series)
+    series.exit()
+      .remove();
+
+    var bars = d3.select(dom)
+      .selectAll(`.${styles.series}`)
       .selectAll(`.${styles.bar}`)
-        .data((d) => d);
+      .data((d) => d);
 
     bars
       .enter()
@@ -232,13 +272,7 @@ export default class Histogram extends React.Component<Props> {
 
     bars.exit()
       .remove();
-
   };
-
-  shouldComponentUpdate(nextProps: Props) {
-    console.log('Should update?');
-    return true;
-  }
 
   componentDidMount() {
     this.renderChart(this.graphRoot.current);
@@ -247,6 +281,7 @@ export default class Histogram extends React.Component<Props> {
   render() {
     const {theme} = this.props;
     const className = classnames(styles.histogram, styles[theme]);
+    this.renderChart(this.graphRoot.current);
     return (
       <div ref={this.graphRoot} className={className}></div>
     );

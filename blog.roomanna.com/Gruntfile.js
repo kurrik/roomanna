@@ -140,5 +140,6 @@ module.exports = function(grunt) {
   // Verbs
   grunt.registerTask('serve',           ['copy:server', 'bgShell:serve']);
   grunt.registerTask('develop',         ['all-devel', 'serve', 'watch']);
+  grunt.registerTask('develop-prod',    ['all', 'serve', 'watch']);
   grunt.registerTask('default',         ['all']);
 };

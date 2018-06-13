@@ -12,6 +12,9 @@ deploy: build
 develop:
 	./node_modules/.bin/grunt develop
 
+develop-prod:
+	./node_modules/.bin/grunt develop-prod
+
 clean:
 	./node_modules/.bin/grunt clean
 
