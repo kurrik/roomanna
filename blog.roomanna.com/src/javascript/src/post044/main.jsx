@@ -58,6 +58,7 @@ const initialState = computeState({
     steal back to the monument and we should make a trial of our signalling.
   `),
   rotText: '',
+  statistics: [],
 });
 
 const ONVALUE = 'roomanna/post044/ONVALUE';
@@ -107,9 +108,28 @@ function computeHistogram(text, alphabet) {
     .sort((a, b) => a.label.localeCompare(b.label));
 }
 
+function diffHistograms(a, b) {
+  var delta = 0;
+  for (var i = 0; i < a.length; i++) {
+    if (a[i].label !== b[i].label) {
+      console.log("Warning: invalid comparison", a, b);
+    }
+    delta += Math.abs(a[i].value - b[i].value)
+  }
+  return delta;
+}
+
 function computeState(state) {
   state.rotText = rotText(state.text, state.rot, state.alphabet);
   state.cipherFrequencies = computeHistogram(state.rotText, state.alphabet);
+  for (var i = 0; i < state.alphabet.length; i++) {
+    const text = rotText(state.rotText, -i, state.alphabet);
+    const freqs = computeHistogram(text, state.alphabet);
+    state.statistics[i] = {
+      rot: i,
+      diff: diffHistograms(freqs, state.englishFrequencies),
+    };
+  }
   return state;
 }
 
@@ -124,7 +144,10 @@ function reducer(state = initialState, action) {
   }
 }
 
-const store = createStore(reducer);
+const store = createStore(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+);
 
 const AlphabetContainer = connect(
   state => ({ letters: state.alphabet.split('') }),

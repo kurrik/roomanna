@@ -4,10 +4,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import ComponentBrowser from './ComponentBrowser';
-import SectionHistogram from './SectionHistogram';
-import SectionTimestampChart from './SectionTimestampChart';
-import SectionControls from './SectionControls';
 import Section from './Section';
+import SectionControls from './SectionControls';
+import SectionHistogram from './SectionHistogram';
+import SectionStyles from './SectionStyles';
+import SectionTimestampChart from './SectionTimestampChart';
 
 import Alphabet from 'components/Alphabet';
 import TestComponent from 'components/TestComponent';
@@ -29,6 +30,7 @@ if (rootElement) {
         <Alphabet theme='green' />
         <Alphabet theme='purple' />
       </Section>
+      <SectionStyles />
       <SectionControls />
       <SectionHistogram />
       <SectionTimestampChart />
