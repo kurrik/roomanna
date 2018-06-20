@@ -124,10 +124,10 @@ function diffHistograms(a, b) {
 function computeDiffText(diff, isBest, isCurrent) {
   const bestLabel = isBest ? (
     <span className="label label-success">BEST</span>
-  ) : null;
+  ) : "";
   const currentLabel = isCurrent ? (
     <span className="label label-primary">CURRENT</span>
-  ) : null;
+  ) : "";
   return (
     <span><span>{diff}</span> {bestLabel} {currentLabel}</span>
   );
