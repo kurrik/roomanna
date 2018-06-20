@@ -9,6 +9,7 @@ import Alphabet from 'components/Alphabet';
 import Histogram from 'components/Histogram';
 import EditableText from 'components/EditableText';
 import Slider from 'components/Slider';
+import Table from 'components/Table';
 
 // Text from http://www.gutenberg.org/files/42455/42455-0.txt
 
@@ -59,6 +60,7 @@ const initialState = computeState({
   `),
   rotText: '',
   statistics: [],
+  statisticsTable: [],
 });
 
 const ONVALUE = 'roomanna/post044/ONVALUE';
@@ -119,6 +121,18 @@ function diffHistograms(a, b) {
   return delta;
 }
 
+function computeDiffText(diff, isBest, isCurrent) {
+  const bestLabel = isBest ? (
+    <span className="label label-success">BEST</span>
+  ) : null;
+  const currentLabel = isCurrent ? (
+    <span className="label label-primary">CURRENT</span>
+  ) : null;
+  return (
+    <span><span>{diff}</span> {bestLabel} {currentLabel}</span>
+  );
+}
+
 function computeState(state) {
   state.rotText = rotText(state.text, state.rot, state.alphabet);
   state.cipherFrequencies = computeHistogram(state.rotText, state.alphabet);
@@ -130,6 +144,17 @@ function computeState(state) {
       diff: diffHistograms(freqs, state.englishFrequencies),
     };
   }
+  state.statistics.sort((a, b) => a.diff - b.diff);
+  state.statisticsTable = [
+    { columns: ['Rot', 'Diff'] },
+    ...state.statistics.map((s, i) => ({
+      className: 'foo',
+      columns: [
+        s.rot,
+        computeDiffText(s.diff, i == 0, s.rot == state.rot),
+      ],
+    }))
+  ];
   return state;
 }
 
@@ -179,6 +204,10 @@ const RotTextContainer = connect(
   state => ({ text: state.rotText, disabled: true }),
 )(EditableText);
 
+const TableContainer = connect(
+  state => ({ data: state.statisticsTable, headerRows: 1 }),
+)(Table);
+
 const testElement = document.getElementById('test');
 if (testElement) {
   ReactDOM.render(
@@ -186,11 +215,13 @@ if (testElement) {
       <div>
         <AlphabetContainer theme='blue' />
         <RotAlphabetContainer theme='purple' />
-        <SliderContainer min={0} max={26} theme='green' />
+        <SliderContainer min={0} max={25} theme='green' />
         <HistogramContainer theme='green' />
         <CipherHistogramContainer theme='purple' />
         <EditableTextContainer theme='blue' />
         <RotTextContainer theme='purple' />
+        <SliderContainer min={0} max={25} theme='green' />
+        <TableContainer />
       </div>
     </Provider>,
     testElement
