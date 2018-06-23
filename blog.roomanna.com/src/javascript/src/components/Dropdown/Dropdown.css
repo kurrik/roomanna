@@ -1,0 +1,56 @@
+@import 'common/roomanna.config.css';
+
+.dropdown {
+  --dark: var(--color-black);
+  --light: var(--color-gray-light);
+}
+.dropdown.blue {
+  --light: var(--color-blue-light);
+  --dark: var(--color-blue);
+}
+.dropdown.red {
+  --light: var(--color-red-light);
+  --dark: var(--color-red);
+}
+.dropdown.yellow {
+  --light: var(--color-yellow-light);
+  --dark: var(--color-yellow);
+}
+.dropdown.green {
+  --light: var(--color-green-light);
+  --dark: var(--color-green);
+}
+.dropdown.purple {
+  --light: var(--color-purple-light);
+  --dark: var(--color-purple);
+}
+
+.dropdown {
+  display: inline;
+  position: relative;
+  border: 0;
+}
+
+.dropdown:after {
+  content: '▼';
+  color: #333;
+  pointer-events: none;
+  position: absolute;
+  right: 5px;
+  top: 1px;
+  line-height: 1;
+}
+
+.dropdown select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  background: transparent;
+  padding: 5px calc(5px + 1em) 5px 5px;
+  margin-top: var(--vertical-spacing);
+  margin-bottom: var(--vertical-spacing);
+  border: 2px solid var(--dark);
+  background: var(--light);
+  border-radius: 5px;
+}

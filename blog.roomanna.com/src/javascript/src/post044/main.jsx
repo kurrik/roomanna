@@ -116,7 +116,10 @@ function diffHistograms(a, b) {
     if (a[i].label !== b[i].label) {
       console.log("Warning: invalid comparison", a, b);
     }
-    delta += Math.abs(a[i].value - b[i].value)
+    const observed = a[i].value;
+    const expected = b[i].value;
+    const diff = Math.abs(observed - expected);
+    delta += diff;
   }
   return delta;
 }
