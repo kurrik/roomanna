@@ -116,6 +116,7 @@ function diffHistograms(a, b) {
     if (a[i].label !== b[i].label) {
       console.log("Warning: invalid comparison", a, b);
     }
+    // TODO: implement switching between https://stats.stackexchange.com/questions/7400/how-to-assess-the-similarity-of-two-histograms
     const observed = a[i].value;
     const expected = b[i].value;
     const diff = Math.abs(observed - expected);
