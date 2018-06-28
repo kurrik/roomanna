@@ -6,8 +6,9 @@ import { connect, Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 
 import Alphabet from 'components/Alphabet';
-import Histogram from 'components/Histogram';
+import Dropdown from 'components/Dropdown';
 import EditableText from 'components/EditableText';
+import Histogram from 'components/Histogram';
 import Slider from 'components/Slider';
 import Table from 'components/Table';
 
@@ -44,7 +45,8 @@ const initialState = computeState({
     { label: 'Y', value: 0.0211 },
     { label: 'Z', value: 0.0007 },
   ],
-  cipherFrequencies: [],
+  plaintextFrequencies: [],
+  rotFrequencies: [],
   text: cleanText(`
     As the signs of our code were already complete we had only to fix on
     some means of signalling 'A' and 'B'. This we did by deciding that by
@@ -61,16 +63,198 @@ const initialState = computeState({
   rotText: '',
   statistics: [],
   statisticsTable: [],
+  distanceMeasures: [
+    { label: 'Hellinger Distance', func: distanceHellinger },
+    { label: 'Manhattan Distance', func: distanceManhattan },
+    { label: 'Euclidian Distance', func: distanceEuclidian },
+    { label: 'Chybyshev Distance', func: distanceChybyshev },
+    { label: 'Fractional Distance (p=0.1)', func: distanceFractional(0.1) },
+    { label: 'Fractional Distance (p=0.5)', func: distanceFractional(0.5) },
+    { label: 'Fractional Distance (p=0.9)', func: distanceFractional(0.9) },
+    { label: 'Histogram Intersection', func: distanceIntersection },
+    { label: 'Cosine Distance', func: distanceCosine },
+    { label: 'Canberra Distance', func: distanceCanberra },
+    { label: 'Pearson\'s Correlation Coefficient', func: distancePearson },
+    { label: 'χ2 Statistics', func: distanceXSquared },
+  ],
+  distanceSelected: 2,
 });
 
 const ONVALUE = 'roomanna/post044/ONVALUE';
 const ONTEXT = 'roomanna/post044/ONTEXT';
+const ONDIST = 'roomanna/post044/ONDIST';
 
 function cleanText(text) {
   return text.split('\n')
     .map(t => t.trim())
     .filter(l => l.length > 0)
     .join(' ');
+}
+
+// Number of mismatched values.
+function distanceHellinger(a, b) {
+  var delta = 0;
+  for (var i = 0; i < a.length; i++) {
+    if (a[i].label !== b[i].label) {
+      console.log("Warning: invalid comparison", a, b);
+    }
+    if (a[i].value != b[i].value) {
+      delta++;
+    }
+  }
+  return delta;
+}
+
+// Linear distance.
+function distanceManhattan(a, b) {
+  var delta = 0;
+  for (var i = 0; i < a.length; i++) {
+    if (a[i].label !== b[i].label) {
+      console.log("Warning: invalid comparison", a, b);
+    }
+    const diff = Math.abs(a[i].value - b[i].value);
+    delta += diff;
+  }
+  return delta;
+}
+
+// Squared distance.
+function distanceEuclidian(a, b) {
+  var delta = 0;
+  for (var i = 0; i < a.length; i++) {
+    if (a[i].label !== b[i].label) {
+      console.log("Warning: invalid comparison", a, b);
+    }
+    const diff = Math.abs(a[i].value - b[i].value);
+    delta += diff * diff;
+  }
+  // Should take square root, but not needed for comparison.
+  return delta;
+}
+
+// Maximum distance between two buckets.
+function distanceChybyshev(a, b) {
+  var delta = 0;
+  for (var i = 0; i < a.length; i++) {
+    if (a[i].label !== b[i].label) {
+      console.log("Warning: invalid comparison", a, b);
+    }
+    const diff = Math.abs(a[i].value - b[i].value);
+    if (diff > delta) {
+      delta = diff;
+    }
+  }
+  return delta;
+}
+
+// Minkowski distance family.
+function distanceFractional(p) {
+  return (a, b) => {
+    var delta = 0;
+    for (var i = 0; i < a.length; i++) {
+      if (a[i].label !== b[i].label) {
+        console.log("Warning: invalid comparison", a, b);
+      }
+      const diff = Math.abs(a[i].value - b[i].value);
+      delta += Math.pow(diff, p);
+    }
+    return Math.pow(delta, 1/p);
+  }
+}
+
+// Histogram intersection.
+function distanceIntersection(a, b) {
+  var delta = 0;
+  for (var i = 0; i < a.length; i++) {
+    if (a[i].label !== b[i].label) {
+      console.log("Warning: invalid comparison", a, b);
+    }
+    delta += Math.min(a[i].value, b[i].value);
+  }
+  return 1 - delta;
+}
+
+// Cosine distance.
+// https://en.wikipedia.org/wiki/Cosine_similarity
+function distanceCosine(a, b) {
+  var numer = 0;
+  var denoma = 0;
+  var denomb = 0;
+  for (var i = 0; i < a.length; i++) {
+    if (a[i].label !== b[i].label) {
+      console.log("Warning: invalid comparison", a, b);
+    }
+    numer += a[i].value * b[i].value;
+    denoma += a[i].value * a[i].value;
+    denomb += b[i].value * b[i].value;
+  }
+  const delta = numer / (Math.sqrt(denoma) * Math.sqrt(denomb));
+  return 1 - delta;
+}
+
+// Canberra distance.
+// https://en.wikipedia.org/wiki/Canberra_distance
+function distanceCanberra(a, b) {
+  var delta = 0;
+  for (var i = 0; i < a.length; i++) {
+    if (a[i].label !== b[i].label) {
+      console.log("Warning: invalid comparison", a, b);
+    }
+    const numer = Math.abs(a[i].value - b[i].value);
+    const denom = Math.abs(a[i].value) + Math.abs(b[i].value);
+    delta += numer / denom;
+  }
+  return delta;
+}
+
+// Pearson's Correlation Coefficient
+// https://en.wikipedia.org/wiki/Pearson_correlation_coefficient
+function distancePearson(a, b) {
+  const n = a.length;
+  var numer = 0;
+  var denoma = 0;
+  var denomb = 0;
+  for (var i = 0; i < n; i++) {
+    if (a[i].label !== b[i].label) {
+      console.log("Warning: invalid comparison", a, b);
+    }
+    const ha = a[i].value - 1/n;
+    const hb = b[i].value - 1/n;
+    numer += ha * hb;
+    denoma += ha * ha;
+    denomb += hb * hb;
+  }
+  const delta = numer / (Math.sqrt(denoma * denoma) * Math.sqrt(denomb * denomb));
+  return 1 - delta;
+}
+
+// χ2 Statistics
+function distanceXSquared(a, b) {
+  var delta = 0;
+  for (var i = 0; i < a.length; i++) {
+    if (a[i].label !== b[i].label) {
+      console.log("Warning: invalid comparison", a, b);
+    }
+    const diff = a[i].value - b[i].value;
+    const sum = a[i].value + b[i].value;
+    delta += (diff * diff) / sum;
+  }
+  return delta;
+}
+
+function diffHistograms(a, b) {
+  var delta = 0;
+  for (var i = 0; i < a.length; i++) {
+    if (a[i].label !== b[i].label) {
+      console.log("Warning: invalid comparison", a, b);
+    }
+    // TODO: implement switching between https://stats.stackexchange.com/questions/7400/how-to-assess-the-similarity-of-two-histograms
+    const observed = a[i].value;
+    const expected = b[i].value;
+    const diff = Math.abs(observed - expected);
+    delta += diff;
+  }
+  return delta;
 }
 
 function rotText(text, rot, alphabet) {
@@ -82,7 +266,7 @@ function rotText(text, rot, alphabet) {
     const c = text[i].toUpperCase();
     if (c >= 'A' && c <= 'Z') {
       const startLetterIndex = c.charCodeAt(0) - baseOffset;
-      const endLetterIndex = (startLetterIndex + rot) % alphabetSize;
+      const endLetterIndex = (startLetterIndex + rot + alphabetSize) % alphabetSize;
       offset = endLetterIndex - startLetterIndex;
       output.push(String.fromCharCode(text.charCodeAt(i) + offset));
     } else {
@@ -110,21 +294,6 @@ function computeHistogram(text, alphabet) {
     .sort((a, b) => a.label.localeCompare(b.label));
 }
 
-function diffHistograms(a, b) {
-  var delta = 0;
-  for (var i = 0; i < a.length; i++) {
-    if (a[i].label !== b[i].label) {
-      console.log("Warning: invalid comparison", a, b);
-    }
-    // TODO: implement switching between https://stats.stackexchange.com/questions/7400/how-to-assess-the-similarity-of-two-histograms
-    const observed = a[i].value;
-    const expected = b[i].value;
-    const diff = Math.abs(observed - expected);
-    delta += diff;
-  }
-  return delta;
-}
-
 function computeDiffText(diff, isBest, isCurrent) {
   const bestLabel = isBest ? (
     <span className="label label-success">BEST</span>
@@ -139,13 +308,15 @@ function computeDiffText(diff, isBest, isCurrent) {
 
 function computeState(state) {
   state.rotText = rotText(state.text, state.rot, state.alphabet);
-  state.cipherFrequencies = computeHistogram(state.rotText, state.alphabet);
+  state.plaintextFrequencies = computeHistogram(state.text, state.alphabet);
+  state.rotFrequencies = computeHistogram(state.rotText, state.alphabet);
+  const diffFunction = state.distanceMeasures[state.distanceSelected].func;
   for (var i = 0; i < state.alphabet.length; i++) {
     const text = rotText(state.rotText, -i, state.alphabet);
     const freqs = computeHistogram(text, state.alphabet);
     state.statistics[i] = {
       rot: i,
-      diff: diffHistograms(freqs, state.englishFrequencies),
+      diff: diffFunction(freqs, state.englishFrequencies),
     };
   }
   state.statistics.sort((a, b) => a.diff - b.diff);
@@ -168,6 +339,8 @@ function reducer(state = initialState, action) {
       return computeState({ ...state, rot: action.value });
     case ONTEXT:
       return computeState({ ...state, text: action.text });
+    case ONDIST:
+      return computeState({ ...state, distanceSelected: action.value });
     default:
       return state;
   }
@@ -195,8 +368,12 @@ const HistogramContainer = connect(
   state => ({ data: state.englishFrequencies }),
 )(Histogram);
 
-const CipherHistogramContainer = connect(
-  state => ({ data: state.cipherFrequencies }),
+const RotHistogramContainer = connect(
+  state => ({ data: state.rotFrequencies }),
+)(Histogram);
+
+const PlaintextHistogramContainer = connect(
+  state => ({ data: state.plaintextFrequencies }),
 )(Histogram);
 
 const EditableTextContainer = connect(
@@ -212,6 +389,11 @@ const TableContainer = connect(
   state => ({ data: state.statisticsTable, headerRows: 1 }),
 )(Table);
 
+const DistanceDropdown = connect(
+  state => ({ value: state.distanceSelected, entries: state.distanceMeasures }),
+  dispatch => ({ onValue: x => { dispatch({ type: ONDIST, value: x}); }}),
+)(Dropdown);
+
 const testElement = document.getElementById('test');
 if (testElement) {
   ReactDOM.render(
@@ -219,12 +401,14 @@ if (testElement) {
       <div>
         <AlphabetContainer theme='blue' />
         <RotAlphabetContainer theme='purple' />
-        <SliderContainer min={0} max={25} theme='green' />
+        <SliderContainer min={0} max={25} theme='purple' />
         <HistogramContainer theme='green' />
-        <CipherHistogramContainer theme='purple' />
+        <PlaintextHistogramContainer theme='blue' />
+        <RotHistogramContainer theme='purple' />
         <EditableTextContainer theme='blue' />
         <RotTextContainer theme='purple' />
-        <SliderContainer min={0} max={25} theme='green' />
+        <SliderContainer min={0} max={25} theme='purple' />
+        <DistanceDropdown theme='green' />
         <TableContainer />
       </div>
     </Provider>,

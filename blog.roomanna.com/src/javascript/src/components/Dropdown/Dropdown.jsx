@@ -8,7 +8,7 @@ import type {Theme} from 'components/types';
 
 type Entry = {
   label: string,
-  value: (string | number),
+  value?: (string | number),
 };
 
 type Props = {
@@ -38,10 +38,12 @@ export default class Dropdown extends React.PureComponent<Props> {
           <select
             className={styles.sliderInput}
             onChange={this.handleChange.bind(this)}
+            value={value}
           >
-            {entries.map((e) => {
+            {entries.map((e, i) => {
+              const v = e.value || i;
               return (
-                <option selected={e.value === value} value={e.value}>{e.label}</option>
+                <option key={v} value={v}>{e.label}</option>
               );
             })}
           </select>

@@ -35,10 +35,9 @@
   content: '▼';
   color: #333;
   pointer-events: none;
-  position: absolute;
-  right: 5px;
+  position: relative;
+  right: 1.5em;
   top: 1px;
-  line-height: 1;
 }
 
 .dropdown select {
@@ -47,7 +46,7 @@
   appearance: none;
   outline: none;
   background: transparent;
-  padding: 5px calc(5px + 1em) 5px 5px;
+  padding: 5px calc(5px + 1.5em) 5px 5px;
   margin-top: var(--vertical-spacing);
   margin-bottom: var(--vertical-spacing);
   border: 2px solid var(--dark);
