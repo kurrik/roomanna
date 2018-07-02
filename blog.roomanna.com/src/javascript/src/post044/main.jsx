@@ -400,8 +400,11 @@ if (demoAlphabet) {
   ReactDOM.render(
     <Provider store={store}>
       <div>
+        <div><strong>Original</strong></div>
         <AlphabetContainer theme='blue' />
+        <div><strong>Mapped</strong></div>
         <RotAlphabetContainer theme='purple' />
+        <div><strong>Rot</strong></div>
         <SliderContainer min={0} max={25} theme='purple' />
       </div>
     </Provider>,
@@ -414,8 +417,11 @@ if (demoText) {
   ReactDOM.render(
     <Provider store={store}>
       <div>
+        <div><strong>Plaintext (editable)</strong></div>
         <EditableTextContainer theme='blue' />
+        <div><strong>Ciphertext</strong></div>
         <RotTextContainer theme='purple' />
+        <div><strong>Rot</strong></div>
         <SliderContainer min={0} max={25} theme='purple' />
       </div>
     </Provider>,
