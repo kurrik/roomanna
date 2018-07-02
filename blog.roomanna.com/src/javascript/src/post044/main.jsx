@@ -394,20 +394,43 @@ const DistanceDropdown = connect(
   dispatch => ({ onValue: x => { dispatch({ type: ONDIST, value: x}); }}),
 )(Dropdown);
 
-const testElement = document.getElementById('test');
-if (testElement) {
+
+const demoAlphabet = document.getElementById('demo-alphabet');
+if (demoAlphabet) {
   ReactDOM.render(
     <Provider store={store}>
       <div>
         <AlphabetContainer theme='blue' />
         <RotAlphabetContainer theme='purple' />
         <SliderContainer min={0} max={25} theme='purple' />
-        <HistogramContainer theme='green' />
-        <PlaintextHistogramContainer theme='blue' />
-        <RotHistogramContainer theme='purple' />
+      </div>
+    </Provider>,
+    demoAlphabet
+  );
+}
+
+const demoText = document.getElementById('demo-text');
+if (demoText) {
+  ReactDOM.render(
+    <Provider store={store}>
+      <div>
         <EditableTextContainer theme='blue' />
         <RotTextContainer theme='purple' />
         <SliderContainer min={0} max={25} theme='purple' />
+      </div>
+    </Provider>,
+    demoText
+  );
+}
+
+const testElement = document.getElementById('test');
+if (testElement) {
+  ReactDOM.render(
+    <Provider store={store}>
+      <div>
+        <HistogramContainer theme='green' />
+        <PlaintextHistogramContainer theme='blue' />
+        <RotHistogramContainer theme='purple' />
         <DistanceDropdown theme='green' />
         <TableContainer />
       </div>
