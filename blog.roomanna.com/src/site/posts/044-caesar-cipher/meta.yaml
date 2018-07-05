@@ -7,3 +7,6 @@ scripts:
   - /static/js/post044.js
 styles:
   - /static/css/post044.css
+images:
+  twitter-card:
+    src: caesar.jpg

@@ -429,18 +429,46 @@ if (demoText) {
   );
 }
 
-const testElement = document.getElementById('test');
-if (testElement) {
+const demoHistEnglish = document.getElementById('demo-histogram-english');
+if (demoHistEnglish) {
   ReactDOM.render(
     <Provider store={store}>
       <div>
+        <div><strong>Letter frequencies in English text</strong></div>
         <HistogramContainer theme='green' />
+      </div>
+    </Provider>,
+    demoHistEnglish
+  );
+}
+
+const demoHistText = document.getElementById('demo-histogram-text');
+if (demoHistText) {
+  ReactDOM.render(
+    <Provider store={store}>
+      <div>
+        <div><strong>Letter frequencies in the plaintext</strong></div>
         <PlaintextHistogramContainer theme='blue' />
+        <div><strong>Letter frequencies in the ciphertext</strong></div>
         <RotHistogramContainer theme='purple' />
+        <SliderContainer min={0} max={25} theme='purple' />
+      </div>
+    </Provider>,
+    demoHistText
+  );
+}
+
+const demoStatistics = document.getElementById('demo-statistics');
+if (demoStatistics) {
+  ReactDOM.render(
+    <Provider store={store}>
+      <div>
+        <div><strong>Histogram comparison function</strong></div>
         <DistanceDropdown theme='green' />
+        <div><strong>Likeliest score for `N` used to encrypt text</strong></div>
         <TableContainer />
       </div>
     </Provider>,
-    testElement
+    demoStatistics
   );
 }
