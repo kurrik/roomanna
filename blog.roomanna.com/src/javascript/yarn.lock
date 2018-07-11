@@ -270,6 +270,10 @@ ajv@^6.1.0:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.1"
 
+alight@^0.14.1:
+  version "0.14.1"
+  resolved "https://registry.yarnpkg.com/alight/-/alight-0.14.1.tgz#ba9a16b683777c93dff3ec5dc26230332097215a"
+
 align-text@^0.1.1, align-text@^0.1.3:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/align-text/-/align-text-0.1.4.tgz#0cd90a561093f35d0a99256c22b7069433fad117"
@@ -1081,6 +1085,12 @@ babel-plugin-transform-regenerator@^6.22.0, babel-plugin-transform-regenerator@^
   dependencies:
     regenerator-transform "^0.10.0"
 
+babel-plugin-transform-runtime@^6.23.0:
+  version "6.23.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-transform-runtime/-/babel-plugin-transform-runtime-6.23.0.tgz#88490d446502ea9b8e7efb0fe09ec4d99479b1ee"
+  dependencies:
+    babel-runtime "^6.22.0"
+
 babel-plugin-transform-strict-mode@^6.24.1:
   version "6.24.1"
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-strict-mode/-/babel-plugin-transform-strict-mode-6.24.1.tgz#d5faf7aa578a65bbe591cf5edae04a0c67020758"
@@ -1088,7 +1098,7 @@ babel-plugin-transform-strict-mode@^6.24.1:
     babel-runtime "^6.22.0"
     babel-types "^6.24.1"
 
-babel-polyfill@^6.23.0:
+babel-polyfill@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-polyfill/-/babel-polyfill-6.26.0.tgz#379937abc67d7895970adc621f284cd966cf2153"
   dependencies:
@@ -7044,6 +7054,30 @@ restore-cursor@^2.0.0:
 ret@~0.1.10:
   version "0.1.15"
   resolved "https://registry.yarnpkg.com/ret/-/ret-0.1.15.tgz#b8a4825d5bdb1fc3f6f53c2bc33f81388681c7bc"
+
+rete-alight-render-plugin@0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/rete-alight-render-plugin/-/rete-alight-render-plugin-0.1.0.tgz#f7c29a7a971b85af543d2dcc45a3411771c8f538"
+  dependencies:
+    alight "^0.14.1"
+
+rete-area-plugin@0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/rete-area-plugin/-/rete-area-plugin-0.1.0.tgz#4f150cd1f1a978eefed3d7eebaf49e3891c4cdb4"
+
+rete-connection-plugin@0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/rete-connection-plugin/-/rete-connection-plugin-0.1.0.tgz#710cc9d827213252c6783cdc4bbcf6d564af145b"
+
+rete-context-menu-plugin@0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/rete-context-menu-plugin/-/rete-context-menu-plugin-0.1.0.tgz#9f357b61ffa4581d66226486eee8e1e5f51871f3"
+  dependencies:
+    alight "^0.14.1"
+
+rete@^1.0.0-alpha.5:
+  version "1.0.0-alpha.5"
+  resolved "https://registry.yarnpkg.com/rete/-/rete-1.0.0-alpha.5.tgz#9dffdce260eb494b225d17e7ded75a7af09782f5"
 
 right-align@^0.1.1:
   version "0.1.3"

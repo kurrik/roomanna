@@ -1,0 +1,7 @@
+:global .node-editor {
+  min-height: 100px;
+}
+
+:global .socket.number {
+    background: #96b38a
+};
