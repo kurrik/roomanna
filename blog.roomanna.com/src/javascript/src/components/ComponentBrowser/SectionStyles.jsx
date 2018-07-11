@@ -30,6 +30,11 @@ export default class SectionStyles extends React.Component<{}> {
               <td>Captain</td>
               <td>Crunch</td>
             </tr>
+            <tr className="success">
+              <th scope="row">3</th>
+              <td>Count</td>
+              <td>Chocula</td>
+            </tr>
           </tbody>
         </table>
       </Section>

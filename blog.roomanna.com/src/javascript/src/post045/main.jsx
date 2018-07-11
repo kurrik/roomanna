@@ -47,7 +47,7 @@ class DataControl extends Rete.Control {
   }
 
   setValue(val) {
-    this.scope.value = (val || []).join(',');
+    this.scope.value = (val || []).join(',') || '<EMPTY>';
     this._alight.scan()
     //this.putData(this.key, val);
     //this.emitter.trigger('process');
@@ -83,10 +83,13 @@ class OutputComponent extends Rete.Component {
   }
 
   worker(node, inputs) {
-    const values = inputs[0][0] || ['<EMPTY>'];
+    const values = inputs[0][0] || [];
     const output = values.join('');
     node.data.output = output;
-    this.editor.nodes.find(n => n.id == node.id).controls[0].setValue(values);
+    this.editor.nodes
+      .find(n => n.id == node.id)
+      .controls[0]
+      .setValue(values);
   }
 }
 
@@ -115,7 +118,7 @@ async function renderPuzzle(selector, input, expected, components) {
   const outputNode = await components.output.createNode();
 
   inputNode.position = [20, 200];
-  outputNode.position = [600, 200];
+  outputNode.position = [800, 200];
 
   editor.addNode(inputNode);
   editor.addNode(outputNode);
@@ -129,9 +132,9 @@ async function renderPuzzle(selector, input, expected, components) {
       domOutput.innerText = output;
       if (output != '') {
         if (output != expected) {
-          domOutputRow.setAttribute('class', 'table-danger');
+          domOutputRow.setAttribute('class', 'danger');
         } else {
-          domOutputRow.setAttribute('class', 'table-success');
+          domOutputRow.setAttribute('class', 'success');
         }
       }
 
