@@ -72,6 +72,7 @@ module.exports = function(grunt) {
       css: {
         src: [
           'lib/font-awesome/font-awesome.css',
+          'lib/bootstrap-4.0.0/css/bootstrap.css',
           'build/content/static/css/site.css',
         ],
         dest: 'build/content/static/css/<%= pkg.name %>.css',
@@ -93,7 +94,7 @@ module.exports = function(grunt) {
     less: {
       dist: {
         options: {
-          paths: ['src/less', 'lib/bootstrap-3.3.5/less'],
+          paths: ['src/less', 'lib'],
           yuicompress: true
         },
         files: {
