@@ -1,7 +1,14 @@
+@import 'common/roomanna.config.css';
+
 :global .node-editor {
   min-height: 100px;
+  border: 1px solid var(--color-gray-light);
+}
+
+:global .node-editor, :global .buttons, :global .results {
+  margin-bottom: 20px;
 }
 
 :global .socket.number {
-    background: #96b38a
+  background: #96b38a
 };

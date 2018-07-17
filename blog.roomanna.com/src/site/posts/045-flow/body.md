@@ -3,8 +3,14 @@ This is the post snippet.
 <!--BREAK-->
 
 <div id="puzzle01">
+  <h2>Puzzle 01</h2>
   <div class="node-editor"></div>
-  <table class="table">
+  <h3>Add nodes</h3>
+  <div class="buttons">
+    <button class="btn btn-success add" data-component="increment">Increment</button>
+  </div>
+  <h3>Results</h3>
+  <table class="results table">
     <tbody>
       <tr>
         <th scope="row">Input</th>
@@ -26,5 +32,4 @@ This is the post snippet.
       </tr>
     </tbody>
   </table>
-  <button class="run">Run</button>
 </div>

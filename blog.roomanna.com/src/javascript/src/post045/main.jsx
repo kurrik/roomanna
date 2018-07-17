@@ -4,10 +4,12 @@ import styles from './main.css';
 
 import Alight from 'alight';
 import Rete from 'rete';
-import * as ConnectionPlugin from 'rete-connection-plugin';
+
 import * as AlightRenderPlugin from 'rete-alight-render-plugin';
-import * as ContextMenuPlugin from 'rete-context-menu-plugin';
 import * as AreaPlugin from 'rete-area-plugin';
+import * as ConnectionPlugin from 'rete-connection-plugin';
+import * as ContextMenuPlugin from 'rete-context-menu-plugin';
+import * as KeyboardPlugin from 'rete-keyboard-plugin';
 
 const sequenceSocket = new Rete.Socket('Sequence');
 
@@ -106,8 +108,9 @@ async function renderPuzzle(selector, input, expected, components) {
   const editor = new Rete.NodeEditor('puzzle@0.1.0', domEditor);
   editor.use(ConnectionPlugin, { curvature: 0.4 });
   editor.use(AlightRenderPlugin);
-  editor.use(ContextMenuPlugin);
+  //editor.use(ContextMenuPlugin);
   editor.use(AreaPlugin);
+  //editor.use(KeyboardPlugin);
 
   Object.values(components).map(c => {
     editor.register(c);
@@ -123,7 +126,8 @@ async function renderPuzzle(selector, input, expected, components) {
   editor.addNode(inputNode);
   editor.addNode(outputNode);
 
-  editor.on('process connectioncreate connectionremove nodecreate noderemove', async ()=>{
+  // Related to processing, checking state of game.
+  editor.on('process connectioncreate connectionremove nodecreate noderemove', async () => {
     if(editor.silent) return;
     requestAnimationFrame(async () => {
       await engine.abort();
@@ -141,13 +145,50 @@ async function renderPuzzle(selector, input, expected, components) {
     });
   });
 
+  // Generally disabled actions which don't need to check nodes.
+  editor.on('translate zoom', () => {
+    return false;
+  });
+
+  // Prevent actions on input / output nodes.
+  function isRestricted(node) {
+    return node.id == inputNode.id || node.id == outputNode.id;
+  }
+  editor.on('nodetranslate', ({ node, x, y }) => {
+    return !isRestricted(node);
+  });
+  editor.on('noderemove nodeselect', (node) => {
+    return !isRestricted(node);
+  });
+
   editor.view.resize();
   AreaPlugin.zoomAt(editor);
   editor.trigger('process');
   domInput.innerText = input;
   domExpected.innerText = expected;
-  domButtonRun.addEventListener('click', async ()=>{
-    console.log('click');
+
+  domBase.addEventListener('click', async (e) => {
+    const classList = e.target.classList;
+    if (classList.contains('add')) {
+      const component = e.target.getAttribute('data-component');
+      if (component && components.hasOwnProperty(component)) {
+        const node = await components[component].createNode();
+        const randomX = Math.random() * 50 - 25;
+        const randomY = Math.random() * 50 - 25;
+        node.position = [410 + randomX, 200 + randomY];
+        editor.addNode(node);
+      }
+    }
+  });
+
+  editor.on('keydown', async (e) => {
+    if (e.keyCode == 8 || e.keyCode == 46) {
+      editor.selected.list.forEach(n => {
+        if (!isRestricted(n)) {
+          editor.removeNode(n);
+        }
+      });
+    }
   });
 }
 

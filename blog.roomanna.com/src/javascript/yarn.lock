@@ -7075,6 +7075,10 @@ rete-context-menu-plugin@0.1.0:
   dependencies:
     alight "^0.14.1"
 
+rete-keyboard-plugin@0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/rete-keyboard-plugin/-/rete-keyboard-plugin-0.1.0.tgz#3635e7790309dd3b18ae49ffd950740d3f269901"
+
 rete@^1.0.0-alpha.5:
   version "1.0.0-alpha.5"
   resolved "https://registry.yarnpkg.com/rete/-/rete-1.0.0-alpha.5.tgz#9dffdce260eb494b225d17e7ded75a7af09782f5"

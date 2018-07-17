@@ -56,6 +56,7 @@
     "rete-area-plugin": "0.1.0",
     "rete-connection-plugin": "0.1.0",
     "rete-context-menu-plugin": "0.1.0",
+    "rete-keyboard-plugin": "0.1.0",
     "seedrandom": "^2.4.3",
     "style-loader": "^0.21.0",
     "uglifyjs-webpack-plugin": "^1.2.5",
