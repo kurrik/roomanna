@@ -32,6 +32,51 @@ class IncrementComponent extends Rete.Component {
   }
 }
 
+class HeadComponent extends Rete.Component {
+  constructor(){
+    super('Head');
+  }
+
+  builder(node) {
+    const inp = new Rete.Input('Input', sequenceSocket);
+    const outHead = new Rete.Output('Head', sequenceSocket);
+    const outTail = new Rete.Output('Tail', sequenceSocket);
+    return node
+      .addInput(inp)
+      .addOutput(outHead)
+      .addOutput(outTail);
+  }
+
+  worker(node, inputs, outputs) {
+    const values = inputs[0][0] || [];
+    outputs[0] = values.slice(0, 1);
+    outputs[1] = values.slice(1);
+  }
+}
+
+class ConcatComponent extends Rete.Component {
+  constructor(){
+    super('Concat');
+  }
+
+  builder(node) {
+    const inpHead = new Rete.Input('Head', sequenceSocket);
+    const inpTail = new Rete.Input('Tail', sequenceSocket);
+    const out= new Rete.Output('Output', sequenceSocket);
+    return node
+      .addInput(inpHead)
+      .addInput(inpTail)
+      .addOutput(out);
+  }
+
+  worker(node, inputs, outputs) {
+    const head = inputs[0][0] || [];
+    const tail = inputs[1][0] || [];
+    outputs[0] = head.concat(tail);
+  }
+}
+
+
 class DataControl extends Rete.Control {
   constructor(emitter, key) {
     super();
@@ -51,8 +96,6 @@ class DataControl extends Rete.Control {
   setValue(val) {
     this.scope.value = (val || []).join(',') || '<EMPTY>';
     this._alight.scan()
-    //this.putData(this.key, val);
-    //this.emitter.trigger('process');
   }
 }
 
@@ -89,13 +132,13 @@ class OutputComponent extends Rete.Component {
     const output = values.join('');
     node.data.output = output;
     this.editor.nodes
-      .find(n => n.id == node.id)
+      .find(n => n.name == "Output")
       .controls[0]
       .setValue(values);
   }
 }
 
-async function renderPuzzle(selector, input, expected, components) {
+async function renderPuzzle(selector, input, expected, solution, components) {
   const domBase = document.querySelector(selector);
   const domEditor = domBase.querySelector('.node-editor');
   const domInput = domBase.querySelector('.input');
@@ -104,21 +147,20 @@ async function renderPuzzle(selector, input, expected, components) {
   const domExpected = domBase.querySelector('.expected');
   const domButtonRun = domBase.querySelector('.run');
 
-  const engine = new Rete.Engine('puzzle@0.1.0');
-  const editor = new Rete.NodeEditor('puzzle@0.1.0', domEditor);
+  const name = selector.replace('#', '') + '@0.1.0';
+  const engine = new Rete.Engine(name);
+  const editor = new Rete.NodeEditor(name, domEditor);
   editor.use(ConnectionPlugin, { curvature: 0.4 });
   editor.use(AlightRenderPlugin);
-  //editor.use(ContextMenuPlugin);
   editor.use(AreaPlugin);
-  //editor.use(KeyboardPlugin);
 
   Object.values(components).map(c => {
     editor.register(c);
     engine.register(c);
   });
 
-  const inputNode = await components.input.createNode({sequence: input.split('')});
-  const outputNode = await components.output.createNode();
+  var inputNode = await components.input.createNode({sequence: input.split('')});
+  var outputNode = await components.output.createNode();
 
   inputNode.position = [20, 200];
   outputNode.position = [800, 200];
@@ -128,20 +170,20 @@ async function renderPuzzle(selector, input, expected, components) {
 
   // Related to processing, checking state of game.
   editor.on('process connectioncreate connectionremove nodecreate noderemove', async () => {
-    if(editor.silent) return;
     requestAnimationFrame(async () => {
       await engine.abort();
       await engine.process(editor.toJSON(), inputNode.id);
       const output = outputNode.data.output;
       domOutput.innerText = output;
+      domOutputRow.classList.remove('danger');
+      domOutputRow.classList.remove('success');
       if (output != '') {
         if (output != expected) {
-          domOutputRow.setAttribute('class', 'danger');
+          domOutputRow.classList.add('danger');
         } else {
-          domOutputRow.setAttribute('class', 'success');
+          domOutputRow.classList.add('success');
         }
       }
-
     });
   });
 
@@ -155,9 +197,11 @@ async function renderPuzzle(selector, input, expected, components) {
     return node.id == inputNode.id || node.id == outputNode.id;
   }
   editor.on('nodetranslate', ({ node, x, y }) => {
+    if (editor.allowAllOperations) return true;
     return !isRestricted(node);
   });
   editor.on('noderemove nodeselect', (node) => {
+    if (editor.allowAllOperations) return true;
     return !isRestricted(node);
   });
 
@@ -178,29 +222,53 @@ async function renderPuzzle(selector, input, expected, components) {
         node.position = [410 + randomX, 200 + randomY];
         editor.addNode(node);
       }
+    } else if (classList.contains('solve')) {
+      editor.allowAllOperations = true;
+      editor.clear();
+      editor.allowAllOperations = false;
+      await editor.fromJSON(solution);
+      inputNode = editor.nodes.find(n => n.name == "Input");
+      outputNode = editor.nodes.find(n => n.name == "Output");
+      await editor.trigger('process');
     }
   });
 
-  editor.on('keydown', async (e) => {
+  domBase.addEventListener('keydown', async (e) => {
     if (e.keyCode == 8 || e.keyCode == 46) {
       editor.selected.list.forEach(n => {
         if (!isRestricted(n)) {
           editor.removeNode(n);
         }
       });
+    } else if (e.keyCode == 192) {
+      console.log(JSON.stringify(editor.toJSON()));
     }
   });
 }
-
-const components = {
-  input: new InputComponent(),
-  output: new OutputComponent(),
-  increment: new IncrementComponent(),
-};
 
 renderPuzzle(
   '#puzzle01',
   'AAA',
   'BBB',
-  components
+  {"id":"puzzle01@0.1.0","nodes":{"1":{"id":1,"data":{"sequence":["A","A","A"]},"inputs":[],"outputs":[{"connections":[{"node":5,"input":0,"data":{}}]}],"position":[20,200],"name":"Input"},"3":{"id":3,"data":{"output":"BBB"},"inputs":[{"connections":[{"node":5,"output":0,"data":{}}]}],"outputs":[],"position":[800,200],"name":"Output"},"5":{"id":5,"data":{},"inputs":[{"connections":[{"node":1,"output":0,"data":{}}]}],"outputs":[{"connections":[{"node":3,"input":0,"data":{}}]}],"position":[406.4390554143261,201.10721542109553],"name":"Increment"}}},
+  {
+    input: new InputComponent(),
+    output: new OutputComponent(),
+    increment: new IncrementComponent(),
+  }
 );
+
+renderPuzzle(
+  '#puzzle02',
+  'ABC',
+  'ADC',
+  {"id":"puzzle02@0.1.0","nodes":{"2":{"id":2,"data":{"sequence":["A","B","C"]},"inputs":[],"outputs":[{"connections":[{"node":6,"input":0,"data":{}}]}],"position":[20,200],"name":"Input"},"4":{"id":4,"data":{"output":"ADC"},"inputs":[{"connections":[{"node":11,"output":0,"data":{}}]}],"outputs":[],"position":[800,200],"name":"Output"},"6":{"id":6,"data":{},"inputs":[{"connections":[{"node":2,"output":0,"data":{}}]}],"outputs":[{"connections":[{"node":11,"input":0,"data":{}}]},{"connections":[{"node":9,"input":0,"data":{}}]}],"position":[268.06898724224715,-35.45330820166658],"name":"Head"},"7":{"id":7,"data":{},"inputs":[{"connections":[{"node":9,"output":0,"data":{}}]}],"outputs":[{"connections":[{"node":8,"input":0,"data":{}}]}],"position":[269.9307275173835,305.22813030827126],"name":"Increment"},"8":{"id":8,"data":{},"inputs":[{"connections":[{"node":7,"output":0,"data":{}}]}],"outputs":[{"connections":[{"node":10,"input":0,"data":{}}]}],"position":[270.6736480678998,439.0456399372415],"name":"Increment"},"9":{"id":9,"data":{},"inputs":[{"connections":[{"node":6,"output":1,"data":{}}]}],"outputs":[{"connections":[{"node":7,"input":0,"data":{}}]},{"connections":[{"node":10,"input":1,"data":{}}]}],"position":[265.32006068678385,138.0247542679685],"name":"Head"},"10":{"id":10,"data":{},"inputs":[{"connections":[{"node":8,"output":0,"data":{}}]},{"connections":[{"node":9,"output":1,"data":{}}]}],"outputs":[{"connections":[{"node":11,"input":1,"data":{}}]}],"position":[536.3170562812329,234.97674104824898],"name":"Concat"},"11":{"id":11,"data":{},"inputs":[{"connections":[{"node":6,"output":0,"data":{}}]},{"connections":[{"node":10,"output":0,"data":{}}]}],"outputs":[{"connections":[{"node":4,"input":0,"data":{}}]}],"position":[536.59691074012,64.33518683342943],"name":"Concat"}}},
+  {
+    input: new InputComponent(),
+    output: new OutputComponent(),
+    head: new HeadComponent(),
+    concat: new ConcatComponent(),
+    increment: new IncrementComponent(),
+  }
+);
+
