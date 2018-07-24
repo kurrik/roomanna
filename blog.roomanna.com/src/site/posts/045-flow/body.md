@@ -13,13 +13,13 @@ This is the post snippet.
   <h3>Results</h3>
   <table class="results table">
     <tbody>
-      <tr>
+      <tr class="input-row">
         <th scope="row">Input</th>
         <td>
           <div class="input"></div>
         </td>
       </tr>
-      <tr>
+      <tr class="expected-row">
         <th scope="row">Expected</th>
         <td>
           <div class="expected"></div>
@@ -48,13 +48,13 @@ This is the post snippet.
   <h3>Results</h3>
   <table class="results table">
     <tbody>
-      <tr>
+      <tr class="input-row">
         <th scope="row">Input</th>
         <td>
           <div class="input"></div>
         </td>
       </tr>
-      <tr>
+      <tr class="expected-row">
         <th scope="row">Expected</th>
         <td>
           <div class="expected"></div>

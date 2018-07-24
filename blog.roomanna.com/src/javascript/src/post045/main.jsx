@@ -138,13 +138,15 @@ class OutputComponent extends Rete.Component {
   }
 }
 
-async function renderPuzzle(selector, input, expected, solution, components) {
+async function renderPuzzle(selector, tests, solution, components) {
   const domBase = document.querySelector(selector);
   const domEditor = domBase.querySelector('.node-editor');
   const domInput = domBase.querySelector('.input');
+  const domInputRow = domBase.querySelector('.input-row');
   const domOutput = domBase.querySelector('.output');
   const domOutputRow = domBase.querySelector('.output-row');
   const domExpected = domBase.querySelector('.expected');
+  const domExpectedRow = domBase.querySelector('.expected-row');
   const domButtonRun = domBase.querySelector('.run');
 
   const name = selector.replace('#', '') + '@0.1.0';
@@ -159,7 +161,7 @@ async function renderPuzzle(selector, input, expected, solution, components) {
     engine.register(c);
   });
 
-  var inputNode = await components.input.createNode({sequence: input.split('')});
+  var inputNode = await components.input.createNode();
   var outputNode = await components.output.createNode();
 
   inputNode.position = [20, 200];
@@ -168,21 +170,45 @@ async function renderPuzzle(selector, input, expected, solution, components) {
   editor.addNode(inputNode);
   editor.addNode(outputNode);
 
+  const domCells = tests.map(t => {
+    const cellInput = document.createElement('td');
+    domInputRow.appendChild(cellInput);
+    cellInput.innerText = t.input;
+    const cellOutput = document.createElement('td');
+    domOutputRow.appendChild(cellOutput);
+    const cellExpected = document.createElement('td');
+    domExpectedRow.appendChild(cellExpected);
+    cellExpected.innerText = t.expected;
+    return {
+      input: cellInput,
+      output: cellOutput,
+      expected: cellExpected,
+    };
+  });
+
+  async function process(test, index) {
+    inputNode.data.sequence = test.input.split('');
+    await engine.abort();
+    await engine.process(editor.toJSON(), inputNode.id);
+    const output = outputNode.data.output;
+    const domCell = domCells[index].output;
+    domCell.innerText = output;
+    domCell.classList.remove('danger');
+    domCell.classList.remove('success');
+    if (output != '') {
+      if (output != test.expected) {
+        domCell.classList.add('danger');
+      } else {
+        domCell.classList.add('success');
+      }
+    }
+  }
+
   // Related to processing, checking state of game.
   editor.on('process connectioncreate connectionremove nodecreate noderemove', async () => {
     requestAnimationFrame(async () => {
-      await engine.abort();
-      await engine.process(editor.toJSON(), inputNode.id);
-      const output = outputNode.data.output;
-      domOutput.innerText = output;
-      domOutputRow.classList.remove('danger');
-      domOutputRow.classList.remove('success');
-      if (output != '') {
-        if (output != expected) {
-          domOutputRow.classList.add('danger');
-        } else {
-          domOutputRow.classList.add('success');
-        }
+      for (var i = 0; i < tests.length; i++) {
+        await(process(tests[i], i));
       }
     });
   });
@@ -208,8 +234,6 @@ async function renderPuzzle(selector, input, expected, solution, components) {
   editor.view.resize();
   AreaPlugin.zoomAt(editor);
   editor.trigger('process');
-  domInput.innerText = input;
-  domExpected.innerText = expected;
 
   domBase.addEventListener('click', async (e) => {
     const classList = e.target.classList;
@@ -248,8 +272,10 @@ async function renderPuzzle(selector, input, expected, solution, components) {
 
 renderPuzzle(
   '#puzzle01',
-  'AAA',
-  'BBB',
+  [
+    { input: 'AAA', expected: 'BBB' },
+    { input: 'CDEF', expected: 'DEFG' },
+  ],
   {"id":"puzzle01@0.1.0","nodes":{"1":{"id":1,"data":{"sequence":["A","A","A"]},"inputs":[],"outputs":[{"connections":[{"node":5,"input":0,"data":{}}]}],"position":[20,200],"name":"Input"},"3":{"id":3,"data":{"output":"BBB"},"inputs":[{"connections":[{"node":5,"output":0,"data":{}}]}],"outputs":[],"position":[800,200],"name":"Output"},"5":{"id":5,"data":{},"inputs":[{"connections":[{"node":1,"output":0,"data":{}}]}],"outputs":[{"connections":[{"node":3,"input":0,"data":{}}]}],"position":[406.4390554143261,201.10721542109553],"name":"Increment"}}},
   {
     input: new InputComponent(),
@@ -260,8 +286,10 @@ renderPuzzle(
 
 renderPuzzle(
   '#puzzle02',
-  'ABC',
-  'ADC',
+  [
+    { input: 'ABC', expected: 'ADC' },
+    { input: 'AABCC', expected: 'ACBCC' },
+  ],
   {"id":"puzzle02@0.1.0","nodes":{"2":{"id":2,"data":{"sequence":["A","B","C"]},"inputs":[],"outputs":[{"connections":[{"node":6,"input":0,"data":{}}]}],"position":[20,200],"name":"Input"},"4":{"id":4,"data":{"output":"ADC"},"inputs":[{"connections":[{"node":11,"output":0,"data":{}}]}],"outputs":[],"position":[800,200],"name":"Output"},"6":{"id":6,"data":{},"inputs":[{"connections":[{"node":2,"output":0,"data":{}}]}],"outputs":[{"connections":[{"node":11,"input":0,"data":{}}]},{"connections":[{"node":9,"input":0,"data":{}}]}],"position":[268.06898724224715,-35.45330820166658],"name":"Head"},"7":{"id":7,"data":{},"inputs":[{"connections":[{"node":9,"output":0,"data":{}}]}],"outputs":[{"connections":[{"node":8,"input":0,"data":{}}]}],"position":[269.9307275173835,305.22813030827126],"name":"Increment"},"8":{"id":8,"data":{},"inputs":[{"connections":[{"node":7,"output":0,"data":{}}]}],"outputs":[{"connections":[{"node":10,"input":0,"data":{}}]}],"position":[270.6736480678998,439.0456399372415],"name":"Increment"},"9":{"id":9,"data":{},"inputs":[{"connections":[{"node":6,"output":1,"data":{}}]}],"outputs":[{"connections":[{"node":7,"input":0,"data":{}}]},{"connections":[{"node":10,"input":1,"data":{}}]}],"position":[265.32006068678385,138.0247542679685],"name":"Head"},"10":{"id":10,"data":{},"inputs":[{"connections":[{"node":8,"output":0,"data":{}}]},{"connections":[{"node":9,"output":1,"data":{}}]}],"outputs":[{"connections":[{"node":11,"input":1,"data":{}}]}],"position":[536.3170562812329,234.97674104824898],"name":"Concat"},"11":{"id":11,"data":{},"inputs":[{"connections":[{"node":6,"output":0,"data":{}}]},{"connections":[{"node":10,"output":0,"data":{}}]}],"outputs":[{"connections":[{"node":4,"input":0,"data":{}}]}],"position":[536.59691074012,64.33518683342943],"name":"Concat"}}},
   {
     input: new InputComponent(),
