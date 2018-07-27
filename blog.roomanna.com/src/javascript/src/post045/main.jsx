@@ -12,6 +12,45 @@ import * as ContextMenuPlugin from 'rete-context-menu-plugin';
 import * as KeyboardPlugin from 'rete-keyboard-plugin';
 
 const sequenceSocket = new Rete.Socket('Sequence');
+const numberSocket = new Rete.Socket('Number');
+
+class NumControl extends Rete.Control {
+  constructor(emitter, key, readonly) {
+    super();
+    this.emitter = emitter;
+    this.key = key;
+    this.template = '<input type="number" :readonly="readonly" :value="value" @input="change($event)"/>';
+
+    this.scope = {
+      value: 0,
+      readonly,
+      change: this.change.bind(this)
+    };
+  }
+
+  change(e) {
+    this.scope.value = +e.target.value;
+    this.update();
+  }
+
+  update() {
+    if(this.key) {
+      this.putData(this.key, this.scope.value)
+    }
+    this.emitter.trigger('process');
+    this._alight.scan();
+  }
+
+  mounted() {
+    this.scope.value = this.getData(this.key) || 0;
+    this.update();
+  }
+
+  setValue(val) {
+    this.scope.value = val;
+    this._alight.scan()
+  }
+}
 
 class IncrementComponent extends Rete.Component {
   constructor(){
@@ -21,14 +60,19 @@ class IncrementComponent extends Rete.Component {
   builder(node) {
     const inp = new Rete.Input('Input', sequenceSocket);
     const out = new Rete.Output('Output', sequenceSocket);
+    const amt = new Rete.Input('Amount', numberSocket);
+    amt.addControl(new NumControl(this.editor, 'amount'));
+    node.data.amount = node.data.amount || 1;
     return node
       .addInput(inp)
+      .addInput(amt)
       .addOutput(out);
   }
 
   worker(node, inputs, outputs) {
     const values = inputs[0][0] || [];
-    outputs[0] = values.map(x => String.fromCharCode(x.charCodeAt(0) + 1));
+    const amount = node.data.amount || 0;
+    outputs[0] = values.map(x => String.fromCharCode(x.charCodeAt(0) + amount));
   }
 }
 
@@ -54,9 +98,36 @@ class HeadComponent extends Rete.Component {
   }
 }
 
-class ConcatComponent extends Rete.Component {
+class SplitComponent extends Rete.Component {
   constructor(){
-    super('Concat');
+    super('Split');
+  }
+
+  builder(node) {
+    const input = new Rete.Input('Input', sequenceSocket);
+    const outHead = new Rete.Output('Head', sequenceSocket);
+    const outTail = new Rete.Output('Tail', sequenceSocket);
+    const position = new Rete.Input('Position', numberSocket);
+    position.addControl(new NumControl(this.editor, 'position'));
+    node.data.position = node.data.position || 1;
+    return node
+      .addInput(input)
+      .addInput(position)
+      .addOutput(outHead)
+      .addOutput(outTail);
+  }
+
+  worker(node, inputs, outputs) {
+    const values = inputs[0][0] || [];
+    const position = node.data.position || 0;
+    outputs[0] = values.slice(0, position);
+    outputs[1] = values.slice(position);
+  }
+}
+
+class JoinComponent extends Rete.Component {
+  constructor(){
+    super('Join');
   }
 
   builder(node) {
@@ -188,6 +259,7 @@ async function renderPuzzle(selector, tests, solution, components) {
 
   async function process(test, index) {
     inputNode.data.sequence = test.input.split('');
+    inputNode.controls[0].mounted();
     await engine.abort();
     await engine.process(editor.toJSON(), inputNode.id);
     const output = outputNode.data.output;
@@ -259,6 +331,9 @@ async function renderPuzzle(selector, tests, solution, components) {
 
   domBase.addEventListener('keydown', async (e) => {
     if (e.keyCode == 8 || e.keyCode == 46) {
+      if (e.target.nodeName.toUpperCase() == 'INPUT') {
+        return;
+      }
       editor.selected.list.forEach(n => {
         if (!isRestricted(n)) {
           editor.removeNode(n);
@@ -290,13 +365,13 @@ renderPuzzle(
     { input: 'ABC', expected: 'ADC' },
     { input: 'AABCC', expected: 'ACBCC' },
   ],
-  {"id":"puzzle02@0.1.0","nodes":{"2":{"id":2,"data":{"sequence":["A","B","C"]},"inputs":[],"outputs":[{"connections":[{"node":6,"input":0,"data":{}}]}],"position":[20,200],"name":"Input"},"4":{"id":4,"data":{"output":"ADC"},"inputs":[{"connections":[{"node":11,"output":0,"data":{}}]}],"outputs":[],"position":[800,200],"name":"Output"},"6":{"id":6,"data":{},"inputs":[{"connections":[{"node":2,"output":0,"data":{}}]}],"outputs":[{"connections":[{"node":11,"input":0,"data":{}}]},{"connections":[{"node":9,"input":0,"data":{}}]}],"position":[268.06898724224715,-35.45330820166658],"name":"Head"},"7":{"id":7,"data":{},"inputs":[{"connections":[{"node":9,"output":0,"data":{}}]}],"outputs":[{"connections":[{"node":8,"input":0,"data":{}}]}],"position":[269.9307275173835,305.22813030827126],"name":"Increment"},"8":{"id":8,"data":{},"inputs":[{"connections":[{"node":7,"output":0,"data":{}}]}],"outputs":[{"connections":[{"node":10,"input":0,"data":{}}]}],"position":[270.6736480678998,439.0456399372415],"name":"Increment"},"9":{"id":9,"data":{},"inputs":[{"connections":[{"node":6,"output":1,"data":{}}]}],"outputs":[{"connections":[{"node":7,"input":0,"data":{}}]},{"connections":[{"node":10,"input":1,"data":{}}]}],"position":[265.32006068678385,138.0247542679685],"name":"Head"},"10":{"id":10,"data":{},"inputs":[{"connections":[{"node":8,"output":0,"data":{}}]},{"connections":[{"node":9,"output":1,"data":{}}]}],"outputs":[{"connections":[{"node":11,"input":1,"data":{}}]}],"position":[536.3170562812329,234.97674104824898],"name":"Concat"},"11":{"id":11,"data":{},"inputs":[{"connections":[{"node":6,"output":0,"data":{}}]},{"connections":[{"node":10,"output":0,"data":{}}]}],"outputs":[{"connections":[{"node":4,"input":0,"data":{}}]}],"position":[536.59691074012,64.33518683342943],"name":"Concat"}}},
+  {"id":"puzzle02@0.1.0","nodes":{"2":{"id":2,"data":{"sequence":["A","A","B","C","C"]},"inputs":[],"outputs":[{"connections":[{"node":5,"input":0,"data":{}}]}],"position":[20,200],"name":"Input"},"4":{"id":4,"data":{"output":"ACBCC"},"inputs":[{"connections":[{"node":6,"output":0,"data":{}}]}],"outputs":[],"position":[800,200],"name":"Output"},"5":{"id":5,"data":{"position":1},"inputs":[{"connections":[{"node":2,"output":0,"data":{}}]},{"connections":[]}],"outputs":[{"connections":[{"node":6,"input":0,"data":{}}]},{"connections":[{"node":7,"input":0,"data":{}}]}],"position":[256.6515112080528,20.169369983629878],"name":"Split"},"6":{"id":6,"data":{},"inputs":[{"connections":[{"node":5,"output":0,"data":{}}]},{"connections":[{"node":9,"output":0,"data":{}}]}],"outputs":[{"connections":[{"node":4,"input":0,"data":{}}]}],"position":[558.2519222760008,38.24653558968016],"name":"Join"},"7":{"id":7,"data":{"position":1},"inputs":[{"connections":[{"node":5,"output":1,"data":{}}]},{"connections":[]}],"outputs":[{"connections":[{"node":8,"input":0,"data":{}}]},{"connections":[{"node":9,"input":1,"data":{}}]}],"position":[156.28953442173764,343.73944101797093],"name":"Split"},"8":{"id":8,"data":{"amount":2},"inputs":[{"connections":[{"node":7,"output":0,"data":{}}]},{"connections":[]}],"outputs":[{"connections":[{"node":9,"input":0,"data":{}}]}],"position":[385.340751249672,258.7618759038483],"name":"Increment"},"9":{"id":9,"data":{},"inputs":[{"connections":[{"node":8,"output":0,"data":{}}]},{"connections":[{"node":7,"output":1,"data":{}}]}],"outputs":[{"connections":[{"node":6,"input":1,"data":{}}]}],"position":[611.159127021008,370.4306957686656],"name":"Join"}}},
   {
     input: new InputComponent(),
     output: new OutputComponent(),
-    head: new HeadComponent(),
-    concat: new ConcatComponent(),
+    join: new JoinComponent(),
     increment: new IncrementComponent(),
+    split: new SplitComponent(),
   }
 );
 

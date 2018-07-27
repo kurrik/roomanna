@@ -9,6 +9,10 @@
   margin-bottom: 20px;
 }
 
-:global .socket.number {
-  background: #96b38a
+:global .node .socket.sequence {
+  background: var(--color-green);
+}
+
+:global .node .socket.number {
+  background: var(--color-red);
 };

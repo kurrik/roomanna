@@ -40,8 +40,8 @@ This is the post snippet.
   <div class="node-editor" tabindex="1"></div>
   <h3>Add nodes</h3>
   <div class="buttons">
-    <button class="btn btn-success add" data-component="head">Head</button>
-    <button class="btn btn-success add" data-component="concat">Concat</button>
+    <button class="btn btn-success add" data-component="split">Split</button>
+    <button class="btn btn-success add" data-component="join">Join</button>
     <button class="btn btn-success add" data-component="increment">Increment</button>
     <button class="btn btn-warning solve">Solution</button>
   </div>
