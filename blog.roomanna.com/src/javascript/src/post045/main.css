@@ -1,8 +1,12 @@
 @import 'common/roomanna.config.css';
 
 :global .node-editor {
-  min-height: 100px;
   border: 1px solid var(--color-gray-light);
+  height: 300px;
+}
+
+:global #puzzle02 .node-editor {
+  height: 430px;
 }
 
 :global .node-editor, :global .buttons, :global .results {
@@ -15,4 +19,8 @@
 
 :global .node .socket.number {
   background: var(--color-red);
-};
+}
+
+:global .table th {
+  width: 150px;
+}
