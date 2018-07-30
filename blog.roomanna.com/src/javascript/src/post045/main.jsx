@@ -1,5 +1,4 @@
 import 'babel-polyfill';
-import $ from 'jquery';
 
 import styles from './main.css';
 
@@ -156,8 +155,10 @@ renderPuzzle(
   [
     { input: 'AAA', expected: 'DDD' },
     { input: 'CDEF', expected: 'FGHI' },
+    { input: 'MOON', expected: 'PQQQ' },
+
   ],
-  {"id":"puzzle01@0.1.0","nodes":{"1":{"id":1,"data":{"sequence":["C","D","E","F"]},"inputs":[],"outputs":[{"connections":[{"node":5,"input":0,"data":{}}]}],"position":[20,200],"name":"Input"},"3":{"id":3,"data":{"output":"FGHI"},"inputs":[{"connections":[{"node":5,"output":0,"data":{}}]}],"outputs":[],"position":[800,200],"name":"Output"},"5":{"id":5,"data":{"amount":3},"inputs":[{"connections":[{"node":1,"output":0,"data":{}}]},{"connections":[]}],"outputs":[{"connections":[{"node":3,"input":0,"data":{}}]}],"position":[406.4390554143261,201.10721542109553],"name":"Increment"}}},
+  {"id":"puzzle01@0.1.0","nodes":{"1":{"id":1,"data":{"sequence":["M","O","O","N"]},"inputs":[],"outputs":[{"connections":[{"node":5,"input":0,"data":{}}]}],"position":[20,200],"name":"Input"},"3":{"id":3,"data":{"output":"PQQQ"},"inputs":[{"connections":[{"node":6,"output":0,"data":{}}]}],"outputs":[],"position":[800,200],"name":"Output"},"5":{"id":5,"data":{"amount":12},"inputs":[{"connections":[{"node":1,"output":0,"data":{}}]},{"connections":[]}],"outputs":[{"connections":[{"node":6,"input":0,"data":{}}]}],"position":[273.09925639053506,131.39107509024126],"name":"Increment"},"6":{"id":6,"data":{"amount":-9},"inputs":[{"connections":[{"node":5,"output":0,"data":{}}]},{"connections":[]}],"outputs":[{"connections":[{"node":3,"input":0,"data":{}}]}],"position":[526.0434593297845,245.6502693958644],"name":"Increment"}}},
   {
     input: new cmp.InputComponent(),
     output: new cmp.OutputComponent(),
@@ -168,10 +169,11 @@ renderPuzzle(
 renderPuzzle(
   '#puzzle02',
   [
-    { input: 'ABC', expected: 'ADC' },
-    { input: 'AABCC', expected: 'ACBCC' },
+    { input: 'ABC', expected: 'DEF' },
+    { input: 'MOON', expected: 'NPR' },
+    { input: 'AABCC', expected: 'CCD' },
   ],
-  {"id":"puzzle02@0.1.0","nodes":{"2":{"id":2,"data":{"sequence":["A","A","B","C","C"]},"inputs":[],"outputs":[{"connections":[{"node":5,"input":0,"data":{}}]}],"position":[20,200],"name":"Input"},"4":{"id":4,"data":{"output":"ACBCC"},"inputs":[{"connections":[{"node":6,"output":0,"data":{}}]}],"outputs":[],"position":[800,200],"name":"Output"},"5":{"id":5,"data":{"position":1},"inputs":[{"connections":[{"node":2,"output":0,"data":{}}]},{"connections":[]}],"outputs":[{"connections":[{"node":6,"input":0,"data":{}}]},{"connections":[{"node":7,"input":0,"data":{}}]}],"position":[256.6515112080528,20.169369983629878],"name":"Split"},"6":{"id":6,"data":{},"inputs":[{"connections":[{"node":5,"output":0,"data":{}}]},{"connections":[{"node":9,"output":0,"data":{}}]}],"outputs":[{"connections":[{"node":4,"input":0,"data":{}}]}],"position":[558.2519222760008,38.24653558968016],"name":"Join"},"7":{"id":7,"data":{"position":1},"inputs":[{"connections":[{"node":5,"output":1,"data":{}}]},{"connections":[]}],"outputs":[{"connections":[{"node":8,"input":0,"data":{}}]},{"connections":[{"node":9,"input":1,"data":{}}]}],"position":[156.28953442173764,343.73944101797093],"name":"Split"},"8":{"id":8,"data":{"amount":2},"inputs":[{"connections":[{"node":7,"output":0,"data":{}}]},{"connections":[]}],"outputs":[{"connections":[{"node":9,"input":0,"data":{}}]}],"position":[385.340751249672,258.7618759038483],"name":"Increment"},"9":{"id":9,"data":{},"inputs":[{"connections":[{"node":8,"output":0,"data":{}}]},{"connections":[{"node":7,"output":1,"data":{}}]}],"outputs":[{"connections":[{"node":6,"input":1,"data":{}}]}],"position":[611.159127021008,370.4306957686656],"name":"Join"}}},
+  {"id":"puzzle02@0.1.0","nodes":{"2":{"id":2,"data":{"sequence":["A","A","B","C","C"]},"inputs":[],"outputs":[{"connections":[{"node":10,"input":0,"data":{}},{"node":11,"input":0,"data":{}}]}],"position":[20,200],"name":"Input"},"4":{"id":4,"data":{"output":"CCD"},"inputs":[{"connections":[{"node":13,"output":0,"data":{}}]}],"outputs":[],"position":[800,200],"name":"Output"},"10":{"id":10,"data":{},"inputs":[{"connections":[{"node":2,"output":0,"data":{}}]},{"connections":[{"node":11,"output":0,"data":{}}]}],"outputs":[{"connections":[{"node":12,"input":0,"data":{}}]}],"position":[569.424603300456,63.495055300427794],"name":"Join"},"11":{"id":11,"data":{"amount":3},"inputs":[{"connections":[{"node":2,"output":0,"data":{}}]},{"connections":[]}],"outputs":[{"connections":[{"node":10,"input":1,"data":{}}]}],"position":[272.9676054490978,5.3320155667772635],"name":"Increment"},"12":{"id":12,"data":{"position":3},"inputs":[{"connections":[{"node":10,"output":0,"data":{}}]},{"connections":[]}],"outputs":[{"connections":[]},{"connections":[{"node":13,"input":0,"data":{}}]}],"position":[260.9049586977488,305.51757395210893],"name":"Split"},"13":{"id":13,"data":{"position":3},"inputs":[{"connections":[{"node":12,"output":1,"data":{}}]},{"connections":[]}],"outputs":[{"connections":[{"node":4,"input":0,"data":{}}]},{"connections":[]}],"position":[560.6935220301846,299.2567205965452],"name":"Split"}}},
   {
     input: new cmp.InputComponent(),
     output: new cmp.OutputComponent(),

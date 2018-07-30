@@ -8,6 +8,8 @@ const numberSocket = new Rete.Socket('Number');
 export class IncrementComponent extends Rete.Component {
   constructor(){
     super('Increment');
+    this.min = 'A'.charCodeAt(0);
+    this.max = 'Z'.charCodeAt(0);
   }
 
   builder(node) {
@@ -25,7 +27,13 @@ export class IncrementComponent extends Rete.Component {
   worker(node, inputs, outputs) {
     const values = inputs[0][0] || [];
     const amount = node.data.amount || 0;
-    outputs[0] = values.map(x => String.fromCharCode(x.charCodeAt(0) + amount));
+    outputs[0] = values.map(x => {
+      const val = Math.max(
+        Math.min(x.charCodeAt(0) + amount, this.max),
+        this.min
+      );
+      return String.fromCharCode(val);
+    });
   }
 }
 
@@ -133,7 +141,7 @@ export class OutputComponent extends Rete.Component {
     const output = values.join('');
     node.data.output = output;
     this.editor.nodes
-      .find(n => n.name == "Output")
+      .find(n => n.name == 'Output')
       .controls[0]
       .setValue(values);
   }

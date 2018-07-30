@@ -1,6 +1,10 @@
 import AnimatedImage from './animated';
 import $ from 'jquery';
-import bootstrap from 'bootstrap';
+import 'popper.js';
+import 'bootstrap';
 
-$('.tooltip-trigger').tooltip();
+$(function () {
+  $('.tooltip-trigger').tooltip();
+  $('[data-toggle="tooltip"]').tooltip()
+});
 AnimatedImage.init();
