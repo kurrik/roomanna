@@ -1,5 +1,7 @@
 import $ from 'jquery';
 
+import styles from './animated.css';
+
 export default class AnimatedImage {
   static init() {
     function imgInit() {

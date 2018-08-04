@@ -3,8 +3,9 @@ import $ from 'jquery';
 import 'popper.js';
 import 'bootstrap';
 
-$(function () {
-  $('.tooltip-trigger').tooltip();
-  $('[data-toggle="tooltip"]').tooltip()
-});
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './main.global.css';
+
+$('.tooltip-trigger').tooltip();
+$('[data-toggle="tooltip"]').tooltip()
 AnimatedImage.init();

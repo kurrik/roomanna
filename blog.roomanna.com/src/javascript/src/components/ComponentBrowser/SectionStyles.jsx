@@ -9,7 +9,10 @@ export default class SectionStyles extends React.Component<{}> {
     return (
       <Section title='Styles'>
         <SectionSublabel>Inline styles</SectionSublabel>
-        <p>Testing the <code>code</code> block.</p>
+        <p>
+          Testing the <code>code</code> block.
+          Testing <a href="http://example.com">a link</a>.
+        </p>
         <SectionSublabel>Tables</SectionSublabel>
         <table className="table">
           <thead>

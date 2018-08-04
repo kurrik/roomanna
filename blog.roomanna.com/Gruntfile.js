@@ -68,44 +68,9 @@ module.exports = function(grunt) {
       },
     },
 
-    concat: {
-      css: {
-        src: [
-          'lib/font-awesome/font-awesome.css',
-          'lib/bootstrap-4.0.0/css/bootstrap.css',
-          'build/content/static/css/site.css',
-        ],
-        dest: 'build/content/static/css/<%= pkg.name %>.css',
-        separator: '\n',
-      },
-    },
-
-    cssmin: {
-      dist: {
-        options: {
-          banner: '/* <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
-        },
-        files: {
-          'build/content/static/css/<%= pkg.name %>.min.css': 'build/content/static/css/<%= pkg.name %>.css',
-        }
-      }
-    },
-
-    less: {
-      dist: {
-        options: {
-          paths: ['src/less', 'lib'],
-          yuicompress: true
-        },
-        files: {
-          'build/content/static/css/site.css': 'src/less/site.less'
-        }
-      }
-    },
-
     watch: {
       frontend: {
-        files: ['lib/**/*', 'src/img/**/*', 'src/less/**/*'],
+        files: ['lib/**/*', 'src/img/**/*'],
         tasks: ['frontend']
       },
       server: {
@@ -131,8 +96,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Site components
-  grunt.registerTask('frontend',        ['copy:frontend', 'less', 'concat', 'cssmin', 'bgShell:javascript']);
-  grunt.registerTask('frontend-devel',  ['copy:frontend', 'less', 'concat', 'cssmin', 'bgShell:javascriptDevel']);
+  grunt.registerTask('frontend',        ['copy:frontend', 'bgShell:javascript']);
+  grunt.registerTask('frontend-devel',  ['copy:frontend', 'bgShell:javascriptDevel']);
   grunt.registerTask('server',          ['copy:server']);
   grunt.registerTask('content',         ['bgShell:ghostwriter']);
   grunt.registerTask('all-devel',       ['clean', 'server', 'frontend-devel', 'content']);

@@ -44,6 +44,8 @@
     "photoswipe": "^4.1.2",
     "popper.js": "^1.14.3",
     "postcss-loader": "^2.1.5",
+    "postcss-mixins": "^6.2.0",
+    "postcss-preset-env": "^5.3.0",
     "react": "^16.4.0",
     "react-addons-test-utils": "^15.6.0",
     "react-autosize-textarea": "^3.0.3",

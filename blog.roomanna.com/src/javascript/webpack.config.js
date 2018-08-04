@@ -47,16 +47,47 @@ var config = {
         ]
       },
       {
-        test: /\.css$/,
+        test: /\.min\.css$/,
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
+      },
+      {
+        test: /\.global\.css$/,
         exclude: /(node_modules)/,
         use: [
           PROD ? MiniCssExtractPlugin.loader : 'style-loader',
           {
             loader: 'css-loader',
-            options: 'modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+            options: {
+              modules: false,
+              importLoaders: 1,
+            }
           },
           {
-            loader: 'postcss-loader',
+            loader: 'postcss-loader'
+          }
+        ]
+      },
+      {
+        test: /\.css$/,
+        exclude: [
+          /(node_modules)/,
+          /\.global\.css$/,
+        ],
+        use: [
+          PROD ? MiniCssExtractPlugin.loader : 'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              importLoaders: 1,
+              localIdentName: '[name]__[local]___[hash:base64:5]'
+            }
+          },
+          {
+            loader: 'postcss-loader'
           }
         ]
       },
@@ -70,7 +101,7 @@ var config = {
         ]
       },
       {
-        test: /\.(gif|png|svg)$/,
+        test: /\.(gif|png|svg|eot|woff|ttf)$/,
         use: [
           {
             loader: 'url-loader'
@@ -98,6 +129,10 @@ var config = {
       Popper: ['popper.js', 'default'],
     }),
     new FlowBabelWebpackPlugin(),
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].css',
+      chunkFilename: 'css/[id].css',
+    }),
   ],
   optimization: {
     minimizer: [
@@ -123,10 +158,6 @@ var config = {
 
 if (PROD) {
   config.plugins.push(
-    new MiniCssExtractPlugin({
-      filename: 'css/[name].css',
-      chunkFilename: 'css/[id].css',
-    }),
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: JSON.stringify('production') }
     })
