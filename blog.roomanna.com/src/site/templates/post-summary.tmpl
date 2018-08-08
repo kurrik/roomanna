@@ -1,0 +1,10 @@
+{{define "post-summary"}}
+<div class="post-summary">
+  <h3 class="post-title"><a href="{{.Path}}">{{.Title}}</a></h3>
+  {{template "post-metadata" .}}
+  <div class="post-snippet">{{.Snippet}}</div>
+  <footer>
+    <a href="{{.Path}}">Read more...</a>
+  </footer>
+</div>
+{{end}}

@@ -42,9 +42,11 @@ implications of the world it builds.  In a way, it's almost like an inverted
 [Stalker][stalker] (theme movie night idea: people trying to either get into
 or out of rooms). It's a confident, entertaining and beautifully shot movie.
 
-<p class="centered">
-  {{template "image" (.Image "exterminating-angel")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "exterminating-angel")}}
+  </figure>
+</div>
 
 There's a lot of good discussion about the meaning of the film.  It's either an
 allegory about the [ruling class in Francoist Spain][ebert], a [Ballardian

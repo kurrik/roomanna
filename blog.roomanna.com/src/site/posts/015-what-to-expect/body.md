@@ -14,10 +14,12 @@ availability.
 It's not totally appropriate (I don't serve the correct status on this site
 yet, for example), but I'm reminded of a favorite quote:
 
-<blockquote><p>
+<blockquote>
   "Embracing HTTP error code 410 means embracing the impermanence of all things."
-  <small><cite title="Mark Pilgrim">Mark Pilgrim</cite></small>
-</p></blockquote>
+  <footer>
+    <cite>Mark Pilgrim</cite>
+  </footer>
+</blockquote>
 
 While writing I try to strike a balance between my personality, a vague picture
 of the audience I'm speaking to, and a degree of professionalism.  By
@@ -74,13 +76,15 @@ When Conan O'Brien was kicked off of the Tonight Show, he had plenty to be
 cynical about.  Instead, his [farewell address](http://vimeo.com/8939365)
 contained one of my favorite expressions of this idea:
 
-<blockquote><p>
+<blockquote>
   "I hate cynicism, for the record it's my least favorite quality. It
   doesn't lead anywhere.  Nobody in life gets exactly what they thought
   they were going to get.  But if you work really hard and you're kind,
   amazing things will happen."
-  <small><cite title="Conan O'Brian">Conan O'Brian</cite></small>
-</p></blockquote>
+  <footer>
+    <cite>Conan O'Brian</cite>
+  </footer>
+</blockquote>
 
 # Avoid punditry
 

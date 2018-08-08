@@ -36,6 +36,7 @@ a comment and I'll update things to work better)*
 
 Writing a simple server is quite easy.  My [echo server project][link-3]
 consists of 2 files:
+
 * [app.yaml][link-4]
 * [echo/echo.go][link-5]
 
@@ -44,16 +45,14 @@ consists of 2 files:
 This is the metadata file that all App Engine apps use to declare information
 about their service.  Mine is:
 
-<pre class="brush:yaml">
-application: echo
-version: 1
-runtime: go
-api_version: 1
+    application: echo
+    version: 1
+    runtime: go
+    api_version: 1
 
-handlers:
-- url: /.*
-  script: _go_app
-</pre>
+    handlers:
+    - url: /.*
+      script: _go_app
 
 Which is really direct.  The only major differences from a Python project are
 that the runtime is “go” and that you don’t specify individual files for the
@@ -74,47 +73,43 @@ package, assigns a handler to a route, and handles input/output in the handler.
 Even though I’m not really familiar with Go’s syntax, the [minimal example from
 the tutorial][link-6] is understandable:
 
-<pre class="blockquote">
-package hello
-import (
-    "fmt"
-    "http"
-)
-func init() {
-    http.HandleFunc("/", handler)
-}
-func handler(w http.ResponseWriter, r *http.Request) {
-    fmt.Fprint(w, "Hello, world!")
-}
-</pre>
+    package hello
+    import (
+        "fmt"
+        "http"
+    )
+    func init() {
+        http.HandleFunc("/", handler)
+    }
+    func handler(w http.ResponseWriter, r *http.Request) {
+        fmt.Fprint(w, "Hello, world!")
+    }
 
 I wanted my echo server to print back the contents of a form-POSTed variable,
 so first step was to define the form.
 
-<pre class="brush:go">
-package echo
+    package echo
 
-import (
-  "http"
-  "fmt"
-)
+    import (
+      "http"
+      "fmt"
+    )
 
-func init() {
-  http.HandleFunc("/", formhandler)
-}
+    func init() {
+      http.HandleFunc("/", formhandler)
+    }
 
-func formhandler (w http.ResponseWriter, r *http.Request) {
-  fmt.Fprint(w, `&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-  &lt;body&gt;
-    &lt;form method=&quot;POST&quot; action=&quot;/dest&quot;&gt;
-      &lt;input type=&quot;text&quot; name=&quot;content&quot; placeholder=&quot;Put content here&quot; /&gt;
-      &lt;button&gt;Submit&lt;/button&gt;
-    &lt;/form&gt;
-  &lt;/body&gt;
-&lt;/html&gt;`)
-}
-</pre>
+    func formhandler (w http.ResponseWriter, r *http.Request) {
+      fmt.Fprint(w, `<!DOCTYPE html>
+    <html>
+      <body>
+        <form method="POST" action="/dest">
+          <input type="text" name="content" placeholder="Put content here" />
+          <button>Submit</button>
+        </form>
+      </body>
+    </html>`)
+    }
 
 Easy enough.  The only thing new there was to figure out that backticks allow
 multi-line string literals in Go.
@@ -126,49 +121,43 @@ includes a `template` package.
 
 I added the package to the imports:
 
-<pre>
-import (
-  "http"
-  "fmt"
-  <strong>"template"</strong>
-)
-</pre>
+    import (
+      "http"
+      "fmt"
+      "template"
+    )
 
 Registered a new handler:
 
-<pre>
-func init() {
-  <strong>http.HandleFunc("/dest", posthandler)</strong>
-  http.HandleFunc("/", formhandler)
-}
-</pre>
+    func init() {
+      http.HandleFunc("/dest", posthandler)
+      http.HandleFunc("/", formhandler)
+    }
 
 And created the template:
 
-<pre>
-func formhandler (w http.ResponseWriter, r *http.Request) {
-  fmt.Fprint(w, `&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-  &lt;body&gt;
-    &lt;form method=&quot;POST&quot; action=&quot;/dest&quot;&gt;
-      &lt;input type=&quot;text&quot; name=&quot;content&quot; placeholder=&quot;Put content here&quot; /&gt;
-      &lt;button&gt;Submit&lt;/button&gt;
-    &lt;/form&gt;
-  &lt;/body&gt;
-&lt;/html&gt;`)
-}
+    func formhandler (w http.ResponseWriter, r *http.Request) {
+      fmt.Fprint(w, `<!DOCTYPE html>
+    <html>
+      <body>
+        <form method="POST" action="/dest">
+          <input type="text" name="content" placeholder="Put content here" />
+          <button>Submit</button>
+        </form>
+      </body>
+    </html>`)
+    }
 
-<strong>var postTemplate = template.MustParse(postTemplateHTML, nil)
-const postTemplateHTML = `
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-  &lt;body&gt;
-    &lt;pre&gt;{Content|html}&lt;/pre&gt;
-    &lt;p&gt;{Seconds}&lt;/p&gt;
-    &lt;a href=&quot;http://{Host}/&quot;&gt;Back&lt;/a&gt;
-  &lt;/body&gt;
-&lt;/html&gt;`</strong>
-</pre>
+    var postTemplate = template.MustParse(postTemplateHTML, nil)
+    const postTemplateHTML = `
+    <!DOCTYPE html>
+    <html>
+      <body>
+        <pre>{Content|html}</pre>
+        <p>{Seconds}</p>
+        <a href="http://{Host}/">Back</a>
+      </body>
+    </html>`
 
 (Interestingly, the example code in the Go documentation shows using
 `postTemplateHTML` before declaring it, so there must be some sort of hoisting
@@ -182,22 +171,18 @@ data I will get from the environment, such as current time and request host.
 
 The handler takes care of rendering the template:
 
-<pre class="brush:go">
-func posthandler (w http.ResponseWriter, r *http.Request) {
-  data :=  …  // I’ll get to this in a second
+    func posthandler (w http.ResponseWriter, r *http.Request) {
+      data :=  …  // I’ll get to this in a second
 
-  if err := postTemplate.Execute(w, data); err != nil {
-    http.Error(w, err.String(), http.StatusInternalServerError)
-  }
-}
-</pre>
+      if err := postTemplate.Execute(w, data); err != nil {
+        http.Error(w, err.String(), http.StatusInternalServerError)
+      }
+    }
 
 The `if` statement syntax is a bit unique to Go (as far as I know).  From the
 [documentation][link-9]:
 
-<pre class="blockquote">
-if and switch accept an optional initialization statement like that of for
-</pre>
+    if and switch accept an optional initialization statement like that of for
 
 So that saves a line, and the `err := foo; err != nil` practice seems to be
 pretty standard, from looking at the code samples.  (In Go, `:=` is an
@@ -207,10 +192,8 @@ Originally, I thought the semicolon in the if statement was for some sort of
 AND operator, which was incorrect.  Go actually *does* use semicolons to
 [terminate statements][link-10]:
 
-<pre class="blockquote">
-Like C, Go's formal grammar uses semicolons to terminate statements;
-unlike C, those semicolons do not appear in the source.
-</pre>
+    Like C, Go's formal grammar uses semicolons to terminate statements;
+    unlike C, those semicolons do not appear in the source.
 
 So in cases where more than one statement is supported for an operator (such as
 `if` or `for`), an explicit semicolon needs to be inserted.
@@ -221,40 +204,34 @@ placeholder variable data which needs to contain values for `Content`,
 `Seconds`, and `Host` template placeholders.  My first instinct was to create a
 struct:
 
-<pre class="brush:go">
-type PostData struct {
-  Content string // post content
-  Seconds int64  // timestamp
-  Host string    // hostname
-}
-</pre>
+    type PostData struct {
+      Content string // post content
+      Seconds int64  // timestamp
+      Host string    // hostname
+    }
 
 Add the time package to get access to the current time:
 
-<pre>
-import (
-  "http"
-  "fmt"
-  "template"
-  <strong>"time"</strong>
-)
-</pre>
+    import (
+      "http"
+      "fmt"
+      "template"
+      "time"
+    )
 
 And then create an instance of the struct in the `posthandler` function:
 
-<pre>
-func posthandler (w http.ResponseWriter, r *http.Request) {
-  <strong>data := PostData {
-    Content: r.FormValue("content"),
-    Seconds: time.Seconds(),
-    Host: r.Host,
-  }</strong>
+    func posthandler (w http.ResponseWriter, r *http.Request) {
+      data := PostData {
+        Content: r.FormValue("content"),
+        Seconds: time.Seconds(),
+        Host: r.Host,
+      }
 
-  if err := postTemplate.Execute(w, data); err != nil {
-    http.Error(w, err.String(), http.StatusInternalServerError)
-  }
-}
-</pre>
+      if err := postTemplate.Execute(w, data); err != nil {
+        http.Error(w, err.String(), http.StatusInternalServerError)
+      }
+    }
 
 This actually worked fine (once I realized that lowercased struct property
 names are considered private and capitalized the names I wanted to reveal to
@@ -266,13 +243,11 @@ declare an explicit type for the value.
 [Turns out][link-11] that a way to do this is to specify the type as an empty
 interface, which every data type will match:
 
-<pre class="brush:go">
-data := map[string] interface{} {
-  "Content":  r.FormValue("content"),
-  "Seconds": time.Seconds(),
-  "Host": r.Host,
-}
-</pre>
+    data := map[string] interface{} {
+      "Content":  r.FormValue("content"),
+      "Seconds": time.Seconds(),
+      "Host": r.Host,
+    }
 
 That worked fine as well, and allows me to be a bit more flexible in what I
 pass to the template renderer.

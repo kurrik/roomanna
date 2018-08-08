@@ -1,0 +1,397 @@
+@import '../common/_roomanna.config.scss';
+@import "~bootstrap/scss/bootstrap";
+
+/******************************************************************************
+ * MACROS
+ ******************************************************************************/
+%text-main {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 1.5 !important;
+  color: var(--color-gray-dark);
+}
+
+%text-quote {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  line-height: 1.5 !important;
+  font-size: 20px;
+  color: var(--color-gray-medium);
+}
+
+%text-heading {
+  font-family: 'Sanchez';
+  font-weight: normal;
+  color: var(--color-gray-dark);
+}
+
+%text-footer {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.5 !important;
+}
+
+%roomanna-cutout {
+  background: var(--color-gray-very-light);
+  border-radius: var(--border-radius);
+  padding: var(--vertical-spacing) var(--horizontal-spacing);
+}
+
+/******************************************************************************
+ * FONTS
+ ******************************************************************************/
+@font-face {
+  font-family: 'Visitor';
+  src: url('/static/font/visitor1.eot?#iefix') format('embedded-opentype'),
+       url('/static/font/visitor1.woff') format('woff'),
+       url('/static/font/visitor1.ttf') format('truetype'),
+       url('/static/font/visitor1.svg#Visitor') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/******************************************************************************
+ * Page layout styles: header, footer, sidebar, etc.
+ ******************************************************************************/
+// Main content.
+body {
+  background: var(--color-gray-light);
+}
+
+.site-main {
+  background: var(--color-white);
+  padding-bottom: var(--vertical-spacing);
+  box-shadow: 0 3px 1px rgba(0,0,0,0.1), 0 -3px 1px rgba(0,0,0,0.1);
+  overflow-x: scroll;
+}
+
+// Logo.
+#roomanna {
+  display: block;
+  margin: var(--vertical-separation) 0;
+}
+
+svg.roomanna-logo {
+  pointer-events: none;
+
+  & text {
+    font: 90px Visitor;
+    fill: #333;
+  }
+  & .subtitle {
+    fill: #eee;
+    text-shadow: 0px 4px 0px #666;
+  }
+}
+
+// Site sidebar.
+.site-sidebar {
+  & li,
+  & li span,
+  & a,
+  & a span {
+    vertical-align: middle;
+  }
+}
+
+// Main content column.
+.site-content {
+  @extend %text-main;
+}
+
+// Paging on blog posts.
+.site-pager {
+  margin-bottom: var(--vertical-separation);
+}
+
+// Commenting.
+.site-comments {
+  margin-bottom: var(--vertical-separation);
+}
+
+// Big header box;
+.site-header {
+  margin: var(--vertical-separation) 0;
+  background-color: var(--color-gray-light);
+  color: var(--color-gray-dark);
+  padding: var(--vertical-spacing) var(--horizontal-spacing);
+  line-height: 1.5;
+
+  & h1 {
+    @extend %text-heading;
+    margin: 0;
+    font-size: 60px;
+    line-height: 1.0;
+    word-wrap: break-word;
+  }
+
+  & em {
+    color: var(--color-pink);
+  }
+
+  & :last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Footer / disclaimer.
+.site-footer {
+  @extend %text-footer;
+  color: var(--color-gray-dark);
+  padding: var(--vertical-separation) 0;
+  border-top: 1px solid var(--color-gray-medium);
+
+  & img {
+    vertical-align: middle;
+  }
+}
+
+/******************************************************************************
+ * Site specific styles.
+ ******************************************************************************/
+// Meta tag sections.
+.site-tagcounts {
+  & a,
+  & h3.post-title {
+    color: var(--color-pink);
+  }
+}
+
+// Tag styles.
+.tag {
+  color: var(--color-pink);
+}
+
+// Connected accounts.
+.site-accounts {
+  & a,
+  & h3.post-title {
+    color: var(--color-green);
+  }
+}
+
+// Tooltips
+.tooltip {
+  @extend %text-main;
+
+  &.in {
+    opacity: 1;
+    filter: 0;
+  }
+
+  .tooltip-inner {
+    min-width: 200px;
+  }
+}
+
+// General styles for post content.
+.post-content {
+  & video,
+  & img,
+  & svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  & h1 {
+    font-size: 28px;
+  }
+
+  & h2 {
+    font-size: 24px;
+  }
+
+  & h3 {
+    font-size: 20px;
+  }
+
+  & h4 {
+    font-size: 18px;
+  }
+
+  & p,
+  & ol,
+  & ul {
+    margin-bottom: var(--vertical-separation);
+  }
+}
+
+// Post titles.
+.post-title {
+  @extend %text-heading;
+  margin-bottom: calc(var(--vertical-spacing) / 2);
+}
+
+// Post metadata.
+.post-metadata {
+  margin-bottom: var(--vertical-spacing);
+  vertical-align: middle;
+
+  & span,
+  & a {
+    vertical-align: middle;
+    line-height: 1;
+  }
+}
+
+// Dates
+.post-date {
+  color: var(--color-indigo);
+  margin-right: var(--horizontal-spacing);
+}
+
+// Post summaries.
+.post-summary {
+  & .post-snippet {
+    & :last-child {
+      margin-bottom: var(--vertical-spacing) !important;
+    }
+  }
+
+  & footer {
+    margin-bottom: calc(var(--vertical-spacing) * 3);
+  }
+}
+
+/******************************************************************************
+ * General styles.
+ ******************************************************************************/
+// Icons: https://github.com/danklammer/bytesize-icons
+svg.i {
+  stroke: currentColor;
+  stroke-width: 7.8125%;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  width: 1em;
+  height: 1em;
+  margin: 0;
+  vertical-align: middle;
+
+  &.large {
+    font-size: 4em;
+    margin: 0;
+  }
+
+  &.medium {
+    font-size: 2em;
+    margin: 0;
+  }
+
+  &.small {
+    font-size: 1em;
+    margin: 0;
+  }
+}
+
+svg, svg symbol {
+  overflow: visible;
+}
+
+// Tweets
+.twitter-tweet-rendered {
+  margin-top: var(--vertical-separation) !important;
+  margin-bottom: var(--vertical-separation) !important;
+}
+
+// Floating
+.roomanna-float-right {
+  @include float-right;
+  margin-left: var(--horizontal-separation);
+}
+
+// Alignment
+.roomanna-centered {
+  @extend .d-flex;
+  @extend .justify-content-center;
+}
+
+// Figures and images
+.roomanna-figure {
+  @extend .figure;
+
+  &.retina2x {
+    // Retina images.
+    width: 50%;
+  }
+
+  & img,
+  & video {
+    @extend .figure-img;
+    @extend .img-fluid;
+    @extend .rounded;
+  }
+
+  & figcaption {
+    @extend .figure-caption;
+    @extend %roomanna-cutout;
+  }
+}
+
+// Preformatted and code blocks
+pre,
+code,
+blockquote {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+pre {
+  margin-bottom: var(--vertical-separation);
+
+  code {
+    display: block;
+    @extend %roomanna-cutout;
+  }
+}
+
+blockquote {
+  @extend .blockquote;
+  @extend %text-quote;
+  @extend %roomanna-cutout;
+  text-align: left;
+  color: theme-color-level(warning, 5);
+  background: theme-color-level(warning, -11);
+  margin-bottom: var(--vertical-separation);
+
+  & :last-child {
+    margin-bottom: 0 !important;
+  }
+
+  & footer {
+    @extend .blockquote-footer;
+    color: theme-color-level(warning, 5);
+  }
+
+  & cite {
+    display: inline-block;
+    margin-top: var(--vertical-spacing);
+  }
+
+  &.twitter-tweet {
+    color: theme-color-level(danger, 5);
+    background: theme-color-level(danger, -11);
+  }
+}
+
+// Inputs / form
+textarea {
+  font-weight: inherit;
+}
+
+label {
+  font-weight: 500;
+}
+
+// Headings
+h1,
+h2,
+h3,
+h4 {
+  @extend %text-heading;
+  margin-top: var(--vertical-separation);
+  margin-bottom: var(--vertical-separation);
+  line-height: 1;
+}

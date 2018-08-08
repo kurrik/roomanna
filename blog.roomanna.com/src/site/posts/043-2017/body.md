@@ -42,9 +42,9 @@ got there. The intent of this objective was to make sure I kept my own state in
 a good condition throughout the year.
 
 <h2>
-  {{template "progress" (map "Value" 100 "Class" "success")}}
   Key result: Interview at other companies
 </h2>
+{{template "progress" (map "Value" 100 "Class" "bg-success")}}
 
 [blog-twitter]: {{link "037-1999-days"}}
 I once heard of a manager giving the advice that employees should periodically
@@ -57,9 +57,9 @@ long (for me) job search and eventually decided [to leave Twitter and join
 Stripe][blog-twitter], a decision I've been very satisfied with so far.
 
 <h2>
-  {{template "progress" (map "Value" 75 "Class" "success")}}
   Key result: Complete home improvement / design projects.
 </h2>
+{{template "progress" (map "Value" 75 "Class" "bg-success")}}
 
 This may seem out of place in the "health and happiness" objective, but I place
 a lot of value in having a space to live and work where I feel at ease and
@@ -70,9 +70,9 @@ three of them, leaving the most ambitious (installing cabinets and shelving in
 our dining area) for 2018.
 
 <h2>
-  {{template "progress" (map "Value" 0 "Class" "danger")}}
   Key result: Four six mile runs and one twelve mile run.
 </h2>
+{{template "progress" (map "Value" 0 "Class" "bg-danger")}}
 
 After my daughter Ada was born, my only real exercise dwindled down to a few
 miles of walking to work at Twitter every day.  I felt myself getting out of
@@ -87,9 +87,9 @@ or Muni. I biked over 700 miles in 2017 over about 100 days of commuting.  So I
 consider this one a success in spirit if not in letter of the intended result.
 
 <h2>
-  {{template "progress" (map "Value" 73 "Class" "success")}}
   Key result: Write in a journal weekly.
 </h2>
+{{template "progress" (map "Value" 73 "Class" "bg-success")}}
 
 [book-persia]: https://www.goodreads.com/book/show/12917506-the-making-of-prince-of-persia
 
@@ -106,9 +106,9 @@ of intellectual growth, and a general tendency to avoid rigorous or challenging
 thinking.  So I set a goal to exercise my brain more.
 
 <h2>
-  {{template "progress" (map "Value" 100 "Class" "success")}}
   Key result: Finish 15 books.
 </h2>
+{{template "progress" (map "Value" 100 "Class" "bg-success")}}
 
 [blog-books]: {{link "042-reading-list-2017-books"}}
 
@@ -117,9 +117,9 @@ As covered in my [2017 reading list][blog-books], I wanted to read more in
 increase over prior years).
 
 <h2>
-  {{template "progress" (map "Value" 38 "Class" "warning")}}
   Key result: Finish 4 cinema club films.
 </h2>
+{{template "progress" (map "Value" 38 "Class" "bg-warning")}}
 
 [blog-skin]: {{link "028-under-the-skin"}}
 [blog-angel]: {{link "040-the-exterminating-angel"}}
@@ -140,9 +140,9 @@ effect of making me watch fewer films. In the future I think I may decouple the
 process of watching a film from writing about it.
 
 <h2>
-  {{template "progress" (map "Value" 0 "Class" "danger")}}
   Key result: Work through Statistics textbook.
 </h2>
+{{template "progress" (map "Value" 0 "Class" "bg-danger")}}
 
 [book-statistics]: https://www.goodreads.com/book/show/147358.Statistics
 
@@ -155,9 +155,9 @@ book and challenge myself to complete the exercises in each chapter but never
 scheduled the time necessary to do so.  A complete miss, unfortunately.
 
 <h2>
-  {{template "progress" (map "Value" 0 "Class" "danger")}}
   Key result: Finish referaat.
 </h2>
+{{template "progress" (map "Value" 0 "Class" "bg-danger")}}
 
 The Estonain fraternity I belong to has two classes of members.  Junior members
 are expected to write a dissertation on the topic of their choosing and defend
@@ -167,9 +167,9 @@ point of shame in my life and every year I intend to finish this up (but never
 really get around to it).  Another year with little progress.
 
 <h2>
-  {{template "progress" (map "Value" 0 "Class" "danger")}}
   Key result: Practice Mandarin regularly for at least one month.
 </h2>
+{{template "progress" (map "Value" 0 "Class" "bg-danger")}}
 
 My wife got me a copy of the Mandarin Rosetta Stone program as a present in
 2014.  I practiced this in 2015 but didn't keep it up over time.  I'd like my
@@ -184,9 +184,9 @@ wanted to focus on being more prolific in 2017, spending less time on more
 things and practicing finishing more often.
 
 <h2>
-  {{template "progress" (map "Value" 60 "Class" "warning")}}
   Key result: Eat from the garden every season.
 </h2>
+{{template "progress" (map "Value" 60 "Class" "bg-warning")}}
 
 [meal-spring]: https://twitter.com/kurrik/status/853336936328552448
 [meal-summer]: https://twitter.com/kurrik/status/878096725314895872
@@ -202,9 +202,9 @@ out of the garden in the winter.  It's a bit of a stretch to call that 3 meals,
 so I'm giving myself 60%.
 
 <h2>
-  {{template "progress" (map "Value" 100 "Class" "success")}}
   Key result: Paint every day in January.
 </h2>
+{{template "progress" (map "Value" 100 "Class" "bg-success")}}
 
 [blog-art]: {{link "038-an-art-a-day"}}
 
@@ -216,9 +216,9 @@ get used to the idea of shipping each piece without agonizing over details for
 very long.
 
 <h2>
-  {{template "progress" (map "Value" 63 "Class" "success")}}
   Key result: One painting a week from February - December.
 </h2>
+{{template "progress" (map "Value" 63 "Class" "bg-success")}}
 
 [instagram]: https://www.instagram.com/roomanna/
 
@@ -229,9 +229,9 @@ honest that I didn't feel like sharing everything I made, but I finished 30
 paintings in 2017, out of 48 remaining weeks in the year.
 
 <h2>
-  {{template "progress" (map "Value" 30 "Class" "warning")}}
   Key result: Publish a game, make $1 from someone I don't know.
 </h2>
+{{template "progress" (map "Value" 30 "Class" "bg-warning")}}
 
 [blog-ludum-dare]: {{link "026-ludum-dare"}}
 
@@ -255,9 +255,9 @@ for $1, as I thought that making a dollar from someone I didn't know for a
 piece of art satisfied the spirit of this challenge.
 
 <h2>
-  {{template "progress" (map "Value" 70 "Class" "success")}}
   Key result: Write 10 blog posts.
 </h2>
+{{template "progress" (map "Value" 70 "Class" "bg-success")}}
 
 [blog-managing]: {{link "036-reading-list-managing-engineers"}}
 [blog-timebox]: {{link "039-timebox"}}

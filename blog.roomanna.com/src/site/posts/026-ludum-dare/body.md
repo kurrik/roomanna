@@ -56,9 +56,11 @@ But I kept revisiting the choice in my head.  At some point, long after SimAnt
 had grown stale, I obtained the most formidable book on game
 programming I could locate - "Tricks of the Game Programming Gurus".
 
-<p class="centered">
-  {{template "image" (.Image "gurus")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "gurus")}}
+  </figure>
+</div>
 
 I memorized Gurus front-to-back despite its basis in C, a language I had never
 used.  It was difficult to get a C compiler for DOS at that time - I remember

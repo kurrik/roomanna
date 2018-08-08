@@ -5,7 +5,9 @@ Our resulting entry, [Chromos](http://eg.regio.us/ld32), is a top-down action
 game reminiscient of Zelda and (blatantly) Titan Souls.  It's the most
 ambitious game we have tried to make in 48 hours:
 
-<iframe class="centered" width="420" height="315" src="https://www.youtube.com/embed/3xs_6vkWYxc" frameborder="0" allowfullscreen></iframe>
+<p class="roomanna-centered">
+  <iframe width="420" height="315" src="https://www.youtube.com/embed/3xs_6vkWYxc" frameborder="0" allowfullscreen></iframe>
+</p>
 
 <!--BREAK-->
 
@@ -20,10 +22,12 @@ didn't want to be limited.  The biggest obstacle in my mind was that it pretty
 much forced us to have a weapon, which we had avoided in the past by making
 puzzle or exploration based games.
 
-<p class="centered">
-  {{template "image" (.Image "slack_theme_hate")}}
-  <div class="caption centered">The team hates on the theme in our Slack channel</div>
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "slack_theme_hate")}}
+    <figcaption>The team hates on the theme in our Slack channel</figcaption>
+  </figure>
+</div>
 
 When I'm working on such a tight timeframe, trimming early and aggressively is
 my favorite way to stay on track.  We always trimmed enemies from our previous
@@ -46,10 +50,12 @@ Souls](http://www.devolverdigital.com/games/view/titan-souls)), draw lines, and
 have an in-memory grid representation of the map for the purposes of
 pathfinding.
 
-<p class="centered">
-  {{template "image" (.Image "ld32_01_360")}}
-  <div class="caption centered">An early tech demo of the twodee engine</div>
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "ld32_01_360")}}
+    <figcaption>An early tech demo of the twodee engine</figcaption>
+  </figure>
+</div>
 
 Once the theme for LD is announced, we always spend an hour coming up with a
 plan of what to build.  But as the hour for LD32 ran out, we still didn't know
@@ -103,13 +109,17 @@ development.  In this case, coloring the scene was a really fast addition and
 we were able to get a proof of concept with some initial art together by
 Saturday night.
 
-<p class="centered">
-  {{template "image" (.Image "ld32_13_360")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "ld32_13_360")}}
+  </figure>
+</div>
 
-<p class="centered">
-  {{template "image" (.Image "ld32_14_360")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "ld32_14_360")}}
+  </figure>
+</div>
 
 I also finally bit the bullet and did the animations for the boss character.
 Originally I was thinking we'd have multiple bosses but I completely ran out of
@@ -119,9 +129,11 @@ dying.  I also made the boss a symmetrical jelly cube so that I wouldn't have
 to worry about making it face different directions.  Hacky, but I like the way
 it turned out (hopefully evocative of D&amp;D):
 
-<p class="centered">
-  {{template "image" (.Image "boss")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "boss")}}
+  </figure>
+</div>
 
 A quick modification to the effects shader let me change the color of the
 center circle to any arbitrary color.  So the game is able to display what the
@@ -136,17 +148,21 @@ engine!).  Being able to visualize algorithms in action is another great thing
 about game development - you can typically just draw more information on a
 scene in debug mode and get an intuition about any weird behavior you see.
 
-<p class="centered">
-  {{template "image" (.Image "ld32_16_360")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "ld32_16_360")}}
+  </figure>
+</div>
 
 Eventually the pathfinding was good enough, and I had put in the stuff to make
 it a real game - the ability to win, the ability to lose, and splash screens
 which showed up whenever either of those things happened.
 
-<p class="centered">
-  {{template "image" (.Image "ld32_17_360")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "ld32_17_360")}}
+  </figure>
+</div>
 
 At the end of the day, we shipped our first game with an enemy.  It's not our
 best game&mdash;we wound up placing 374/1468 overall, which is our worst

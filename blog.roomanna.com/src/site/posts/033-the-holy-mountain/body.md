@@ -46,15 +46,18 @@ Right off the bat, a set of explosions disrupt the protest.  But the smoke
 clouds are a rich azure, so the scene looks more like a Holi celebration than a
 slaughter.
 
-<p><video
-  class="centered"
-  preload="none"
-  width="640"
-  height="264"
-  controls
-  poster="{{(.Image "smoke").Data.Permalink}}"
-  src="{{link "holymountain-smoke-480-nosound.mp4" }}">
-</video></p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    <video
+      preload="none"
+      width="640"
+      height="264"
+      controls
+      poster="{{(.Image "smoke").Data.Permalink}}"
+      src="{{link "holymountain-smoke-480-nosound.mp4" }}">
+    </video>
+  </figure>
+</div>
 
 The bits where protesters are killed are all played for effect - the tone, the
 action, and the acting all indicate an atrocity.  But the visuals themselves
@@ -64,64 +67,79 @@ what is going on without needing to suffer through it directly.
 In this scene, the police are obviously throwing and spraying red paint onto
 the crowd.
 
-<p><video
-  class="centered"
-  preload="none"
-  width="640"
-  height="264"
-  controls
-  poster="{{(.Image "paint01").Data.Permalink}}"
-  src="{{link "holymountain-paint01-480-nosound.mp4" }}">
-</video></p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    <video
+      preload="none"
+      width="640"
+      height="264"
+      controls
+      poster="{{(.Image "paint01").Data.Permalink}}"
+      src="{{link "holymountain-paint01-480-nosound.mp4" }}">
+    </video>
+  </figure>
+</div>
 
 A set of eviscerations play out in odd fashion.  Sausages and ribbon stand in
 for intestines.
 
-<p><video
-  class="centered"
-  preload="none"
-  width="640"
-  height="264"
-  controls
-  poster="{{(.Image "sausages").Data.Permalink}}"
-  src="{{link "holymountain-sausages-480-nosound.mp4" }}">
-</video></p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    <video
+      preload="none"
+      width="640"
+      height="264"
+      controls
+      poster="{{(.Image "sausages").Data.Permalink}}"
+      src="{{link "holymountain-sausages-480-nosound.mp4" }}">
+    </video>
+  </figure>
+</div>
 
-<p><video
-  class="centered"
-  preload="none"
-  width="640"
-  height="264"
-  controls
-  poster="{{(.Image "ribbon").Data.Permalink}}"
-  src="{{link "holymountain-ribbon-480-nosound.mp4" }}">
-</video></p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    <video
+      preload="none"
+      width="640"
+      height="264"
+      controls
+      poster="{{(.Image "ribbon").Data.Permalink}}"
+      src="{{link "holymountain-ribbon-480-nosound.mp4" }}">
+    </video>
+  </figure>
+</div>
 
 Police pull lightbulbs, dirt, watermelon, a houseplant, even a live dove from
 the innards of their victims.
 
-<p><video
-  class="centered"
-  preload="none"
-  width="640"
-  height="264"
-  controls
-  poster="{{(.Image "insides").Data.Permalink}}"
-  src="{{link "holymountain-insides-480-nosound.mp4" }}">
-</video></p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    <video
+      preload="none"
+      width="640"
+      height="264"
+      controls
+      poster="{{(.Image "insides").Data.Permalink}}"
+      src="{{link "holymountain-insides-480-nosound.mp4" }}">
+    </video>
+  </figure>
+</div>
 
 An officer removes a cauliflower from between the legs of a strawberry-covered
 woman and stomps on it.
 
-<p><video
-  class="centered"
-  preload="none"
-  width="640"
-  height="264"
-  controls
-  poster="{{(.Image "strawberries").Data.Permalink}}"
-  src="{{link "holymountain-strawberries-480-nosound.mp4" }}">
-</video></p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    <video
+      preload="none"
+      width="640"
+      height="264"
+      controls
+      poster="{{(.Image "strawberries").Data.Permalink}}"
+      src="{{link "holymountain-strawberries-480-nosound.mp4" }}">
+    </video>
+  </figure>
+</div>
 
 The most elaborate special effects come at the end, where a set of copper pipes
 molded to actresses' heads spurt different colored paints onto the ground.
@@ -129,15 +147,18 @@ Perhaps the only literal brutality comes from Axon himself, as he pulls the
 head off of an obviously a crude animatronic as a skull slides up from between
 its shoulders.
 
-<p><video
-  class="centered"
-  preload="none"
-  width="640"
-  height="264"
-  controls
-  poster="{{(.Image "paint02").Data.Permalink}}"
-  src="{{link "holymountain-paint02-480-nosound.mp4" }}">
-</video></p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    <video
+      preload="none"
+      width="640"
+      height="264"
+      controls
+      poster="{{(.Image "paint02").Data.Permalink}}"
+      src="{{link "holymountain-paint02-480-nosound.mp4" }}">
+    </video>
+  </figure>
+</div>
 
 For the cost of some groceries, basic hardware supplies and a bunch of extras,
 Jodorowsky stages what would be an iconic scene if the rest of the movie

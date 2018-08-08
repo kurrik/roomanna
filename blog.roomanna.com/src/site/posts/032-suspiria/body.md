@@ -45,9 +45,11 @@ Suspiria as some kind of apex, the culmination of decades of work on analog
 color in cinema.
 
 <style>
+.roomanna-figure img {
+  margin-bottom: 0;
+  border-radius: var(--border-radius) var(--border-radius) 0 0 !important;
+}
 .Palettes {
-  margin-top: 1px;
-  margin-bottom: 20px;
 }
 .Clusters {
   line-height: 0;
@@ -69,22 +71,28 @@ are in pitch darkness, but we see everything going on in an eerie otherworldly
 (and voyeuristic) way.
 
 <div class="row">
-  <div class="col-sm-4">
-    <div class="centered">
-      {{template "image" (.Image "red")}}
-      <div class="Palettes"></div>
+  <div class="col">
+    <div class="roomanna-centered">
+      <figure class="roomanna-figure">
+        {{template "image" (.Image "red")}}
+        <div class="Palettes"></div>
+      </figure>
     </div>
   </div>
-  <div class="col-sm-4">
-    <div class="centered">
-      {{template "image" (.Image "green")}}
-      <div class="Palettes"></div>
+  <div class="col">
+    <div class="roomanna-centered">
+      <figure class="roomanna-figure">
+        {{template "image" (.Image "green")}}
+        <div class="Palettes"></div>
+      </figure>
     </div>
   </div>
-  <div class="col-sm-4">
-    <div class="centered">
-      {{template "image" (.Image "blue")}}
-      <div class="Palettes"></div>
+  <div class="col">
+    <div class="roomanna-centered">
+      <figure class="roomanna-figure">
+        {{template "image" (.Image "blue")}}
+        <div class="Palettes"></div>
+      </figure>
     </div>
   </div>
 </div>
@@ -102,9 +110,11 @@ lighting breaks the symmetry of the staircase in the back of this hallway
 scene, or how the tan tones equally balance out the strong red highlights (with
 a perfect hit of turquoise up at the top).
 
-<div class="centered">
-  {{template "image" (.Image "hallway-01")}}
-  <div class="Palettes"></div>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "hallway-01")}}
+    <div class="Palettes"></div>
+  </figure>
 </div>
 
 Red plays a very prominent role in the film and there's no lack of it in most
@@ -112,26 +122,32 @@ scenes.  But it is also very balanced with black and tan tones.  The intricate
 patterns on the walls of the school always stand out.  Texture and depth
 everywhere.
 
-<div class="centered">
-  {{template "image" (.Image "hallway-02")}}
-  <div class="Palettes"></div>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "hallway-02")}}
+    <div class="Palettes"></div>
+  </figure>
 </div>
 
 I love the attention to detail in the framing, light, and texturing of this
 scene.  It looks like a Baroque painting (albeit with a clunky 70s phone).
 
-<div class="centered">
-  {{template "image" (.Image "gold")}}
-  <div class="Palettes"></div>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "gold")}}
+    <div class="Palettes"></div>
+  </figure>
 </div>
 
 And here's a wonderfully balanced Blue / Orange scene.  Opposite sides of the
 color wheel are used as complimentary colors and the number of tones on each
 side are roughly even.
 
-<div class="centered">
-  {{template "image" (.Image "light")}}
-  <div class="Palettes"></div>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "light")}}
+    <div class="Palettes"></div>
+  </figure>
 </div>
 
 There's a blind character in Suspiria who walks with a guide dog and a cane.  I
@@ -144,9 +160,11 @@ highlights his handicap, along with the white service band his dog wears.  The
 red cross on the band stands out like a splash of blood, the only non-blue tone
 in an otherwise muted scene.
 
-<div class="centered">
-  {{template "image" (.Image "shadow")}}
-  <div class="Palettes"></div>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "shadow")}}
+    <div class="Palettes"></div>
+  </figure>
 </div>
 
 So I liked Suspiria, it was fun to look at for a few hours.  It was also fun to
@@ -178,17 +196,16 @@ last image usually gets clustered into its own shade, but sometimes falls into
 another non-red cluster and is averaged out (this is more likely to happen if k
 is small).
 
-<div class="row">
+<div class="form-group row">
   <div class="col-sm-6">
     <label>Random seed (<span data-display="seed"></span>)</label>
-    <input type="range" min="1", max="10" data-binding="seed" />
+    <input type="range" min="1", max="10" data-binding="seed" class="form-control" />
   </div>
   <div class="col-sm-6">
     <label>K (<span data-display="k"></span>)</label>
-    <input type="range" min="1", max="32" data-binding="k" />
+    <input type="range" min="1", max="32" data-binding="k" class="form-control" />
   </div>
 </div>
-<br>
 
 Bet you didn't think you'd be learning about data mining techniques in an
 article about a 70s horror film!

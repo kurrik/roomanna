@@ -296,10 +296,10 @@ function computeHistogram(text, alphabet) {
 
 function computeDiffText(diff, isBest, isCurrent) {
   const bestLabel = isBest ? (
-    <span className="label label-success">BEST</span>
+    <span className="badge badge-success">BEST</span>
   ) : "";
   const currentLabel = isCurrent ? (
-    <span className="label label-primary">CURRENT</span>
+    <span className="badge badge-primary">CURRENT</span>
   ) : "";
   return (
     <span><span>{diff}</span> {bestLabel} {currentLabel}</span>

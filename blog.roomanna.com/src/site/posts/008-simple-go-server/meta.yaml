@@ -11,4 +11,4 @@ images:
     src: "gogopher.png"
     metadata:
       alt: Go Gopher
-      class: pull-right
+      class: roomanna-float-right

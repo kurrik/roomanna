@@ -19,9 +19,11 @@ non-widescreen 1.37:1 ratio so there's some excellent scene composition in
 this film, but at least a few parts where I felt like he wanted to go wider
 to give a grander scope to the scene.
 
-<p class="centered">
-  {{template "image" (.Image "aspect")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "aspect")}}
+  </figure>
+</div>
 
 He made another 1.37:1 film in 1957 called The Lower Depths but then shot
 almost exclusively widescreen for the rest of his career. The single
@@ -52,15 +54,18 @@ or how many takes it took - the fog looks perfectly painted into place, and
 I'd have to imagine a contemporary director saying "fuck it, we'll use a
 digital effect" instead.
 
-<p><video
-  class="centered"
-  preload="none"
-  width="480"
-  height="360"
-  controls
-  poster="{{(.Image "death").Data.Permalink}}"
-  src="{{link "throne-of-blood-death-480.mp4" }}">
-</video></p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    <video
+      preload="none"
+      width="480"
+      height="360"
+      controls
+      poster="{{(.Image "death").Data.Permalink}}"
+      src="{{link "throne-of-blood-death-480.mp4" }}">
+    </video>
+  </figure>
+</div>
 
 The ending features one of the most incredible stunt sequences I've ever
 seen.  Washizu is struck down by dozens of arrows which were mostly actual
@@ -70,15 +75,18 @@ indicate he's about to move in a direction and for the archers not to shoot
 there any more.  The effect is incredible, I can't think of any other movie
 which communicates such tangible danger on screen.
 
-<p><video
-  class="centered"
-  preload="none"
-  width="480"
-  height="360"
-  controls
-  poster="{{(.Image "arrows").Data.Permalink}}"
-  src="{{link "throne-of-blood-arrows-480.mp4" }}">
-</video></p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    <video
+      preload="none"
+      width="480"
+      height="360"
+      controls
+      poster="{{(.Image "arrows").Data.Permalink}}"
+      src="{{link "throne-of-blood-arrows-480.mp4" }}">
+    </video>
+  </figure>
+</div>
 
 Eight of Kurosawa's 15 prior films had also featured Toshirô Mifune.  By this
 point it seems that Kurosawa was more than happy to let Mifune dominate a
@@ -88,9 +96,11 @@ intensity and physicality in his performance, whether he's stomping around a
 scene in full armor or silently staring down the camera while contemplating
 his own guilty conscience.
 
-<p class="centered">
-  {{template "image" (.Image "mifune")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "mifune")}}
+  </figure>
+</div>
 
 Overall, Mifune and Kurosawa went on to create 16 films (out of Kurosawa's
 30) together, but had a falling out after Red Beard in 1965.  Mifune was

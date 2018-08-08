@@ -21,13 +21,13 @@ Tweet which is being viewed was created (always before the impression, as you
 would expect).  You can graph these two values, as I have below using simulated
 data:
 
-<div class="centered" id="example00"></div>
+<div class="roomanna-centered" id="example00"></div>
 
 Say you wanted to aggregate a set of impressions on a certain day. This would
 be represented by cutting a vertical slice in the graph and summing up the
 count of impressions inside that slice.
 
-<div class="centered" id="example01"></div>
+<div class="roomanna-centered" id="example01"></div>
 
 This is roughly equivalent to the monthly aggregation view in
 [the Twitter Analytics home page](https://analytics.twitter.com/user/*/home).
@@ -35,9 +35,11 @@ It represents the total number of impressions that month, but could include
 impressions from Tweets created before the period, and may not include every
 impression for a Tweet created within the period.
 
-<p class="centered">
-  {{template "image" (.Image "monthly-impressions")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure retina2x">
+    {{template "image" (.Image "monthly-impressions")}}
+  </figure>
+</div>
 
 Turns out, this is not strictly what people expect if you say "Tweet
 impressions in July". The intuition for many of our users was to select all the
@@ -45,16 +47,18 @@ Tweets which were created in July and sum up the impression number for
 each.  This was possible due to another feature our team built: all-time
 impressions on Tweet activity pages.
 
-<p class="centered">
-  {{template "image" (.Image "tweet-alltime-impressions")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure retina2x">
+    {{template "image" (.Image "tweet-alltime-impressions")}}
+  </figure>
+</div>
 
 For a Tweet created in July, this count might include impressions which
 occurred in August or even later.  So summing up this number for all Tweets in
 a given time range can be thought of as a horizontal slice in the Tweet
 impression graph:
 
-<div class="centered" id="example02"></div>
+<div class="roomanna-centered" id="example02"></div>
 
 Given these two methods of aggregation, imagine the method to select a "Top"
 Tweet for a given month.  Selecting the maximum by either horizontal or vertical
@@ -68,16 +72,18 @@ square in the chart below, you can see that this method biases for Tweets which
 occur toward the start of the period.  A popular Tweet which split its
 impressions equally across two months may not be the top in either.
 
-<div class="centered" id="example03"></div>
+<div class="roomanna-centered" id="example03"></div>
 
 Eventually, we figured the least surprising approach was to return the Tweet
 which got the most impressions in the given month.  Since this number is
 different from the all-time impression count, it is displayed as part of the
 Top Tweet UI:
 
-<p class="centered">
-  {{template "image" (.Image "tweet-monthly-impressions")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure retina2x">
+    {{template "image" (.Image "tweet-monthly-impressions")}}
+  </figure>
+</div>
 
 Of course, this means that the Top Tweet in July might be a Tweet created in
 June, but we figured our users would understand.  When we tested this with

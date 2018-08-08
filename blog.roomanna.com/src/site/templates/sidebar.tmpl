@@ -1,31 +1,47 @@
 {{define "sidebar"}}
-<nav class="Sidebar">
-  <ul class="Navigation">
-    <li class="Navigation-header">Navigation</li>
-    <li><a href="/archive.html">All Posts</a></li>
-    <li><a href="/atom.xml">Atom <img width="16" height="16" src="/static/img/rss-icon.png"/></a></li>
-    <li>
-      <a href="https://twitter.com/kurrik"
-        class="twitter-follow-button"
-        data-show-count="false">Follow @kurrik</a>
+<ul class="list-group list-group-flush site-sidebar">
+  <li class="list-group-item list-group-item-success">
+    <svg class="i small"><use xlink:href="#i-user" /></svg>
+    <span>Navigation</span>
+  </li>
+  <a class="list-group-item list-group-item-action" href="/archive.html">
+    <svg class="i small"><use xlink:href="#i-portfolio" /></svg>
+    <span>All Posts</span>
+  </a>
+  <a class="list-group-item list-group-item-action align-items-center" href="/atom.xml" target="_blank">
+    <svg class="i small"><use xlink:href="#i-download" /></svg>
+    <span>Atom Feed</span>
+  </a>
+  <a class="list-group-item list-group-item-action align-items-center" href="https://twitter.com/kurrik" target="_blank">
+    <svg class="i small"><use xlink:href="#i-twitter" /></svg>
+    <span>@kurrik</span>
+  </a>
+
+  {{if .Post}}
+    <li class="list-group-item list-group-item-warning">
+      <svg class="i small"><use xlink:href="#i-file" /></svg>
+      <span>This Post</span>
     </li>
-    {{if .Post}}
-    <li class="Navigation-header">This Post</li>
-    <li><a href="{{.Post.Permalink}}">Permalink</a></li>
+    <a class="list-group-item list-group-item-action align-items-center" href="{{.Post.Permalink}}">
+      <svg class="i small"><use xlink:href="#i-link" /></svg>
+      <span>Permalink</span>
+    </a>
     {{if .Post.Next}}
-    <li><a href="{{.Post.Next.Path}}" class="tooltip-trigger" data-placement="right" title="{{.Post.Next.Title}}">Next &rarr;</a></li>
+      <a class="list-group-item list-group-item-action align-items-center tooltip-trigger" data-placement="right" href="{{.Post.Next.Path}}" title="{{.Post.Next.Title}}">
+        <svg class="i small"><use xlink:href="#i-arrow-left" /></svg>
+        <span>Newer Post</span>
+      </a>
     {{end}}
     {{if .Post.Prev}}
-    <li><a href="{{.Post.Prev.Path}}" class="tooltip-trigger" data-placement="right" title="{{.Post.Prev.Title}}">Prev &larr;</a></li>
+      <a class="list-group-item list-group-item-action align-items-center tooltip-trigger" data-placement="right" href="{{.Post.Prev.Path}}" title="{{.Post.Prev.Title}}">
+        <svg class="i small"><use xlink:href="#i-arrow-right" /></svg>
+        <span>Older Post</span>
+      </a>
     {{end}}
-    <li>
-      <a href="https://twitter.com/share"
-         class="twitter-share-button"
-         data-count="horizontal"
-         data-text="Just read '{{.Post.Title}}'"
-         data-via="kurrik">Tweet</a>
-    </li>
-    {{end}}
-  </ul>
-</nav>
+    <a class="list-group-item list-group-item-action align-items-center" href='https://twitter.com/intent/tweet?text={{urlquery "'" .Post.Title "' by @kurrik " .Post.Permalink}}' target="_blank">
+      <svg class="i small"><use xlink:href="#i-twitter" /></svg>
+      <span>Tweet this</span>
+    </a>
+  {{end}}
+</ul>
 {{end}}

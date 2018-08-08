@@ -46,8 +46,7 @@ Yu's notes and analysis of developing the game [Spleunky][url-spleunky].  There
 are lots of fantastic insights into product development in that book but his
 discussion on finishing has been especially memorable to me:
 
-<blockquote>
-  <p>"finishing is a skill as much as being able to design, draw, program, or
+<blockquote>"finishing is a skill as much as being able to design, draw, program, or
 make music, and that finished projects are more valuable than unfinished
 projects. Most creative people are familiar with the first part of making
 something, and it’s easy to mistakenly assume that the rest is just more of the
@@ -55,8 +54,7 @@ same. It’s akin to repeatedly climbing the first quarter of a mountain and
 thinking that you’re getting the experience you need to summit. Or running a
 few miles and thinking that you can run a marathon. In truth, the only way to
 learn how to summit mountains, run marathons, and finish making games is to
-actually do those things."</p>
-</blockquote>
+actually do those things."</blockquote>
 
 Hackathons provide ideal conditions for practicing finishing but there are
 other, broader benefits too.  At work, they can be used to answer some

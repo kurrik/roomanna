@@ -33,9 +33,11 @@ three months.  By the time I showed up for my first day, I was given the
 assignment of ramping up on an internal secret project which nobody seemed to
 be able to describe, but eventually became to be known as OpenSocial.
 
-<p class="centered">
-  {{template "image" (.Image "bust")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "bust")}}
+  </figure>
+</div>
 
 <!-- -**-END-**- -->
 

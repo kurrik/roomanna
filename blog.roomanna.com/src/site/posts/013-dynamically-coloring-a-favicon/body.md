@@ -21,9 +21,11 @@ open tabs in Chrome, and I realized that I was losing productivity.
 To illustrate, quickly tell me which of the following tabs is for
 **twitter.com**, and which are **dev.twitter.com**:
 
-<p class="centered">
-  {{template "image" (.Image "twitterbars")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "twitterbars")}}
+  </figure>
+</div>
 
 Not very easy, huh?
 
@@ -32,9 +34,11 @@ Extension content script][5].  Using some Javascript, the <code>&lt;link
 rel="icon"&gt;</code> element, and the HTML5 canvas API, I was able to quickly
 turn the tab strip into this:
 
-<p class="centered">
-  {{template "image" (.Image "twitterbars2")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "twitterbars2")}}
+  </figure>
+</div>
 
 Much better!  And the technique is general-purpose enough to be used on any
 domain, or even in a non-Chrome extension context (if you can run code on the
@@ -47,18 +51,16 @@ I could've written this as a [user script][7], but I like hosting stuff in the
 Chrome Web Store, so I decided to do a full-on packaged extension.  So I made a
 simple **manifest.json** file:
 
-<pre>
-{
-   "name": "Change favicon for dev.twitter.com",
-   "description": "Make dev.twitter.com stand out from twitter.com",
-   "version": "1.0.0",
-   "content_scripts": [ {
-      "js": [ "favicon.js" ],
-      "matches": [ "https://dev.twitter.com/*" ],
-      "run_at": "document_idle"
-   } ]
-}
-</pre>
+    {
+       "name": "Change favicon for dev.twitter.com",
+       "description": "Make dev.twitter.com stand out from twitter.com",
+       "version": "1.0.0",
+       "content_scripts": [ {
+          "js": [ "favicon.js" ],
+          "matches": [ "https://dev.twitter.com/*" ],
+          "run_at": "document_idle"
+       } ]
+    }
 
 The only thing truly important to note here is that I specified a content
 script which executes a file named **favicon.js** any time Chrome visits an URL
@@ -84,14 +86,12 @@ While **dev.twitter.com**
 contains such a link element in the DOM, not every page does, so the following
 code queries for such an element and creates one if nothing is found:
 
-<pre class="brush:javascript">
-var link = document.querySelector("link[rel~='icon']");
-if (!link) {
-  link = document.createElement("link");
-  link.setAttribute("rel", "icon");
-  document.head.appendChild(link);
-}
-</pre>
+    var link = document.querySelector("link[rel~='icon']");
+    if (!link) {
+      link = document.createElement("link");
+      link.setAttribute("rel", "icon");
+      document.head.appendChild(link);
+    }
 
 ## Get the favicon
 
@@ -104,9 +104,7 @@ For a more general-purpose script, a given page is not guaranteed to have a
 `<link rel="icon">` element, but since favicons live in canonical locations, it
 is possible to guess the favicon URL from the page's origin:
 
-<pre class="brush:javascript">
-var faviconUrl = link.href || window.location.origin + "/favicon.ico";
-</pre>
+    var faviconUrl = link.href || window.location.origin + "/favicon.ico";
 
 <div class="alert alert-warning">
 <strong>Note:</strong> Because the content script is going to be manipulating
@@ -123,33 +121,31 @@ canvas `drawImage` API which will take an URL as a parameter.  Thankfully, HTML
 
 First, load the URL is loaded into an image tag:
 
-<pre class="brush: javascript">
-function onImageLoaded() {
-  ...
-};
-var img = document.createElement("img");
-img.addEventListener("load", onImageLoaded);
-img.src = faviconUrl;
-</pre>
+    function onImageLoaded() {
+      ...
+    };
+    var img = document.createElement("img");
+    img.addEventListener("load", onImageLoaded);
+    img.src = faviconUrl;
 
 Then, the image element is drawn to a new canvas:
 
-<pre class="brush: javascript">
-function onImageLoaded() {
-  var canvas = document.createElement("canvas");
-  canvas.width = 16;
-  canvas.height = 16;
-  var context = canvas.getContext("2d");
-  context.drawImage(img, 0, 0);
-};
-</pre>
+    function onImageLoaded() {
+      var canvas = document.createElement("canvas");
+      canvas.width = 16;
+      canvas.height = 16;
+      var context = canvas.getContext("2d");
+      context.drawImage(img, 0, 0);
+    };
 
 Even though the canvas isn't really placed in the DOM anywhere, this is what it
 would look like if it were visible:
 
-<p class="centered">
-  {{template "image" (.Image "favicon1")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "favicon1")}}
+  </figure>
+</div>
 
 I've enlarged the image 20x and changed the alpha channel to show pink instead
 of transparency.
@@ -161,19 +157,17 @@ possible.  Personally, I preferred to use the fairly new
 [`globalCompositeOperation`][8] 2d context attribute to recolor the image.
 Here's an implementation:
 
-<pre class="brush: javascript">
-function onImageLoaded() {
-  var canvas = document.createElement("canvas");
-  canvas.width = 16;
-  canvas.height = 16;
-  var context = canvas.getContext("2d");
-  context.drawImage(img, 0, 0);
-  context.globalCompositeOperation = "source-in";
-  context.fillStyle = "#d00";
-  context.fillRect(0, 0, 16, 16);
-  context.fill();
-};
-</pre>
+    function onImageLoaded() {
+      var canvas = document.createElement("canvas");
+      canvas.width = 16;
+      canvas.height = 16;
+      var context = canvas.getContext("2d");
+      context.drawImage(img, 0, 0);
+      context.globalCompositeOperation = "source-in";
+      context.fillStyle = "#d00";
+      context.fillRect(0, 0, 16, 16);
+      context.fill();
+    };
 
 This `onImageLoaded` function:
 
@@ -203,17 +197,21 @@ This means that the layer to be drawn will only be drawn where the current
 canvas is opaque, so if the canvas contains the original favicon, and a 16x16
 red square is drawn over it:
 
-<p class="centered">
-  {{template "image" (.Image "favicon1smaller")}}
-  {{template "image" (.Image "favicon2smaller")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "favicon1smaller")}}
+    {{template "image" (.Image "favicon2smaller")}}
+  </figure>
+</div>
 
 The result will be a solid red image, but with an alpha channel matching the
 original favicon:
 
-<p class="centered">
-  {{template "image" (.Image "favicon3")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "favicon3")}}
+  </figure>
+</div>
 
 ## Setting the favicon
 
@@ -226,17 +224,15 @@ used anywhere an URL would be accepted.
 For example. if you paste the following string into the browser's address bar,
 you'll see the modified Twitter favicon:
 
-<pre>
-data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAA
-ABZ0lEQVQ4T6WTvUsDQRDF32mh2NiKIKIG65QWFtFGFEELC8tUFum1DQRRbATRXjvFJq
-iVphD/A0vBj2ghxCoRRGz8+E24Xe7CXQzkYNjZt2/ezOzsBeryC7qMV8cCD1Ie8pglnJ
-CKLnFT4Eka/ZUaHLwnVfQoHYLn4Xyw7mSkzZgAhEWAC6wM6RzCkSOEmU3Afz1SjlJuDP
-AV/EglNitgA1gd27dSEXgFH26p7IqzOS9gDlVMs1Sw/gj5Fj+b0NYnVSx8cyf+EhEYZF
-OihbUWkaRrcVgxNgVEJhEoA47/I2ItNuBWYgL3Uh/AModboUha9hOCL3ulakDWXch7pH
-xxbLBj/NWU6Dr9zzIFux+ZQIF1w27e3gJiuTZNf8E5YMzrjhNUpSFGaI9kieCpNsE1zk
-+xbbLXvIA5Ye/zlDaDkI1txBHYv+Fbe9f0fBYNbrYQzWijRCRr83U4QZbtGeAuqbqOf6
-a01v4AkvBSO+ESsK0AAAAASUVORK5CYII=
-</pre>
+    data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAA
+    ABZ0lEQVQ4T6WTvUsDQRDF32mh2NiKIKIG65QWFtFGFEELC8tUFum1DQRRbATRXjvFJq
+    iVphD/A0vBj2ghxCoRRGz8+E24Xe7CXQzkYNjZt2/ezOzsBeryC7qMV8cCD1Ie8pglnJ
+    CKLnFT4Eka/ZUaHLwnVfQoHYLn4Xyw7mSkzZgAhEWAC6wM6RzCkSOEmU3Afz1SjlJuDP
+    AV/EglNitgA1gd27dSEXgFH26p7IqzOS9gDlVMs1Sw/gj5Fj+b0NYnVSx8cyf+EhEYZF
+    OihbUWkaRrcVgxNgVEJhEoA47/I2ItNuBWYgL3Uh/AModboUha9hOCL3ulakDWXch7pH
+    xxbLBj/NWU6Dr9zzIFux+ZQIF1w27e3gJiuTZNf8E5YMzrjhNUpSFGaI9kieCpNsE1zk
+    +xbbLXvIA5Ye/zlDaDkI1txBHYv+Fbe9f0fBYNbrYQzWijRCRr83U4QZbtGeAuqbqOf6
+    a01v4AkvBSO+ESsK0AAAAASUVORK5CYII=
 
 (Or just click <a target="_blank"
 href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABZ0lEQVQ4T6WTvUsDQRDF32mh2NiKIKIG65QWFtFGFEELC8tUFum1DQRRbATRXjvFJqiVphD/A0vBj2ghxCoRRGz8+E24Xe7CXQzkYNjZt2/ezOzsBeryC7qMV8cCD1Ie8pglnJCKLnFT4Eka/ZUaHLwnVfQoHYLn4Xyw7mSkzZgAhEWAC6wM6RzCkSOEmU3Afz1SjlJuDPAV/EglNitgA1gd27dSEXgFH26p7IqzOS9gDlVMs1Sw/gj5Fj+b0NYnVSx8cyf+EhEYZFOihbUWkaRrcVgxNgVEJhEoA47/I2ItNuBWYgL3Uh/AModboUha9hOCL3ulakDWXch7pHxxbLBj/NWU6Dr9zzIFux+ZQIF1w27e3gJiuTZNf8E5YMzrjhNUpSFGaI9kieCpNsE1zk+xbbLXvIA5Ye/zlDaDkI1txBHYv+Fbe9f0fBYNbrYQzWijRCRr83U4QZbtGeAuqbqOf6a01v4AkvBSO+ESsK0AAAAASUVORK5CYII=">here</a>)
@@ -245,67 +241,63 @@ It is possible to get the data URL corresponding to a canvas by calling
 `toDataURL()` on the canvas element.  The modified `onImageLoaded` function
 only needs two additional lines:
 
-<pre class="brush: javascript">
-function onImageLoaded() {
-  var canvas = document.createElement("canvas");
-  canvas.width = 16;
-  canvas.height = 16;
-  var context = canvas.getContext("2d");
-  context.drawImage(img, 0, 0);
-  context.globalCompositeOperation = "source-in";
-  context.fillStyle = "#d00";
-  context.fillRect(0, 0, 16, 16);
-  context.fill();
-  link.type = "image/x-icon";
-  link.href = canvas.toDataURL();
-};
-</pre>
+    function onImageLoaded() {
+      var canvas = document.createElement("canvas");
+      canvas.width = 16;
+      canvas.height = 16;
+      var context = canvas.getContext("2d");
+      context.drawImage(img, 0, 0);
+      context.globalCompositeOperation = "source-in";
+      context.fillStyle = "#d00";
+      context.fillRect(0, 0, 16, 16);
+      context.fill();
+      link.type = "image/x-icon";
+      link.href = canvas.toDataURL();
+    };
 
 To be honest, I'm not completely sure why Chrome needs the `image/x-icon` type,
 but some pages won't render correctly unless this attribute is explicitly set.
 
 A complete **favicon.js** looks like this:
 
-<pre class="brush: javascript">
-/*
- * Copyright 2011 Twitter, Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may
- * not use this file except in compliance with the License. You may obtain
- * a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-var link = document.querySelector("link[rel~='icon']");
-if (!link) {
-  link = document.createElement("link");
-  link.setAttribute("rel", "shortcut icon");
-  document.head.appendChild(link);
-}
-var faviconUrl = link.href || window.location.origin + "/favicon.ico";
-function onImageLoaded() {
-  var canvas = document.createElement("canvas");
-  canvas.width = 16;
-  canvas.height = 16;
-  var context = canvas.getContext("2d");
-  context.drawImage(img, 0, 0);
-  context.globalCompositeOperation = "source-in";
-  context.fillStyle = "#d00";
-  context.fillRect(0, 0, 16, 16);
-  context.fill();
-  link.type = "image/x-icon";
-  link.href = canvas.toDataURL();
-};
-var img = document.createElement("img");
-img.addEventListener("load", onImageLoaded);
-img.src = faviconUrl;
-</pre>
+    /*
+     * Copyright 2011 Twitter, Inc.
+     *
+     * Licensed under the Apache License, Version 2.0 (the "License"); you may
+     * not use this file except in compliance with the License. You may obtain
+     * a copy of the License at
+     *
+     *     http://www.apache.org/licenses/LICENSE-2.0
+     *
+     * Unless required by applicable law or agreed to in writing, software
+     * distributed under the License is distributed on an "AS IS" BASIS,
+     * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     * See the License for the specific language governing permissions and
+     * limitations under the License.
+     */
+    var link = document.querySelector("link[rel~='icon']");
+    if (!link) {
+      link = document.createElement("link");
+      link.setAttribute("rel", "shortcut icon");
+      document.head.appendChild(link);
+    }
+    var faviconUrl = link.href || window.location.origin + "/favicon.ico";
+    function onImageLoaded() {
+      var canvas = document.createElement("canvas");
+      canvas.width = 16;
+      canvas.height = 16;
+      var context = canvas.getContext("2d");
+      context.drawImage(img, 0, 0);
+      context.globalCompositeOperation = "source-in";
+      context.fillStyle = "#d00";
+      context.fillRect(0, 0, 16, 16);
+      context.fill();
+      link.type = "image/x-icon";
+      link.href = canvas.toDataURL();
+    };
+    var img = document.createElement("img");
+    img.addEventListener("load", onImageLoaded);
+    img.src = faviconUrl;
 
 <div id="extending"></div>
 # Making the extension work on all domains
@@ -330,68 +322,63 @@ tested.
 Adding the appropriate permissions and background page to **manifest.json**
 results in:
 
-<pre class="brush: javascript">
-{
-   "name": "Change all favicons",
-   "description": "Make every favicon red",
-   "version": "1.0.0",
-   "content_scripts": [ {
-      "js": [ "favicon.js" ],
-      "matches": [ "&lt;all_urls&gt;" ],
-      "run_at": "document_idle"
-   } ],
-  "permissions": ["chrome://favicon/"],
-  "background_page": "background.html"
-}
-</pre>
-<!-- _end italics -->
+    {
+       "name": "Change all favicons",
+       "description": "Make every favicon red",
+       "version": "1.0.0",
+       "content_scripts": [ {
+          "js": [ "favicon.js" ],
+          "matches": [ "&lt;all_urls&gt;" ],
+          "run_at": "document_idle"
+       } ],
+      "permissions": ["chrome://favicon/"],
+      "background_page": "background.html"
+    }
 
 Most of the work is now offloaded into a message handler in the new
 **background.html** page:
 
-<pre class="brush: html">
-&lt;!DOCTYPE html&gt;
-&lt;!--
- * Copyright 2011 Twitter, Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may
- * not use this file except in compliance with the License. You may obtain
- * a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
---&gt;
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;script&gt;
-      function getFavicon(request, sender, callback) {
-        var faviconUrl = 'chrome://favicon/' + request.url;
-        function onImageLoaded() {
-          var canvas = document.createElement("canvas");
-          canvas.width = 16;
-          canvas.height = 16;
-          var context = canvas.getContext("2d");
-          context.drawImage(img, 0, 0);
-          context.globalCompositeOperation = "source-in";
-          context.fillStyle = "#d00";
-          context.fillRect(0, 0, 16, 16);
-          context.fill();
-          callback(canvas.toDataURL());
-        };
-        var img = document.createElement("img");
-        img.addEventListener("load", onImageLoaded);
-        img.src = faviconUrl;
-      };
-      chrome.extension.onRequest.addListener(getFavicon);
-    &lt;/script&gt;
-  &lt;/head&gt;
-&lt;/html&gt;
-</pre>
+    <!DOCTYPE html>
+    <!--
+     * Copyright 2011 Twitter, Inc.
+     *
+     * Licensed under the Apache License, Version 2.0 (the "License"); you may
+     * not use this file except in compliance with the License. You may obtain
+     * a copy of the License at
+     *
+     *     http://www.apache.org/licenses/LICENSE-2.0
+     *
+     * Unless required by applicable law or agreed to in writing, software
+     * distributed under the License is distributed on an "AS IS" BASIS,
+     * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     * See the License for the specific language governing permissions and
+     * limitations under the License.
+    -->
+    <html>
+      <head>
+        <script>
+          function getFavicon(request, sender, callback) {
+            var faviconUrl = 'chrome://favicon/' + request.url;
+            function onImageLoaded() {
+              var canvas = document.createElement("canvas");
+              canvas.width = 16;
+              canvas.height = 16;
+              var context = canvas.getContext("2d");
+              context.drawImage(img, 0, 0);
+              context.globalCompositeOperation = "source-in";
+              context.fillStyle = "#d00";
+              context.fillRect(0, 0, 16, 16);
+              context.fill();
+              callback(canvas.toDataURL());
+            };
+            var img = document.createElement("img");
+            img.addEventListener("load", onImageLoaded);
+            img.src = faviconUrl;
+          };
+          chrome.extension.onRequest.addListener(getFavicon);
+        </script>
+      </head>
+    </html>
 
 Finally, **favicon.js** is simplified to find or create a `<link>` element,
 request the modified favicon data URL for the current page's URL, and render
@@ -401,40 +388,38 @@ additional favicon requests every time the page is loaded.  This could
 certainly be made more sophisticated to expire cached favicons periodically,
 but works as a simple example:
 
-<pre class="brush: javascript">
-/*
- * Copyright 2011 Twitter, Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may
- * not use this file except in compliance with the License. You may obtain
- * a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-var link = document.querySelector("link[rel~='icon']");
-if (!link) {
-  link = document.createElement("link");
-  link.setAttribute("rel", "icon");
-  document.body.appendChild(link);
-}
-var betterFavicon = localStorage["better-favicon"];
-if (betterFavicon) {
-  link.type = "image/x-icon";
-  link.href = betterFavicon;
-} else {
-  var payload = {url: window.location.href};
-  chrome.extension.sendRequest(payload, function(response) {
-    link.type = "image/x-icon";
-    link.href = response;
-    localStorage["better-favicon"] = response;
-  });
-}
-</pre>
+    /*
+     * Copyright 2011 Twitter, Inc.
+     *
+     * Licensed under the Apache License, Version 2.0 (the "License"); you may
+     * not use this file except in compliance with the License. You may obtain
+     * a copy of the License at
+     *
+     *     http://www.apache.org/licenses/LICENSE-2.0
+     *
+     * Unless required by applicable law or agreed to in writing, software
+     * distributed under the License is distributed on an "AS IS" BASIS,
+     * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     * See the License for the specific language governing permissions and
+     * limitations under the License.
+     */
+    var link = document.querySelector("link[rel~='icon']");
+    if (!link) {
+      link = document.createElement("link");
+      link.setAttribute("rel", "icon");
+      document.body.appendChild(link);
+    }
+    var betterFavicon = localStorage["better-favicon"];
+    if (betterFavicon) {
+      link.type = "image/x-icon";
+      link.href = betterFavicon;
+    } else {
+      var payload = {url: window.location.href};
+      chrome.extension.sendRequest(payload, function(response) {
+        link.type = "image/x-icon";
+        link.href = response;
+        localStorage["better-favicon"] = response;
+      });
+    }
 
 This works consistently on all domains I've tried. Enjoy your red icons!

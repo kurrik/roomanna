@@ -7,9 +7,11 @@ quiet out here, it is the quietest place in the world."
 
 <!--BREAK-->
 
-<p class="centered">
-  {{template "image" (.Image "stalker")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "stalker")}}
+  </figure>
+</div>
 
 The Zone sequences were filmed in Estonia, where my parents' families lived
 before WW2 drove them to America and the Iron Curtain walled them off from
@@ -44,9 +46,11 @@ it's more of a sense that this space is perverted in a way that is
 indecipherable to most people.  Those who can navigate are labeled Stalkers,
 guides into the heart of The Zone.
 
-<p class="centered">
-  {{template "image" (.Image "stalker2")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "stalker2")}}
+  </figure>
+</div>
 
 I think the whole Eastern Bloc has a respect for the crafty, trickster type. It
 seems that at least half the Estonian folk tales I've read involve a farmer

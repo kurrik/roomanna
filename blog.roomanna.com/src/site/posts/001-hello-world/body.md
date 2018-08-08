@@ -24,9 +24,11 @@ Jersey in 2007 to take a job with a nascent advertising megacorporation startup
 named [Google][link-google], doing all kinds of developer outreach sort of
 stuff. Here I am in all my naïve glory (on the left):
 
-<p class="centered">
-  {{template "image" (.Image "arne")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "arne")}}
+  </figure>
+</div>
 
 The construction of the blog itself is a bit more interesting, to be honest. I
 decided to use [Jekyll][link-jekyll], mostly for reasons explained well

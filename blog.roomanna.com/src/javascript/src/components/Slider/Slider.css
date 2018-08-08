@@ -1,4 +1,4 @@
-@import 'common/roomanna.config.css';
+/* Vars defined in common/_roomanna.config.scss */
 
 .slider {
   --light: var(--color-gray-light);

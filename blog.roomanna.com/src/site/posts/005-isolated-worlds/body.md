@@ -11,32 +11,30 @@ group][link-groups].
 
 For example:
 
-<pre class="blockquote">
-My requirement is load jquery.js file into the content script
+<blockquote>
+<p>My requirement is load jquery.js file into the content script
 when it is not having that js file(For Ex: I am checking for jquery.js
-file,fancybox.js file and if it is not there load these files. )
+file,fancybox.js file and if it is not there load these files. )</p>
 
-When i implement this logic in content script it is loading the
+<p>When i implement this logic in content script it is loading the
 jquery.js file. After that it is not working in content script . It is
 showing $(or) jQuery is undefined. For every time it is loading,but
-not executing in the content script.
-</pre>
+not executing in the content script.</p>
+</blockquote>
 
 The code in question usually winds up being something like:
 
-<pre class="blockquote">
-   function loadJQuery() {
-     if (!jQuery) {
-       var script = document.createElement('script');
-       script.async = true;
-       script.src = "http://url/to/jquery.js";
-       script.addEventListener('load', function() {
-         <strong>// Do something with jQuery, which causes an error.</strong>
-       });
-       document.head.appendChild(script);
-     }
-   }
-</pre>
+    function loadJQuery() {
+      if (!jQuery) {
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = "http://url/to/jquery.js";
+        script.addEventListener('load', function() {
+          // Do something with jQuery, which causes an error.
+        });
+        document.head.appendChild(script);
+      }
+    }
 
 This is a pretty interesting situation because if you were to use the snippet
 on a regular web page, there would be a decent chance of getting it to work.
@@ -48,9 +46,11 @@ one.
 
 A lot of Chrome extensions have structures similar to this:
 
-<p class="centered">
-  {{template "image" (.Image "puttogether01")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "puttogether01")}}
+  </figure>
+</div>
 
 That is, a **manifest.json** file which points to a **background page**, a
 **popup**, and a **content script**.  The content script runs on a few URLs
@@ -71,25 +71,27 @@ page's window object from a popup by calling
 `chrome.extension.getBackgroundPage` and access a popup's window object from a
 background page by calling `chrome.extension.getViews`:
 
-<p class="centered">
-  {{template "image" (.Image "puttogether02")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "puttogether02")}}
+  </figure>
+</div>
 
 This is pretty cool, because a popup could log to the background page's console
 like this:
 
-<pre class="brush:javascript">
-var bg = chrome.extension.getBackgroundPage();
-bg.console.log('This is sent from the popup but shows up in the bg page log!');
-</pre>
+    var bg = chrome.extension.getBackgroundPage();
+    bg.console.log('This is sent from the popup but shows up in the bg page log!');
 
 **Content scripts** are a different story.  They interact with a rendered page,
 so they need to be loaded in that process.  This means that the content script
 and the background page cannot directly share objects in memory:
 
-<p class="centered">
-  {{template "image" (.Image "puttogether03")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "puttogether03")}}
+  </figure>
+</div>
 
 The two can still pass messages back and forth using
 **chrome.extension.sendRequest** but these messages are serialized and
@@ -106,9 +108,11 @@ currently running on.  While the content script can read and write the DOM
 nodes on the page without any issue, it can't access native JavaScript code in
 the page:
 
-<p class="centered">
-  {{template "image" (.Image "puttogether04")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "puttogether04")}}
+  </figure>
+</div>
 
 The reason for this has a lot to do with JavaScript's dynamic nature.  If the
 page and the content script shared a JavaScript execution environment, then the
@@ -125,25 +129,21 @@ the context of the untrusted page.
 
 So this code:
 
-<pre class="brush:javascript">
-function loadJQuery() {
-  var script = document.createElement('script');
-  script.src = "http://url/to/jquery.js";
-  document.head.appendChild(script);
-};
-</pre>
+    function loadJQuery() {
+      var script = document.createElement('script');
+      script.src = "http://url/to/jquery.js";
+      document.head.appendChild(script);
+    };
 
 does actually load jQuery, but it puts it into the page's execution context,
 not the context of the content script.  In fact, if you were to do something
 like:
 
-<pre class="brush:javascript">
-function loadMyScript() {
-  var script = document.createElement('script');
-  script.src = chrome.extension.getURL("myscript.js");
-  document.head.appendChild(script);
-};
-</pre>
+    function loadMyScript() {
+      var script = document.createElement('script');
+      script.src = chrome.extension.getURL("myscript.js");
+      document.head.appendChild(script);
+    };
 
 you would be able to load JavaScript resources packaged with your extension
 into the context of arbitrary web pages.  Which can be useful if you really
@@ -153,18 +153,16 @@ An extension can still rely on jQuery, although not dynamically.  Just
 reference the appropriate file in the `content_scripts` section of your
 **manifest.json** file:
 
-<pre class="brush:javascript">
-{
-  ...
-  "content_scripts": [
     {
-      "matches": ["http://www.google.com/*"],
-      "js": ["jquery.js", "myscript.js"]
+      ...
+      "content_scripts": [
+        {
+          "matches": ["http://www.google.com/*"],
+          "js": ["jquery.js", "myscript.js"]
+        }
+      ],
+      ...
     }
-  ],
-  ...
-}
-</pre>
 
 Of course you knew that, since it's almost verbatim from the
 [documentation][link-docs], right?

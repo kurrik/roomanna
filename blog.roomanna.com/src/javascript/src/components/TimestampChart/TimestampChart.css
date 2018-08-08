@@ -1,4 +1,4 @@
-@import 'common/roomanna.config.css';
+/* Vars defined in common/_roomanna.config.scss */
 
 .circ {
     fill: #D35400;

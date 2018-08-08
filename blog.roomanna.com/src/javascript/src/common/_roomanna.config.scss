@@ -1,0 +1,71 @@
+/* Roomanna primary color palette:
+   https://coolors.co/4d9de0-e15554-ffc107-3bb273-7768ae
+*/
+$blue: #4d9de0;
+$red: #e15554;
+$yellow: #ffc107;
+$green: #3bb273;
+$purple: #7768ae;
+
+/* Secondary:
+   https://coolors.co/ec0868-fd7e14-55dde0-20c997-6610f2
+*/
+$pink: #ec0868;
+$orange: #fd7e14;
+$teal: #55dde0;
+$cyan: #20c997;
+$indigo: #6610f2;
+
+/* Grays taken directly from Bootstrap 4 */
+$gray-100: #f8f9fa;
+$gray-300: #dee2e6;
+$gray-500: #adb5bd;
+$gray-700: #495057;
+$gray-900: #212529;
+
+$lighten-amount: 36%;
+$darken-amount: 24%;
+
+:root {
+  --color-blue: #{$blue};
+  --color-red: #{$red};
+  --color-yellow: #{$yellow};
+  --color-green: #{$green};
+  --color-purple: #{$purple};
+
+  --color-pink: #{$pink};
+  --color-orange: #{$orange};
+  --color-teal: #{$teal};
+  --color-cyan: #{$cyan};
+  --color-indigo: #{$indigo};
+
+  --color-blue-light: #{lighten($blue, $lighten-amount)};
+  --color-red-light: #{lighten($red, $lighten-amount)};
+  --color-yellow-light: #{lighten($yellow, $lighten-amount)};
+  --color-green-light: #{lighten($green, $lighten-amount)};
+  --color-purple-light: #{lighten($purple, $lighten-amount)};
+
+  --color-blue-dark: #{darken($blue, $darken-amount)};
+  --color-red-dark: #{darken($red, $darken-amount)};
+  --color-yellow-dark: #{darken($yellow, $darken-amount)};
+  --color-green-dark: #{darken($green, $darken-amount)};
+  --color-purple-dark: #{darken($purple, $darken-amount)};
+
+  /* Grayscale */
+  --color-gray-very-light: #{$gray-100};
+  --color-gray-light: #{$gray-300};
+  --color-gray-medium: #{$gray-500};
+  --color-gray-dark: #{$gray-700};
+  --color-gray-very-dark: #{$gray-900};
+  --color-black: #000000;
+  --color-white: #ffffff;
+
+  /* Layout */
+  --vertical-spacing: 10px;
+  --vertical-separation: calc(var(--vertical-spacing) * 2);
+
+  --horizontal-spacing: 10px;
+  --horizontal-separation: calc(var(--horizontal-spacing) * 2);
+
+  --border-radius: 5px;
+}

@@ -20,10 +20,12 @@ helped form my opinion of Twitter's recent move to the neighborhood, and also
 let me get the reference when Andy made an offhand comment about her in Season
 7 of Weeds:
 
-<p class="centered">
-  <iframe width="560" height="315" src="http://www.youtube.com/embed/pBcIphFHzaU"
-    frameborder="0" allowfullscreen></iframe>
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    <iframe width="560" height="315" src="http://www.youtube.com/embed/pBcIphFHzaU"
+      frameborder="0" allowfullscreen></iframe>
+  </figure>
+</div>
 
 I've also been really inspired by Pamela Fox's [reading list][1].  Many folks
 know her as a developer evangelist or engineer, but that list alone reveals

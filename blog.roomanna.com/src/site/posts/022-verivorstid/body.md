@@ -127,9 +127,7 @@ using the blood to make, so they're getting all my custom-order meat business
 from now on (unfortunately for them it's a pretty low volume).   I elected
 **not** to take the blood on the muni home, so the walk back was a bit surreal:
 
-<p>
 <blockquote align="center" class="twitter-tweet"><p>So this is how I'm walking home <a href="http://t.co/t9xqdw0c" title="http://twitter.com/kurrik/status/281927016142471168/photo/1">twitter.com/kurrik/status/…</a></p>&mdash; Arne Roomann-Kurrik (@kurrik) <a href="https://twitter.com/kurrik/status/281927016142471168">December 21, 2012</a></blockquote>
-</p>
 
 Everything else from the onions to the marjoram are very standard.  The spice
 mixture is very basic.  Fergus Henderson has a blood cake recipe where he adds
@@ -147,9 +145,11 @@ directions.  Since I had scaled up the recipe I wound up using two giant pots
 filled with boiling water.  When finished, I cooled the barley in several
 baking trays scattered around the kitchen:
 
-<p class="centered">
-  {{template "image" (.Image "IMG_5453")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "IMG_5453")}}
+  </figure>
+</div>
 
 While the barley is cooking, prep the meat.  The biggest piece of hardware you
 need for the recipe is a meat grinder.  I have the attachment for my
@@ -161,17 +161,21 @@ Your goal in grinding is to evenly integrate the fat (salt pork) with the
 leaner shoulder.  Start by cubing all of the meat so that the cubes will fit
 into the grinder and mix them together:
 
-<p class="centered">
-  {{template "image" (.Image "IMG_5433")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "IMG_5433")}}
+  </figure>
+</div>
 
 Then grind into a bowl set inside of another bowl partially filled with ice
 water.  You don't want the fat to heat up too much from the grinding process so
 that it starts getting soft and mushy.
 
-<p class="centered">
-  {{template "image" (.Image "IMG_5440")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "IMG_5440")}}
+  </figure>
+</div>
 
 Sometime around now you should start hydrating the sausage casings.  They come
 packed in salt, so pull out about as much as you need and rinse them off.  The
@@ -180,21 +184,27 @@ for a while and you'll need to change out the water every few minutes.  Make
 sure to use cold water too&mdash;one time when making sausage I used boiling
 water which cooked the casings and ruined them.
 
-<p class="centered">
-  {{template "image" (.Image "IMG_5450")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "IMG_5450")}}
+  </figure>
+</div>
 
 After the casings are soaking, cook the ground meat along with the onions.  I
 followed the advice to cook the meat in a pan until the fat was rendered and a
 smaller amount of steam was coming off, then added onion:
 
-<p class="centered">
-  {{template "image" (.Image "IMG_5458")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "IMG_5458")}}
+  </figure>
+</div>
 
-<p class="centered">
-  {{template "image" (.Image "IMG_5471")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "IMG_5471")}}
+  </figure>
+</div>
 
 After about 30 minutes total, the meat should be cooked and the onion soft.
 Move the cooled barley to a pot and dump all of the sauteed meat and onions on
@@ -203,9 +213,11 @@ integrate evenly.
 
 This is what the barley, onion, spice, and meat mixture should look like:
 
-<p class="centered">
-  {{template "image" (.Image "IMG_5473")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "IMG_5473")}}
+  </figure>
+</div>
 
 Make sure that the whole mixture is fairly cool (you don't want to cook the
 blood with any residual heat) and mix in the pig's blood.  You'll notice that
@@ -214,9 +226,11 @@ a long time to thaw, so I wound up pouring it out and mixing it with a spoon to
 break up ice chunks.  The vase was the only free container in my kitchen large
 enough at this point.
 
-<p class="centered">
-  {{template "image" (.Image "IMG_5478")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "IMG_5478")}}
+  </figure>
+</div>
 
 Now you have the mixture which will be stuffed into the casings.  This is the
 last chance to adjust for flavor.  What I did was fry up a small portion of the
@@ -225,9 +239,11 @@ heard of wrapping a bit in plastic wrap and poaching it, which I think will
 give a better indication of the final product. I've even heard of cooks tasting
 the mixture directly at this point, which is far out of my comfort zone.
 
-<p class="centered">
-  {{template "image" (.Image "IMG_5483")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "IMG_5483")}}
+  </figure>
+</div>
 
 Up until now, the process has been pretty benign, but stuffing is really where
 you get your hands dirty.  I've never seen anyone work this out perfectly, so
@@ -251,9 +267,11 @@ blood against the wall of our kitchen.  After cleaning up we got the cardboard
 in place which helped the next time that happened.  Something to think about
 when setting up your workspace, I guess.
 
-<p class="centered">
-  {{template "image" (.Image "IMG_5494")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "IMG_5494")}}
+  </figure>
+</div>
 
 I'll also point out that stuffing is really a two person job.  One person feeds
 the stuffer by spooning mixture into the top, while the other guides it into
@@ -267,9 +285,11 @@ at once.  Some light massaging of the sausage was required to even things out.
 Luckily, Steph was really good at keeping things moving.  She was kind of scary
 good at it, actually.
 
-<p class="centered">
-  {{template "image" (.Image "IMG_5515")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "IMG_5515")}}
+  </figure>
+</div>
 
 Have several 3" lengths of cut kitchen twine to tie off the ends.  It takes a
 bit of technique to keep the filling from oozing out one end while tying off
@@ -277,9 +297,11 @@ the other but you can get the hang of it pretty easily.  Try to make sure you
 don't get any air pockets, even at the cost of tying off a bit further into the
 sausage and wasting a little bit of filling.
 
-<p class="centered">
-  {{template "image" (.Image "IMG_5492")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "IMG_5492")}}
+  </figure>
+</div>
 
 It's very important not to stuff the sausages too much or else they will burst
 while cooking.  In the following picture you'll see how they flatten out a bit
@@ -288,21 +310,27 @@ and look a bit deflated.  That's what you should shoot for.  We made maybe 5 or
 This allowed the blood to even out throughout the sausage, which led to a more
 consistent product.
 
-<p class="centered">
-  {{template "image" (.Image "IMG_5508")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "IMG_5508")}}
+  </figure>
+</div>
 
 Boiling is easy.  Gather up the ends (note the relative fullness of the sausage)
 
-<p class="centered">
-  {{template "image" (.Image "IMG_5496")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "IMG_5496")}}
+  </figure>
+</div>
 
 And lower it gently into simmering water.  Simmering, not rolling boil.
 
-<p class="centered">
-  {{template "image" (.Image "IMG_5500")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "IMG_5500")}}
+  </figure>
+</div>
 
 You can cook several at once if you have a large enough pot.  Cook each sausage
 for 15 minutes this way.  If they wind up floating after a minute or two, take
@@ -313,17 +341,21 @@ sink.
 After 15 minutes, remove the sausages and put them on a drying rack.  They'll
 look amazing at this point - all round and smooth like a really fancy hotdog.
 
-<p class="centered">
-  {{template "image" (.Image "IMG_5511")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "IMG_5511")}}
+  </figure>
+</div>
 
 Over time they'll dry out and darken in color.  Once they've cooled enough to
 handle, you can put them in the fridge if you're planning on eating them in a
 couple of days, or freeze them for months.  They keep rather well.
 
-<p class="centered">
-  {{template "image" (.Image "IMG_5519")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "IMG_5519")}}
+  </figure>
+</div>
 
 # Serving
 
@@ -348,9 +380,11 @@ potatoes aren't done yet keep them in the oven.  The potatoes should be golden
 and have dark or even slightly charred edges.  They'll wind up having a crunchy
 crust and a fluffy center and are ridiculously good with the verivorst.
 
-<p class="centered">
-  {{template "image" (.Image "IMG_5668")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "IMG_5668")}}
+  </figure>
+</div>
 
 Serve the sausages with the potatoes, sauerkraut and cranberry sauce.  The
 sauerkraut gives a bit of acid which cuts the richness of the verivorst, and

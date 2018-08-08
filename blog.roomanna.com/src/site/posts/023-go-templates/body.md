@@ -12,25 +12,31 @@ from a common `root`, the inheritence is expressed inside of the templates
 themselves.  It's sufficient to parse `index` and `post` in code, and let the
 templating engine handle the lookup of `root` on its own:
 
-<p class="centered">
-  {{template "image" (.Image "templates01")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "templates01")}}
+  </figure>
+</div>
 
 Go's templates don't allow a template to specify which template(s) it inherits
 from, only ones which the root template calls.  Therefore the association
 points downstream, which means that you call render on the parent.
 
-<p class="centered">
-  {{template "image" (.Image "templates02")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "templates02")}}
+  </figure>
+</div>
 
 Therefore inheritance needs to be managed in code.  Luckily, a template exposes
 a `Clone` method which allows you to copy a parsed template and then populate
 any empty sections on a per-clone basis.
 
-<p class="centered">
-  {{template "image" (.Image "templates03")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "templates03")}}
+  </figure>
+</div>
 
 It's easy enough to define a simple class which allows you to parse a set of
 files as a `root` template and then split that into new templates as needed.
@@ -83,56 +89,52 @@ Go's library).
 Note the empty `head` and `body` templates.  Because they're empty, they'll be
 overrideable in clones.  Trying to override a populated template will
 unfortunately cause an error.
-<pre>
-\{\{define &quot;root&quot;}}&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-  &lt;head&gt;
-    \{\{template &quot;head&quot; .}}
-  &lt;/head&gt;
-  &lt;body&gt;
-    \{\{template &quot;body&quot; .}}
-  &lt;/body&gt;
-&lt;/html&gt;
-\{\{end}}
-\{\{define &quot;head&quot;}}\{\{end}}
-\{\{define &quot;body&quot;}}\{\{end}}
-</pre>
+
+    {{"{{"}}define "root"}}<!DOCTYPE html>
+    <html>
+      <head>
+        {{"{{"}}template "head" .}}
+      </head>
+      <body>
+        {{"{{"}}template "body" .}}
+      </body>
+    </html>
+    {{"{{"}}end}}
+    {{"{{"}}define "head"}}{{"{{"}}end}}
+    {{"{{"}}define "body"}}{{"{{"}}end}}
 
 **templates/root/post.html**
 For the sake of the example, there's another template included in the base
 called `post`.  This can be called from any cloned template, so it shows how
 you can make a set of common templates which may be called by individual
 overrides.
-<pre>
-\{\{define &quot;post&quot;}}
-&lt;div class=&quot;post&quot;&gt;
-  &lt;h2&gt;\{\{.Title}}&lt;/h2&gt;
-  \{\{.Body}}
-&lt;/div&gt;
-\{\{end}}
-</pre>
+
+    {{"{{"}}define "post"}}
+    <div class="post">
+      <h2>{{"{{"}}.Title}}</h2>
+      {{"{{"}}.Body}}
+    </div>
+    {{"{{"}}end}}
 
 **templates/index.html**
 The index page just defines a simple body.
-<pre>
-\{\{define &quot;body&quot;}}
-&lt;h1&gt;Index&lt;/h1&gt;
-&lt;p&gt;Hi! Check out the &lt;a href=&quot;/posts&quot;&gt;posts&lt;/a&gt;&lt;/p&gt;
-\{\{end}}
-</pre>
+
+    {{"{{"}}define "body"}}
+    <h1>Index</h1>
+    <p>Hi! Check out the <a href="/posts">posts</a></p>
+    {{"{{"}}end}}
 
 **templates/posts.html**
 The posts page iterates over the data and calls the `post` base template.
-<pre>
-\{\{define &quot;body&quot;}}
-&lt;h1&gt;Here are posts&lt;/h1&gt;
-&lt;div class=&quot;posts&quot;&gt;
-  \{\{range .Posts}}
-    \{\{template &quot;post&quot; .}}
-  \{\{end}}
-&lt;/div&gt;
-\{\{end}}
-</pre>
+
+    {{"{{"}}define "body"}}
+    <h1>Here are posts</h1>
+    <div class="posts">
+      {{"{{"}}range .Posts}}
+        {{"{{"}}template "post" .}}
+      {{"{{"}}end}}
+    </div>
+    {{"{{"}}end}}
 
 Building the templates in code requires parsing the files in `templates/root`
 and then splitting that into individual `posts` and `index` clones, then
@@ -227,9 +229,11 @@ This produces the following output:
 You can build more complicated template hierarchies by adding wrapper
 templates.  In the following diagram, I've called them variants:
 
-<p class="centered">
-  {{template "image" (.Image "templates04")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "templates04")}}
+  </figure>
+</div>
 
 Imagine you have a set of pages which depend on an administrator menu which you
 wish to insert above or wrapping the `body` content.  The most direct approach
@@ -237,23 +241,21 @@ I've discovered involves creating another layer of template and then creating
 both regular and admin variants.
 
 **templates/regular.html**
-<pre>
-\{\{define &quot;body_content&quot;}}\{\{end}}
-\{\{define &quot;body&quot;}}
-  \{\{template &quot;body_content&quot; .}}
-\{\{end}}
-</pre>
+
+    {{"{{"}}define "body_content"}}{{"{{"}}end}}
+    {{"{{"}}define "body"}}
+      {{"{{"}}template "body_content" .}}
+    {{"{{"}}end}}
 
 **templates/admin.html**
-<pre>
-\{\{define &quot;body_content&quot;}}\{\{end}}
-\{\{define &quot;body&quot;}}
-  &lt;div class=&quot;admin_menu&quot;&gt;
-    Admin menu
-  &lt;/div&gt;
-  \{\{template &quot;body_content&quot; .}}
-\{\{end}}
-</pre>
+
+    {{"{{"}}define "body_content"}}{{"{{"}}end}}
+    {{"{{"}}define "body"}}
+      <div class="admin_menu">
+        Admin menu
+      </div>
+      {{"{{"}}template "body_content" .}}
+    {{"{{"}}end}}
 
 Then every page living in the third tier of templates must implement
 `body_content` instead of `body`.  Because `body_content` is used consistently,
@@ -267,16 +269,14 @@ included here into a real library which would be able to infer inheritance
 through some sort of template file metadata.  For example, imagine a directory
 structure like the following:
 
-<pre>
-templates/
- +- base.html
- +- post.html
- +- admin/
- |   \- admin.html
- \- regular/
-     +- index.html
-     \- posts.html
-</pre>
+    templates/
+     +- base.html
+     +- post.html
+     +- admin/
+     |   \- admin.html
+     \- regular/
+         +- index.html
+         \- posts.html
 
 All of the inhertance could be inferred by the directory path, which would keep
 template logic contained to the template files and organization themselves.

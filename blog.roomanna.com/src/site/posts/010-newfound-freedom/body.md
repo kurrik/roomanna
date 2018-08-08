@@ -13,9 +13,11 @@ week.  I have named this week **Freedom Week**.
 
 <!--BREAK-->
 
-<p class="centered">
-  {{template "image" (.Image "freedom")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure retina2x">
+    {{template "image" (.Image "freedom")}}
+  </figure>
+</div>
 
 Like [Shark Week][6], **Freedom Week** will be free as in beer (as in I will be
 drinking some).  Unlike Shark Week, **Freedom Week** will be free as in
@@ -23,17 +25,18 @@ freedom, meaning that for once in my life, I have full control over copyright
 and licensing for any code I manage to create.  Naturally, I'm reminded of [the
 best description of a summer break, ever][5]:
 
-> It's the beginning of the summer and I'm standing in the lobby of a
-> thousand-story grand hotel, where a bank of elevators a mile long and
-> an endless row of monkey attendants in gold braid wait to carry me up,
-> up, up through the suites of moguls, of spies, and of starlets, to rush
-> me straight to the zeppelin mooring at the art deco summit, where they
-> keep the huge dirigible of August tied up and bobbing in the high
-> winds. On my way to the shining needle at the top I will wear a lot
-> of neckties, I will buy five or six works of genius on 45 rpm, and
-> perhaps too many times I will find myself looking at the snapped
-> spine of a lemon wedge at the bottom of a drink. I said, "I anticipate
-> a coming season of dilated time and of women all in disarray."
+<blockquote>
+It's the beginning of the summer and I'm standing in the lobby of a
+thousand-story grand hotel, where a bank of elevators a mile long and
+an endless row of monkey attendants in gold braid wait to carry me up,
+up, up through the suites of moguls, of spies, and of starlets, to rush
+me straight to the zeppelin mooring at the art deco summit, where they
+keep the huge dirigible of August tied up and bobbing in the high
+winds. On my way to the shining needle at the top I will wear a lot
+of neckties, I will buy five or six works of genius on 45 rpm, and
+perhaps too many times I will find myself looking at the snapped
+spine of a lemon wedge at the bottom of a drink. I said, "I anticipate
+a coming season of dilated time and of women all in disarray."</blockquote>
 
 It would be a shame to squander such an opportunity, so I've come up with some
 principles to adhere to:

@@ -2,20 +2,13 @@
   <title>{{.Site.Title}} - '{{.Tag}}' posts</title>
 {{end}}
 {{define "body"}}
-  <div class="bigheader">
+  <header class="site-header">
     <h1>{{.Tag}}</h1>
-    <p class="nomargin">Posts tagged with <em>{{.Tag}}</em> ordered by date, newest at the top.</p>
-  </div>
+    <p>Posts tagged with <em>{{.Tag}}</em> ordered by date, newest at the top.</p>
+  </header>
   <div class="postlist">
   {{range .Posts}}
-    <h3 class="posttitle"><a href="{{.Path}}">{{.Title}}</a></h3>
-    <p class="muted metadata">
-      <i class="icon-time"></i>
-      {{.FormattedDate}}
-      <i class="icon-tags"></i>
-      {{range .Tags}}<a href="/tags/{{.}}" class="tag">{{.}}</a> {{end}}
-    </p>
-    <div class="snippet">{{.Snippet}} <a href="{{.Path}}" class="readmore">Read more...</a></div>
+    {{template "post-summary" .}}
   {{end}}
   </div>
   {{template "meta" .}}

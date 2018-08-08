@@ -40,11 +40,13 @@ haven't had the fortune to see Jack yet, but his talks are already gaining a
 [legendary reputation][3] in the valley.  It's been a short time, but I really
 feel confident in the leadership at Twitter.
 
-<p class="centered">
-<a href="https://twitter.com/#!/dickc/status/3962807808">
-  {{template "image" (.Image "twitter")}}
-</a>
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    <a href="https://twitter.com/#!/dickc/status/3962807808">
+      {{template "image" (.Image "twitter")}}
+    </a>
+  </figure>
+</div>
 
 # My team
 
@@ -72,15 +74,15 @@ more raw, like a scrappy startup should.  Any company which makes a recruiting
 video in the style of [one of my favorite movies ever][5] is hitting all the
 right notes, in my opinion:
 
-<p class="centered">
-<iframe
-  width="640"
-  height="360"
-  src="http://www.youtube.com/embed/wU6epAkC9wg?hd=1"
-  frameborder="0"
-  allowfullscreen="true">
-</iframe>
-</p>
+<div class="roomanna-centered">
+  <iframe
+    width="640"
+    height="360"
+    src="http://www.youtube.com/embed/wU6epAkC9wg?hd=1"
+    frameborder="0"
+    allowfullscreen="true">
+  </iframe>
+</div>
 
 ## The potential
 

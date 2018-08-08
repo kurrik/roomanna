@@ -28,9 +28,11 @@ have pronounced Internet access a human right.  But that argument, however well
 meaning, misses a larger point: technology is an enabler of rights, not a right
 itself."  But the comparison to Estonia is where I think Cerf goes awry.
 
-<p class="centered">
-  {{template "image" (.Image "screen")}}
-</p>
+<div class="roomanna-centered">
+  <figure class="roomanna-figure">
+    {{template "image" (.Image "screen")}}
+  </figure>
+</div>
 
 Vint Cerf is thinking at a low level.  When he hears "internet" he knows that
 it means IP and UDP and TCP, most of the time with HTTP or SMTP or SPDY or

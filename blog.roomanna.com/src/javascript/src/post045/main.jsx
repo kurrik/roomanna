@@ -70,13 +70,13 @@ async function renderPuzzle(selector, tests, solution, components) {
     const output = outputNode.data.output;
     const domCell = domCells[index].output;
     domCell.innerText = output;
-    domCell.classList.remove('danger');
-    domCell.classList.remove('success');
+    domCell.classList.remove('table-danger');
+    domCell.classList.remove('table-success');
     if (output != '') {
       if (output != test.expected) {
-        domCell.classList.add('danger');
+        domCell.classList.add('table-danger');
       } else {
-        domCell.classList.add('success');
+        domCell.classList.add('table-success');
       }
     }
   }

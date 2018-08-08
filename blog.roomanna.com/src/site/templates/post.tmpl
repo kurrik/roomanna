@@ -19,41 +19,37 @@
 {{end}}
 {{define "body"}}
   <article>
-    <h2 class="posttitle">{{.Post.Title}}</h2>
-    <p class="muted metadata">
-      <i class="icon-time"></i>
-      <span class="postdate">{{.Post.FormattedDate}}</span>
-      <i class="icon-tags"></i>
-      {{range .Post.Tags}}<a href="/tags/{{.}}" class="tag">{{.}}</a> {{end}}
-    </p>
-    <div class="postbody">{{.Post.Body}}</div>
+    <h1 class="post-title">{{.Post.Title}}</h1>
+    {{template "post-metadata" .Post}}
+    <div class="post-content">{{.Post.Body}}</div>
   </article>
-  <ul class="pager">
-    {{if .Post.Next}}
-    <li class="previous">
-      <a href="{{.Post.Next.Path}}">&larr; Newer - {{.Post.Next.Title}}</a>
-    </li>
-    {{else}}
-      <li class="previous disabled">
-        <a href="#">&larr; No newer posts</a>
+  <nav class="site-pager" aria-label="Site navigation">
+    <ul class="pagination justify-content-center">
+      {{if .Post.Next}}
+      <li class="page-item w-50">
+        <a class="page-link text-center" href="{{.Post.Next.Path}}"><span>&larr; Newer - {{.Post.Next.Title}}</span></a>
       </li>
-    {{end}}
-    {{if .Post.Prev}}
-      <li class="next">
-        <a href="{{.Post.Prev.Path}}">Older - {{.Post.Prev.Title}} &rarr;</a>
+      {{else}}
+      <li class="page-item disabled w-50">
+        <a class="page-link text-center" href="#"><span>&larr; No newer posts<span></a>
       </li>
-    {{else}}
-      <li class="next disabled">
-        <a href="#">No older posts &rarr;</a>
-      </li>
-    {{end}}
-  </ul>
-  <div id="comments">
+      {{end}}
+      {{if .Post.Prev}}
+        <li class="page-item w-50">
+          <a class="page-link text-center" href="{{.Post.Prev.Path}}"><span>Older - {{.Post.Prev.Title}} &rarr;</span></a>
+        </li>
+      {{else}}
+        <li class="page-item disabled w-50">
+          <a class="page-link text-center" href="#"><span>No older posts &rarr;</span></a>
+        </li>
+      {{end}}
+    </ul>
+  </nav>
+  <div class="site-comments">
     <p class="alert alert-info">
       <strong>Comments?</strong>
-      In the interest of limiting third-party Javascript running on this
-      site, I've disabled all commenting plugins.  If you have feedback, please
-      <a href="https://twitter.com/intent/tweet?text=@kurrik&url={{.Post.Permalink}}">share it with me on Twitter</a>.
+      If you have feedback, please
+      <a href="https://twitter.com/intent/tweet?text=@kurrik&url={{.Post.Permalink}}">share it with me on Twitter</a>!
     </p>
   </div>
   {{template "meta" .}}

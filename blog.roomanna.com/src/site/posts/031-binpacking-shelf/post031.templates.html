@@ -1,20 +1,18 @@
 <style>
 .postbody ol {
-  font: 13px monospace;
+  font: 16px monospace;
   list-style-type: none;
 }
 .Word {
   display: inline-block;
   padding: 5px;
   box-sizing: border-box;
-  border: 1px solid #ccc;
-  background: #eee;
+  background: var(--color-gray-very-light);
   margin: 2px;
   overflow: hidden;
 }
 .Output {
-  border: 1px solid #d00;
-  background: #fee;
+  background: var(--color-red-light);
   position: relative;
   overflow: hidden;
   margin: 0 auto 20px auto;
@@ -22,14 +20,17 @@
 .Output .Word {
   position: absolute;
   margin: 0;
+  background: var(--color-red);
+  color: var(--color-white);
 }
 .Controls-words {
   height: 300px;
   overflow: scroll;
-  background: #fcf8e3;
-  color: #8a6d3b;
-  border: 1px solid #faebcc;
-  margin-bottom: 20px;
+  background: var(--color-yellow-light);
+  margin-bottom: var(--vertical-separation);
+}
+.Controls-words .Word {
+  background: var(--color-yellow);
 }
 </style>
 
@@ -40,10 +41,10 @@
 <script id="tmplControlsCount" type="text/html">
   {{#wordCount}}
     <div class="form-group">
-      <label data-toggle="tooltip" title="Number of words to generate">
+      <label data-toggle="tooltip" title="Number of words to generate" class="col-form-label">
         Word count (<span data-binding-label="wordCount">{{value}}</span>)
       </label>
-      <input class="Controls-wordCount" data-binding="wordCount" type="range" min="{{min}}" max="{{max}}" step="{{step}}" value="{{value}}" />
+      <input class="Controls-wordCount form-control" data-binding="wordCount" type="range" min="{{min}}" max="{{max}}" step="{{step}}" value="{{value}}" />
     </div>
   {{/wordCount}}
 </script>
@@ -85,7 +86,7 @@
           <label data-toggle="tooltip" title="Changes the random number generator to produce a different series">
             Random seed (<span data-binding-label="seed">{{value}}</span>)
           </label>
-          <input class="Controls-seed" data-binding="seed" type="range" min="{{min}}" max="{{max}}" step="{{step}}" value="{{value}}" />
+          <input class="Controls-seed form-control" data-binding="seed" type="range" min="{{min}}" max="{{max}}" step="{{step}}" value="{{value}}" />
         </div>
       {{/seed}}
     </div>
@@ -100,7 +101,7 @@
           <label data-toggle="tooltip" title="'Color' of generated noise. Lower values result in regular sine-like output, higher values produce more chaos">
             Word length exponent (<span data-binding-label="wordExponent">{{value}}</span>)
           </label>
-          <input class="Controls-wordExponent" data-binding="wordExponent" type="range" min="{{min}}" max="{{max}}" step="{{step}}" value="{{value}}" />
+          <input class="Controls-wordExponent form-control" data-binding="wordExponent" type="range" min="{{min}}" max="{{max}}" step="{{step}}" value="{{value}}" />
         </div>
       {{/wordExponent}}
     </div>
@@ -110,7 +111,7 @@
           <label data-toggle="tooltip" title="Maximum length of any generated word">
             Max word length (<span data-binding-label="wordMaxLength">{{value}}</span>)
           </label>
-          <input class="Controls-wordMaxLength" data-binding="wordMaxLength" type="range" min="{{min}}" max="{{max}}" step="{{step}}" value="{{value}}" />
+          <input class="Controls-wordMaxLength form-control" data-binding="wordMaxLength" type="range" min="{{min}}" max="{{max}}" step="{{step}}" value="{{value}}" />
         </div>
       {{/wordMaxLength}}
     </div>
@@ -130,7 +131,7 @@
           <label data-toggle="tooltip" title="'Color' of generated noise. Lower values result in regular sine-like output, higher values produce more chaos">
             Font size exponent (<span data-binding-label="sizeExponent">{{value}}</span>)
           </label>
-          <input class="Controls-sizeExponent" data-binding="sizeExponent" type="range" min="{{min}}" max="{{max}}" step="{{step}}" value="{{value}}" />
+          <input class="Controls-sizeExponent form-control" data-binding="sizeExponent" type="range" min="{{min}}" max="{{max}}" step="{{step}}" value="{{value}}" />
         </div>
       {{/sizeExponent}}
     </div>
@@ -140,7 +141,7 @@
           <label data-toggle="tooltip" title="How far apart the font sizes may be in pixels">
             Font size variance (<span data-binding-label="sizeVariance">{{value}}</span>)
           </label>
-          <input class="Controls-sizeVariance" data-binding="sizeVariance" type="range" min="{{min}}" max="{{max}}" step="{{step}}" value="{{value}}" />
+          <input class="Controls-sizeVariance form-control" data-binding="sizeVariance" type="range" min="{{min}}" max="{{max}}" step="{{step}}" value="{{value}}" />
         </div>
       {{/sizeVariance}}
     </div>

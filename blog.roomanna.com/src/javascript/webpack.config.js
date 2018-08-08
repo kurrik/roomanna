@@ -26,26 +26,24 @@ var config = {
   },
   module: {
     rules: [
+      // Javascript.
       {
-        test: /\.js$/,
-        exclude: /(node_modules)/,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: { presets: ['env'], cacheDirectory: true }
-          }
+        test: [
+          /\.jsx$/,
+          /\.js$/
         ],
-      },
-      {
-        test: /\.jsx$/,
         exclude: /(node_modules)/,
         use: [
           {
             loader: 'babel-loader',
-            options: { presets: ['env', 'react', 'stage-0'], cacheDirectory: true }
+            options: {
+              presets: ['env', 'react', 'stage-0'],
+              cacheDirectory: true
+            }
           },
         ]
       },
+      // Minimized CSS.
       {
         test: /\.min\.css$/,
         use: [
@@ -53,6 +51,53 @@ var config = {
           'css-loader'
         ]
       },
+      // Sass global styles.
+      {
+        test: /\.global\.scss$/,
+        exclude: /(node_modules)/,
+        use: [
+          PROD ? MiniCssExtractPlugin.loader : 'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: false,
+              importLoaders: 2
+            }
+          },
+          {
+            loader: 'postcss-loader'
+          },
+          {
+            loader: 'sass-loader'
+          }
+        ]
+      },
+      // Sass modules.
+      {
+        test: /\.scss$/,
+        exclude: [
+          /(node_modules)/,
+          /\.global\.scss$/,
+        ],
+        use: [
+          PROD ? MiniCssExtractPlugin.loader : 'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              importLoaders: 2,
+              localIdentName: '[name]__[local]___[hash:base64:5]'
+            }
+          },
+          {
+            loader: 'postcss-loader'
+          },
+          {
+            loader: 'sass-loader'
+          }
+        ]
+      },
+      // CSS global styles.
       {
         test: /\.global\.css$/,
         exclude: /(node_modules)/,
@@ -70,6 +115,7 @@ var config = {
           }
         ]
       },
+      // CSS modules.
       {
         test: /\.css$/,
         exclude: [
@@ -91,6 +137,7 @@ var config = {
           }
         ]
       },
+      // HTML.
       {
         test: /\.html$/,
         use: [
@@ -100,6 +147,7 @@ var config = {
           }
         ]
       },
+      // Images and fonts.
       {
         test: /\.(gif|png|svg|eot|woff|ttf)$/,
         use: [
@@ -119,7 +167,7 @@ var config = {
       'default-skin.svg': path.join(__dirname, 'node_modules/photoswipe/dist/default-skin/default-skin.svg'),
       'preloader.gif': path.join(__dirname, 'node_modules/photoswipe/dist/default-skin/preloader.gif')
     },
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.scss'],
   },
   plugins: [
     new webpack.ProvidePlugin({
