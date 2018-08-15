@@ -40,35 +40,31 @@ DOM (with a CSS style to position it absolutely over every other element).
 Then it's a matter of stepping through the animation frames until the effect is
 finished.
 
-<pre class="brush:javascript">
-function renderAnimation() {
-  var bufferimage = document.createElement('image');
-  var outputcanvas = document.createElement('canvas');
-  var outputcontext = outputcanvas.getContext('2d');
-  chrome.tabs.captureVisibleTab(null, function(src) {
-    bufferimage.addEventListener('load', function() {
-      outputcanvas.width = bufferimage.width;
-      outputcanvas.height = bufferimage.height;
-      outputcanvas.className = 'effectcanvas';
-      document.body.appendChild(outputcanvas);
-      var stepper = stepAnimation(bufferimage, outputcanvas, 200);
-      stepper();
-    });
-    bufferimage.src = src;
-  });
-};
-</pre>
+    function renderAnimation() {
+      var bufferimage = document.createElement('image');
+      var outputcanvas = document.createElement('canvas');
+      var outputcontext = outputcanvas.getContext('2d');
+      chrome.tabs.captureVisibleTab(null, function(src) {
+        bufferimage.addEventListener('load', function() {
+          outputcanvas.width = bufferimage.width;
+          outputcanvas.height = bufferimage.height;
+          outputcanvas.className = 'effectcanvas';
+          document.body.appendChild(outputcanvas);
+          var stepper = stepAnimation(bufferimage, outputcanvas, 200);
+          stepper();
+        });
+        bufferimage.src = src;
+      });
+    };
 
 The `stepAnimation` method takes a source image, an output canvas, and the
 number of horizontal slices to use as its parameters.  I assign a velocity to
 each slice using a sine function during initialization:
 
-<pre class="brush:javascript">
-for (var i = 0; i &lt; slices; i++) {
-  velocity[i] = Math.abs(Math.sin(i) * 5) + 5;
-  offsets[i] = 0;
-}
-</pre>
+    for (var i = 0; i &lt; slices; i++) {
+      velocity[i] = Math.abs(Math.sin(i) * 5) + 5;
+      offsets[i] = 0;
+    }
 
 The slices move at a constant velocity in a wavy sort of pattern. I like using
 the trigonometric functions for this kind of thing because I feel like it leads
@@ -82,48 +78,52 @@ calculated for each slice, based off of its corresponding velocity.
 When the animation completes, the canvas is removed from the DOM, so the
 original scene will be drawn again.
 
-<pre class="brush:javascript">
-function stepAnimation(src, dst, slices) {
-  var slice_width = dst.width / slices;
-  var sx = 0;
-  var sy = 0;
-  var sw = slice_width;
-  var sh = dst.height;
-  var dx = 0;
-  var dy = sy;
-  var dw = sw;
-  var dh = sh;
-  var velocity = []
-  var offsets = []
-  for (var i = 0; i &lt; slices; i++) {
-    velocity[i] = Math.abs(Math.sin(i) * 5) + 5;    // Assign a velocity
-    offsets[i] = 0;
-  }
-  var context = dst.getContext('2d');
-  context.fillStyle = '#600';                       // Use a red background
-  var stepper = function() {
-    var stepagain = false;
-    context.fillRect(0, 0, src.width, src.height);  // Clear the old image data
-    for (var i = 0; i &lt; slices; i++) {
-      sx = i * slice_width;
-      dx = sx;
-      dy = sy + offsets[i];
-      offsets[i] += velocity[i];                    // Calculate the offset
-      if (dy &lt; sh) {
-        stepagain = true;
+    function stepAnimation(src, dst, slices) {
+      var slice_width = dst.width / slices;
+      var sx = 0;
+      var sy = 0;
+      var sw = slice_width;
+      var sh = dst.height;
+      var dx = 0;
+      var dy = sy;
+      var dw = sw;
+      var dh = sh;
+      var velocity = []
+      var offsets = []
+      for (var i = 0; i &lt; slices; i++) {
+        // Assign a velocity
+        velocity[i] = Math.abs(Math.sin(i) * 5) + 5;
+        offsets[i] = 0;
       }
-      // Draw the slice
-      context.drawImage(src, sx, sy, sw, sh, dx, dy, dw, dh);
-    }
-    if (stepagain) {
-      window.setTimeout(stepper, 10);      // Call this method again in 10ms
-    } else {
-      dst.parentNode.removeChild(dst);     // Remove the canvas from the DOM
-    }
-  };
-  return stepper;
-};
-</pre>
+      var context = dst.getContext('2d');
+      // Use a red background
+      context.fillStyle = '#600';
+      var stepper = function() {
+        var stepagain = false;
+        // Clear the old image data
+        context.fillRect(0, 0, src.width, src.height);
+        for (var i = 0; i &lt; slices; i++) {
+          sx = i * slice_width;
+          dx = sx;
+          dy = sy + offsets[i];
+          // Calculate the offset
+          offsets[i] += velocity[i];
+          if (dy &lt; sh) {
+            stepagain = true;
+          }
+          // Draw the slice
+          context.drawImage(src, sx, sy, sw, sh, dx, dy, dw, dh);
+        }
+        if (stepagain) {
+          // Call this method again in 10ms
+          window.setTimeout(stepper, 10);
+        } else {
+          // Remove the canvas from the DOM
+          dst.parentNode.removeChild(dst);
+        }
+      };
+      return stepper;
+    };
 
 I think this technique would be very useful for making interesting Chrome OS
 screensavers.  I'll probably take a stab at writing one in the future.

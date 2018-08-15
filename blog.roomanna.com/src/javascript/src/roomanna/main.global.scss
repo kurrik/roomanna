@@ -104,6 +104,23 @@ svg.roomanna-logo {
 // Paging on blog posts.
 .site-pager {
   margin-bottom: var(--vertical-separation);
+
+  & .page-item {
+    display: flex;
+  }
+
+  & .page-link {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    min-height: 4em;
+
+    & span {
+      text-align: center;
+      width: 100%;
+    }
+  }
 }
 
 // Commenting.
