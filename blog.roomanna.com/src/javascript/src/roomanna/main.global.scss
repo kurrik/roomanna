@@ -412,3 +412,13 @@ h4 {
   margin-bottom: var(--vertical-separation);
   line-height: 1;
 }
+
+
+/******************************************************************************
+ * Media queries.
+ ******************************************************************************/
+@include media-breakpoint-down(sm) {
+  #roomanna {
+    width: 50%;
+  }
+}

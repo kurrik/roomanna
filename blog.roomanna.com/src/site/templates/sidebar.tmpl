@@ -1,6 +1,6 @@
 {{define "sidebar"}}
 <ul class="list-group list-group-flush site-sidebar">
-  <li class="list-group-item list-group-item-success">
+  <li class="list-group-item list-group-item-success d-none d-md-block">
     <svg class="i small"><use xlink:href="#i-user" /></svg>
     <span>Navigation</span>
   </li>
@@ -8,7 +8,7 @@
     <svg class="i small"><use xlink:href="#i-portfolio" /></svg>
     <span>All Posts</span>
   </a>
-  <a class="list-group-item list-group-item-action align-items-center" href="/atom.xml" target="_blank">
+  <a class="list-group-item list-group-item-action align-items-center d-none d-md-block" href="/atom.xml" target="_blank">
     <svg class="i small"><use xlink:href="#i-download" /></svg>
     <span>Atom Feed</span>
   </a>
@@ -18,7 +18,7 @@
   </a>
 
   {{if .Post}}
-    <li class="list-group-item list-group-item-warning">
+    <li class="list-group-item list-group-item-warning d-none d-md-block">
       <svg class="i small"><use xlink:href="#i-file" /></svg>
       <span>This Post</span>
     </li>
