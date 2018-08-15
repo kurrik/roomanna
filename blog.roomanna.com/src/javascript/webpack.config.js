@@ -160,7 +160,6 @@ var config = {
   },
   resolve: {
     alias: {
-      './common/roomanna.config.css': path.join(__dirname, 'src/common/roomanna.config.css'),
       'components': path.join(__dirname, 'src/components'),
       'lib': path.join(__dirname, 'lib'),
       'default-skin.png': path.join(__dirname, 'node_modules/photoswipe/dist/default-skin/default-skin.png'),
