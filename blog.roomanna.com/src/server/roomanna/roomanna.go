@@ -22,6 +22,7 @@ import (
 	"os"
 	"path/filepath"
 	"time"
+	"google.golang.org/appengine"
 )
 
 type Handler struct {
@@ -57,6 +58,9 @@ func (h *Handler) HandleRequest(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Last-Modified", h.LastModified)
 	w.Header().Set("Cache-Control", ccontrol)
 	w.Header().Set("Expires", expires.Format(time.RFC1123))
+	if !appengine.IsDevAppServer() {
+		w.Header().Set("Strict-Transport-Security", "max-age=86400; includeSubDomains")
+	}
 	w.Header().Del("Set-Cookie")
 	http.ServeFile(w, r, path)
 }
