@@ -1,0 +1,21 @@
+date: 12-09-2018
+slug: google-form-emails
+title: Sending nice emails from Google Forms
+tags:
+  - google
+  - javascript
+  - management
+  - work
+images:
+  email:
+    src: "email.png"
+  form:
+    src: "form.png"
+  installtriggers:
+    src: "installtriggers.png"
+  permissions:
+    src: "permissions.png"
+  scripteditor:
+    src: "scripteditor.png"
+  twitter-card:
+    src: "clipboard_1f4cb.png"

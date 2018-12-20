@@ -234,6 +234,12 @@ svg.roomanna-logo {
   & ul {
     margin-bottom: var(--vertical-separation);
   }
+  & ul ul,
+  & ol ol,
+  & ul ol,
+  & ol ul {
+    margin-bottom: 0;
+  }
 }
 
 // Post titles.
