@@ -6,11 +6,11 @@ blend moved more toward nonfiction this year, which I'll blame on getting a ton
 of good recommendations through work.  Stripe is an amazing place to build an
 impossibly large reading list.
 
-I didn't quite hit my goal of 20 books this year, although there's still a bit
-of time left to update that estimate (and this post I guess).  If I had to
-pick, I think _Democratizing Innovation_, _The Score Takes Care of Itself_, and
-_Sculpting in Time_ were my favorites of the year. I've left some notes on
-these books (and more!) in ascending order of completion below:
+I didn't quite hit my goal of 20 books this year, but feel good about the
+material I did get through this year.  If I had to pick, I think _Men,
+Machines, and Modern Times_, _Democratizing Innovation_, _The Score Takes Care
+of Itself_, and _Sculpting in Time_ were my favorites of the year. I've left
+some notes on these books (and more!) in ascending order of completion below:
 
 <!--BREAK-->
 
@@ -374,3 +374,53 @@ totally different styles of presenting stories of police officers tracking down
 serial killers.  This one certainly gets points for going incredibly over the
 top.  The book opens with a murder via escalator, which is honestly pretty
 inventive!
+
+[book-men]: https://www.goodreads.com/book/show/32601265-men-machines-and-modern-times
+[tweet-men]: https://twitter.com/patrickc/status/1069423408675319809
+
+## 19. [Men, Machines, and Modern Times][book-men] by Elting E. Morison, Rosalind Williams, Leo Marx
+Patrick [Tweeted][tweet-men] a quote from this book which I found compelling
+(much of the success I see at work is simply from making things explicit) so I
+started reading this and quickly found myself highlighting large swaths of the
+book on my Kindle.  Like the title indicates, this is a bit dated, but this
+1966 book is a fascinating account of how the American military and American
+industry reacted to disruptive innovations in the late 1800s coupled with some
+forward-looking writing from the point of view of the 1960s.  I thoroughly
+enjoyed the history lessons, but was fascinated by how familiar some warnings
+about the adoption of computers seemed.  Here's a notable passage, especially
+in light of contemporary debates about AI and bias:
+
+> In dealing with the computer, with its incisive capacity to reach clear
+> decisions from the data presented, we will find ourselves in grave
+> difficulties, I think, if we persist in such sloppy definitions of the
+> problems we wish to solve. We will have, in the near future, to ask ourselves
+> if we can assess even quantifiable data without distortion; we will have to
+> painfully consider whether we are ready to lift out our raw affections for
+> observation and analysis, whether we are honest enough and brave enough to
+> make the necessary separations between the indispensable and the irrelevant
+> feeling.
+
+The book has a message about the dangers of being too fixed in our own ways.  I
+was struck by this bit about engineering preferences:
+
+> Then there is the apprehension about the computer as a fascinating gadget. It
+> is obvious that there is always danger from the gadget-happy, whether the
+> gadget is a machine, an idea, or a procedure. Amasa Stone, for instance, a
+> very able man, killed a trainload of people because, against advice, he built
+> a bridge at Ashtabula from a truss design for which he had an ancient
+> attachment.
+
+The entire book is beautifully written, and was one of my favorites of the
+year.  I'll leave with this meditation on complex systems:
+
+> Sigmund Freud had a theory that art is merely a neurotic compromise, an
+> enormous effort by men to give reality in the imagined abstract to desires
+> they could not fulfill in action. It is possible that our affectionate
+> attachment to particular schemes of value are equally symptoms of our
+> incapacity to run an environment in a reasonable way. For instance, in the
+> thirteenth century a man petitioned Almighty God only perhaps because he
+> thought he could control nature in no other way. Or a man in the nineteenth
+> century made hard work, thrift, giving to the poor, and the sacredness of
+> individual enterprise into a scheme of value because they were the only
+> devices that enabled him to deal with an uncertain economy he could not run
+> or understand by his reason alone.
