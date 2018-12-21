@@ -382,13 +382,13 @@ inventive!
 Patrick [Tweeted][tweet-men] a quote from this book which I found compelling
 (much of the success I see at work is simply from making things explicit) so I
 started reading this and quickly found myself highlighting large swaths of the
-book on my Kindle.  Like the title indicates, this is a bit dated, but this
-1966 book is a fascinating account of how the American military and American
-industry reacted to disruptive innovations in the late 1800s coupled with some
-forward-looking writing from the point of view of the 1960s.  I thoroughly
-enjoyed the history lessons, but was fascinated by how familiar some warnings
-about the adoption of computers seemed.  Here's a notable passage, especially
-in light of contemporary debates about AI and bias:
+book on my Kindle.  Like the gendered title indicates, this is a bit dated, but
+this 1966 book is a fascinating account of how the American military and
+American industry reacted to disruptive innovations in the late 1800s coupled
+with some forward-looking writing from the point of view of the 1960s.  I
+thoroughly enjoyed the history lessons, but was fascinated by how familiar some
+warnings about the adoption of computers seemed.  Here's a notable passage,
+especially in light of contemporary debates about AI and bias:
 
 > In dealing with the computer, with its incisive capacity to reach clear
 > decisions from the data presented, we will find ourselves in grave
