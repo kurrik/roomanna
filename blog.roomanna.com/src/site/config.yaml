@@ -1,5 +1,5 @@
 title: Roomanna
-root: http://blog.roomanna.com
+root: https://blog.roomanna.com
 author: Arne Roomann-Kurrik
 email:
 pathformat: /{{.DatePath}}/{{.Slug}}
