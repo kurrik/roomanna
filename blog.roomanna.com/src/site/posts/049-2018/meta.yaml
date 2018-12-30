@@ -1,0 +1,14 @@
+date: 12-29-2018
+slug: 2018
+title: 2018
+tags:
+  - arne
+  - cinemaclub
+images:
+  beach:
+    src: "beach.jpg"
+  twitter-card:
+    src: "beach.jpg"
+scripts:
+  - src: https://www.instagram.com/embed.js
+    async: true
