@@ -6,7 +6,7 @@ tags:
   - reviews
   - algorithms
 scripts:
-  - /static/js/post032.js
+  - src: /static/js/post032.js
 images:
   twitter-card:
     src: suspiria-gold-lg.jpg

@@ -6,6 +6,6 @@ tags:
   - javascript
   - games
 scripts:
-  - /static/js/post035.js
+  - src: /static/js/post035.js
 styles:
   - /static/css/post035.css

@@ -15,7 +15,7 @@
   {{range .Post.Styles}}<link rel="stylesheet" href="{{.}}?v={{$.Site.Rendered.Unix}}" />{{end}}
 {{end}}
 {{define "scripts"}}
-  {{range .Post.Scripts}}<script src="{{.}}?v={{$.Site.Rendered.Unix}}"></script>{{end}}
+  {{range .Post.Scripts}}<script src="{{.Src}}?v={{$.Site.Rendered.Unix}}" {{- if .Async}} async{{end}}></script>{{end}}
 {{end}}
 {{define "body"}}
   <article>

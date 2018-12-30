@@ -5,7 +5,7 @@ tags:
   - art
   - arne
 scripts:
-  - /static/js/post038.js
+  - src: /static/js/post038.js
 styles:
   - /static/css/post038.css
 images:

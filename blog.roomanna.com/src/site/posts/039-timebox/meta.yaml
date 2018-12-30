@@ -5,7 +5,7 @@ tags:
   - twitter
   - product
 scripts:
-  - /static/js/post039.js
+  - src: /static/js/post039.js
 styles:
   - /static/css/post039.css
 images:

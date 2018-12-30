@@ -4,6 +4,6 @@ title: Flow puzzles v1
 tags:
   - games
 scripts:
-  - /static/js/post045.js
+  - src: /static/js/post045.js
 styles:
   - /static/css/post045.css
