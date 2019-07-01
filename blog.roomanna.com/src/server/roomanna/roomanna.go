@@ -79,11 +79,11 @@ func init() {
 		err      error
 		modified []byte
 	)
-	if modified, err = ioutil.ReadFile("build/content/rendered.txt"); err != nil {
+	if modified, err = ioutil.ReadFile("blog.roomanna.com/build/content/rendered.txt"); err != nil {
 		modified = []byte(time.Now().Format(time.RFC1123))
 	}
 	handler := &Handler{
-		Path:         "build/content",
+		Path:         "blog.roomanna.com/build/content",
 		LastModified: string(modified),
 	}
 	http.HandleFunc("/", GetHandler(handler))

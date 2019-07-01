@@ -1,3 +1,11 @@
+# # Ignore everything
+# *
+# 
+# # and only upload these three targets
+# !/blog.roomanna.com/build/**
+# !/blog.roomanna.com/src/server/**
+# !app.yaml
+
 # Ignore everything
 # *
 #

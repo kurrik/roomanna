@@ -4,8 +4,8 @@ main: github.com/kurrik/roomanna/blog.roomanna.com/src/server
 
 handlers:
 - url: /(.*\.(gif|png|jpg|mp4|js|css|woff|ico))$
-  static_files: build/content/\1
-  upload: build/content/.*\.(gif|png|jpg|mp4|js|css|woff|ico)$
+  static_files: blog.roomanna.com/build/content/\1
+  upload: blog.roomanna.com/build/content/.*\.(gif|png|jpg|mp4|js|css|woff|ico)$
   expiration: "365d"
 
 - url: /.*
