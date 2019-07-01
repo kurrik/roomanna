@@ -1,5 +1,3 @@
-application: roomanna-blog-hrd
-version: 5
 runtime: go112
 default_expiration: "7d"
 main: github.com/kurrik/roomanna/blog.roomanna.com/src/server

@@ -1,0 +1,33 @@
+# Ignore everything
+# *
+#
+# # and only upload these three targets
+# !build/**
+# !src/server/**
+# !app.yaml
+#
+# # Explicitly allow current dir. `gcloud deploy` fails without it.
+# !build
+# !src
+# !src/server
+# !.
+
+assets
+dst
+lib
+node_modules
+src/build
+src/drafts
+src/img
+src/javascript
+src/less
+src/site
+
+.DS_Store
+.gcloudignore
+.gitignore
+Gruntfile.js
+LICENSE
+Makefile
+NOTICE
+README.md

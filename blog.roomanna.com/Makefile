@@ -7,7 +7,7 @@ create:
 	${GOPATH}/bin/ghostwriter -src=src/site -dst=build/content -action=create
 
 deploy: build
-	gcloud app deploy
+	gcloud app deploy --project roomanna-blog-hrd app.yaml
 
 develop:
 	./node_modules/.bin/grunt develop
