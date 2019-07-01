@@ -7,7 +7,7 @@ create:
 	${GOPATH}/bin/ghostwriter -src=src/site -dst=build/content -action=create
 
 deploy: build
-	~/src/go_appengine/appcfg.py --oauth2 update build
+	gcloud app deploy
 
 develop:
 	./node_modules/.bin/grunt develop

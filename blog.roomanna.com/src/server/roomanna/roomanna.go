@@ -22,7 +22,6 @@ import (
 	"os"
 	"path/filepath"
 	"time"
-	"google.golang.org/appengine"
 )
 
 type Handler struct {
@@ -54,11 +53,13 @@ func (h *Handler) HandleRequest(w http.ResponseWriter, r *http.Request) {
 		maxage   = 3600
 		expires  = time.Now().Add(time.Second * time.Duration(maxage))
 		ccontrol = fmt.Sprintf("max-age=%v, public", maxage)
+		mode     = os.Getenv("ROOMANNA_MODE")
 	)
 	w.Header().Set("Last-Modified", h.LastModified)
 	w.Header().Set("Cache-Control", ccontrol)
 	w.Header().Set("Expires", expires.Format(time.RFC1123))
-	if !appengine.IsDevAppServer() {
+
+	if mode != "dev" {
 		w.Header().Set("Strict-Transport-Security", "max-age=86400; includeSubDomains")
 	}
 	w.Header().Del("Set-Cookie")
@@ -78,11 +79,11 @@ func init() {
 		err      error
 		modified []byte
 	)
-	if modified, err = ioutil.ReadFile("content/rendered.txt"); err != nil {
+	if modified, err = ioutil.ReadFile("build/content/rendered.txt"); err != nil {
 		modified = []byte(time.Now().Format(time.RFC1123))
 	}
 	handler := &Handler{
-		Path:         "content",
+		Path:         "build/content",
 		LastModified: string(modified),
 	}
 	http.HandleFunc("/", GetHandler(handler))

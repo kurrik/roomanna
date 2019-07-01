@@ -9,7 +9,7 @@ module.exports = function(grunt) {
       },
 
       serve: {
-        cmd: 'pkill -f dev_appserver || ~/src/go_appengine/dev_appserver.py --skip_sdk_update_check=yes --port=9998 build',
+        cmd: 'PORT=9998 ROOMANNA_MODE=dev go run src/server/main.go',
         bg: true,
       },
 
@@ -27,16 +27,6 @@ module.exports = function(grunt) {
     clean: ['build'],
 
     copy: {
-      server: {
-        files: [
-          {
-            expand: true,
-            cwd:    'src/server',
-            src:    ['**/*'],
-            dest:   'build',
-          }
-        ],
-      },
       frontend: {
         files: [
           {
@@ -75,7 +65,7 @@ module.exports = function(grunt) {
       },
       server: {
         files: ['src/server/**/*'],
-        tasks: ['server']
+        tasks: []
       },
       content: {
         files: ['src/site/**/*'],
@@ -98,13 +88,12 @@ module.exports = function(grunt) {
   // Site components
   grunt.registerTask('frontend',        ['copy:frontend', 'bgShell:javascript']);
   grunt.registerTask('frontend-devel',  ['copy:frontend', 'bgShell:javascriptDevel']);
-  grunt.registerTask('server',          ['copy:server']);
   grunt.registerTask('content',         ['bgShell:ghostwriter']);
-  grunt.registerTask('all-devel',       ['clean', 'server', 'frontend-devel', 'content']);
-  grunt.registerTask('all',             ['clean', 'server', 'frontend', 'content']);
+  grunt.registerTask('all-devel',       ['clean', 'frontend-devel', 'content']);
+  grunt.registerTask('all',             ['clean', 'frontend', 'content']);
 
   // Verbs
-  grunt.registerTask('serve',           ['copy:server', 'bgShell:serve']);
+  grunt.registerTask('serve',           ['bgShell:serve']);
   grunt.registerTask('develop',         ['all-devel', 'serve', 'watch']);
   grunt.registerTask('develop-prod',    ['all', 'serve', 'watch']);
   grunt.registerTask('default',         ['all']);
