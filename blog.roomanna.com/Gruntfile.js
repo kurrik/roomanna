@@ -26,38 +26,6 @@ module.exports = function(grunt) {
 
     clean: ['build'],
 
-    copy: {
-      frontend: {
-        files: [
-          {
-            expand: true,
-            cwd:    'lib/font-awesome/',
-            src:    ['*.woff', '*.eot', '*.ttf', '*.svg'],
-            dest:   'build/content/static/font',
-          },
-          {
-            expand: true,
-            cwd:    'lib/visitor1/',
-            src:    ['*.woff', '*.otf', '*.eot', '*.svg', '*.ttf'],
-            dest:   'build/content/static/font',
-          },
-          {
-            expand: true,
-            cwd:    'lib/font-awesome/',
-            src:    ['font-awesome-ie7.css'],
-            dest:   'build/content/static/css',
-          },
-          {
-            expand: true,
-            cwd:    'src/img/',
-            src:    ['*'],
-            dest:   'build/content/static/img',
-            filter: 'isFile',
-          },
-        ]
-      },
-    },
-
     watch: {
       frontend: {
         files: ['lib/**/*', 'src/img/**/*'],
@@ -77,17 +45,11 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-bg-shell');
   grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-contrib-less');
-  grunt.loadNpmTasks('grunt-contrib-requirejs');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Site components
-  grunt.registerTask('frontend',        ['copy:frontend', 'bgShell:javascript']);
-  grunt.registerTask('frontend-devel',  ['copy:frontend', 'bgShell:javascriptDevel']);
+  grunt.registerTask('frontend',        ['bgShell:javascript']);
+  grunt.registerTask('frontend-devel',  ['bgShell:javascriptDevel']);
   grunt.registerTask('content',         ['bgShell:ghostwriter']);
   grunt.registerTask('all-devel',       ['clean', 'frontend-devel', 'content']);
   grunt.registerTask('all',             ['clean', 'frontend', 'content']);
