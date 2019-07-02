@@ -9,7 +9,7 @@ module.exports = function(grunt) {
       },
 
       serve: {
-        cmd: 'PORT=9998 ROOMANNA_MODE=dev go run src/server/main.go',
+        cmd: 'cd .. && PORT=9998 ROOMANNA_MODE=dev go run blog.roomanna.com/src/server/main.go',
         bg: true,
       },
 

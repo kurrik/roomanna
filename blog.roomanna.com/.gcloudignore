@@ -1,41 +1,15 @@
-# # Ignore everything
-# *
-# 
-# # and only upload these three targets
-# !/blog.roomanna.com/build/**
-# !/blog.roomanna.com/src/server/**
-# !app.yaml
-
 # Ignore everything
-# *
-#
-# # and only upload these three targets
-# !build/**
-# !src/server/**
-# !app.yaml
-#
-# # Explicitly allow current dir. `gcloud deploy` fails without it.
-# !build
-# !src
-# !src/server
-# !.
+*
 
-assets
-dst
-lib
-node_modules
-src/build
-src/drafts
-src/img
-src/javascript
-src/less
-src/site
+# and only upload these three targets
+!blog.roomanna.com/build/**
+!blog.roomanna.com/src/server/**
+!app.yaml
+!go.mod
 
-.DS_Store
-.gcloudignore
-.gitignore
-Gruntfile.js
-LICENSE
-Makefile
-NOTICE
-README.md
+# Explicitly allow current dir. `gcloud deploy` fails without it.
+!blog.roomanna.com
+!blog.roomanna.com/build
+!blog.roomanna.com/src
+!blog.roomanna.com/src/server
+!.
