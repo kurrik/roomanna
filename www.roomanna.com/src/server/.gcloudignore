@@ -1,0 +1,15 @@
+# Ignore everything
+*
+
+# and only upload these targets
+!www.roomanna.com/src/**
+!www.roomanna.com/src/server/**
+!www.roomanna.com/src/splash/**
+!go.mod
+
+# Explicitly allow current dir. `gcloud deploy` fails without it.
+!www.roomanna.com
+!www.roomanna.com/src
+!www.roomanna.com/src/server
+!www.roomanna.com/src/splash
+!.

@@ -3,7 +3,6 @@ html {
   padding: 0;
   width: 100%;
   height: 100%;
-  display: -webkit-box;
 }
 
 body {
@@ -14,10 +13,10 @@ body {
   background: #fafafa url('./bg-2.png');
   width: 100%;
   height: 100%;
-  display: -webkit-box;
-  -webkit-box-pack: center;
-  -webkit-box-align: center;
-  -webkit-box-orient: vertical;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 :global #fonty {
@@ -33,7 +32,7 @@ body {
   padding: 10px;
   margin: 10px;
   border: 1px solid #999;
-  -webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
 a {

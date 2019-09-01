@@ -17,12 +17,9 @@ package roomanna
 import (
 	"fmt"
 	"html/template"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
-	"path/filepath"
-	"strings"
 	"time"
 )
 
@@ -36,30 +33,21 @@ type Handler struct {
 // Handles all HTTP requests.
 func (h *Handler) HandleRequest(w http.ResponseWriter, r *http.Request) {
 	var (
-		path         string
-		tmplName     string
-		tmpl         *template.Template
-		staticPrefix string
+		tmpl *template.Template
+		templateName string = "content"
 	)
 	log.Printf("[roomanna] Served path: %q", r.URL.Path)
-	path = filepath.Join(h.Path, r.URL.Path)
-	tmplName = strings.Trim(strings.Replace(path, "/", "_", -1), "_")
-	if tmpl = h.Templates.Lookup(tmplName); tmpl == nil {
-		log.Printf("[roomanna] Template with name: %v not found", tmplName)
+	if tmpl = h.Templates.Lookup(templateName); tmpl == nil {
+		log.Printf("[roomanna] Template with name: '%v' not found", templateName)
 		http.NotFound(w, r)
 		return
-	}
-	if h.Prod {
-		staticPrefix = "/static"
-	} else {
-		staticPrefix = "/static/dev"
 	}
 	var (
 		maxage   = 3600
 		expires  = time.Now().Add(time.Second * time.Duration(maxage))
 		ccontrol = fmt.Sprintf("max-age=%v, public", maxage)
 		data     = map[string]interface{}{
-			"StaticPrefix": staticPrefix,
+			"StaticPrefix": "/static",
 		}
 	)
 	w.Header().Set("Last-Modified", h.LastModified)
@@ -84,16 +72,14 @@ func init() {
 		tmpl     *template.Template
 		devel    bool
 	)
-	if modified, err = ioutil.ReadFile("content/rendered.txt"); err != nil {
-		modified = []byte(time.Now().Format(time.RFC1123))
-	}
-	if tmpl, err = template.ParseGlob("content/*.html"); err != nil {
+	modified = []byte(time.Now().Format(time.RFC1123))
+	if tmpl, err = template.ParseGlob("www.roomanna.com/src/server/content/*.html"); err != nil {
 		panic(err)
 	}
 	devel = os.Getenv("DEVEL") == "1"
 	log.Printf("[roomanna] Starting up with PROD=%v", !devel)
 	handler := &Handler{
-		Path:         "content",
+		Path:         "www.roomanna.com/src/server/content",
 		LastModified: string(modified),
 		Templates:    tmpl,
 		Prod:         !devel,

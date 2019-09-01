@@ -1,7 +1,6 @@
-application: roomanna-www-hrd
-version: 1
-runtime: go
-api_version: go1
+runtime: go112
+default_expiration: "7d"
+main: github.com/kurrik/roomanna/www.roomanna.com/src/server
 
 handlers:
 - url: /favicon.ico
@@ -17,4 +16,5 @@ handlers:
   expiration: "365d"
 
 - url: /.*
-  script: _go_app
+  script: auto
+  secure: always

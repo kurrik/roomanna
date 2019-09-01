@@ -7,17 +7,12 @@ usage:
 	@echo '    deploy                Deploy'
 
 serve:
-	npm run watch& dev_appserver.py \
-		--port=9997 \
-		--admin_port=8001 \
-		--skip_sdk_update_check=yes \
-		--env_var DEVEL=${DEVEL} \
-		src/server
+	yarn run watch& cd .. && go run www.roomanna.com/src/server/main.go
 
 test:
-	npm run test
+	yarn run test
 
 deploy:
 	export DEVEL=0
-	npm run build
-	appcfg.py update src/server
+	yarn run build
+	gcloud app deploy --project roomanna-www-hrd src/server/app.yaml
