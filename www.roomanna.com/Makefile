@@ -15,4 +15,4 @@ test:
 deploy:
 	export DEVEL=0
 	yarn run build
-	gcloud app deploy --project roomanna-www-hrd src/server/app.yaml
+	gcloud app deploy --project roomanna-www-hrd app.yaml

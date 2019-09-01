@@ -4,15 +4,11 @@ main: github.com/kurrik/roomanna/www.roomanna.com/src/server
 
 handlers:
 - url: /favicon.ico
-  static_files: static/favicon.ico.png
-  upload: static/favicon.ico.png
-
-- url: /static/dev
-  static_dir: static/dev/
-  expiration: "1s"
+  static_files: www.roomanna.com/src/server/static/favicon.ico.png
+  upload: www.roomanna.com/src/server/static/static/favicon.ico.png
 
 - url: /static
-  static_dir: static/
+  static_dir: www.roomanna.com/src/server/static/
   expiration: "365d"
 
 - url: /.*
