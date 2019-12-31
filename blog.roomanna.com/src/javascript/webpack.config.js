@@ -1,10 +1,13 @@
 const path = require('path');
 const webpack = require('webpack');
 const PROD = JSON.parse(process.env.PROD || '0');
+const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const FlowBabelWebpackPlugin = require('flow-babel-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+
+const StaticPath = path.join(__dirname, '../../build/content/static');
 
 var config = {
   mode: PROD ? 'production' : 'development',
@@ -21,7 +24,7 @@ var config = {
     'post045': './src/post045/main.jsx'
   },
   output: {
-    path: path.join(__dirname, '../../build/content/static'),
+    path: StaticPath,
     filename: 'js/[name].js'
   },
   module: {
@@ -147,9 +150,9 @@ var config = {
           }
         ]
       },
-      // Images and fonts.
+      // Other images and fonts.
       {
-        test: /\.(gif|png|svg|eot|woff|ttf)$/,
+        test: /\.(gif|png|svg|eot|woff|ttf|otf)$/,
         use: [
           {
             loader: 'url-loader'
@@ -180,6 +183,10 @@ var config = {
       filename: 'css/[name].css',
       chunkFilename: 'css/[id].css',
     }),
+    new CopyPlugin([
+      { from: '../img', to: path.join(StaticPath, 'img') },
+      { from: '../../lib/visitor1', to: path.join(StaticPath, 'font') },
+    ]),
   ],
   optimization: {
     minimizer: [

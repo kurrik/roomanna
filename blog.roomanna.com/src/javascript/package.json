@@ -12,7 +12,8 @@
     "components": "webpack-dev-server --hot --inline --content-base ../../build/content/static/"
   },
   "author": "Arne Roomann-Kurrik",
-  "dependencies": {},
+  "dependencies": {
+  },
   "devDependencies": {
     "@webpack-cli/init": "^0.0.8",
     "alight": "^0.14.1",
@@ -29,6 +30,7 @@
     "chai": "^4.1.2",
     "classnames": "^2.2.6",
     "css-loader": "^0.28.11",
+    "copy-webpack-plugin": "^5.1.1",
     "d3": "^5.4.0",
     "enzyme": "^3.3.0",
     "exports-loader": "^0.7.0",

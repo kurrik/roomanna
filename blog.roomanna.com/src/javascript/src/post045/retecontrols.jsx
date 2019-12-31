@@ -2,7 +2,7 @@ import Rete from 'rete';
 
 export class NumControl extends Rete.Control {
   constructor(emitter, key, readonly) {
-    super();
+    super('Num Control');
     this.emitter = emitter;
     this.key = key;
     this.template = '<input type="number" :readonly="readonly" :value="value" @input="change($event)"/>';
@@ -40,7 +40,7 @@ export class NumControl extends Rete.Control {
 
 export class DataControl extends Rete.Control {
   constructor(emitter, key) {
-    super();
+    super('Data Control');
     this.emitter = emitter;
     this.key = key;
     this.template = '<div>{{value}}</div>';
