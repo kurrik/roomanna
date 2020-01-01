@@ -1,0 +1,7 @@
+{
+    "editor.renderWhitespace": "boundary",
+    "editor.tabSize": 2,
+    "files.trimTrailingWhitespace": true,
+    "files.trimFinalNewlines": true,
+    "workbench.editor.enablePreview": false
+}
