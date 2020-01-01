@@ -21,7 +21,8 @@ var config = {
     'post038': './src/post038/main.js',
     'post039': './src/post039/main.jsx',
     'post044': './src/post044/main.jsx',
-    'post045': './src/post045/main.jsx'
+    'post045': './src/post045/main.jsx',
+    'post050': './src/post050/main.js'
   },
   output: {
     path: StaticPath,

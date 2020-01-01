@@ -1,8 +1,8 @@
 {{define "gallery"}}
 <div class="roomanna-gallery" itemscope itemtype="http://schema.org/ImageGallery">
 {{range .}}<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-  <a href="{{.Data.Permalink}}" itemprop="contentUrl" data-size="{{.Data.Width}}x{{.Data.Height}}">
-    <img src="{{.Variants.thumb.Permalink}}" itemprop="thumbnail" width="{{.Variants.thumb.Width}}" height="{{.Variants.thumb.Height}}" />
+  <a href="{{.Data.Path}}" itemprop="contentUrl" data-size="{{.Data.Width}}x{{.Data.Height}}">
+    <img src="{{.Variants.thumb.Path}}" itemprop="thumbnail" width="{{.Variants.thumb.Width}}" height="{{.Variants.thumb.Height}}" />
   </a>
   {{with .Metadata.alt}}
     <figcaption itemprop="caption description">{{.}}</figcaption>
