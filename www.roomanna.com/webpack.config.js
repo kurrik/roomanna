@@ -5,7 +5,7 @@ const PUBLIC_PREFIX = PROD ? 'static/' : 'static/dev/';
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const FlowBabelWebpackPlugin = require('flow-babel-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 var config = {
   mode: PROD ? 'production' : 'development',
@@ -175,10 +175,9 @@ var config = {
   ],
   optimization: {
     minimizer: [
-      new UglifyJsPlugin({
-        cache: true,
+      new TerserPlugin({
         parallel: true,
-        sourceMap: true
+        sourceMap: true,
       }),
       new OptimizeCSSAssetsPlugin({})
     ],
