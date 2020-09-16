@@ -3,5 +3,6 @@
     "files.trimFinalNewlines": true,
     "[markdown]":  {
         "editor.wordWrap": "off",
-    }
+    },
+    "editor.tabSize": 2
 }
