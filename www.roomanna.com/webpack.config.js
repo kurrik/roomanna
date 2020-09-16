@@ -30,7 +30,7 @@ var config = {
           {
             loader: 'babel-loader',
             options: {
-              presets: ['env', 'react', 'stage-0'],
+              presets: ['@babel/preset-env', '@babel/preset-react'],
               cacheDirectory: true
             }
           },
@@ -79,8 +79,10 @@ var config = {
             options: {
               modules: true,
               importLoaders: 2,
-              localIdentName: '[name]__[local]___[hash:base64:5]'
-            }
+              modules: {
+                localIdentName: '[name]__[local]___[hash:base64:5]',
+              },
+            },
           },
           {
             loader: 'postcss-loader'
@@ -122,8 +124,10 @@ var config = {
             options: {
               modules: true,
               importLoaders: 1,
-              localIdentName: '[name]__[local]___[hash:base64:5]'
-            }
+              modules: {
+                localIdentName: '[name]__[local]___[hash:base64:5]',
+              },
+            },
           },
           {
             loader: 'postcss-loader'
