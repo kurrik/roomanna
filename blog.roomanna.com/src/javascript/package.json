@@ -14,7 +14,7 @@
   "author": "Arne Roomann-Kurrik",
   "dependencies": {},
   "devDependencies": {
-    "@webpack-cli/init": "^0.0.8",
+    "@webpack-cli/init": "^0.3.0",
     "alight": "^0.14.1",
     "autoprefixer": "^9.1.0",
     "babel-core": "^6.25.0",
