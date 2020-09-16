@@ -65,14 +65,22 @@ var config = {
             loader: 'css-loader',
             options: {
               modules: false,
-              importLoaders: 2
+              sourceMap: true,
+              importLoaders: 3,
+              url: false,
             }
           },
           {
-            loader: 'postcss-loader'
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true,
+            }
           },
           {
-            loader: 'sass-loader'
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+            }
           }
         ]
       },
@@ -90,7 +98,9 @@ var config = {
             options: {
               modules: true,
               importLoaders: 2,
-              localIdentName: '[name]__[local]___[hash:base64:5]'
+              modules: {
+                localIdentName: '[name]__[local]___[hash:base64:5]'
+              },
             }
           },
           {
@@ -116,7 +126,7 @@ var config = {
           },
           {
             loader: 'postcss-loader'
-          }
+          },
         ]
       },
       // CSS modules.
@@ -133,12 +143,14 @@ var config = {
             options: {
               modules: true,
               importLoaders: 1,
-              localIdentName: '[name]__[local]___[hash:base64:5]'
+              modules: {
+                localIdentName: '[name]__[local]___[hash:base64:5]'
+              },
             }
           },
           {
             loader: 'postcss-loader'
-          }
+          },
         ]
       },
       // HTML.
@@ -153,7 +165,7 @@ var config = {
       },
       // Other images and fonts.
       {
-        test: /\.(gif|png|svg|eot|woff|ttf|otf)$/,
+        test: /\.(gif|png|svg|eot|woff|ttf|otf)([?#]+[a-zA-Z0-9]*)?$/,
         use: [
           {
             loader: 'url-loader'
