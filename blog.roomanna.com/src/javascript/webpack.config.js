@@ -66,7 +66,7 @@ var config = {
             options: {
               modules: false,
               sourceMap: true,
-              importLoaders: 3,
+              importLoaders: 2,
               url: false,
             }
           },
