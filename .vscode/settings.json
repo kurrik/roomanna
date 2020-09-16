@@ -1,7 +1,8 @@
 {
-    "editor.renderWhitespace": "boundary",
-    "editor.tabSize": 2,
     "files.trimTrailingWhitespace": true,
     "files.trimFinalNewlines": true,
-    "workbench.editor.enablePreview": false
+    "[markdown]":  {
+        "editor.wordWrap": "off",
+    },
+    "editor.tabSize": 2
 }
