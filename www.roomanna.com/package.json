@@ -25,7 +25,7 @@
     "file-loader": "^0.10.1",
     "flow-babel-webpack-plugin": "^1.1.1",
     "imports-loader": "^0.6.5",
-    "jquery": "^3.1.1",
+    "jquery": "^3.5.0",
     "mini-css-extract-plugin": "^0.8.0",
     "mocha": "^3.1.2",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
