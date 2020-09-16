@@ -9,7 +9,7 @@ trying to figure out what I was going to do to help bootstrap developers for
 the nascent OpenSocial project.  Patrick Chanezon, the Developer Advocate on
 the project, said something like "we're going to cold call a bunch of social
 app authors and hold a hackathon to test out the API" which hadn't really been
-done before&mdash;we were helping pave a new path for the company at the time.
+done before—we were helping pave a new path for the company at the time.
 That first event was kind of a mess.  I remember stalling for time with a room
 full of developers since our test server wasn't booting correctly. An engineer
 was hurriedly trying to fix things so that the attendees could get to work.
@@ -33,7 +33,7 @@ new, finishing something soon, and never having to worry about maintaining the
 output. The ideal hackathon puts me in a state where I keep a map of everything
 related to my program in short-term memory.  Every challenge is surmounted with
 the ugliest, cleverest hack I can muster.  Once that state is gone I can't go
-back to the code I wrote&mdash;it's poison; radioactive.  But generally (if I'm
+back to the code I wrote—it's poison; radioactive.  But generally (if I'm
 successful) my program satisfies the task I brought it into the world to do.
 
 Through such events I've been able to prototype a wide range of ideas which I
@@ -128,7 +128,7 @@ do well typically have interesting takes on the theme which are integrated in a
 deep way.
 
 When unconstrained, I find myself working on projects which have been bugging
-me for a while&mdash; fixit tasks rather than innovative things. I tend to pick
+me for a while—fixit tasks rather than innovative things. I tend to pick
 the first thing which I might have wanted to do for a while. But I tend to feel
 more creative during Ludum Dare.  Originally I thought this was just because
 games were creative endeavors but this [wonderful talk on the subject of

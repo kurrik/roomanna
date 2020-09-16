@@ -1,0 +1,61 @@
+date: 12-31-2019
+slug: 2019
+title: 2019
+tags:
+  - arne
+  - newyear
+scripts:
+  - src: /static/js/post050.js
+styles:
+  - /static/css/post050.css
+images:
+  twitter-card:
+    src: "06-kow.jpg"
+  weight:
+    src: "weight.png"
+  happiness:
+    src: "happiness.png"
+  01-waneella:
+    src: "01-waneella.jpg"
+    variants:
+      thumb:
+        src: "thumbs/01-waneella.jpg"
+    metadata:
+      alt: Waneella
+  02-tractor:
+    src: "02-tractor.jpg"
+    variants:
+      thumb:
+        src: "thumbs/02-tractor.jpg"
+    metadata:
+      alt: Tractor
+  03-corridor:
+    src: "03-corridor.jpg"
+    variants:
+      thumb:
+        src: "thumbs/03-corridor.jpg"
+    metadata:
+      alt: Science Fiction Corridor
+  04-deepsea:
+    src: "04-deepsea.jpg"
+    variants:
+      thumb:
+        src: "thumbs/04-deepsea.jpg"
+    metadata:
+      alt: Deep Sea
+  05-kaiju:
+    src: "05-kaiju.jpg"
+    variants:
+      thumb:
+        src: "thumbs/05-kaiju.jpg"
+    metadata:
+      alt: Kaiju
+  06-kow:
+    src: "06-kow.jpg"
+    variants:
+      thumb:
+        src: "thumbs/06-kow.jpg"
+    metadata:
+      alt: Kow Mech
+  zerocoast:
+    src: "zerocoast.png"
