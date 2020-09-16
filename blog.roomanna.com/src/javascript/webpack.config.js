@@ -5,7 +5,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const FlowBabelWebpackPlugin = require('flow-babel-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const StaticPath = path.join(__dirname, '../../build/content/static');
 
@@ -41,7 +41,7 @@ var config = {
           {
             loader: 'babel-loader',
             options: {
-              presets: ['env', 'react', 'stage-0'],
+              presets: ['@babel/preset-env', '@babel/preset-react'],
               cacheDirectory: true
             }
           },
@@ -184,17 +184,18 @@ var config = {
       filename: 'css/[name].css',
       chunkFilename: 'css/[id].css',
     }),
-    new CopyPlugin([
-      { from: '../img', to: path.join(StaticPath, 'img') },
-      { from: '../../lib/visitor1', to: path.join(StaticPath, 'font') },
-    ]),
+    new CopyPlugin({
+      patterns: [
+        { from: '../img', to: path.join(StaticPath, 'img') },
+        { from: '../../lib/visitor1', to: path.join(StaticPath, 'font') },
+      ],
+    }),
   ],
   optimization: {
     minimizer: [
-      new UglifyJsPlugin({
-        cache: true,
+      new TerserPlugin({
         parallel: true,
-        sourceMap: true
+        sourceMap: true,
       }),
       new OptimizeCSSAssetsPlugin({})
     ],
