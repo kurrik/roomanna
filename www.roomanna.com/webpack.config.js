@@ -3,8 +3,7 @@ const webpack = require('webpack');
 const PROD = !!!JSON.parse(process.env.DEVEL || '0'); // Defaults to PROD unless DEVEL=1
 const PUBLIC_PREFIX = PROD ? 'static/' : 'static/dev/';
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const FlowBabelWebpackPlugin = require('flow-babel-webpack-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 var config = {
@@ -80,7 +79,7 @@ var config = {
               modules: true,
               importLoaders: 2,
               modules: {
-                localIdentName: '[name]__[local]___[hash:base64:5]',
+                localIdentName: '[name]__[local]___[contenthash:base64:5]',
               },
             },
           },
@@ -125,7 +124,7 @@ var config = {
               modules: true,
               importLoaders: 1,
               modules: {
-                localIdentName: '[name]__[local]___[hash:base64:5]',
+                localIdentName: '[name]__[local]___[contenthash:base64:5]',
               },
             },
           },
@@ -137,21 +136,12 @@ var config = {
       // HTML.
       {
         test: /\.html$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: { name: '[name].[ext]' }
-          }
-        ]
+        type: 'asset/resource',
       },
       // Images and fonts.
       {
         test: /\.(gif|png|svg|eot|woff|ttf|otf)$/,
-        use: [
-          {
-            loader: 'url-loader'
-          }
-        ]
+        type: 'asset/inline',
       }
     ]
   },
@@ -167,7 +157,6 @@ var config = {
       jquery: 'jquery',
       Popper: ['popper.js', 'default'],
     }),
-    new FlowBabelWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: 'css/[name].css',
       chunkFilename: 'css/[id].css',
@@ -179,18 +168,8 @@ var config = {
         parallel: true,
         sourceMap: true,
       }),
-      new OptimizeCSSAssetsPlugin({})
+      new CssMinimizerPlugin(),
     ],
-    splitChunks: {
-      cacheGroups: {
-        commons: {
-          chunks: 'initial',
-          test: /\.js$/,
-          name: 'common',
-          enforce: true
-        }
-      }
-    }
   },
   devServer: {
     index: '', // specify to enable root proxying
@@ -202,7 +181,7 @@ var config = {
       context: () => true,
       target: 'http://localhost:8080'
     }
-  }
+  },
 };
 
 if (PROD) {
